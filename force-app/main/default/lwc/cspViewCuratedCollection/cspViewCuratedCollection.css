@@ -1,0 +1,10 @@
+.collection__title {
+    font-size: 2.0625rem;
+}
+
+.collection__icon {
+    background-color: var(--c-successPlatformLightGreenHighlight, rgb(110,183,175));
+    border-radius: 2px;
+    height: 150px;
+    width: 220px;
+}

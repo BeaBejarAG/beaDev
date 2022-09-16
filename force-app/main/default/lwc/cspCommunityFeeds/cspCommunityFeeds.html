@@ -1,0 +1,364 @@
+<template>
+    <template if:false={error}>
+        <template if:false={hideCreateButton}>
+            <div class="slds-text-align_right slds-var-m-bottom_xx-large" if:true={isTypeGroup}>
+                <lightning-button
+                    icon-name="utility:comments"
+                    label="START A GROUP DISCUSSION"
+                    class="csp-button_brand"
+                    onclick={handleStartDiscussion}>
+                </lightning-button>
+            </div>
+            <div class="slds-text-align_right slds-var-m-bottom_xx-large" if:true={isTypeTopic}>
+                <lightning-button
+                    if:true={canAskQuestion}
+                    icon-name="utility:question"
+                    label="ASK A PRODUCT QUESTION"
+                    class="csp-button_brand"
+                    onclick={handleStartQuestion}>
+                </lightning-button>
+            </div>
+        </template>
+    </template>
+
+    <div class="csp-feed_header slds-container_fluid slds-var-m-bottom_medium slds-popover slds-nubbin_bottom-left"
+        if:true={showHeader}>
+        <div class="slds-var-p-vertical_large slds-var-p-horizontal_xx-large">
+            <div class="csp-text_large csp-text_strong slds-grid">
+                <div class="slds-show_inline-block">
+                    <lightning-icon
+                        icon-name="utility:announcement"
+                        class="slds-var-m-right_medium csp-fill_white"
+                        size="medium">
+                    </lightning-icon>
+                    <lightning-formatted-rich-text
+                        if:true={feed.name}
+                        value={feed.name}>
+                    </lightning-formatted-rich-text>
+                </div>
+                <div if:false={feed.name} class="slds-var-p-top_xx-small slds-show_inline-block">
+                    <div class="csp-loading_20 csp-loading_thick"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template if:false={error}>
+        <template if:false={feedList}>
+            <div class="slds-box csp-box csp-box_shaded-light slds-var-m-bottom_small slds-p-around_x-large">
+                <div class="slds-grid">
+                    <div class="slds-col slds-show_small">
+                        <div>
+                            <lightning-avatar
+                                size="small"
+                                class="slds-align-top csp-avatar csp-avatar_placeholder">
+                            </lightning-avatar>
+                        </div>
+                        <div class="slds-var-m-top_x-small">
+                            <c-csp-community-reputation
+                                level-number=1
+                                level-name="loading">
+                            </c-csp-community-reputation>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-var-p-left_medium slds-var-p-bottom_medium slds-container_fluid">
+                        <div class="slds-var-m-top_large"></div>
+                        <div class="csp-loading_30 csp-loading_thick"></div>
+                        <div class="slds-var-m-top_medium slds-var-p-right_large">
+                            <div class="csp-loading_20"></div>
+                            <div class="csp-loading_30"></div>
+                            <div class="csp-loading_10"></div>
+                            <div class="csp-loading_10"></div>
+                            <div class="csp-loading_10"></div>
+                            <div class="csp-loading_30"></div>
+                            <div class="csp-loading_30"></div>
+                            <div class="csp-loading_20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+
+    <c-csp-modal
+        onkeyup={handleEscape}
+        class="csp-join-popup">
+        <span slot="header">Start a group discussion</span>
+        <p>You're not a member of this group. <br/> You need to join this group before you can participate. Click "Join" to get started.</p>
+
+        <div slot="footer" class="slds-var-m-top_medium">
+            <lightning-button
+                label="Join"
+                onclick={handleJoin}
+                value={feed.recordId}
+                class="csp-button_brand-white slds-var-m-right_medium"
+                icon-name="utility:comments">
+            </lightning-button>
+        </div>
+    </c-csp-modal>
+
+    <template if:true={error}>
+        <div class="slds-box csp-box csp-box-shaded-left_brand csp-box_shaded-light slds-var-m-bottom_small">
+            <div class="slds-var-p-around_large slds-grid">
+                <lightning-icon icon-name="utility:broadcast" size="medium"></lightning-icon>
+                <span class="slds-var-m-left_medium csp-text_medium">
+                    {error}
+                </span>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={feedList}>
+        <template if:false={error}>
+            <template if:false={feedList.length}>
+                <div class="slds-box csp-box csp-box-shaded-left_green csp-box_shaded-light slds-var-m-bottom_small">
+                    <div class="slds-var-p-around_large slds-grid">
+                        <lightning-icon icon-name="utility:broadcast" size="medium"></lightning-icon>
+                        <span class="slds-var-m-left_medium csp-text_medium">
+                            There are no posts here yet
+                        </span>
+                    </div>
+                </div>
+            </template>
+
+            <template if:true={feedList.length}>
+                <template iterator:element={feedList}>
+                    <div key={element.value.uniqueId}
+                        class={element.value.feedElementClass}>
+                        <div class="slds-col slds-show_small" data-id={element.value.actor.id}>
+                            <div>
+                                <lightning-avatar
+                                    size="small"
+                                    src={element.value.actor.photo.mediumPhotoUrl}
+                                    initials={element.value.actor.initials}
+                                    onmouseover={handleShowProfile}
+                                    alternative-text={element.value.actor.displayName}
+                                    class={element.value.actor.avatar}>
+                                </lightning-avatar>
+                            </div>
+                            <div class="slds-var-m-top_x-small">
+                                <c-csp-community-reputation
+                                    level-number={element.value.actor.reputation.reputationLevel.levelNumber}
+                                    level-name={element.value.actor.reputation.reputationLevel.levelName}>
+                                </c-csp-community-reputation>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-var-p-left_medium slds-var-p-bottom_medium slds-container_fluid">
+                            <div class="slds-float_right">
+                                <div class="csp-badge slds-show_inline-block">
+                                    <div if:true={element.value.isPinned}>
+                                        <lightning-icon
+                                            size="x-small"
+                                            icon-name="utility:pinned">
+                                        </lightning-icon>
+                                    </div>
+                                </div>
+                                <div class="csp-menu slds-show_inline-block slds-var-m-left_medium"
+                                    if:true={element.value.menuOptionCount}>
+                                    <lightning-button-menu
+                                        variant="container"
+                                        nubbin
+                                        data-id={element.value.id}
+                                        onfocus={resetFeed}
+                                        icon-name="utility:threedots"
+                                        onselect={handleMenuSelect}
+                                        if:false={displayOnly}
+                                        alternative-text="More">
+                                        <template iterator:option={element.value.menuOptions}>
+                                            <lightning-menu-item
+                                                key={option.value.value}
+                                                value={option.value.value}
+                                                label={option.value.label}
+                                                if:true={option.value.visible}>
+                                            </lightning-menu-item>
+                                        </template>
+                                    </lightning-button-menu>
+                                </div>
+                            </div>
+                            <div class="slds-var-m-top_large"></div>
+                            <template if:true={element.value.capabilities.questionAndAnswers}>
+                                <lightning-button
+                                    value={element.value.id}
+                                    label={element.value.capabilities.questionAndAnswers.questionTitle}
+                                    onclick={handleViewFeed}
+                                    class="csp-button_link csp-text_medium">
+                                </lightning-button>
+                                <template if:true={element.value.capabilities.status}>
+                                    <template if:true={element.value.capabilities.status.isPendingReview}>
+                                        <em> (pending review)</em>
+                                    </template>
+                                </template>
+
+                                <p class="slds-var-m-top_medium slds-var-p-right_large csp-line-height_double">
+                                    <template if:true={element.value.capabilities.feedEntityShare}>
+                                        <c-csp-community-post-render
+                                            shared-post={element.value.capabilities.feedEntityShare.feedEntity}
+                                            collapse="true"
+                                            oncsppopoverprofileevent={handleRichTextPopover}
+                                            post-body={element.value.body}>
+                                        </c-csp-community-post-render>
+                                    </template>
+                                    <template if:false={element.value.capabilities.feedEntityShare}>
+                                        <c-csp-community-post-render
+                                            collapse="true"
+                                            oncsppopoverprofileevent={handleRichTextPopover}
+                                            post-body={element.value.body}>
+                                        </c-csp-community-post-render>
+                                    </template>
+                                </p>
+                            </template>
+                            <template if:false={element.value.capabilities.questionAndAnswers}>
+                                <lightning-button
+                                    value={element.value.id}
+                                    label={element.value.header.text}
+                                    onclick={handleViewFeed}
+                                    class="csp-button_link csp-text_medium">
+                                </lightning-button>
+                                <template if:true={element.value.capabilities.status}>
+                                    <template if:true={element.value.capabilities.status.isPendingReview}>
+                                        <em> (pending review)</em>
+                                    </template>
+                                </template>
+
+                                <div class="slds-var-m-top_medium slds-var-p-right_large">
+                                    <p>{element.value.body.text}</p>
+                                </div>
+                            </template>
+                            <div class="slds-var-m-top_medium slds-truncate csp-max-width_100 slds-grid slds-wrap">
+                                <div class="slds-show_inline-block slds-var-m-right_medium csp-text_small">
+                                    <lightning-icon
+                                        icon-name="utility:preview"
+                                        size="x-small"
+                                        class="slds-var-m-right_x-small">
+                                    </lightning-icon>
+                                    {element.value.capabilities.interactions.count} views
+                                </div>
+                                <div class="slds-show_inline-block slds-var-m-right_medium csp-text_small">
+                                    <lightning-icon
+                                        icon-name="utility:comments"
+                                        size="x-small"
+                                        class="slds-var-m-right_x-small">
+                                    </lightning-icon>
+                                    {element.value.capabilities.comments.page.total} comments
+                                </div>
+                                <div class="slds-show_inline-block slds-var-m-right_medium csp-text_small">
+                                    <lightning-icon
+                                        icon-name="utility:clock"
+                                        size="x-small"
+                                        class="slds-var-m-right_x-small">
+                                    </lightning-icon>
+                                    {element.value.relativeCreatedDate}
+                                </div>
+                                <template if:true={element.value.capabilities.topics}>
+                                    <template if:true={element.value.capabilities.topics.items}>
+                                        <lightning-icon
+                                            icon-name="utility:summary"
+                                            size="x-small"
+                                            if:true={element.value.capabilities.topics.items.length}
+                                            class="slds-var-m-right_x-small">
+                                        </lightning-icon>
+                                        <template iterator:item={element.value.capabilities.topics.items}>
+                                            <div key={item.value.id}
+                                                class="slds-show_inline-block slds-var-m-right_x-small csp-text_small">
+                                                <span>
+                                                    <lightning-formatted-rich-text
+                                                        value={item.value.name}>
+                                                    </lightning-formatted-rich-text>
+                                                </span>
+                                                <span if:false={item.last}>,</span>
+                                            </div>
+                                        </template>
+                                    </template>
+                                </template>
+                            </div>
+                            <template if:false={element.value.capabilities.comments.page.total}>
+                                <div class="slds-var-m-top_large"
+                                    if:false={element.value.isPostByMe}>
+                                    <lightning-button
+                                        label="Be the first to answer this"
+                                        class="csp-button_brand csp-button_rounded"
+                                        value={element.value.id}
+                                        onclick={handleViewFeed}
+                                        icon-name="utility:reply">
+                                    </lightning-button>
+                                </div>
+                            </template>
+                            <template if:true={element.value.capabilities.comments.page.total}>
+                                <div class="slds-var-m-top_large slds-grid"
+                                    if:true={element.value.capabilities.comments.page.items.length}>
+                                    <lightning-icon
+                                        icon-name="utility:reply"
+                                        size="x-small"
+                                        if:true={element.value.capabilities.comments.page.items.length}
+                                        class="slds-var-m-right_x-small slds-var-m-top_xx-small">
+                                    </lightning-icon>
+                                    <template iterator:item={element.value.capabilities.comments.page.items}>
+                                        <div key={item.value.id}
+                                            class="slds-show_inline-block"
+                                            data-id={item.value.user.id}
+                                            if:true={item.first}>
+                                            <span>Latest reply by </span>
+                                            <span data-id={item.value.user.id}>
+                                                <a href="#" onmouseover={handleShowProfileReply}>
+                                                    {item.value.user.displayName}
+                                                </a>
+                                            </span>
+                                            <div class="slds-show_inline-block slds-var-m-horizontal_x-small">
+                                                <span class="csp-text_strong csp-text_small">&gt;</span>
+                                            </div>
+                                            {item.value.relativeCreatedDate}
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div key={element.value.uniqueId}
+                        class="slds-var-m-vertical_large csp-border-think_bottom"
+                        if:true={element.value.isFinalPinned}>
+                    </div>
+                    <div key={element.value.uniqueId}
+                        class="slds-var-m-bottom_xx-large"
+                        if:true={element.last}>
+                    </div>
+                </template>
+
+                <div class="slds-var-m-bottom_large">
+                    <lightning-button
+                        class="csp-button_brand-white csp-button_stretch"
+                        label="LOAD MORE"
+                        if:true={nextPageToken}
+                        onclick={handleLoadMore}>
+                    </lightning-button>
+                </div>
+            </template>
+        </template>
+    </template>
+
+    <c-csp-modal
+        onkeyup={handleEscape}
+        class="csp-delete-popup">
+        <span slot="header">Delete post</span>
+        <p>Are you sure you want to delete this post?</p>
+
+        <div slot="footer" class="slds-var-m-top_medium">
+            <lightning-button
+                label="CANCEL"
+                onclick={handleCancelDeleteElement}
+                value={popupData.id}
+                class="csp-button_brand-white slds-var-m-right_medium">
+            </lightning-button>
+
+            <lightning-button
+                label="Delete"
+                onclick={handleDeleteElement}
+                value={popupData.id}
+                class="csp-button_brand">
+            </lightning-button>
+        </div>
+    </c-csp-modal>
+
+    <div if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+</template>

@@ -1,0 +1,183 @@
+<template>
+    <template if:true={caseObject}>
+        <template if:true={headerView}>
+            <template if:true={modalView}>
+                {caseObject.subject}
+            </template>
+            <template if:false={modalView}>
+                <c-csp-breadcrumbs 
+                    if:true={isProjectCase}
+                    display-sub-nav-item=true
+                    sub-nav-item-name="Projects"
+                    sub-nav-link="/projects">
+                </c-csp-breadcrumbs>
+                <c-csp-breadcrumbs 
+                    if:false={isProjectCase}
+                    display-product=true
+                    display-sub-nav-item=true
+                    sub-nav-item-name="Cases"
+                    sub-nav-link="/cases">
+                </c-csp-breadcrumbs>
+                <h1 class="slds-text-heading_large slds-var-m-top_large slds-var-m-bottom_xx-large cKnowledge_Articles">{caseObject.subject}</h1>
+                <p class="slds-var-m-bottom_xx-large" if:false={isProjectCase}>
+                    <span class="slds-text-color_weak">Case reference number: </span>
+                    <span class="csp-text_strong">{caseObject.caseNumber}</span>
+                </p>
+                <template if:false={caseAccess}>
+                    <p>NO ACCESS TO CASE</p>
+                </template>
+            </template>
+        </template>
+        <template if:false={headerView}>
+            <template if:true={isProjectCase}>
+                <div class="slds-box csp-box slds-var-m-bottom_large">
+                    <div class="slds-grid slds-wrap slds-var-p-around_medium">
+                        <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Project status:</div>
+                        <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.status}</div>
+                        <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Case reference number:</div>
+                        <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.caseNumber}</div>
+                    </div>
+                </div>
+            </template>
+
+            <template if:false={isProjectCase}>
+                <template if:true={caseAccess}>
+                    <div class="slds-box csp-box slds-var-m-bottom_large">
+                        <div class="slds-grid slds-wrap slds-var-p-around_medium">
+                            <template if:true={showClose} >
+                                <lightning-button label="CLOSE CASE" class="slds-size_1-of-1 csp-button_brand-white slds-button slds-var-m-bottom_medium csp-button_stretch" onclick={handleShowClose}></lightning-button>
+                                <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                            </template>
+                            <template if:true={showConfirm} >
+                                <div class="slds-size_1-of-1 slds-m-bottom_small">
+                                    Please Note: Once a case has been marked as closed, no further comments can be added.
+                                </div>
+                                <lightning-button label="CLOSE" class="slds-size_1-of-1 csp-button_brand slds-var-m-bottom_medium csp-button_stretch" onclick={handleConfirm}></lightning-button>
+                                <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                            </template>
+                            <template if:true={showResolve} >
+                                <lightning-textarea data-id="closeComment" required class="view-case__close-input csp-text_small slds-size_1-of-1 slds-m-bottom_small" label='Enter a comment to close the case' type="text" minlength="5" placeholder='Enter a comment to close the case' variant="label-hidden"></lightning-textarea>
+                                <lightning-button label="CLOSE" class="slds-size_1-of-1 csp-button_brand slds-var-m-bottom_medium csp-button_stretch" onclick={handleResolve}></lightning-button>
+                                <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                            </template>
+                            <template if:true={showClosed} >
+                                <div class="">
+                                    Case closed.
+                                </div>
+                                <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                            </template>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Requester:</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.contact.name}</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Assigned to:</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.owner.name}</div>
+                            <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Case created on:</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">
+                                <lightning-relative-date-time value={caseObject.createdDate}></lightning-relative-date-time>
+                            </div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Last activity:</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">
+                                <lightning-relative-date-time value={caseObject.lastModifiedDate}></lightning-relative-date-time>
+                            </div>
+                            <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                            <template if:false={isIssueCase}>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Product:</div>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.product}</div>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Sub-product:</div>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.subAnalysis}</div>
+                            </template>
+                            <template if:true={isIssueCase}>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Type:</div>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.type}</div>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">User Info 1:</div>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.user1}</div>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">User Info 2:</div>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.user2}</div>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">User Info 3:</div>
+                                <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.user3}</div>
+                            </template>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Business impact:</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.impact}</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Status:</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{caseObject.statusGroup}</div>
+                            <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Attachments:</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak" if:false={attachments.length}>No attachments</div>
+                            <div class="slds-size_6-of-12 csp-text_strong" if:true={attachments.length}>
+                                <template iterator:attachment={attachments}>
+                                    <div key={attachment.value.Id} class="slds-var-m-bottom_x-small slds-grid">
+                                        <lightning-icon icon-name="doctype:attachment" size="x-small" class="csp-fill_brand slds-var-m-vertical_xx-small"></lightning-icon>
+                                        <lightning-button class="csp-button_link slds-var-m-left_x-small slds-var-m-right_xx-small csp-text_small" value={attachment.value.Id} onclick={handleViewAttachment} label={attachment.value.Title}></lightning-button>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <template if:false={isProjectCase}>
+                                <div class="slds-size_12-of-12 slds-var-m-bottom_medium" if:false={isCaseClosed}>
+                                    <lightning-file-upload
+                                        name="fileUploader"
+                                        record-id={caseObject.id}
+                                        onuploadfinished={handleUploadFinished}
+                                        multiple>
+                                    </lightning-file-upload>
+                                </div>
+                            </template>
+
+                            <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Linked articles:</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak" if:false={attachedArticles.length}>No linked articles</div>
+                            <div class="slds-size_6-of-12 slds-var-m-bottom_medium csp-text_strong" if:true={attachedArticles.length}>
+                                <template iterator:article={attachedArticles}>
+                                    <div key={article.value.title} class="slds-var-m-bottom_x-small slds-grid">
+                                        <lightning-icon class="slds-var-m-vertical_xx-small" icon-name="utility:description" size="x-small"></lightning-icon>
+                                        <lightning-button class="csp-button_link slds-var-m-right_xx-small slds-var-m-left_x-small csp-text_small" data-url={article.value.url} onclick={handleViewArticle} label={article.value.title}></lightning-button>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                            <template if:false={isProjectCase}>
+                                <template if:false={isIssueCase}>
+                                    <div class="slds-size_12-of-12 slds-var-m-bottom_medium">
+                                        <c-csp-case-collaborators record-id={recordId}></c-csp-case-collaborators>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </template>
+    </template>
+
+    <c-csp-modal
+        size="medium"
+        data-id="article-popup"
+        onkeydown={handleEscape}>
+        <template if:true={articleUrl.length}>
+            <span slot="header">
+                <c-csp-knowledge-article
+                    show-title="true"
+                    show-feedback-component="false"
+                    hide-action-buttons="true"
+                    url-name={articleUrl}>
+                </c-csp-knowledge-article>
+            </span>
+            <div class="slds-is-relative">
+                <div if:false={hasLoadedArticle}>
+                    <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                </div>
+                <c-csp-knowledge-article onkeydown={handleEscape}
+                    show-body="true"
+                    show-feedback-component="true"
+                    hide-action-buttons="true"
+                    oncspsubmittedarticlefeedback={handleArticleFeedback}
+                    oncsparticleloaded={handleArticleLoaded}
+                    url-name={articleUrl}>
+                </c-csp-knowledge-article>
+            </div>
+        </template>
+    </c-csp-modal>
+    <div if:true={refreshing}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+</template>

@@ -1,0 +1,34 @@
+<aura:component implements="forceCommunity:themeLayout,flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+    <aura:attribute name="logo" type="Aura.Component[]"/>
+    <aura:attribute name="navBar" type="Aura.Component[]"/>
+    <aura:attribute name="search" type="Aura.Component[]"/>
+    <aura:attribute name="profileMenu" type="Aura.Component[]"/>
+    <aura:attribute name="navigation" type="Aura.Component[]"/>
+    <aura:attribute name="breadcrumbs" type="Aura.Component[]"/>
+    <aura:attribute name="globalNavigation" type="Aura.Component[]"/>
+    <aura:attribute name="profileBox" type="Aura.Component[]"/>
+
+    <aura:attribute name="user" type="User"/>
+    <aura:attribute name="pageTitle" type="String"/>
+	<aura:attribute name="colour" type="String"/>
+
+    <aura:handler name="render" value="{!this}" action="{!c.handleInit}"/>
+    <aura:handler event="forceCommunity:routeChange" action="{!c.rerender}"/>
+
+    <force:recordData aura:id="recordLoader" recordId="{!$SObjectType.CurrentUser.Id}" fields="Id,CreatedDate,FirstName,Name,MediumPhotoUrl,IsProfilePhotoActive" targetFields="{!v.user}" recordUpdated="{!c.handleUser}"/>
+
+    <ltng:require styles="{!$Resource.cspstyles}" />
+
+    <header>
+        <c:cspAccountSelection />
+        <c:cspGlobalHeader profileMenu="{!v.profileMenu}" globalNavigation="{!v.globalNavigation}"/>
+        <div class="slds-m-top_x-large">{!v.profileBox}</div>
+    </header>
+    <div class="access-theme-body">
+        <div class="access-theme-body__container">
+            {!v.body}
+        </div>
+    </div>
+
+    <div class="access-theme-footer"><c:cspGlobalFooter/></div>
+</aura:component>

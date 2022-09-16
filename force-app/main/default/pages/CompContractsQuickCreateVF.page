@@ -1,0 +1,6 @@
+<apex:page standardController="Account" tabStyle="account" >
+<flow:interview name="flow.CompContractsQuickCreate">
+<apex:param name="AccountID" value="{!account.id}"/>
+</flow:interview>
+
+</apex:page>

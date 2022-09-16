@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Community Feed</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="feedId" type="String" default="" label="Feed ID" />
+            <property name="hideCreateButton" type="Boolean" default="false" label="Hide create new post button" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

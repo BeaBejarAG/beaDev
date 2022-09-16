@@ -1,0 +1,45 @@
+/* Global Page Elements */
+.THIS {
+    font-size: 1rem;
+}
+.THIS.access-theme-body {
+    max-width: token(successPlatformPageWidth);
+    margin: 0px auto;
+}
+
+.THIS .csp-info {
+    background-color: token(successPlatformRed);
+}
+
+.THIS .csp-info__inner {
+    max-width: token(successPlatformPageWidth);
+    margin: 0 auto;
+}
+
+.THIS .csp-info__image {
+    height: 290px;
+}
+
+@media (max-width: 450px) {
+	.THIS .access-theme-logo {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .THIS .csp-info__image {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .THIS .csp-info__image {
+        height: 200px;
+    }
+}
+
+@media (max-width: 920px) {
+    .THIS .access-theme-website-link {
+        display: none;
+    }
+}

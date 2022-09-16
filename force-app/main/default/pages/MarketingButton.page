@@ -1,0 +1,27 @@
+<apex:page showHeader="false" Controller="PreChatFormCtrl">
+    <img id="liveagent_button_online_5735800000004YY" onclick="liveagent.startChat('5735800000004YY')" style="display: none; border: 10px none; cursor: pointer; margin:5px"  src="https://dev-accessgroup--dev.cs85.force.com/webtest/resource/1497023697000/OnlineChat" />    
+    <img id="liveagent_button_offline_5735800000004YY" style="display: none; border: 10px none; margin:5px;" src="https://dev-accessgroup--dev.cs85.force.com/webtest/resource/1497023753000/OfflineChat" />
+    <script type="text/javascript">
+    if (!window._laq) { 
+        window._laq = []; 
+    }
+    window._laq.push(function(){liveagent.showWhenOnline('5735800000004YY', document.getElementById('liveagent_button_online_5735800000004YY'));
+    liveagent.showWhenOffline('5735800000004YY', document.getElementById('liveagent_button_offline_5735800000004YY'));
+    liveagent.showWhenOffline('5735800000004YY', document.getElementById('logCase')); 
+    });</script>
+
+
+    <script type="text/javascript">
+        function loadUrl(newLocation){
+            window.location = newLocation;
+        }
+    </script>
+
+
+    <script type='text/javascript' src='https://c.la1-c1cs-frf.salesforceliveagent.com/content/g/js/40.0/deployment.js'></script>
+        <script type='text/javascript'>
+            liveagent.setChatWindowHeight(520);
+            liveagent.setChatWindowWidth(600);
+            liveagent.init('https://d.la1-c1cs-frf.salesforceliveagent.com/chat', '57258000000045T', '00D58000000Z4gm');
+    </script>
+</apex:page>

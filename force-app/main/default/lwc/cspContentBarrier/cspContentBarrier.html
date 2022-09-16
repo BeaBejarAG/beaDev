@@ -1,0 +1,38 @@
+<template>
+    <div class="slds-var-m-vertical_large">
+        <div class="csp-content-barrier__title slds-var-m-vertical_large">
+            {title}
+        </div>
+        <div class="slds-var-m-vertical_small">
+            {barrierDetail1}
+        </div>
+        <div class="slds-var-m-vertical_small">
+            {barrierDetail2}
+        </div>
+        <div class="slds-grid slds-wrap slds-grid_align-center">
+            <lightning-button class="slds-size_1-of-1 slds-button slds-m-vertical_xx-small slds-p-vertical_x-small csp-button_brand csp-button_stretch" label="SIGN IN" onclick={handleSignInClick}></lightning-button>
+            <lightning-button class="slds-size_1-of-1 slds-button slds-m-vertical_xx-small slds-p-vertical_x-small csp-button_brand-white csp-button_stretch" label="REGISTER" onclick={handleRegisterClick}></lightning-button>
+        </div>
+    </div>
+
+    <c-csp-modal
+        show-modal="true">
+        <span slot="header">
+            <div class="csp-content-barrier__title">
+                {title}
+            </div>
+        </span>
+        <div class="slds-is-relative">
+            <div class="slds-var-m-vertical_small">
+                {barrierDetail1}
+            </div>
+            <div class="slds-var-m-vertical_small">
+                {barrierDetail2}
+            </div>
+            <div class="slds-grid slds-wrap slds-grid_align-center">
+                <lightning-button class="slds-size_1-of-1 slds-large-size_10-of-12 slds-button slds-m-vertical_xx-small slds-p-vertical_x-small csp-button_brand csp-button_stretch" label="SIGN IN" onclick={handleSignInClick}></lightning-button>
+                <lightning-button class="slds-size_1-of-1 slds-large-size_10-of-12 slds-button slds-m-vertical_xx-small slds-p-vertical_x-small csp-button_brand-white csp-button_stretch" label="REGISTER" onclick={handleRegisterClick}></lightning-button>
+            </div>
+        </div>
+    </c-csp-modal>
+</template>

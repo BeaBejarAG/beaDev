@@ -1,0 +1,219 @@
+<template>
+    <div class="case-results-filters slds-grid slds-wrap slds-gutters-direct slds-grid_vertical-align-center slds-p-horizontal_small">
+        <div class="slds-col slds-grow-none slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small" if:false={displayProjectCases}>
+            <template if:true={displayCollaborationCases}>
+                <div class="case-results-filters__display">
+                    Display:
+                </div>
+                <div class="slds-p-vertical_small slds-p-horizontal_x-small">
+                    <lightning-button-menu label={ownerFilter} onselect={handleOwnerFilterSelect} class="case-results__owner-filter">
+                        <lightning-menu-item class="case-results__menu-option" value="User" label="My Cases"></lightning-menu-item>
+                        <lightning-menu-divider class="case-results__menu-divider"></lightning-menu-divider>
+                        <lightning-menu-item class="case-results__menu-option" value="Collaboration" label="My Collaboration Cases"></lightning-menu-item>
+                        <lightning-menu-divider if:true={displayOrganisationCases} class="case-results__menu-divider"></lightning-menu-divider>
+                        <lightning-menu-item if:true={displayOrganisationCases} class="case-results__menu-option" value="Organisation" label="My Organisation's Cases"></lightning-menu-item>
+                    </lightning-button-menu>
+                </div>
+            </template>
+        </div>
+        <div if:true={productFilterVisible} class="slds-col slds-grow-none slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+            <div class="slds-p-vertical_small slds-p-right_x-small">
+                <lightning-button-menu label={product.name} onselect={handleProductFilterSelect} class="case-results__product-filter">
+                    <template iterator:pr={productList}>
+                        <lightning-menu-divider key={pr.value.name} if:false={pr.first} class="case-results__menu-divider"></lightning-menu-divider>
+                        <lightning-menu-item key={pr.value.name} class="case-results__menu-option" value={pr.value} label={pr.value.name}></lightning-menu-item>
+                    </template>
+                </lightning-button-menu>
+            </div>
+        </div>
+        <div class="slds-col" onkeyup={handleSearchKeyPress}>
+            <lightning-input class="case-results-filters__search slds-p-around_x-small" label={assistiveText} type="search" maxlength="100" value={searchText} placeholder={assistiveText} variant="label-hidden"></lightning-input>
+        </div>
+        <div class="slds-col slds-grow-none slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small" if:false={displayProjectCases}>
+            <lightning-icon icon-name="utility:filter" size="x-small" class="case-results-filters__filter slds-var-m-right_x-small"></lightning-icon>
+            Filter:
+            <div class="slds-p-vertical_small slds-p-left_small">
+                <lightning-button-menu label={statusFilter} onselect={handleStatusFilterSelect} class="case-results__status-filter">
+                    <lightning-menu-item class="case-results__menu-option" value="All status" label="All status"></lightning-menu-item>
+                    <lightning-menu-divider class="case-results__menu-divider"></lightning-menu-divider>
+                    <lightning-menu-item class="case-results__menu-option" value="Open" label="Open"></lightning-menu-item>
+                    <lightning-menu-divider class="case-results__menu-divider"></lightning-menu-divider>
+                    <lightning-menu-item class="case-results__menu-option" value="Needs Action" label="Needs Action"></lightning-menu-item>
+                    <lightning-menu-divider class="case-results__menu-divider"></lightning-menu-divider>
+                    <lightning-menu-item class="case-results__menu-option" value="With Access" label="With Access"></lightning-menu-item>
+                    <lightning-menu-divider class="case-results__menu-divider"></lightning-menu-divider>
+                    <lightning-menu-item class="case-results__menu-option" value="Solved" label="Solved"></lightning-menu-item>
+                </lightning-button-menu>
+            </div>
+        </div>
+        <div if:true={displayDownloadButton} class="slds-col slds-grow-none csp-button_brand-white slds-p-horizontal_x-small">
+            <button class="case-results__download-button slds-button slds-var-m-vertical_small" onclick={toggleDownload}>
+                DOWNLOAD DATA
+            </button>
+        </div>
+        <template if:true={showCasesCheckbox}>
+            <template if:false={HideAllAccountCases}>
+                <lightning-input type="checkbox" value={viewAllCases} label="Display All Cases For All Accounts" name="selectAllAccount" onchange={handleAccountCheckBox}></lightning-input>
+            </template>
+        </template>
+    </div>
+    <template if:true={showDownload} >
+        <div class="case-results-download slds-grid slds-var-m-bottom_small slds-p-horizontal_small">
+            <div class="slds-col slds-grid slds-wrap slds-gutters-direct slds-grid_vertical-align-center slds-grid_align-spread">
+                <div class="slds-col slds-grow-none slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+                    <div class="case-results-download__from">
+                        From date:
+                    </div>
+                    <div class="slds-p-vertical_small slds-p-horizontal_small">
+                        <lightning-input data-id="dateFrom" class="case-results-download__date" type="date" date-style="short" placeholder="Enter a start date..." max={dateTo} value={dateFrom} onchange={handleDateFromChange}></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-col slds-grow-none slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+                    <div class="slds-p-vertical_small case-results-download__to">
+                        To date:
+                    </div>
+                    <div class="slds-p-vertical_small slds-p-horizontal_small">
+                        <lightning-input data-id="dateTo" class="case-results-download__date" type="date" date-style="short" placeholder="Enter an end date..." min={dateFrom} value={dateTo} onchange={handleDateToChange}></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-col slds-grow-none slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small slds-var-m-right_small">
+                    <lightning-helptext class="slds-var-m-right_x-small" content="Up to 1000 cases will be downloaded. User filters to download all cases in a period." icon-variant='inverse'></lightning-helptext>
+                    <div class="csp-button_brand">
+                        <button class="case-results__download-button slds-button slds-var-m-vertical_small" onclick={handleDownloadClick}>
+                            <lightning-icon icon-name="utility:download" size="x-small" variant="inverse" class="slds-var-m-right_x-small"></lightning-icon>
+                            DOWNLOAD
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-col_bump-left slds-grow-none slds-show_small">
+                <div class="slds-p-left_medium slds-var-m-vertical_medium slds-border_left">
+                    <lightning-icon icon-name="utility:close" onclick={handleCloseDownload} size="small" class="case-results-download__close slds-var-m-left_x-small slds-var-m-right_medium slds-var-m-vertical_large"></lightning-icon>
+                </div>
+            </div>
+        </div>
+    </template>
+    <div class="case-results-header slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid_vertical-align-center slds-p-vertical_medium">
+        <div class="case-results-header__reference slds-col slds-size_3-of-12 slds-medium-size_2-of-12 slds-large-size_1-of-12 slds-p-horizontal_x-small">
+            Ref. Number
+        </div>
+        <div class="case-results-header__subject slds-col slds-size_2-of-12 slds-p-horizontal_x-small">
+            Subject
+        </div>
+        <div class="case-results-header__account slds-col slds-size_2-of-12 slds-p-horizontal_x-small">
+            Account
+        </div>
+        <div class="case-results-header__product slds-col slds-size_3-of-12 slds-medium-size_2-of-12 slds-p-horizontal_x-small" if:false={displayProjectCases}>
+            Product
+        </div>
+        <div class="case-results-header__product slds-col slds-size_3-of-12 slds-medium-size_2-of-12 slds-p-horizontal_x-small" if:true={displayProjectCases}>
+            Project Lead
+        </div>
+        <div class="case-results-header__created slds-col slds-show_medium slds-medium-size_1-of-12 slds-p-horizontal_x-small">
+            Created
+        </div>
+        <div class="case-results-header__createdBy slds-col slds-show_medium slds-medium-size_2-of-12 slds-p-horizontal_x-small" if:false={displayProjectCases}>
+            Requester
+        </div>
+        <div class="case-results-header__createdBy slds-col slds-show_medium slds-medium-size_2-of-12 slds-p-horizontal_x-small" if:true={displayProjectCases}>
+            Project Owner
+        </div>
+        <div class="case-results-header__modified slds-col slds-show_large slds-large-size_1-of-12 slds-p-horizontal_x-small">
+            Last Activity
+        </div>
+        <div class="case-results-header__status slds-col slds-size_2-of-12 slds-medium-size_1-of-12 slds-p-horizontal_x-small">
+            Status
+        </div>
+    </div>
+    <template if:false={userNotEntitled}>
+        <div class="case-results">
+            <template iterator:result={caseList}>
+                <div if:true={result.first} key={result.value.id} class="slds-border_top case-results__top-border"></div>
+                <div key={result.value.id} data-url={result.value.url} onclick={handleCaseClick} class="case-result slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid--vertical-stretch">
+                    <template if:true={result.value.isWithCustomer}>
+                        <div class="case-result__reference-highlight slds-col slds-size_3-of-12 slds-medium-size_2-of-12 slds-large-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                            <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.reference}</div>
+                        </div>
+                    </template>
+                    <template if:false={result.value.isWithCustomer}>
+                        <div class="case-result__reference slds-col slds-size_3-of-12 slds-medium-size_2-of-12 slds-large-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                            <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.reference}</div>
+                        </div>
+                    </template>
+                    <div class="case-result__subject slds-col slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                        <a class="slds-m-vertical_small slds-m-horizontal_x-small slds-line-clamp_x-small">{result.value.subject}</a>
+                    </div>
+                    <template if:false={serviceUser}>
+                    <div class="case-result__account slds-col slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                        <a class="slds-m-vertical_small slds-m-horizontal_x-small slds-line-clamp_x-small">{result.value.AccountName}</a>
+                    </div>
+                </template>
+                <template if:true={serviceUser}>
+                    <div class="case-result__account slds-col slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                        <a class="slds-m-vertical_small slds-m-horizontal_x-small slds-line-clamp_x-small">{result.value.ServiceAccount}</a>
+                    </div>
+                </template>
+                    <div class="case-result__product slds-col slds-size_3-of-12 slds-medium-size_2-of-12 slds-grid slds-grid_vertical-align-center" if:false={displayProjectCases}>
+                        <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.product}</div>
+                    </div>
+                    <div class="case-result__product slds-col slds-size_3-of-12 slds-medium-size_2-of-12 slds-grid slds-grid_vertical-align-center" if:true={displayProjectCases}>
+                        <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.projectLead}</div>
+                    </div>
+                    <div class="case-result__created slds-col slds-show_medium slds-medium-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                        <lightning-relative-date-time class="slds-m-vertical_small slds-m-horizontal_x-small" value={result.value.created}></lightning-relative-date-time>
+                    </div>
+                    <div class="case-result__createdBy slds-col slds-show_medium slds-medium-size_2-of-12 slds-grid slds-grid_vertical-align-center" if:false={displayProjectCases}>
+                        <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.contact}</div>
+                    </div>
+                    <div class="case-result__createdBy slds-col slds-show_medium slds-medium-size_2-of-12 slds-grid slds-grid_vertical-align-center" if:true={displayProjectCases}>
+                        <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.owner}</div>
+                    </div>
+                    <div class="case-result__modified slds-col slds-show_large slds-large-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                        <lightning-relative-date-time class="slds-m-vertical_small slds-m-horizontal_x-small" value={result.value.lastModified}></lightning-relative-date-time>
+                    </div>
+                    <template if:false={displayProjectCases}>
+                        <template if:true={result.value.isWithAccess}>
+                            <div class="case-result__status-access slds-col slds-size_2-of-12 slds-medium-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                                <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.statusGroup}</div>
+                            </div>
+                        </template>
+                        <template if:true={result.value.isWithCustomer}>
+                            <div class="case-result__status-customer slds-col slds-size_2-of-12 slds-medium-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                                <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.statusGroup}</div>
+                            </div>
+                        </template>
+                        <template if:true={result.value.isSolved}>
+                            <div class="case-result__status-solved slds-col slds-size_2-of-12 slds-medium-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                                <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.statusGroup}</div>
+                            </div>
+                        </template>
+                        <template if:true={result.value.isUnknown}>
+                            <div class="case-result__status-solved slds-col slds-size_2-of-12 slds-medium-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                                <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.statusGroup}</div>
+                            </div>
+                        </template>
+                    </template>
+                    <template if:true={displayProjectCases}>
+                        <div class="case-result__status slds-col slds-size_2-of-12 slds-medium-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                            <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.status}</div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <div class="slds-var-m-top_medium slds-size_1-of-1 slds-align_absolute-center">
+                <button if:true={showMore} class="slds-button slds-button_neutral slds-var-p-vertical_small slds-var-p-horizontal_large csp-search-button" onclick={handleLoadMore}>Load More</button>
+            </div>
+            <template if:true={completedSearch}>
+                <div class="slds-var-m-vertical_xx-large">No cases found</div>
+            </template>
+            <div if:true={refreshing}>
+                <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+            </div>
+        </div>
+    </template>
+    <template if:true={userNotEntitled}>
+        <div class="slds-m-vertical_x-small">
+            You are not a named Support contact for this product and therefore are unable to raise cases, but you are able to view all associated knowledge content.
+        </div>
+    </template>
+</template>

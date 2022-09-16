@@ -1,0 +1,48 @@
+.THIS .slds-dropdown__item {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+.THIS .selected a {
+    background-color: token(successPlatformLightGreenHover);
+    color: token(successPlatformDarkGrey);
+    font-weight: 600;
+}
+.THIS .slds-dropdown__item a {
+    color: token(successPlatformDarkGrey);
+    padding: 0.6rem 0.75rem;
+}
+.THIS .slds-dropdown__item a:hover {
+    background-color: token(successPlatformLightGreenHover);
+}
+.THIS .slds-dropdown__item a:active {
+    background-color: token(successPlatformLightGreenHover);
+}
+.THIS .slds-dropdown__item a:focus {
+    background-color: token(successPlatformLightGreenHover);
+}
+
+.THIS .csp-product-select button,
+.THIS .csp-product-select button:hover {
+    border: 0px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: token(successPlatformDarkGrey);
+}
+.THIS .csp-product-select button:hover,
+.THIS .csp-product-select button:active {
+    color: black;
+}
+.THIS .csp-product-select-picklist button,
+.THIS .csp-product-select-picklist button:hover,
+.THIS .csp-product-select-picklist button:active {
+    background-color: white;
+    color: token(successPlatformDarkGrey);
+    font-weight: 600;
+}
+
+.THIS .csp-product-icon-container {
+    border-radius: 5px;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+}

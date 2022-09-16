@@ -1,0 +1,296 @@
+<template>
+  <template if:true={showModal}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-service modal-content-id-application modal-content-id-submitted modal-content-id-premier" class="slds-modal slds-modal_small slds-fade-in-open">
+      <div class="slds-modal__container csp-services-catalogue-modal-container">
+        <header class="slds-modal__header slds-modal__header_empty">
+            <lightning-button-icon
+            class="slds-modal__close"
+            title="Close"
+            icon-name="utility:close"
+            icon-class="slds-button_icon-inverse"
+            onclick={handleDialogClose}>
+            </lightning-button-icon>
+        </header>
+        <div class="csp-flex-points-header">
+          <div class="csp-flex-points-services-container">
+            <div class="slds-line-clamp_x-small slds-truncate csp-flex-points-services-name">{service.Service_Title__c}</div>
+            <div class="csp-flex-points-services-category slds-line-clamp_x-small slds-p-top_xxx-small slds-truncate">
+              {service.Service_Type__c}
+            </div>
+          </div>
+          <div class="csp-flex-points-services-points-container">
+            <template if:true={showRequest}>
+              <div class="csp-flex-points-services-points csp-flex-points-services-banner csp-flex-points-services-points-margin">
+                Request a quote
+              </div>
+            </template>
+            <template if:false={showRequest}>
+              <template if:true={showSubmitted}>
+                <div class="csp-flex-points-services-points-submitted csp-flex-points-services-banner csp-flex-points-services-points-margin">
+                  <lightning-formatted-number value={service.Points_Conversion__c}></lightning-formatted-number> points <span class="csp-flex-points-services-points-value-pending">pending</span>
+                </div>
+              </template>
+              <template if:false={showSubmitted}>
+                <div class="csp-flex-points-services-points csp-flex-points-services-banner csp-flex-points-services-points-margin">
+                  <lightning-formatted-number value={service.Points_Conversion__c}></lightning-formatted-number> points
+                </div>
+              </template>
+            </template>
+            <div if:true={service.Premier_Only__c} class="csp-flex-points-services-usertype csp-flex-points-services-banner">
+              Premier Only
+            </div>
+          </div>
+        </div>
+        <template if:true={showServiceDetails}>
+          <template if:true={service}>
+            <div class="slds-modal__content" id="modal-content-id-service">
+              <article class="csp-flex-points-services-slds-card slds-card">
+                <div class="slds-card__body slds-card__body_inner">
+                  <div class="slds-grid slds-gutters_direct_xxx-small slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-var-p-horizontal_large">
+                      <p class="csp-flex-points-footer-title">Overview</p>
+                      <div class="csp-flex-points-text"><lightning-formatted-rich-text value={service.Service_Description__c}></lightning-formatted-rich-text></div>
+                    </div>
+                  </div>
+                  <div if:true={hasPreReqs} class="slds-grid slds-gutters_direct_xxx-small slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-var-p-horizontal_large">
+                      <p class="csp-flex-points-footer-title">Prerequisites</p>
+                        <div class="csp-flex-points-text"><lightning-formatted-rich-text value={service.Service_Prerequisites__c}></lightning-formatted-rich-text></div>
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-gutters_direct_xxx-small slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-var-p-horizontal_large">
+                      <p class="csp-flex-points-footer-title">Outcomes</p>
+                        <div class="csp-flex-points-text"><lightning-formatted-rich-text value={service.Service_Outcomes__c}></lightning-formatted-rich-text></div>
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-gutters_direct_xxx-small slds-wrap">
+                    <div class="slds-col slds-large-size_1-of-2 slds-medium-size_1-of-2 slds-size_1-of-1 slds-var-p-horizontal_large">
+                      <p class="csp-flex-points-footer-title">Delivery Type</p>
+                      <div class="csp-flex-points-text"><lightning-formatted-rich-text value={service.Delivery_Type__c}></lightning-formatted-rich-text></div>
+                    </div>
+                    <div class="slds-col slds-var-p-horizontal_large">
+                      <p class="csp-flex-points-footer-title">Account Journey Stage</p>
+                      <div class="csp-flex-points-text"><lightning-formatted-rich-text value={service.Account_Journey_Stage__c}></lightning-formatted-rich-text></div>
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-gutters_direct_xxx-small slds-wrap">
+                    <div class="slds-col slds-large-size_1-of-2 slds-medium-size_1-of-2 slds-size_1-of-1 slds-var-p-horizontal_large">
+                      <p class="csp-flex-points-footer-title">Service Type</p>
+                      <div class="csp-flex-points-text"><lightning-formatted-rich-text value={service.Service_Type__c}></lightning-formatted-rich-text></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </template>
+          <div class="csp-flex-points-services-footer">
+            <!-- Guardian Account -->
+            <template if:true={isGuardian}>
+              <!-- Premier Service -->
+              <template if:true={premierService}>
+                <template if:true={isAllProductSelected}>
+                  <div class="csp-flex-points-guardian">
+                    <p>Please select a product to redeem this service</p><br/>
+                  </div>
+                </template>
+                <template if:false={isAllProductSelected}>
+                  <div class="csp-flex-points-guardian">
+                    <p>Sorry, this service is only available for <strong>Premier Account</strong> holders.</p>
+                    <div>
+                      Find out more about your upgrade options.
+                      <lightning-button class="csp-button_brand slds-float_right" onclick={handleAccountUpgrade} label="ACCOUNT UPGRADES"></lightning-button><br/><br/>
+                    </div>
+                  </div>
+                </template>
+              </template>
+              <template if:false={premierService}>
+                <template if:true={isAllProductSelected}>
+                  <div class="csp-flex-points-guardian">
+                    <p>Please select a product to redeem this service</p><br/>
+                  </div>
+                </template>
+                <template if:false={isAllProductSelected}>
+                  <template if:true={showRequest}>
+                    <!-- Get a quote for this service -->
+                    <div class="csp-flex-points-apply-button-container">
+                      <div class="slds-col slds-grow-none csp-button_brand slds-p-horizontal_x-small">
+                        <button class="modal-apply-for-service-button slds-button slds-var-m-vertical_small" disabled={handleDisableQuoteRequest} onclick={handleRequestAService}>
+                            GET A QUOTE FOR THIS SERVICE
+                        </button>
+                      </div>
+                    </div>
+                  </template>
+                  <template if:false={showRequest}>
+                    <!-- Points Guardian -->
+                    <div class="csp-flex-points-apply-button-container csp-flexpoint-book-service">
+                      <div class="slds-col slds-grow-none csp-button_brand slds-p-horizontal_x-small">
+                        <button class="modal-apply-for-service-button slds-button slds-var-m-vertical_small" disabled={handleDisableSubmit} onclick={handleApplyForService}>
+                            BOOK THIS SERVICE
+                        </button>
+                      </div>
+                    </div>
+                    <template if:true={handleDisableSubmit}> <!-- Only show tooltip if the button is disabled -->
+                      <div class="slds-popover slds-popover_tooltip slds-nubbin_top-left slds-popover_small csp-flexpoint-book-service-popover" role="tooltip">
+                          <div class="slds-popover__body csp-popover-body">
+                              <p>You do not have enough points to book this service.</p>
+                          </div>
+                      </div>
+                  </template>
+                  </template>
+                </template>
+              </template>
+            </template>
+            <!-- Non Guardian Account -->
+            <template if:false={isGuardian}>
+              <!-- Standard User -->
+              <template if:false={isNonPointsUser}>
+                <div class="csp-flex-points-guardian">
+                  <p class="csp-flex-points-footer-title">Think this service would benefit your organisation?</p>
+                  <p class="csp-flex-points-text">Contact your FlexPoints team to request this service.</p>
+                </div>
+                <div class="csp-flex-points-guardian">
+                  <p class="csp-flex-points-footer-title">FlexPoints Guardians</p>
+                  <template if:true={errorMsg}>
+                    <p class="csp-flex-points-text">{errorMsg}</p>
+                  </template>
+                  <template if:true={pointGuardians}>
+                    <template for:each={pointGuardians} for:item="result">
+                      <div key={result.id} class="slds-grid slds-grid--vertical-align-center slds-var-m-vertical_small">
+                        <lightning-avatar
+                          class={result.avatar}
+                          src={result.photoUrl}
+                          initials={result.initials}>
+                        </lightning-avatar>
+                        <div class="slds-col slds-medium-size_5-of-12 slds-large-size_5-of-12 slds-max-small-size_4-of-12">{result.Contact.Name}</div>
+                        <div class="slds-col slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-max-small-size_2-of-12"><lightning-formatted-email value={result.Contact.Email} hide-icon></lightning-formatted-email></div>
+                      </div>
+                    </template>
+                  </template>
+                </div>
+              </template>
+
+              <!-- Non Points User -->
+              <template if:true={isNonPointsUser}>
+                <div class="csp-flex-points-guardian">
+                  <p class="csp-flex-points-footer-title">Think this service would benefit your organisation?</p>
+                  <p class="csp-flex-points-text">Contact your account manager to sign up to FlexPoints.</p>
+                </div>
+                <div class="csp-flex-points-guardian">
+                  <p class="csp-flex-points-footer-title">Your Account Manager</p>
+                  <template if:true={errorMsg}>
+                    <p class="csp-flex-points-text">{errorMsg}</p>
+                  </template>
+                  <template if:true={accountManager}>
+                    <div class="slds-grid slds-grid--vertical-align-center slds-var-m-vertical_small">
+                      <lightning-avatar
+                        class={accountManager.avatar}
+                        src={accountManager.photoUrl}
+                        initials={accountManager.initials}>
+                      </lightning-avatar>
+                      <div class="slds-col slds-medium-size_5-of-12 slds-large-size_5-of-12 slds-max-small-size_4-of-12">{accountManager.Name}</div>
+                      <div class="slds-col slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-max-small-size_2-of-12"><lightning-formatted-email value={accountManager.Email} hide-icon></lightning-formatted-email></div>
+                    </div>
+                  </template>
+                </div>
+              </template>
+            </template>
+          </div>
+        </template>
+
+        <template if:true={showApplication}>
+          <div class="slds-modal__content" id="modal-content-id-application">
+            <article class="csp-flex-points-services-slds-card slds-card">
+              <div class="slds-card__body slds-card__body_inner">
+                <div class="csp-flex-points-guardian">
+                  <template if:true={showRequest}>
+                    <p class="csp-flex-points-footer-title">Request</p>
+                  </template>
+                  <template if:false={showRequest}>
+                    <p class="csp-flex-points-footer-title">Book a Service</p>
+                  </template>
+                  <div class="csp-flex-points-text">
+                    Please share any information that will help our team with the delivery of this service.<br/><br/>
+                    Where appropriate, you should include things such as:<br/>
+                    <ul class="slds-list_dotted">
+                      <li>Why you’ve requested this service</li>
+                      <li>When you’d like it to take place</li>
+                      <li>Who will be participating</li>
+                      <li>The contact details of someone else in the team that you’d like us to discuss this with</li>
+                    </ul>
+                    <br/>
+                  </div>
+                  <div class="slds-p-bottom_x-small slds-p-top_x-small">
+                    <lightning-textarea name="input1" onchange={handleInputChange} value={textInput} label="Text field..." placeholder="Text field..." variant="label-hidden"></lightning-textarea>
+                  </div>
+
+                  <div class="slds-grid slds-gutters">
+                  <template if:true={showRequest}>
+                    <div class="slds-col slds-grow-none csp-button_brand csp-flex-points-services-submitted-buttons">
+                      <button class="modal-apply-for-service-button slds-button slds-var-m-vertical_small" onclick={handleRequestAQuote}>
+                          SUBMIT REQUEST
+                      </button>
+                    </div>
+                  </template>
+                    <template if:false={showRequest}>
+                      <div class="slds-col slds-grow-none csp-button_brand csp-flex-points-services-submitted-buttons">
+                        <button class="modal-apply-for-service-button slds-button slds-var-m-vertical_small" onclick={handleSubmitService}>
+                            BOOK SERVICE
+                        </button>
+                      </div>
+                    </template>
+                    <div class="slds-col slds-grow-none csp-button_brand-cancel csp-flex-points-services-submitted-buttons">
+                      <button class="modal-apply-for-service-cancel-button slds-button slds-var-m-vertical_small" onclick={handleDialogClose}>
+                        Cancel
+                    </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </template>
+
+        <template if:true={showSubmitted}>
+          <div class="slds-modal__content" id="modal-content-id-submitted">
+            <article class="csp-flex-points-services-slds-card slds-card">
+              <div class="slds-card__body slds-card__body_inner">
+                <div class="csp-flex-points-guardian">
+                  <p class="csp-flex-points-footer-title-large">Thank you, your request is being processed.</p>
+                  <div class="csp-flex-points-text">
+                    We will get back to you very soon. Your request has been sent to our Projects Management Office who will be in touch to schedule a time convenient to you.
+                  </div>
+                  <p class="csp-flex-points-footer-title">What happens next?</p>
+                  <div class="csp-flex-points-text">
+                    You should expect a response within 2 business days.
+                  </div>
+                  <div class="slds-col csp-flex-points-services-submitted-buttons slds-grow-none csp-button_brand-white slds-p-right_x-small">
+                    <button class="modal-service-submitted-button slds-button slds-var-m-vertical_small" onclick={navigateToFlexPointsPage}>
+                        VIEW YOUR FLEXPOINTS
+                    </button>
+                  </div>
+                  <div class="slds-col csp-flex-points-services-submitted-buttons slds-grow-none csp-button_brand slds-p-horizontal_x-small">
+                    <button class="modal-service-submitted-button slds-button slds-var-m-vertical_small" onclick={handleBrowseOurServices}>
+                        BROWSE OUR SERVICES
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </template>
+      </div>
+    </section>
+    <lightning-spinner class="csp-flex-points-loading-spinner" if:true={isLoading} alternative-text="Loading" size="medium"></lightning-spinner>
+    <div  if:false={isLoading} class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+  <c-csp-modal
+    size="small"
+    padding="large"
+    onkeyup={handleEscape}
+    class="csp-account-upgrade-popup"
+    data-id="csp-account-upgrade-popup">
+    <span slot="header">Account upgrade</span>
+    <c-csp-purchase-additional-points oncancelpointspurchase={handleCancelAccountUpgrade} account-upgrades=true handle-submit-account-upgrade-application-click={handleSubmitAccountUpgradeApplicationClick}></c-csp-purchase-additional-points>
+  </c-csp-modal>
+</template>

@@ -1,0 +1,67 @@
+<aura:component implements="forceCommunity:themeLayout,flexipage:availableForAllPageTypes,lightning:isUrlAddressable,force:hasRecordId" access="global">
+    <aura:attribute name="logo" type="Aura.Component[]"/>
+    <aura:attribute name="navBar" type="Aura.Component[]"/>
+    <aura:attribute name="search" type="Aura.Component[]"/>
+    <aura:attribute name="serviceAlert" type="Aura.Component[]"/>
+    <aura:attribute name="profileMenu" type="Aura.Component[]"/>
+    <aura:attribute name="navigation" type="Aura.Component[]"/>
+    <aura:attribute name="productSelection" type="Aura.Component[]"/>
+    <aura:attribute name="globalNavigation" type="Aura.Component[]"/>
+
+    <aura:attribute name="product" type="Object" />
+    <aura:attribute name="name" type="String"/>
+    <aura:attribute name="landingPageLayout" type="Boolean" default="false"/>
+    <aura:attribute name="ShowServiceAlert" type="Boolean" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.handleInit}"/>
+
+    <aura:handler event="c:cspProductSelectionEvent" action="{!c.handleProductSelection}" includeFacets="true" />
+
+    <ltng:require styles="{!$Resource.cspstyles}" />
+
+    <header>
+        <c:cspAccountSelection />
+        <c:cspGlobalHeader profileMenu="{!v.profileMenu}" globalNavigation="{!v.globalNavigation}"/>
+
+        <aura:if isTrue="{!v.landingPageLayout}">
+            <div class="access-theme-product slds-m-top_x-large">
+                <div class="access-theme-product-inner slds-p-top_large">
+                    <div class="slds-grid slds-wrap slds-p-top_x-large slds-p-bottom_xx-large slds-align_absolute-center">
+                        <div class="slds-col--padded slds-size_1-of-1 slds-large-size_1-of-1 slds-align_absolute-center">
+                            <h1 class="slds-text-heading_large slds-p-bottom_large">What would you like help with today?</h1>
+                        </div>
+                        <div class="slds-col--padded slds-size_1-of-1 slds-large-size_8-of-12">{!v.search}</div>
+                        <div class="slds-col--padded slds-size_1-of-1 slds-large-size_1-of-1 slds-align_absolute-center slds-p-top_xx-large">
+                            Are you new to the portal?  <lightning:button label="Take the tour" iconName="utility:location" iconPosition="right" class="slds-m-left_medium slds-p-horizontal_large slds-p-vertical_xxx-small access-tour-button"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.landingPageLayout != true}">
+            <div class="access-theme-product-bar" aura:id="access-theme-product-bar">
+                <div class="slds-grid slds-wrap slds-gutters slds-align_absolute-center slds-m-top_x-large">
+                    <div class="slds-col--padded slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_7-of-12 slds-p-vertical_small slds-text-heading_medium slds-align_absolute-left">
+                        {!v.productSelection}
+                    </div>
+                    <div class="slds-col--padded slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_5-of-12 slds-p-vertical_x-small access-theme-search">{!v.search}</div>
+                </div>
+            </div>
+            <aura:if isTrue="{!v.ShowServiceAlert}">
+        <div class="slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-text-heading_medium slds-align_absolute-left">
+{!v.serviceAlert}</div>
+</aura:if>
+            <div class="access-theme-nav-bar">
+                <div class="slds-grid slds-gutters slds-align_absolute-center">
+                    <div class="slds-size_12-of-12 access-theme-nav">{!v.navBar}</div>
+                </div>
+            </div>
+        </aura:if>
+    </header>
+    <div class="access-theme-body">
+        <div class="access-theme-body__container">
+            {!v.body}
+        </div>
+    </div>
+    <div class="access-theme-footer"><c:cspGlobalFooter/></div>
+</aura:component>

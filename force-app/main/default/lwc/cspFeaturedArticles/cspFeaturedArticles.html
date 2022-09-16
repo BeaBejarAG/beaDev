@@ -1,0 +1,10 @@
+<template>
+    <div if:true={showHeading} class="slds-m-vertical_large csp-featured-articles__title">
+        Featured articles
+    </div>
+    <div class="slds-grid">
+        <div class="slds-size_1-of-1 slds-large-size_9-of-12">
+            <c-csp-search-results oncspsearcheventcomplete={handleChange} suppress-no-results=true articles-list-view=true featured-layout=true include-knowledge-results=true></c-csp-search-results>
+        </div>
+    </div>
+</template>

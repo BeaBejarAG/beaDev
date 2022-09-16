@@ -1,0 +1,4 @@
+<!-- TODO : remove this  -->
+<aura:event type="APPLICATION" description="CSP: Navigation Event">
+    <aura:attribute name="active" type="Integer"/>
+</aura:event>

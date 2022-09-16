@@ -1,0 +1,44 @@
+.csp-curated-collection {
+    background-color: var(--c-successPlatformGreyBackground, rgb(246,246,246));
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.csp-curated-collection__title {
+    color: var(--c-successPlatformRed, rgb(213,52,62));
+    font-size: 1.375rem;
+    font-weight: 600;
+}
+
+.csp-curated-collection__subtitle {
+    font-weight: 300;
+}
+
+.csp-curated-collection__card {
+    background-color: white;
+    box-shadow: var(--c-successPlatformBoxShadow, 2px 3px 4px rgb(220, 220, 220));
+    min-height: 152px;
+}
+
+.csp-curated-collection__card:hover {
+    background-color: var(--c-successPlatformLightGreenHover,rgb(237,247,246));
+    cursor: pointer;
+}
+
+.csp-curated-collection__card-icon {
+    background-color: var(--c-successPlatformLightGreenHighlight,rgb(110,183,175));
+}
+
+.csp-curated-collection__card-title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.csp-curated-collection__card-description {
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+.csp-curated-collection__card-article {
+    font-size: 0.875rem;
+    font-weight: 300;
+}

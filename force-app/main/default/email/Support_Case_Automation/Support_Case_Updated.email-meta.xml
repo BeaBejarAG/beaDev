@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <available>true</available>
+    <description>Customised template that fires on case an agent adding a public comment, extra information is pulled out of the Product routing</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Support - Case Updated</name>
+    <style>none</style>
+    <subject>Access Support Team |  - We&apos;ve Received Your Case</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

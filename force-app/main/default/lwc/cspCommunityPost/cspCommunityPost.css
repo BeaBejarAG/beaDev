@@ -1,0 +1,11 @@
+.csp-popover_guidelines {
+    margin-top: 10px;
+}
+
+.csp-popover_guidelines a {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+}
+
+.csp-vertical-align_bottom {
+    vertical-align: bottom;
+}

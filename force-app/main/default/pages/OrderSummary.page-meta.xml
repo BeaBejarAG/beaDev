@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <availableInTouch>true</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>VF  page  for &quot;wrap-up&quot; of the sales process on the opportunity level. collecting all the information from multiple sources to display on one editable page and make sure all the information is there before order fulfilment starts.</description>
+    <label>OrderSummary</label>
+    <packageVersions>
+        <majorNumber>232</majorNumber>
+        <minorNumber>2</minorNumber>
+        <namespace>SBQQ</namespace>
+    </packageVersions>
+</ApexPage>

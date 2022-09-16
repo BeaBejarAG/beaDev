@@ -1,0 +1,32 @@
+<template>
+    <template if:true={active}>
+        <div class="csp-nav-card__active slds-grid slds-wrap slds-grid--vertical-stretch slds-m-vertical_small" onclick={handleClick}>
+            <div class="csp-nav-card__img-container slds-size_1-of-1 slds-p-horizontal_small slds-p-top_small slds-grid">
+                <img class="csp-nav-card__img slds-size_1-of-1" src={image}></img>
+            </div>
+            <div class="slds-grid slds-grid_vertical slds-size_1-of-1 slds-p-around_medium csp-nav-card__details">
+                <lightning-icon icon-name={icon} size="x-small" class="slds-m-vertical_x-small"></lightning-icon>
+                <p class="slds-m-bottom_small csp-nav-card__title"><lightning-formatted-text value={heading}></lightning-formatted-text></p>
+                <div class="slds-var-m-vertical_x-small csp-nav-card__description">{description}</div>
+                <div class="slds-col slds-grid slds-grid--vertical-align-end slds-var-m-top_small">
+                    <a class="slds-var-m-right_medium csp-nav-card__link">{linkText}</a>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:false={active}>
+        <div class="csp-nav-card__inactive slds-grid slds-wrap slds-grid--vertical-stretch slds-m-vertical_small">
+            <div class="csp-nav-card__img-container slds-size_1-of-1 slds-p-horizontal_small slds-p-top_small slds-grid">
+                <img class="csp-nav-card__img slds-size_1-of-1" src={image}></img>
+            </div>
+            <div class="slds-grid slds-grid_vertical slds-size_1-of-1 slds-p-around_medium csp-nav-card__details">
+                <lightning-icon icon-name={icon} size="x-small" class="slds-m-vertical_x-small"></lightning-icon>
+                <p class="slds-m-bottom_small csp-nav-card__title"><lightning-formatted-text value={heading}></lightning-formatted-text></p>
+                <div class="slds-var-m-vertical_x-small csp-nav-card__description">{description}</div>
+                <div class="slds-col slds-grid slds-grid--vertical-align-end slds-var-m-top_small">
+                    {linkText}
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

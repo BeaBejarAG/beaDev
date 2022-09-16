@@ -1,0 +1,15 @@
+.csp-success-points-card {
+    width:340px;
+    margin:auto;
+}
+
+.csp-success-points-card-img {
+    width:340px;
+    height:200px;
+    overflow:hidden;
+    position:relative;
+}
+
+.csp-success-points-card-img:hover {
+    cursor: pointer;
+}

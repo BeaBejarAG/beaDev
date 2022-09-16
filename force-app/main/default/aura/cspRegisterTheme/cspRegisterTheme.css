@@ -1,0 +1,12 @@
+.THIS .access-theme-header {
+    max-width: token(successPlatformPageWidth);
+    align-items: normal;
+}
+.THIS .access-theme-register {
+    background-color: token(successPlatformLightGreen);
+}
+.THIS .access-theme-register-inner {
+    max-width: token(successPlatformPageWidth);
+    margin: 0 auto;
+    font-size: 0.9rem;
+}

@@ -1,0 +1,20 @@
+.csp-purchase-points-title {
+    color: var(--c-successPlatformRed,#d5343e);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.csp-purchase-points-desc {
+    font-size: 18px;
+}
+
+.csp-purchase-points-button {
+    margin-top: 20px;
+}
+
+.csp-purchase-points-cancel-button {
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 20px;
+}

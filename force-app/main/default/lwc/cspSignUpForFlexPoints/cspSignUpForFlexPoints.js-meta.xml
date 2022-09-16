@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Sign Up For FlexPoints</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="flexPointsTitle" type="String" default="Sign up for FlexPoints" label="FlexPoints Title"/>
+            <property name="flexPointsDesc" type="String" default="Access FlexPoints are a cost-effective, flexible way to consume a wide range of value-added Access services, to customise reporting, train staff, enable future integrations or upgrades and adapt as your business objectives change.Use them as a flexible, pre-allocated resource. And add the reassurance of having them in the bank, ready, already budgeted for." label="FlexPoints Description"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

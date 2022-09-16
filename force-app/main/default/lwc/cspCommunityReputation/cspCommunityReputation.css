@@ -1,0 +1,80 @@
+.csp-reputation {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+    min-width: 4.8rem;
+}
+
+.csp-reputation svg {
+    fill: white;
+}
+
+.csp-reputation_level {
+    border-radius: 0px 0px 5px 5px;
+}
+
+.csp-reputation_horizontal {
+    min-width: auto;
+}
+
+.csp-reputation_horizontal .csp-reputation_level {
+    display: inline-block;
+    height: 100%;
+    border-radius: 0px 5px 5px 0px;
+    vertical-align: middle;
+    padding: 3px 10px;
+}
+
+.csp-reputation_level-no-stars,
+.csp-reputation_horizontal .csp-reputation_level-no-stars {
+    border-radius: 5px;
+}
+
+.csp-reputation_horizontal .csp-reputation_stars {
+    display: inline-block;
+}
+
+.csp-reputation > div {
+    color: white;
+    border-radius: 5px;
+}
+
+.csp-reputation_bronze {
+    background-color: rgb(178,74,36);
+}
+.csp-reputation_bronze .csp-reputation_level {
+    background-color: rgb(209,87,41);
+}
+
+.csp-reputation_silver {
+    background-color: rgb(179,179,179);
+}
+.csp-reputation_silver .csp-reputation_level {
+    background-color: rgb(210,210,210);
+    color: black;
+}
+
+.csp-reputation_gold {
+    background-color: rgb(218,164,0);
+}
+.csp-reputation_gold .csp-reputation_level {
+    background-color: rgb(255,193,1);
+    color: black;
+}
+
+.csp-reputation_platinum {
+    background-color: rgb(179,179,179);
+}
+.csp-reputation_platinum .csp-reputation_level {
+    background-color: rgb(210,210,210);
+    color: black;
+}
+
+.csp-reputation_loading {
+    background-color: rgb(233,244,243);
+}
+.csp-reputation_loading .csp-reputation_level {
+    background-color: rgb(233,244,243);
+    color: transparent;
+}

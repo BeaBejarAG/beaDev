@@ -1,0 +1,58 @@
+<template>
+    <div class="slds-grid slds-grid_align-center">
+        <div class="slds-grid slds-wrap slds-gutters_direct slds-grid_align-center slds-size_1-of-1">
+            <c-csp-navigation-card
+                class="slds-var-m-right_small"
+                active="true"
+                image={eventsImage}
+                icon="utility:high_velocity_sales"
+                heading="Projects"
+                description="Check on the status of your active implementations and check back over those that are complete."
+                link-text="Take me there"
+                link="/projects">
+            </c-csp-navigation-card>
+            <c-csp-navigation-card
+                class="slds-var-m-right_small"
+                active="true"
+                image={knowledgeBaseImage}
+                icon="utility:undeprecate"
+                heading="Success Plans"
+                description="View which members of your team have access to the customer success portal and which of them have permission to view and manage cases."
+                link-text="Take me there"
+                link="/success-plans">
+            </c-csp-navigation-card>
+            <c-csp-navigation-card
+                class="slds-var-m-right_small"
+                active="true"
+                image={servicesImage}
+                icon="utility:settings"
+                heading="Our Services"
+                description="Take a look at the available services for your Access product."
+                link-text="Take me there"
+                link="/services-landing">
+            </c-csp-navigation-card>
+            <template if:true={isPointsGuardian}>
+                <c-csp-navigation-card
+                    class="slds-var-m-right_small"
+                    active="true"
+                    image={flexPointsImage}
+                    icon="utility:ribbon"
+                    heading="FlexPoints"
+                    description="View your FlexPoints balance and request services."
+                    link-text="Take me there"
+                    link="/flexpoints">
+                </c-csp-navigation-card>
+            </template>
+            <c-csp-navigation-card
+                class=""
+                active="true"
+                image={releasesImage}
+                icon="utility:people"
+                heading="Access Contacts"
+                description="View the designated team at Access that are available to support you."
+                link-text="Take me there"
+                link="/contacts">
+            </c-csp-navigation-card>
+        </div>
+    </div>
+</template>

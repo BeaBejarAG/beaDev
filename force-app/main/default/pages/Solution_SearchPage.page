@@ -1,0 +1,53 @@
+<apex:page standardController="Case" extensions="solutionsearch" >
+  <!-- Begin Default Content REMOVE THIS -->
+  <apex:form >
+          <apex:actionFunction name="GetProduct" reRender="render">
+            <apex:param name="RelatedProduct" value="" assignTo="{!RelatedProduct}" />
+        </apex:actionFunction> 
+                <apex:actionFunction name="GetSub" reRender="render">
+            <apex:param name="SubAnalysis" value="" assignTo="{!SubAnalysis}" />
+        </apex:actionFunction> 
+                      <apex:actionFunction name="GetClosed" reRender="render">
+            <apex:param name="ClosedCases" value="true" assignTo="{!ClosedCases}" />
+        </apex:actionFunction> 
+    Search Term<apex:inputText value="{!searchstring}" label="Input" required="true" />Only Closed <apex:inputCheckBox Value="{!ClosedCases}" onClick="GetClosed()" style="ClosedCases" label="Closed" selected="true"></apex:inputCheckBox> <br>
+    Product:<apex:inputField value="{!Case.RelatedProduct__c}" onchange="getProduct()" styleClass="RelatedProduct"/></br>
+    Sub Analysis:<apex:inputField value="{!Case.SubAnalysis__c}" onchange="getSub()" styleClass="SubAnalysis"/>
+    <apex:commandButton value="Search" action="{!search}"/>
+    <div style="overflow: scroll; width: 100%; height: 400px;">
+    <apex:pageBlock title="Results"> 
+<apex:pageblockTable value="{!acc}" var="a"> 
+<apex:column title="Case Number" > 
+    <!-- <apex:outputLink value="{!URLFOR($Action.Case.View, a.id)}">{!a.CaseNumber}</apex:outputLink> -->
+<apex:outputLink value="#" onClick="openPrimaryTab('/{!a.id}','{!a.CaseNumber}');return false">{!a.CaseNumber}</apex:outputLink>
+    </apex:column>
+<apex:column value="{!a.subject}"/>
+<apex:column value="{!a.Solution__c}"/> 
+</apex:pageBlockTable> 
+</apex:pageBlock>
+    </div>
+  </apex:form>
+  <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" />
+  <apex:includeScript value="/support/console/42.0/integration.js"/>
+
+      <script type="text/javascript">
+    var $j = jQuery.noConflict();
+    function getProduct() {
+        var v1 = $j('.RelatedProduct').val();
+        if(typeof v1 != 'undefined') GetProduct(v1);
+    }
+    function getSub() {
+        var v2 = $j('.SubAnalysis').val();
+        if(typeof v2 != 'undefined') GetSub(v2);
+    }
+    function GetClosed() {
+        var v3 = $j('.ClosedCases').val();
+        if(typeof v3 != 'undefined') GetClosed(v3);
+    }
+
+function openPrimaryTab(id, name) {
+    sforce.console.openPrimaryTab(null, id, true, name);
+    }
+    </script>
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

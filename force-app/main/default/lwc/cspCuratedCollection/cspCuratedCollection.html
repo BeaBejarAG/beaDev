@@ -1,0 +1,33 @@
+<template>
+    <template if:true={collections}>
+        <div class="slds-grid slds-wrap slds-grid_align-center csp-curated-collection slds-m-vertical_x-large slds-p-around_large">
+            <div class="slds-size_1-of-1 csp-curated-collection__title slds-align_absolute-center slds-m-vertical_small">
+                {title}
+            </div>
+            <div class="slds-size_1-of-1 csp-curated-collection__subtitle slds-align_absolute-center slds-m-vertical_small">
+                {subtitle}
+            </div>
+            <div class="slds-size_1-of-1 slds-large-size_11-of-12 slds-grid slds-wrap slds-gutters_direct slds-m-vertical_large slds-grid_align-space">
+                <template iterator:collection={collections}>
+                    <div key={collection.value.title} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2" >
+                        <div class="csp-curated-collection__card slds-m-vertical_medium slds-grid" onclick={handleCardClick} data-id={collection.value.id}>
+                            <div class="csp-curated-collection__card-icon slds-size_1-of-3 slds-show_small slds-grid slds-grid_vertical-align-center">
+                                <lightning-icon icon-name={collection.value.icon} variant="inverse" size="large" class="slds-align_absolute-center"></lightning-icon>
+                            </div>
+                            <div class="slds-grid slds-grid_vertical slds-size_3-of-3 slds-small-size_2-of-3 slds-p-vertical_small slds-p-right_large slds-p-left_small">
+                                <div class="slds-text-heading_large slds-m-bottom_small csp-curated-collection__card-title">{collection.value.title}</div>
+                                <div class="slds-var-m-vertical_x-small slds-line-clamp_x-small csp-curated-collection__card-description">{collection.value.shortDescription}</div>
+                                <div class="slds-col slds-grid slds-grid--vertical-align-end slds-var-m-top_small">
+                                    <div class="csp-curated-collection__card-article slds-var-m-right_medium slds-var-m-top_xx-small">
+                                        <lightning-icon icon-name="utility:description" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                                        {collection.value.articleCount}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,13 @@
+<apex:page showHeader="true" sidebar="true" standardController="Case" extensions="CaseCreateIncident" title="Case: {!thisCase.CaseNumber} - Create Incident" action="{!createIncident}">
+	<apex:form >
+		<apex:sectionHeader title="Case: {!thisCase.CaseNumber}" subtitle="Create Incident"/>
+
+		<apex:pageBlock title="Create Incident">
+			<apex:pageMessages />
+
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Cancel" action="{!cancel}"/>
+			</apex:pageBlockButtons>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

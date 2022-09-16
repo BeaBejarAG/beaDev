@@ -1,0 +1,98 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+    <template if:false={isLoading}>
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-3 slds-large-size_2-of-3 slds-var-m-bottom_medium">
+                <div class="slds-grid slds-wrap slds-box csp-box csp-box_shaded slds-var-p-around_medium">
+                    <div class="slds-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-var-m-bottom_small slds-text-color_weak">Service:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 slds-var-m-bottom_small csp-text_strong">{flexPointsCase.serviceTitle}</div>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="slds-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-var-m-bottom_small slds-text-color_weak">Description:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 slds-var-m-bottom_small csp-text_strong"><lightning-formatted-text value={flexPointsCase.serviceDesc} ></lightning-formatted-text></div>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="slds-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-var-m-bottom_small slds-text-color_weak">Outcomes:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 slds-var-m-bottom_small csp-text_strong">{flexPointsCase.serviceOutcomes}</div>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="slds-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-var-m-bottom_small slds-text-color_weak">Prerequisites:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 slds-var-m-bottom_small csp-text_strong">{flexPointsCase.servicePrerequisites}</div>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="slds-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-var-m-bottom_small slds-text-color_weak">Type:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 slds-var-m-bottom_small csp-text_strong">{flexPointsCase.serviceType}</div>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="slds-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-var-m-bottom_small slds-text-color_weak">User Level:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 slds-var-m-bottom_small csp-text_strong">{flexPointsCase.userLevel}</div>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="slds-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-var-m-bottom_small slds-text-color_weak">Journey Level:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 slds-var-m-bottom_small csp-text_strong">{flexPointsCase.journeyStage}</div>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="slds-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-var-m-bottom_small slds-text-color_weak">Location:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_9-of-12 slds-large-size_9-of-12 slds-var-m-bottom_small csp-text_strong">{flexPointsCase.location}</div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3">
+                <div class="slds-grid slds-wrap slds-box csp-box slds-var-p-around_medium">
+                    <div class="slds-size_1-of-1 csp-text_brand csp-text_strong csp-text_large slds-var-m-bottom_small">
+                        <template if:true={pendingQuote}>
+                            Quote Pending
+                        </template>
+                        <template if:false={pendingQuote}>
+                            Value: <lightning-formatted-number value={getPointsValue}></lightning-formatted-number> FlexPoints
+                        </template>
+                    </div>
+                    <lightning-button if:true={approveQuote} label="APPROVE THIS QUOTE" class="slds-size_1-of-1 csp-button_brand slds-button slds-var-m-bottom_medium csp-button_stretch csp-flexpoint-approve-quote" disabled={handleDisableSubmit} onclick={handleQuoteApproval}></lightning-button>
+                    <template if:true={handleDisableSubmit}> <!-- Only show tooltip if the button is disabled -->
+                        <div class="slds-popover slds-popover_tooltip slds-nubbin_top-left slds-popover_small csp-flexpoint-approve-quote-popover" role="tooltip">
+                            <div class="slds-popover__body csp-popover-body">
+                                <p>You do not have enough points to pay for this service.</p>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:true={showRejectButton}>
+                        <lightning-button if:true={approveQuote} label="REJECT THIS QUOTE" class="slds-size_1-of-1 csp-button_brand-white slds-button slds-var-m-bottom_medium csp-button_stretch csp-quote-reject-button" onclick={handleQuoteReject}></lightning-button>
+                    </template>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="sslds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Requester:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{flexPointsCase.contactName}</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Assigned to:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{flexPointsCase.owner}</div>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Case created on:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">
+                        <lightning-relative-date-time value={flexPointsCase.createdDate}></lightning-relative-date-time>
+                    </div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Last activity:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">
+                        <lightning-relative-date-time value={flexPointsCase.lastModifiedDate}></lightning-relative-date-time>
+                    </div>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Product:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium csp-text_strong">{flexPointsCase.product}</div>
+                    <div class="slds-border_bottom slds-container_fluid slds-var-m-bottom_large slds-var-m-top_small"></div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak">Attachments:</div>
+                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-var-m-bottom_medium slds-text-color_weak" if:false={attachments.length}>No attachments</div>
+                    <div class="slds-size_12-of-12 slds-large-size_6-of-12 csp-text_strong" if:true={attachments.length}>
+                        <template iterator:attachment={attachments}>
+                            <div key={attachment.value.Id} class="slds-var-m-bottom_x-small slds-grid">
+                                <lightning-icon icon-name="doctype:attachment" size="x-small" class="csp-fill_brand slds-var-m-vertical_xx-small"></lightning-icon>
+                                <lightning-button class="csp-button_link slds-var-m-left_x-small slds-var-m-right_xx-small csp-text_small" value={attachment.value.Id} onclick={handleViewAttachment} label={attachment.value.Title}></lightning-button>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="slds-size_12-of-12 slds-var-m-bottom_medium">
+                        <lightning-file-upload
+                            name="fileUploader"
+                            record-id={caseId}
+                            onuploadfinished={handleUploadFinished}
+                            multiple>
+                        </lightning-file-upload>
+                    </div>
+                </div>
+            </div>
+            <div if:true={isProcessing}>
+                <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+            </div>
+        </div>
+    </template>
+</template>

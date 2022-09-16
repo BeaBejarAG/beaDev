@@ -1,0 +1,12 @@
+<aura:component controller="GetCurrentUserType" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="loggedInUser" type="boolean" default="false"/>
+    <aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/>
+    <aura:if isTrue="{!v.loggedInUser}">
+        <div id="button_right">
+     <lightning:button variant="brand" label="Article Feedback" onclick="{! c.handleClickSumbit }" />
+        </div>
+    </aura:if>
+        <aura:set attribute="else">      
+    </aura:set>
+</aura:component>

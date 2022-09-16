@@ -1,0 +1,3 @@
+<!-- TODO : remove this  -->
+<aura:component extends="forceCommunity:navigationMenuBase" implements="force:appHostable,forceCommunity:availableForAllPageTypes" access="global">
+</aura:component>

@@ -1,0 +1,47 @@
+<template>
+    <div class="csp-footer-container slds-grid slds-align_absolute-center slds-p-horizontal_medium">
+        <div class="csp-footer slds-size_1-of-1 slds-grid slds-wrap slds-grid--vertical-stretch slds-m-vertical_xx-large">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-grid slds-grid_vertical slds-grid_align-spread">
+                <div>
+                    <img src={logo} class="csp-footer__logo slds-m-around_small" />
+                </div>
+                <div class="csp-footer__copyright slds-m-around_small">
+                    &copy; 2020 The Access Group
+                </div>
+            </div>
+            <div class="csp-footer__links slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-p-around_small">
+                <template iterator:link={footerLinks}>
+                    <template if:true={link.value.internal}>
+                        <div key={link.value.name} class="slds-m-vertical_medium">
+                            <div data-url={link.value.url} onclick={handleLinkClick} class="csp-footer__link slds-grid_vertical-align-center">
+                                <lightning-icon icon-name={link.value.icon} variant="inverse" size="x-small" class="slds-var-m-right_small"></lightning-icon>
+                                {link.value.name}
+                            </div>
+                        </div>
+                    </template>
+                    <template if:false={link.value.internal}>
+                        <div key={link.value.name} class="slds-m-vertical_medium">
+                            <a href={link.value.url} target={link.value.target} class="csp-footer__link slds-grid_vertical-align-center">
+                                <lightning-icon icon-name={link.value.icon} variant="inverse" size="x-small" class="slds-var-m-right_small"></lightning-icon>
+                                {link.value.name}
+                            </a>
+                        </div>
+                    </template>
+                </template>
+            </div>
+            <div class="csp-footer__more-access slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-p-around_small">
+                <div class="csp-footer__more-access-title slds-m-bottom_small">
+                    More from Access:
+                </div>
+                <template iterator:link={moreFromAccessLinks}>
+                    <div key={link.value.name} class="slds-m-vertical_medium slds-m-left_small">
+                        <div data-url={link.value.url} class="csp-footer__link slds-grid_vertical-align-center" onclick={handleLinkClick}>
+                            <lightning-icon icon-name={link.value.icon} variant="inverse" size="x-small" class="slds-var-m-right_small"></lightning-icon>
+                            {link.value.name}
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

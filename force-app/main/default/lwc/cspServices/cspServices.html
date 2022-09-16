@@ -1,0 +1,13 @@
+<template>
+    <template if:true={showStepProduct}>
+        <c-csp-product-selection-matrix show-all={showAll} product-target="">
+            <span class="slds-size_1-of-1" slot="header">
+                <h1 class="slds-size_1-of-1 slds-text-heading_large slds-var-m-around_large slds-align_absolute-center access-product-matrix__header">Browse our services by product...</h1>
+            </span>
+        </c-csp-product-selection-matrix>
+    </template>
+
+    <template if:false={showStepProduct}>
+        <c-csp-service-catalogue-services state="browse"></c-csp-service-catalogue-services>
+    </template>
+</template>

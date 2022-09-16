@@ -1,0 +1,25 @@
+/* Global Page Elements */
+.THIS h4 {
+    color: white;
+    font-size: 1rem;
+}
+.THIS .access-theme-account-inner {
+    max-width: token(successPlatformPageWidth);
+    margin: 0 auto;
+}
+.THIS .access-theme-account-inner .slds-text-heading_large {
+    font-weight: 400;
+    font-size: 2rem;
+    color: white;
+}
+.THIS .access-theme-account-inner .slds-avatar {
+    height: 6.6rem;
+    width: 6.6rem;
+    min-height: 6.6rem;
+    min-width: 6.6rem;
+    border-radius: 3.3rem;
+    border: 0.25rem solid white;
+    text-align: center;
+    font-size: 2.5rem;
+    color: white;
+}

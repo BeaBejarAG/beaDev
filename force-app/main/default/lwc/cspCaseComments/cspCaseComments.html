@@ -1,0 +1,161 @@
+<template>
+    <template if:true={caseAccess}>
+        <template iterator:comment={comments}>
+            <div key={comment.value.id} class="slds-box csp-box csp-box_shaded slds-var-m-bottom_xx-large" if:true={comment.first}>
+                <div class="">
+                    <template if:true={comment.value.Solution}>
+                        <div class="csp-text_brand csp-text_large csp-text_strong slds-var-m-bottom_medium">Solution</div>
+                        <div class='slds-box csp-box csp-box-shaded-left_green slds-var-m-bottom_small'>
+                            <div class="slds-var-p-around_xx-small slds-grid">
+                                <div class="slds-var-m-left_medium">
+                                    <p class="case-comment__body slds-var-m-bottom_small">
+                                        <lightning-formatted-text value={comment.value.CommentBody} linkify></lightning-formatted-text>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:false={comment.value.Solution}>
+                        <template if:true={isProjectCase}>
+                            <div class="csp-text_brand csp-text_large csp-text_strong slds-var-m-bottom_medium">Project description</div>
+                            <div class='slds-box csp-box csp-box-shaded-left_green slds-var-m-bottom_small'>
+                                <div class="slds-var-p-around_xx-small slds-grid">
+                                    <div class="slds-var-m-left_medium">
+                                        <p class="case-comment__body slds-var-m-bottom_small">
+                                            <lightning-formatted-text value={comment.value.CommentBody} linkify></lightning-formatted-text>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:false={isProjectCase}>
+                            <div class="csp-text_brand csp-text_large csp-text_strong slds-var-m-bottom_medium">Latest comment</div>
+                            <div class='slds-box csp-box csp-box-shaded-left_green slds-var-m-bottom_small'>
+                                <div class="slds-var-p-around_xx-small slds-grid">
+                                    <div class="slds-float_left slds-align-top slds-grid_vertical-stretch">
+                                        <lightning-avatar
+                                            size="large"
+                                            src={comment.value.CreatorFullPhotoUrl}
+                                            initials={comment.value.CreatedBy.Initial}
+                                            alternative-text={comment.value.CreatedBy.Name}
+                                            class={comment.value.CreatedBy.AvatarClass}>
+                                        </lightning-avatar>
+                                    </div>
+                                    <div class="slds-var-m-left_medium">
+                                        <p class="slds-var-m-top_small slds-var-m-bottom_xxx-small csp-text_small">
+                                            <lightning-formatted-date-time
+                                                value={comment.value.CreatedDate}
+                                                year="numeric"
+                                                month="long"
+                                                day="2-digit"
+                                                weekday="long"
+                                                class="slds-var-m-right_medium">
+                                            </lightning-formatted-date-time>
+                                            <span class="slds-nowrap slds-show_inline-block">
+                                                <lightning-icon
+                                                    icon-name="utility:clock"
+                                                    size="x-small"
+                                                    class="slds-var-m-right_xx-small slds-var-m-bottom_xx-small slds-align-middle">
+                                                </lightning-icon>
+                                                <lightning-formatted-date-time
+                                                    value={comment.value.CreatedDate}
+                                                    hour="2-digit"
+                                                    minute="2-digit">
+                                                </lightning-formatted-date-time>
+                                            </span>
+                                        </p>
+                                        <p class="slds-var-m-bottom_large">
+                                            <strong class="csp-text_medium csp-text_strong">{comment.value.CreatedBy.Name}</strong>
+                                        </p>
+            
+                                        <p class="case-comment__body slds-var-m-bottom_small">
+                                            <lightning-formatted-text value={comment.value.CommentBody} linkify></lightning-formatted-text>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                    <template if:false={isClosed}>
+                        <template if:false={isFlexPointsRedemptionRecordType}>
+                            <div if:false={isProjectCase}>
+                                <lightning-textarea
+                                    class="csp-case_comment csp-input_base"
+                                    placeholder="Add a comment..."
+                                    message-when-value-missing=" "
+                                    required>
+                                </lightning-textarea>
+
+                                <div class="slds-var-m-top_small">
+                                    <lightning-button
+                                        label="Add Comment"
+                                        class="csp-button_brand"
+                                        onclick={handleAddComment}>
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                    <template if:true={isClosed}>
+                        <div if:false={isIssueCase} class="slds-var-m_vertical_small">
+                            This case is now Closed and no further Comments can be added. If you’d like our team to look into this further, please <a onclick={handleCreateCase}>open a New Case</a>.
+                        </div>
+                        <div if:true={isIssueCase} class="slds-var-m_vertical_small">
+                            This case is now Closed and no further Comments can be added. If you’d like our team to look into this further, please open a New Case.
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <template if:false={comment.first}>
+                <div key={comment.value.id} class='slds-box csp-box slds-var-m-around_medium'>
+                    <div class="slds-var-p-around_xx-small slds-grid">
+                        <div class="slds-float_left slds-align-top slds-grid_vertical-stretch">
+                            <lightning-avatar
+                                size="large"
+                                src={comment.value.CreatorFullPhotoUrl}
+                                initials={comment.value.CreatedBy.Initial}
+                                alternative-text={comment.value.CreatedBy.Name}
+                                class={comment.value.CreatedBy.AvatarClass}>
+                            </lightning-avatar>
+                        </div>
+                        <div class="slds-var-m-left_medium">
+                            <p class="slds-var-m-top_small slds-var-m-bottom_xxx-small csp-text_small slds-clear">
+                                <lightning-formatted-date-time
+                                    value={comment.value.CreatedDate}
+                                    year="numeric"
+                                    month="long"
+                                    day="2-digit"
+                                    weekday="long"
+                                    class="slds-var-m-right_medium">
+                                </lightning-formatted-date-time>
+
+                                <span class="slds-nowrap slds-show_inline-block">
+                                    <lightning-icon
+                                        icon-name="utility:clock"
+                                        size="x-small"
+                                        class="slds-var-m-right_xx-small slds-var-m-bottom_xx-small slds-align-middle">
+                                    </lightning-icon>
+                                    <lightning-formatted-date-time
+                                        value={comment.value.CreatedDate}
+                                        hour="2-digit"
+                                        minute="2-digit">
+                                    </lightning-formatted-date-time>
+                                </span>
+                            </p>
+                            <p class="slds-var-m-bottom_large">
+                                <strong class="csp-text_medium csp-text_strong">{comment.value.CreatedBy.Name}</strong>
+                            </p>
+
+                            <p class="case-comment__body slds-var-m-bottom_small">
+                                <lightning-formatted-text value={comment.value.CommentBody} linkify></lightning-formatted-text>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </template>
+    </template>
+    <div if:true={refreshing}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+</template>

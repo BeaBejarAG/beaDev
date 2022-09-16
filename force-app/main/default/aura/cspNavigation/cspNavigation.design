@@ -1,0 +1,3 @@
+<design:component label="CSP: Navigation">
+    <design:attribute name="navigationLinkSetId" label="Navigation" datasource="apex://cspGlobalNavigation"/>
+</design:component>

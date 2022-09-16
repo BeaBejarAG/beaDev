@@ -1,0 +1,276 @@
+<template>
+    <template if:true={user.id}>
+            <template if:true={showBanner}>
+            <div class={user.profileBox}>
+                <div class="access-theme-account-inner slds-var-p-top_large">
+                    <div class="slds-grid slds-wrap slds-var-p-bottom_large slds-grid_vertical-align-center">
+                        <div class="slds-col_padded slds-size_1-of-1 slds-large-size_1-of-1">
+                            <div class="slds-grid slds-grid_vertical-align-center">
+
+                                <lightning-avatar
+                                    size="large"
+                                    src={photoUrl}
+                                    initials={user.initials}
+                                    class="slds-var-m-right_large slds-var-m-vertical_medium">
+                                </lightning-avatar>
+                               
+                                <div>
+                                    <h1 class="slds-text-heading_large slds-var-p-bottom_small">
+                                        {user.name}
+                                        <template if:false={user.isCurrentUser}>
+                                            <template if:true={user.email}>
+                                                <span> ({user.email})</span>
+                                            </template>
+                                        </template>
+                                    </h1>
+                                    <h4>Member since:&nbsp;
+                                        <strong>
+                                        <lightning-formatted-date-time
+                                            value={user.createdDate}
+                                            year="numeric"
+                                            month="long">
+                                        </lightning-formatted-date-time>
+                                        </strong>
+                                    </h4>
+                                    <h4 class="slds-var-m-top_small" if:true={user.aboutMe}>{user.aboutMe}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+    <template if:true={user.id}>
+        <template if:false={showBanner}>
+            <template if:true={showProfile}>
+
+                <div class="csp-box csp-box-border_dark slds-grid slds-var-p-around_large">
+                    <div class="slds-show_inline-block">
+                        <lightning-avatar
+                            size="large"
+                            src={photoUrl}
+                            initials={user.initials}
+                            class={user.avatar}>
+                        </lightning-avatar>
+                    </div>
+
+                    <div class="slds-var-m-top_xx-small slds-var-m-left_xx-large slds-show_inline-block">
+                        <p class="slds-var-m-bottom_medium">Profile picture</p>
+
+                        <lightning-file-upload
+                            onuploadfinished={handleSelectFile}
+                            data-id="profile-file"
+                            accept={acceptedImageFormats}
+                            class="csp-file-upload_button-only slds-show_inline-block">
+                        </lightning-file-upload>
+
+                        <div class="slds-var-m-left_medium slds-show_inline-block" if:false={hasLoadedFile}>
+                            <lightning-button
+                                class="csp-button_brand-white"
+                                label="REMOVE"
+                                if:true={user.hasPhoto}
+                                onclick={handleRemovePhoto}>
+                            </lightning-button>
+                        </div>
+
+                        <div class="slds-var-m-left_medium slds-show_inline-block" if:true={hasLoadedFile}>
+                            <lightning-button
+                                class="csp-button_brand-white"
+                                label="CANCEL"
+                                onclick={handleCancelFileUpload}>
+                            </lightning-button>
+                        </div>
+
+                        <div class="slds-var-m-left_medium slds-text-color_weak slds-show_inline-block" if:true={hasLoadedFile}>
+                            *Changes will be applied when you click save
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-var-m-top_large">
+                    <lightning-textarea
+                        label="About me"
+                        data-id="about-me"
+                        class="csp-feed_input csp-input_base"
+                        value={user.aboutMe}
+                        max-length="255">
+                    </lightning-textarea>
+                </div>
+
+                <template if:true={RegionPicklistValues.data}>
+                    <div if:true={user.hasContact} class="slds-var-m-top_large">
+                        <lightning-combobox
+                            label="Region"
+                            class="csp-feed_input csp-input_base"
+                            data-id="region"
+                            value={user.region}
+                            placeholder="Please select a region"
+                            options={RegionPicklistValues.data.values}
+                            onchange={handleRegionChange}>
+                        </lightning-combobox>
+                    </div>
+                </template>
+
+                <div class="slds-var-m-top_large">
+                    <lightning-button
+                        label="Save"
+                        onclick={handleUpdateProfile}
+                        class="csp-button_brand">             
+                    </lightning-button>
+                </div>
+
+            </template>
+
+            <template if:true={showPassword}>
+                <p class="csp-text_strong slds-var-m-bottom_large">Change your password</p>
+                <div class="slds-grid">
+                    <div class="slds-size_6-of-12">
+                        <lightning-input
+                            label="Enter your old password"
+                            type="password"
+                            name="password"
+                            required
+                            message-when-value-missing="You must enter your old password"
+                            data-id="old-password"
+                            class="csp-feed_input csp-input_base slds-var-m-bottom_large">
+                        </lightning-input>
+
+                        <lightning-input
+                            label="Enter your new password"
+                            type="password"
+                            data-id="new-password"
+                            minlength="8"
+                            required
+                            message-when-too-short="Your password needs to be a minimum of 8 characters"
+                            message-when-value-missing="You must enter your new password"
+                            class="csp-feed_input csp-input_base slds-var-m-bottom_large">
+                        </lightning-input>
+
+                        <lightning-input
+                            label="Confirm your new password"
+                            type="password"
+                            data-id="confirm-password"
+                            minlength="8"
+                            required
+                            message-when-too-short="Your password needs to be a minimum of 8 characters"
+                            message-when-value-missing="You must confirm your new password"
+                            class="csp-feed_input csp-input_base slds-var-m-bottom_large">
+                        </lightning-input>
+
+                        <lightning-button
+                            label="Save"
+                            onclick={handleUpdatePassword}
+                            class="csp-button_brand slds-var-m-top_medium">
+                        </lightning-button>
+                    </div>
+                </div>
+            </template>
+
+            <template if:true={showPosts}>
+                <div class="slds-var-m-top_small slds-var-m-bottom_medium slds-text-align_right"
+                if:false={isCurrentUser}>
+                    <template if:false={isMember}>
+                        <lightning-button
+                            class="csp-button_brand"
+                            label="FOLLOW"
+                            onclick={handleFollow}
+                            icon-name="utility:comments">
+                        </lightning-button>
+                    </template>
+                    <template if:true={isMember}>
+                        <lightning-button
+                            class="csp-button_brand-white"
+                            label="UNFOLLOW"
+                            onclick={handleUnfollow}
+                            icon-name="utility:comments">
+                        </lightning-button>
+                    </template>
+                </div>
+            </template>
+
+            <template if:true={showFeed}>
+                <c-csp-community-feeds
+                    hide-create-button="true"
+                    display-only="true"
+                    show-authored={showPosts}
+                    show-unanswered={showUnanswered}
+                    record-id={recordId}>
+                </c-csp-community-feeds>
+            </template>
+
+            <template if:true={showBadges}>
+
+                <template if:false={user.missions.length}>
+                    <div class="slds-box csp-box csp-box-shaded-left_green csp-box_shaded-light slds-var-m-bottom_small">
+                        <div class="slds-var-p-around_large slds-grid">
+                            <lightning-icon icon-name="utility:locker_service_console" size="medium"></lightning-icon>
+                            <span class="slds-var-m-left_medium csp-text_medium">No badges received yet</span>
+                        </div>
+                    </div>
+                </template>
+
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template iterator:badge={user.missions}>
+                        <div key={badge.value.Id} class="slds-col slds-size_3-of-12 slds-text-align_center">
+                            <div class="csp-box csp-box-shaded">
+                                <div class="slds-var-p-around_medium">
+                                    <img src={badge.value.ImageUrl} class="csp-profile_badge">
+                                </div>
+                                <div key={badge.value.Id} class="slds-var-p-around_medium slds-border_top">
+                                    {badge.value.Message}
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:true={showGroups}>
+
+
+                <template if:false={user.groups.groups.length}>
+                    <div class="slds-box csp-box csp-box-shaded-left_green csp-box_shaded-light slds-var-m-bottom_small">
+                        <div class="slds-var-p-around_large slds-grid">
+                            <lightning-icon icon-name="utility:hierarchy" size="medium"></lightning-icon>
+                            <span class="slds-var-m-left_medium csp-text_medium">Not a member of any groups</span>
+                        </div>
+                    </div>
+                </template>
+
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template iterator:group={user.groups.groups}>
+
+                        <div key={group.value.id} class="slds-col slds-size_5-of-12 slds-var-m-bottom_medium">
+                            <div class="slds-box csp-box_shaded slds-grid csp-browse_group" onclick={handleViewGroup} data-id={group.value.id}>
+                                <div class="slds-size_3-of-12 slds-var-p-around_xx-small slds-var-m-top_medium slds-var-m-right_small">
+                                    <img src={group.value.photo.mediumPhotoUrl}>
+                                </div>
+                                <div class="slds-size_9-of-12 slds-var-p-horizontal_small">
+
+                                    <div class="slds-var-m-top_small slds-var-m-bottom_x-small slds-truncate csp-max-width_100">
+                                        <span class="csp-text_strong">{group.value.name}</span>
+                                    </div>
+                                    <p class="slds-line-clamp_x-small csp-text_small csp-browse_group-description">
+                                        {group.value.description}
+                                    </p>
+
+                                    <div class="slds-var-m-top_x-small slds-grid">
+                                        <lightning-icon
+                                            icon-name="utility:groups"
+                                            size="x-small"
+                                            class="slds-var-m-right_small">
+                                        </lightning-icon>
+                                        <div class="csp-text_small">{group.value.memberCountLabel}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </template>
+    </template>
+    <div if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+</template>

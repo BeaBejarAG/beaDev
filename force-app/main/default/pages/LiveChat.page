@@ -1,0 +1,80 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" pageStyle="">
+
+    <style>
+        body { margin: 0px; font-family: Open Sans; }
+        a { text-decoration: none; }
+    </style>
+    <apex:stylesheet value="{!$Resource.cspstyles}"/>
+
+    <div id="liveagent_button_online_{!$CurrentPage.parameters.buttonId}" style="display: none;">
+        If your live chat window doesn't open automatically,
+        <a href="javascript://Chat" onclick="liveagent.startChat('{!$CurrentPage.parameters.buttonId}')">
+            please click here
+            <button class="commbuttononline" style="display:none">Live Chat</button>
+        </a>
+    </div>
+    <div id="liveagent_button_offline_{!$CurrentPage.parameters.buttonId}" style="display: block;">
+        Sorry chat is unavailable at the moment
+        <button class="commbutton" style="display:none">Chat Offline</button>
+    </div>
+
+    <script type="text/javascript">
+    if (!window._laq) { window._laq = []; }
+    window._laq.push(function(){liveagent.showWhenOnline('{!$CurrentPage.parameters.buttonId}', document.getElementById('liveagent_button_online_{!$CurrentPage.parameters.buttonId}'));
+    liveagent.showWhenOffline('{!$CurrentPage.parameters.buttonId}', document.getElementById('liveagent_button_offline_{!$CurrentPage.parameters.buttonId}'));
+    });</script>
+
+    <script type='text/javascript' src='https://c.la1-c2-lo2.salesforceliveagent.com/content/g/js/46.0/deployment.js'></script>
+    <script type='text/javascript'>
+        const config = { attributes: true, childList: true };
+        const onlineId = 'liveagent_button_online_{!$CurrentPage.parameters.buttonId}';
+        const offlineId = 'liveagent_button_offline_{!$CurrentPage.parameters.buttonId}';
+
+        function setChatStatus(status) {
+            const event = new CustomEvent('chatStatus', { detail: status });
+            if(window.parent && window.parent.document) {
+                window.parent.document.dispatchEvent(event)
+            }
+        }
+
+        setChatStatus('Offline');
+
+        window.addEventListener('message', e => {
+            if(e.data.event === 'OPEN_CHAT') {
+                document.getElementById(onlineId).click();
+            }
+        }, true);
+
+        new MutationObserver(mutationsList => {
+            mutationsList.forEach(mutation => {
+                if (mutation.attributeName === 'style' &&
+                  mutation.target.style.display !== 'none') {
+                    setChatStatus('Online');
+                }
+            });
+        }).observe(document.getElementById(onlineId), config);
+
+        new MutationObserver(mutationsList => {
+            mutationsList.forEach(mutation => {
+                if (mutation.attributeName === 'style' &&
+                  mutation.target.style.display !== 'none') {
+                    setChatStatus('Offline');
+                }
+            });
+        })
+        .observe(document.getElementById(offlineId), config);
+
+        liveagent.init('https://d.la1-c2-lo2.salesforceliveagent.com/chat', '57258000000045T', '{!LEFT($Organization.Id,15)}');
+        liveagent.addCustomDetail('EntyId', '{!$CurrentPage.parameters.EntitlementID}');
+        liveagent.addCustomDetail('ContactEmail', '{!$CurrentPage.parameters.ContactEmail}');
+        liveagent.addCustomDetail('LCContactId', '{!$CurrentPage.parameters.ContactID}');
+        liveagent.addCustomDetail('LCCaseId', '{!$CurrentPage.parameters.CaseID}');
+
+        if({!$CurrentPage.parameters.CaseID != ""}) {
+            let ival = setInterval(e => {
+                liveagent.startChat('{!$CurrentPage.parameters.buttonId}');
+                clearInterval(ival);
+            }, 1000);
+        }
+    </script>
+</apex:page>

@@ -1,0 +1,77 @@
+<template>
+    <template if:true={isHorizontal}>
+        <div class="csp-my-cases-h slds-p-around_large">
+            <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+                <div class="slds-col slds-m-vertical_small csp-my-cases__title">
+                    {componentTitle}
+                </div>
+                <template if:true={showCasesCheckbox}>
+                    <template if:false={HideAllAccountCases}>
+                    <lightning-input type="checkbox" label="Display All Cases For All Accounts" name="selectAllAccount" onchange={handleAccountCheckBox}></lightning-input>
+                </template>
+                </template>
+                <lightning-button if:false={userNotEntitled} class="slds-col_bump-left slds-button slds-m-vertical_small slds-p-vertical_x-small slds-p-horizontal_medium slds-align_absolute-center slds-button csp-button_brand-white" label="VIEW ALL CASES" onclick={handleAllCasesClick}></lightning-button>
+            </div>
+            <template if:false={userNotEntitled}>
+                <div class="slds-grid slds-wrap slds-gutters_direct">
+                    <div class="slds-size_1-of-1 slds-large-size_1-of-2 slds-col">
+                        <div class="csp-my-cases__card slds-m-vertical_medium slds-grid slds-grid_vertical-align-center" onclick={handleOpenCasesClick}>
+                            <div class="slds-p-around_large csp-my-cases__card-box slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+                                {openCases}
+                            </div>
+                            <div class="csp-my-cases-h__card-title slds-m-horizontal_medium slds-m-vertical_small">
+                                My open cases
+                            </div>
+                        </div>
+                    </div>
+                    <div class="csp-my-cases__container slds-size_1-of-1 slds-large-size_1-of-2 slds-col">
+                        <div class="csp-my-cases__card slds-m-vertical_medium slds-grid slds-grid_vertical-align-center" onclick={handleAwaitingCasesClick}>
+                            <div class="slds-p-around_large csp-my-cases__card-box-alert slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+                                {pendingCases}
+                            </div>
+                            <div class="csp-my-cases-h__card-title-alert slds-m-horizontal_medium slds-m-vertical_small">
+                                Cases I need to action
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template if:true={userNotEntitled}>
+                <div class="slds-m-vertical_small">
+                    You are not a named Support contact for this product and therefore are unable to raise cases, but you are able to view all associated knowledge content.
+                </div>
+            </template>            
+        </div>
+    </template>
+    <template if:false={isHorizontal}>
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+            <div class="slds-col slds-m-vertical_small csp-my-cases__title">
+                {componentTitle}
+            </div>
+            <lightning-button if:false={userNotEntitled} class="slds-col_bump-left slds-button slds-m-vertical_small slds-p-vertical_x-small slds-p-horizontal_medium slds-align_absolute-center slds-button csp-button_brand" label="CREATE CASE" onclick={handleCreateCaseClick}></lightning-button>
+        </div>
+        <template if:false={userNotEntitled}>
+            <div class="csp-my-cases__card slds-m-vertical_medium slds-grid slds-grid_vertical-align-center" onclick={handleOpenCasesClick}>
+                <div class="slds-p-around_large csp-my-cases__card-box slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+                    {openCases}
+                </div>
+                <div class="csp-my-cases__card-title slds-m-horizontal_medium slds-m-vertical_small slds-truncate">
+                    My open cases
+                </div>
+            </div>
+            <div class="csp-my-cases__card slds-m-vertical_medium slds-grid slds-grid_vertical-align-center" onclick={handleAwaitingCasesClick}>
+                <div class="slds-p-around_large csp-my-cases__card-box-alert slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+                    {pendingCases}
+                </div>
+                <div class="csp-my-cases__card-title-alert slds-m-horizontal_medium slds-m-vertical_small slds-truncate">
+                    Cases I need to action
+                </div>
+            </div>
+        </template>
+        <template if:true={userNotEntitled}>
+            <div class="slds-m-vertical_small">
+                You are not a named Support contact for this product and therefore are unable to raise cases, but you are able to view all associated knowledge content.
+            </div>
+        </template>
+    </template>
+</template>

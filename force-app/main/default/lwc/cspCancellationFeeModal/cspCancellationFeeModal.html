@@ -1,0 +1,20 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+    <template if:false={isLoading}>
+        <div class="slds-is-relative">
+            <template if:true={isProcessing}>
+                <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+            </template>
+            <lightning-quick-action-panel title="Quick Action Title">
+            Cancellation Fee Points
+            <lightning-input type="number" label="Cancellation Fee Amount" name="CancellationFeeAmount" onchange={handleFeeChange}></lightning-input>
+            <div slot="footer">
+                <lightning-button variant="neutral" label="Cancel" onclick={closeAction}></lightning-button>
+                <lightning-button variant="brand" label="Save" onclick={saveAction}></lightning-button>
+            </div>
+            </lightning-quick-action-panel>
+        </div>
+    </template>
+</template>

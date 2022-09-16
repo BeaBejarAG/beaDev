@@ -1,0 +1,75 @@
+<!--
+  @description       : Order Summary - triggered from button Sales Handover
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : PolSource
+  @last modified on  : 11-19-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page standardController="Opportunity" applyHtmlTag="true" setup="false" sidebar="false" standardStylesheets="true" lightningStylesheets="true" extensions="OpportunityExtension" docType="html-5.0">
+ <apex:pageMessages id="errormsg" />
+ 
+    <apex:outputpanel id="scriptPanel"> 
+    </apex:outputpanel>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="1" title="Note" dir="left" collapsible="false">
+                <br/>
+                <p>
+                    Please review all data in the following sections and ensure that all fields are populated before the page is submitted.
+                </p>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="Order Summary" dir="Center">
+                <apex:outputText label="Quote" value="{!Opportunity.SBQQ__PrimaryQuote__r.Name}" rendered="{!if(Opportunity.SBQQ__PrimaryQuote__r.SBQQ__Primary__c , true ,false)}"></apex:outputText>
+            <apex:pageBlockSection title="Summary of Opportunity Values" collapsible="false" columns="2">
+                <apex:outputField label="Total ABC" value="{!Opportunity.Total_ABC__c }"/>
+                <apex:outputField label="Total Services" value="{!Opportunity.Total_Services__c }"/>
+                <apex:outputField label="Total SAAS" value="{!Opportunity.Total_SAAS__c  }"/>
+                <apex:outputField label="Total Variable" value="{!Opportunity.Total_Variable__c }"/>
+                <apex:outputField label="Total Discount %" value="{!Opportunity.SBQQ__PrimaryQuote__r.SBQQ__CustomerDiscount__c}"/>
+                <apex:outputField label="Total Services Discount %" value="{!Opportunity.SBQQ__PrimaryQuote__r.CPQ_Services_Discount__c}"/>
+                <apex:outputField label="Total SaaS Discount %" value="{!Opportunity.SBQQ__PrimaryQuote__r.CPQ_Software_Discount__c}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Summary of Contract" collapsible="false" columns="2">
+                
+                <apex:outputField label="Contract Term" value="{!Opportunity.SBQQ__PrimaryQuote__r.SBQQ__SubscriptionTerm__c}"/>
+                <apex:input type="date" value="{!primaryQuoteStartDate}" label="Start Date"/>
+                <apex:outputField label="Payment Terms" value="{!Opportunity.SBQQ__PrimaryQuote__r.SBQQ__PaymentTerms__c}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlock mode="inlineEdit" >
+                <apex:pageBlockSection title="Summary of Why We Won" collapsible="false" columns="2">
+                   
+                    <apex:outputField label="Competitior Win/Loss" value="{!currentOpp.Competitior_Lost_To__c}"><apex:inlineEditSupport disabled="true"/></apex:outputField>
+                    
+                    <apex:outputField label="Win Reason" value="{!currentOpp.Close_Reason__c}"/>
+                   
+                  
+                    <apex:outputField label="Competitor Product Win/Loss" value="{!currentOpp.Competitor_Product_Lost_To__c}"><apex:inlineEditSupport disabled="true"/></apex:outputField>
+                
+                   
+                </apex:pageBlockSection>
+                
+                <apex:pageBlockSection title="Additional Information" collapsible="false" columns="2" dir="left">
+                    <apex:outputField label="Notes to Project Office" value="{!currentOpp.SOW_Description__c}"/>
+                </apex:pageBlockSection>
+                
+                <apex:pageBlockSection columns="1" dir="left" collapsible="false">
+                    <p>
+                        <strong>By submitting this order, you confirm that you have not put in place any side agreements or other informal arrangements
+                            with the customer and that all terms relating to this order have been included within the countersigned agreement.</strong>
+                    </p>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+            
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Save" action="{!save}" disabled="false" />
+                <apex:commandButton value="Cancel" action="{!cancel}" disabled="false" />
+                <apex:commandButton value="Submit" action="{!submit}" disabled="false" rerender="errormsg,scriptPanel"/>
+            </apex:pageBlockButtons>
+            
+        </apex:pageBlock>
+    </apex:form>    
+</apex:page>

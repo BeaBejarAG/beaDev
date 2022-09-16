@@ -1,0 +1,11 @@
+<apex:page standardController="case" lightningStyleSheets="true"  standardStylesheets="false" tabStyle="Case">
+
+  <style>
+.bFilterView{ display: none; visibility:hidden;}
+</style>
+<apex:slds />
+  <apex:ListViews type="Case">
+  <apex:facet name="header">&nbsp;</apex:facet>
+  </apex:ListViews>
+
+</apex:page>

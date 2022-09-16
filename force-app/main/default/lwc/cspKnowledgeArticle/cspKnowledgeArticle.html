@@ -1,0 +1,137 @@
+<template>
+    <div if:true={showTitle}>
+        <h1 class="slds-text-heading_large slds-var-m-top_large slds-var-m-bottom_xx-large cKnowledge_Articles">{article.Title}</h1>
+    </div>
+
+    <div if:true={showBody} class="slds-col ui-widget">
+        <div class="cKnowledge_Articles">
+            <div>
+                <img src={article.ArticleHeaderImage}/>
+            </div>
+            <div class="slds-grid slds-var-m-bottom_large slds-grid_vertical-align-center">
+                <template if:true={showProduct}>
+                    <div if:true={article.ProductName} class="slds-var-m-right_small slds-var-m-top_xx-small csp-article-product">
+                        {article.ProductName}
+                    </div>
+                </template>
+                <div class="slds-col csp-article-features">
+                    <template if:true={categories.length}>
+                        <lightning-icon icon-name="utility:summary" size="x-small" class="slds-var-m-right_small csp-article-features-icon"></lightning-icon>
+                        <template iterator:category={categories}>
+                            <template key={category.value} if:true={userId}>
+                                <lightning-button key={category.value} onclick={handleFeatureClick} value={category.value} label={category.value} variant="base"></lightning-button>
+                                <span key={category.value} if:false={category.last}>, </span>
+                            </template>
+                            <template key={category.value} if:false={userId}>
+                                {category.value}<span key={category.value} if:false={category.last}>, </span>
+                            </template>
+                        </template>
+                    </template>
+                </div>
+                <div class="slds-var-m-right_small slds-grid_align-end csp-article-views slds-var-m-top_xxx-small">
+                    <lightning-icon icon-name="utility:preview" size="x-small" class="slds-var-m-right_small"></lightning-icon>
+                    {article.Views} views
+                </div>
+                <div class="slds-grid_align-end csp-article-published slds-var-m-top_xxx-small">
+                    <lightning-icon icon-name="utility:date_input" size="x-small" class="slds-var-m-right_small"></lightning-icon>
+                    <lightning-relative-date-time value={publishedDate}></lightning-relative-date-time>
+                </div>
+            </div>
+            <template if:false={isReleaseNote}>
+                <div if:true={article.Description} class="slds-border_bottom slds-var-m-bottom_large">
+                    <h2>Description</h2>
+                </div>
+                <lightning-formatted-rich-text if:true={article.Description} value={article.Description}></lightning-formatted-rich-text>
+                <div if:true={article.Environment} class="slds-border_bottom slds-var-m-top_large slds-var-m-bottom_large">
+                    <h2>Environment</h2>
+                </div>
+                <lightning-formatted-rich-text class="csp-article__environment" if:true={article.Environment} value={article.Environment}></lightning-formatted-rich-text>
+                <div if:true={article.Solution} class="slds-border_bottom slds-var-m-top_large slds-var-m-bottom_large">
+                    <h2>Solution</h2>
+                </div>
+                <lightning-formatted-rich-text if:true={article.Solution} value={article.Solution}></lightning-formatted-rich-text>
+            </template>
+            <template if:true={isReleaseNote} >
+                <div class="slds-var-m-bottom_large">
+                    <lightning-formatted-rich-text if:true={article.RelaseNoteImage} value={article.RelaseNoteImage}></lightning-formatted-rich-text>
+                </div>
+                <div if:true={article.WhatsNew} class="slds-border_bottom slds-var-m-bottom_large">
+                    <h2>What's new?</h2>
+                </div>
+                <lightning-formatted-rich-text if:true={article.WhatsNew} value={article.WhatsNew}></lightning-formatted-rich-text>
+                <div if:true={article.HowAvailable} class="slds-border_bottom slds-var-m-top_large slds-var-m-bottom_large">
+                    <h2>How this version will be made available</h2>
+                </div>
+                <lightning-formatted-rich-text if:true={article.HowAvailable} value={article.HowAvailable}></lightning-formatted-rich-text>
+                <div if:true={article.AdditionalInformation} class="slds-border_bottom slds-var-m-top_large slds-var-m-bottom_large">
+                    <h2>Additional information</h2>
+                </div>
+                <lightning-formatted-rich-text if:true={article.AdditionalInformation} value={article.AdditionalInformation}></lightning-formatted-rich-text>
+                <div if:true={article.JoinConversation} class="slds-border_bottom slds-var-m-top_large slds-var-m-bottom_large">
+                    <h2>Join the conversation</h2>
+                </div>
+                <lightning-formatted-rich-text if:true={article.JoinConversation} value={article.JoinConversation}></lightning-formatted-rich-text>
+            </template>
+        </div>
+
+        <div class="slds-border_bottom slds-var-m-vertical_large"></div>
+
+        <div class="slds-grid slds-var-m-vertical_large">
+            <div class="slds-col">
+
+            </div>
+            <div>
+                <lightning-button label="Share" variant="brand" class="slds-var-p-top_medium csp-button_brand-white csp-button_no-uppercase" icon-name="utility:share" onclick={handleShare}></lightning-button>
+            </div>
+        </div>
+
+        <div class="slds-border_bottom slds-var-m-vertical_large"></div>
+
+        <template if:true={showFeedbackComponent}>
+            <div class="slds-grid slds-var-m-top_large slds-var-p-around_x-large slds-var-m-vertical_large slds-border_top slds-border_bottom slds-border_left slds-border_right">
+                <template if:true={showFeedbackRequest}>
+                    <div class="slds-col">
+                        <p class="slds-text-heading_large csp-knowledge-large">Thank you for voting</p>
+                        <p class="slds-var-m-top_small">Please let us know how we can improve this article</p>
+                        <p class="slds-var-m-top_x-small">
+                            <em>
+                                <strong>Please note: </strong>
+                                We can't respond to individual questions, if you have a support query, please ask the community
+                            </em>
+                        </p>
+                        <lightning-textarea class="slds-var-m-top_medium slds-var-m-bottom_medium" name="feedback" label="" placeholder="Add your feedback..." variant="label-hidden"></lightning-textarea>
+                        <lightning-button label="Share Feedback" variant="brand" class="csp-button_brand" onclick={handleFeedback}></lightning-button>
+                    </div>
+                </template>
+                <template if:true={showFeedbackResponse}>
+                    <div class="slds-col">
+                        <p class="slds-text-heading_large csp-knowledge-large">Thank you for the feedback</p>
+                    </div>
+                </template>
+                <template if:true={showSentimentRequest}>
+                    <div class="slds-col slds-text-heading_large slds-var-m-top_x-small csp-knowledge-large">
+                        Was this article useful?
+                    </div>
+                    <div>
+                        <lightning-button onclick={handleSentiment} label="Yes" value="Positive" variant="brand" class="slds-var-p-top_medium slds-var-m-right_medium csp-button_brand-white csp-button_no-uppercase" icon-name="utility:smiley_and_people"></lightning-button>
+                        <lightning-button onclick={handleSentiment} label="No" value="Negative" variant="brand" class="slds-var-p-top_medium csp-button_brand-white csp-button_no-uppercase" icon-name="utility:sentiment_negative"></lightning-button>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <c-csp-modal>
+            <span slot="header">Copy link to thread</span>
+            <span>
+                <lightning-input value={articleLink} read-only="true" class="slds-var-m-bottom_medium csp-copy-link" variant="label-hidden"></lightning-input>
+                <div class="slds-grid">
+                    <lightning-button label="Copy Link" class="csp-button_brand" onclick={handleCopy}></lightning-button>
+                    <div class="csp-knowledge-copied slds-hide slds-grid slds-var-m-top_small">
+                        <lightning-icon size="x-small" variant="success" class="slds-var-p-top_xxx-small slds-var-m-left_large slds-var-m-right_xx-small" icon-name="utility:success"></lightning-icon>
+                        <span class="slds-text-color_success">URL copied to clipboard</span>
+                    </div>
+                </div>
+            </span>
+        </c-csp-modal>
+    </div>
+</template>

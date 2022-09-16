@@ -1,0 +1,4 @@
+<design:component label="CSP: Help Centre Theme">
+    <design:attribute name="landingPageLayout" label="Use landing page layout"/>
+    <design:attribute name="name" label="Name"/>
+</design:component>

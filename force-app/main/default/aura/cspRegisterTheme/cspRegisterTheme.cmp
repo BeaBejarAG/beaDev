@@ -1,0 +1,45 @@
+<aura:component implements="forceCommunity:themeLayout,flexipage:availableForAllPageTypes" controller="CspLogin" access="global">
+    <aura:attribute name="title" type="Aura.Component[]"/>
+
+    <aura:attribute name="showLoginForm" type="Boolean" default="false"/>
+
+    <ltng:require styles="{!$Resource.cspstyles}" />
+
+    <header>
+        <c:cspAccountSelection />
+        <div class="slds-grid slds-gutters slds-align_absolute-center access-theme-header">
+            <div class="slds-col_padded slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_2-of-12 access-theme-logo slds-var-m-top_x-large">
+                <a href="/Support/">
+                    <img width="160" style="height: 43px" src="{!$ContentAsset.AccessGroupsvg+'?v=6'}" class="slds-var-p-right_small"/>
+                </a>
+            </div>
+            <div class="slds-col_padded slds-size_9-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_6-of-12">
+            </div>
+            <div class="slds-col_padded slds-size_3-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-var-m-top_medium slds-var-p-top_large slds-clearfix access-theme-header-links">
+                <ul class="slds-float_right slds-clearfix slds-grid">
+                    <li class="slds-text-color_weak slds-var-m-right_x-small access-theme-website-link">
+                        <a href='https://www.theaccessgroup.com/' target='_blank' class="slds-text-link_reset">
+                            The Access Group
+                        </a>
+                        <lightning:icon class="slds-var-m-left_x-small slds-var-m-top_xxx-small" iconName="utility:share" alternativeText="Open" title="Open" size="x-small" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="access-theme-register slds-var-m-top_x-large">
+            <div class="access-theme-register-inner slds-var-p-top_large">
+                <div class="slds-grid slds-wrap slds-var-p-top_xx-large slds-var-p-bottom_x-large">
+                    <div class="slds-col_padded slds-size_1-of-1">
+                        <div class="slds-var-p-top_xx-small slds-var-p-bottom_medium">{!v.title}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="access-theme-body">
+        <div class="access-theme-body__container">
+            {!v.body}
+        </div>
+    </div>
+    <div class="access-theme-footer"><c:cspGlobalFooter/></div>
+</aura:component>

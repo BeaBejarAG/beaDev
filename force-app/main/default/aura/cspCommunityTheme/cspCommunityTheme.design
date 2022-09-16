@@ -1,0 +1,3 @@
+<design:component label="CSP: Community Theme">
+    <design:attribute name="landingPageLayout" label="Use landing page layout"/>
+</design:component>

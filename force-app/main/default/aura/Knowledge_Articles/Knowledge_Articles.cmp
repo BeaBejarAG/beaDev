@@ -1,0 +1,18 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" controller="ArticleContentView_Controller">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="Article" type="Knowledge__kav" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     <h1><lightning:formattedText  value="{!v.Article.Title}" style="font-size: 18pt;  font-weight: bold;" /></h1>
+    <br></br>
+    <div aura:id="output" class="slds-text-longform">
+       <p id='txtheader'>Description</p>
+        <lightning:formattedRichText value="{!v.Article.Information_Article_Body__c}" />
+        <p id='spacer'></p>
+            <aura:if isTrue="{!not(empty(v.Article.Solution__c))}">
+           <p id='txtheader'>Solution</p>
+        <lightning:formattedRichText value="{!v.Article.Solution__c}" />
+  </aura:if> 
+ 
+    </div>
+</aura:component>

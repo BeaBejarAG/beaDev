@@ -1,0 +1,7 @@
+<aura:component controller="CommunityAlerts" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute type="Service_Status_Update__c" name="counts" />  
+      <aura:iteration items="{!v.counts}" var="obj">
+          <div class="alert-box warning"><span>{!obj.Title__c}: </span>{!obj.Description__c}</div>
+       </aura:iteration>
+</aura:component>

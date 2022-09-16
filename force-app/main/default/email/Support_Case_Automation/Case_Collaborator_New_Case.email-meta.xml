@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Template for new case/collaborator</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Case Collaborator New Case</name>
+    <style>none</style>
+    <subject>Access Support Team | {!Portal_Case_Collaborator__c.Case_Number__c} - New Case</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

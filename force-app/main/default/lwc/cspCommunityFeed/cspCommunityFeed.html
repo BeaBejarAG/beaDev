@@ -1,0 +1,783 @@
+<template>
+    <div class="slds-grid slds-var-m-bottom_xx-large">
+        <div class="slds-size_1-of-1 slds-medium-size_10-of-12">
+
+            <template if:false={feed.body}>
+                <div>
+                    <h1 class="csp-text_page-heading slds-var-p-bottom_large slds-var-m-bottom_xx-large">
+                        <div class="csp-loading_40 csp-loading_thick"></div>
+                    </h1>
+                </div>
+                <div class="slds-box csp-post csp-box csp-box_shaded-light slds-var-m-bottom_x-large slds-grid">
+                    <div class="slds-col slds-text-align_center slds-show_small">
+                        <div>
+                            <lightning-avatar
+                                size="large"
+                                class="slds-align-top csp-avatar csp-avatar_placeholder">
+                            </lightning-avatar>
+                        </div>
+                        <div class="csp-box slds-var-m-right_medium slds-var-p-around_small slds-var-m-top_medium slds-show_inline-block csp-mouse_pointer">
+                            <lightning-icon
+                                icon-name="utility:favorite"
+                                size="small"
+                                class="csp-fill_loading">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-var-p-around_small slds-show_inline-block">
+                            <div class="csp-text_brand csp-text_small">
+                                <div class="csp-loading_2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-var-p-left_large slds-var-p-top_large slds-var-p-right_large slds-container_fluid">
+                        <div class="slds-float_right slds-var-m-top_xxx-small slds-show_x-large">
+                            <div class="csp-loading_5"></div>
+                        </div>
+
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-show_inline-block slds-var-m-right_large csp-text_medium csp-text_strong slds-float_left">
+                                <div class="csp-loading_10 csp-loading_thick"></div>
+                            </div>
+                            <div class="slds-show_inline-block slds-var-m-right_large">
+                                <c-csp-community-reputation
+                                    horizontal="true"
+                                    level-number="1"
+                                    level-name="loading">
+                                </c-csp-community-reputation>
+                            </div>
+                        </div>
+                        <div class="slds-var-m-vertical_large csp-line-height_double">
+                            <div class="csp-loading_20"></div>
+                            <div class="csp-loading_30"></div>
+                            <div class="csp-loading_10"></div>
+                            <div class="csp-loading_10"></div>
+                            <div class="csp-loading_10"></div>
+                            <div class="csp-loading_30"></div>
+                            <div class="csp-loading_30"></div>
+                            <div class="csp-loading_20"></div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template if:true={feed.body}>
+
+                <template if:true={feed.capabilities.questionAndAnswers}>
+                    <div>
+                        <h1 class="csp-text_page-heading slds-var-p-bottom_large slds-var-m-bottom_xx-large">
+                            {feed.capabilities.questionAndAnswers.questionTitle}
+                            <template if:true={feed.capabilities.status}>
+                                <template if:true={feed.capabilities.status.isPendingReview}><em> (pending review)</em></template>
+                            </template>
+                        </h1>
+                    </div>
+                </template>
+
+                <template if:false={feed.capabilities.questionAndAnswers}>
+                    <div>
+                        <h1 class="csp-text_page-heading slds-var-p-bottom_large slds-var-m-bottom_xx-large">
+                            {feed.header.text}
+                            <template if:true={feed.capabilities.status}>
+                                <template if:true={feed.capabilities.status.isPendingReview}><em> (pending review)</em></template>
+                            </template>
+                        </h1>
+                    </div>
+                </template>
+
+
+                <div class="slds-box csp-post csp-box csp-box-border_dark slds-var-m-bottom_x-large slds-grid">
+                    <div class="slds-col slds-text-align_center slds-show_small" data-id={feed.actor.id}>
+                        <div>
+                            <lightning-avatar
+                                size="large"
+                                onmouseover={handleShowProfile}
+                                src={feed.actor.photo.mediumPhotoUrl}
+                                initials={feed.actor.initials}
+                                alternative-text={feed.actor.displayName}
+                                class={feed.actor.avatar}>
+                            </lightning-avatar>
+                        </div>
+                        <template if:false={feed.liked}>
+                            <div class="csp-box csp-box-border_brand slds-var-p-around_small slds-var-m-top_medium slds-show_inline-block csp-mouse_pointer">
+                                <lightning-icon
+                                    icon-name="utility:favorite"
+                                    size="small"
+                                    class="csp-fill_brand"
+                                    onclick={handleLike}
+                                    data-id={feed.id}
+                                    data-liked={feed.liked}>
+                                </lightning-icon>
+                            </div>
+                        </template>
+                        <template if:true={feed.liked}>
+                            <div class="csp-box csp-box_shaded-dark-green csp-box-border_green slds-var-p-around_small slds-var-m-top_medium slds-show_inline-block csp-mouse_pointer">
+                                <lightning-icon
+                                    icon-name="utility:favorite"
+                                    size="small"
+                                    class="csp-fill_gold"
+                                    onclick={handleLike}
+                                    data-id={feed.id}
+                                    data-liked={feed.liked}>
+                                </lightning-icon>
+                            </div>
+                        </template>
+                        <div class="slds-var-p-around_small slds-show_inline-block">
+                            <div class="csp-text_brand csp-text_small">
+                                <div class="csp-text_strong">{feed.capabilities.chatterLikes.page.total}</div>
+                                <span>votes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-var-p-left_large slds-var-p-top_large slds-var-p-right_large slds-container_fluid">
+                        <div class="slds-float_right csp-menu slds-show_inline-block slds-var-m-left_medium" if:true={feed.menuOptionCount}>
+                            <lightning-button-menu
+                                variant="container"
+                                nubbin
+                                icon-name="utility:threedots"
+                                onselect={handleMenuSelect}
+                                onkeypup={handleEscape}
+                                alternative-text="More">
+                                <template iterator:option={feed.menuOptions}>
+                                    <lightning-menu-item
+                                        key={option.value.value}
+                                        value={option.value.value}
+                                        label={option.value.label}
+                                        if:true={option.value.visible}>
+                                    </lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+
+                        <template if:true={feed.capabilities.moderation}>
+                            <div class="slds-var-m-left_medium slds-float_right csp-badge slds-show_inline-block slds-var-m-top_xxx-small"
+                                if:true={feed.capabilities.moderation.moderationFlags.flagCount}>
+                                <div class="csp-badge_flagged">Flagged</div>
+                            </div>
+                            <template if:false={feed.capabilities.moderation.moderationFlags.flagCount}>
+                                <div class="slds-var-m-left_medium slds-float_right csp-badge slds-show_inline-block slds-var-m-top_xxx-small"
+                                    if:true={feed.capabilities.moderation.moderationFlags.flaggedByMe}>
+                                    <div class="csp-badge_flagged">Flagged</div>
+                                </div>
+                            </template>
+                        </template>
+
+                        <div class="slds-float_right slds-var-m-top_xxx-small slds-show_x-large">
+                            <lightning-icon
+                                icon-name="utility:clock"
+                                size="x-small"
+                                class="slds-var-m-right_x-small">
+                            </lightning-icon>
+                            {feed.relativeCreatedDate}
+                        </div>
+
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-show_inline-block slds-var-m-right_large csp-text_medium csp-text_strong slds-float_left">
+                                {feed.actor.displayName}
+                                <template if:true={feed.actor.additionalLabel}>
+                                    <span> ({feed.actor.additionalLabel})</span>
+                                </template>
+                            </div>
+                            <div class="slds-show_inline-block slds-var-m-right_large">
+                                <c-csp-community-reputation
+                                    horizontal="true"
+                                    level-number={feed.actor.reputation.reputationLevel.levelNumber}
+                                    level-name={feed.actor.reputation.reputationLevel.levelName}>
+                                </c-csp-community-reputation>
+                            </div>
+                        </div>
+                        <div class="slds-var-m-vertical_large csp-line-height_double">
+                            <template if:true={feed.capabilities.feedEntityShare}>
+                                <c-csp-community-post-render
+                                    oncsppopoverprofileevent={handleRichTextPopover}
+                                    data-id={feed.id}
+                                    shared-post={feed.capabilities.feedEntityShare.feedEntity}
+                                    post-body={feed.body}>
+                                </c-csp-community-post-render>
+                            </template>
+                            <template if:false={feed.capabilities.feedEntityShare}>
+                                <c-csp-community-post-render
+                                    oncsppopoverprofileevent={handleRichTextPopover}
+                                    data-id={feed.id}
+                                    post-body={feed.body}>
+                                </c-csp-community-post-render>
+                            </template>
+                        </div>
+                        <div class="slds-var-m-top_xx-small slds-hide_x-large">
+                            <lightning-icon
+                                icon-name="utility:clock"
+                                size="x-small"
+                                class="slds-var-m-right_x-small">
+                            </lightning-icon>
+                            {feed.relativeCreatedDate}
+                        </div>
+                        <div class="slds-var-p-top_small">
+                            <div class="slds-var-m-top_small slds-show_inline-block">
+                                <lightning-button
+                                    label="Report abuse"
+                                    icon-name="utility:priority"
+                                    value={feed.id}
+                                    onclick={handleReportAbuseFeed}
+                                    class="csp-button_link csp-button_link-secondary slds-var-m-top_medium csp-button_compact">
+                                </lightning-button>
+                            </div>
+                            <div class="slds-float_right">
+                                <lightning-button
+                                    icon-name="utility:reply"
+                                    value={feed.id}
+                                    onclick={handleReply}
+                                    if:false={feed.capabilities.close.isClosed}
+                                    class="csp-button_brand csp-button_circle">
+                                </lightning-button>
+                                <lightning-button
+                                    label="Reply"
+                                    value={feed.id}
+                                    onclick={handleReply}
+                                    if:false={feed.capabilities.close.isClosed}
+                                    class="csp-button_link csp-button_link-brand slds-var-m-left_medium">
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <template if:true={feed.capabilities.questionAndAnswers}>
+                    <template if:true={feed.capabilities.questionAndAnswers.bestAnswer}>
+                        <div class="slds-var-p-around_x-large csp-post csp-box_shaded-green slds-var-m-bottom_x-large">
+                            <div class="csp-text_brand csp-text_strong slds-var-m-bottom_medium">
+                                <lightning-icon
+                                    icon-name="utility:ribbon"
+                                    size="small"
+                                    class="csp-fill_brand">
+                                </lightning-icon>
+                                <span class="slds-var-p-left_small">Best answer</span>
+
+                                <template if:true={feed.capabilities.questionAndAnswers.bestAnswer.capabilities.verified}>
+                                    <template if:true={feed.capabilities.questionAndAnswers.bestAnswer.capabilities.verified.isVerified}>
+                                        <img src={accessLogoIcon} width="20" class="slds-var-m-left_large slds-var-m-bottom_xxx-small">
+                                        <span class="slds-var-p-left_small">Access verified</span>
+                                    </template>
+                                </template>
+                            </div>
+                            <div class="slds-box csp-box csp-box_shaded-light slds-grid">
+                            <div class="slds-col slds-text-align_center slds-show_small"
+                                    data-id={feed.capabilities.questionAndAnswers.bestAnswer.user.id}>
+                                    <div onmouseover={handleShowProfile}>
+                                        <lightning-avatar
+                                            size="large"
+                                            src={feed.capabilities.questionAndAnswers.bestAnswer.user.photo.mediumPhotoUrl}
+                                            initials={feed.capabilities.questionAndAnswers.bestAnswer.user.initials}
+                                            alternative-text={feed.capabilities.questionAndAnswers.bestAnswer.user.displayName}
+                                            class={feed.capabilities.questionAndAnswers.bestAnswer.user.avatar}>
+                                        </lightning-avatar>
+                                    </div>
+                                    <template if:false={feed.capabilities.questionAndAnswers.bestAnswer.liked}>
+                                        <div class="csp-box csp-box-border_brand slds-var-p-around_small slds-var-m-top_medium slds-show_inline-block csp-mouse_pointer">
+                                            <lightning-icon
+                                                icon-name="utility:favorite"
+                                                size="small"
+                                                class="csp-fill_brand"
+                                                onclick={handleCommentLike}
+                                                data-id={feed.capabilities.questionAndAnswers.bestAnswer.id}
+                                                data-liked={feed.capabilities.questionAndAnswers.bestAnswer.liked}>
+                                            </lightning-icon>
+                                        </div>
+                                    </template>
+                                    <template if:true={feed.capabilities.questionAndAnswers.bestAnswer.liked}>
+                                        <div class="csp-box csp-box_shaded-dark-green csp-box-border_green slds-var-p-around_small slds-var-m-top_medium slds-show_inline-block csp-mouse_pointer">
+                                            <lightning-icon
+                                                icon-name="utility:favorite"
+                                                size="small"
+                                                class="csp-fill_gold"
+                                                onclick={handleCommentLike}
+                                                data-id={feed.capabilities.questionAndAnswers.bestAnswer.id}
+                                                data-liked={feed.capabilities.questionAndAnswers.bestAnswer.liked}>
+                                            </lightning-icon>
+                                        </div>
+                                    </template>
+                                    <div class="slds-var-p-around_small slds-show_inline-block">
+                                        <div class="csp-text_brand csp-text_small">
+                                            <div class="csp-text_strong">
+                                                {feed.capabilities.questionAndAnswers.bestAnswer.likes.total}
+                                            </div>
+                                            <span>votes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-var-p-left_large slds-var-p-top_large slds-var-p-right_large slds-container_fluid">
+                                    <div class="slds-float_right csp-menu slds-show_inline-block slds-var-m-left_medium" if:true={feed.capabilities.questionAndAnswers.bestAnswer.menuOptionCount}>
+                                        <lightning-button-menu
+                                            variant="container"
+                                            nubbin
+                                            icon-name="utility:threedots"
+                                            onkeypup={handleEscape}
+                                            onselect={handleMenuSelect}
+                                            alternative-text="More">
+                                            <template iterator:option={feed.capabilities.questionAndAnswers.bestAnswer.menuOptions}>
+                                                <lightning-menu-item
+                                                    key={option.value.value}
+                                                    value={option.value.value}
+                                                    label={option.value.label}
+                                                    if:true={option.value.visible}>
+                                                </lightning-menu-item>
+                                            </template>
+                                        </lightning-button-menu>
+                                    </div>
+
+                                    <template if:true={feed.capabilities.questionAndAnswers.bestAnswer.moderationFlags}>
+                                        <div class="slds-var-m-left_medium slds-float_right csp-badge slds-show_inline-block slds-var-m-top_xxx-small"
+                                            if:true={feed.capabilities.questionAndAnswers.bestAnswer.moderationFlags.flagCount}>
+                                            <div class="csp-badge_flagged">Flagged</div>
+                                        </div>
+                                        <template if:false={feed.capabilities.questionAndAnswers.bestAnswer.moderationFlags.flagCount}>
+                                            <div class="slds-var-m-left_medium slds-float_right csp-badge slds-show_inline-block slds-var-m-top_xxx-small"
+                                                if:true={feed.capabilities.questionAndAnswers.bestAnswer.moderationFlags.flaggedByMe}>
+                                                <div class="csp-badge_flagged">Flagged</div>
+                                            </div>
+                                        </template>
+                                    </template>
+
+                                    <div class="slds-float_right slds-var-m-top_xxx-small slds-show_x-large">
+                                        <lightning-icon
+                                            icon-name="utility:clock"
+                                            size="x-small"
+                                            class="slds-var-m-right_x-small">
+                                        </lightning-icon>
+                                        {feed.capabilities.questionAndAnswers.bestAnswer.relativeCreatedDate}
+                                    </div>
+
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-show_inline-block slds-var-m-right_large csp-text_medium csp-text_strong slds-float_left">
+                                            {feed.capabilities.questionAndAnswers.bestAnswer.user.displayName}
+                                            <template if:true={feed.capabilities.questionAndAnswers.bestAnswer.user.additionalLabel}>
+                                                <span> ({feed.capabilities.questionAndAnswers.bestAnswer.user.additionalLabel})</span>
+                                            </template>
+                                        </div>
+                                        <div class="slds-show_inline-block slds-var-m-right_large">
+                                            <c-csp-community-reputation
+                                                horizontal="true"
+                                                level-number={feed.capabilities.questionAndAnswers.bestAnswer.user.reputation.reputationLevel.levelNumber}
+                                                level-name={feed.capabilities.questionAndAnswers.bestAnswer.user.reputation.reputationLevel.levelName}>
+                                            </c-csp-community-reputation>
+                                        </div>
+                                    </div>
+                                    <div class="slds-var-m-vertical_large csp-line-height_double">
+                                        <template if:true={feed.capabilities.feedEntityShare}>
+                                            <c-csp-community-post-render
+                                                oncsppopoverprofileevent={handleRichTextPopover}
+                                                data-id={feed.capabilities.questionAndAnswers.bestAnswer.id}
+                                                shared-post={feed.capabilities.feedEntityShare.feedEntity}
+                                                post-body={feed.capabilities.questionAndAnswers.bestAnswer.body}>
+                                            </c-csp-community-post-render>
+                                        </template>
+                                        <template if:false={feed.capabilities.feedEntityShare}>
+                                            <c-csp-community-post-render
+                                                oncsppopoverprofileevent={handleRichTextPopover}
+                                                data-id={feed.capabilities.questionAndAnswers.bestAnswer.id}
+                                                post-body={feed.capabilities.questionAndAnswers.bestAnswer.body}>
+                                            </c-csp-community-post-render>
+                                        </template>
+                                    </div>
+                                    <div class="slds-var-m-top_xx-small slds-hide_x-large">
+                                        <lightning-icon
+                                            icon-name="utility:clock"
+                                            size="x-small"
+                                            class="slds-var-m-right_x-small">
+                                        </lightning-icon>
+                                        {feed.capabilities.questionAndAnswers.bestAnswer.relativeCreatedDate}
+                                    </div>
+
+                                    <div class="slds-var-p-top_small">
+                                        <div class="slds-var-m-top_small slds-show_inline-block">
+                                            <template if:false={feed.capabilities.close.isClosed}>
+                                                <template if:true={feed.capabilities.questionAndAnswers.canCurrentUserSelectOrRemoveBestAnswer}>
+                                                    <lightning-button
+                                                        label="Remove as best answer"
+                                                        icon-name="utility:ribbon"
+                                                        value={feed.capabilities.questionAndAnswers.bestAnswer.id}
+                                                        onclick={handleRemoveBest}
+                                                        if:true={feed.capabilities.questionAndAnswers.canCurrentUserSelectOrRemoveBestAnswer}
+                                                        class="csp-button_link csp-button_link-brand slds-var-m-top_medium slds-var-p-right_small csp-button_compact">
+                                                    </lightning-button>
+                                                </template>
+                                            </template>
+
+                                            <lightning-button
+                                                label="Report abuse"
+                                                icon-name="utility:priority"
+                                                value={feed.capabilities.questionAndAnswers.bestAnswer.id}
+                                                onclick={handleReportAbuseComment}
+                                                class="csp-button_link csp-button_link-secondary slds-var-m-top_medium csp-button_compact">
+                                            </lightning-button>
+                                        </div>
+                                        <div class="slds-float_right">
+                                            <lightning-button
+                                                icon-name="utility:reply"
+                                                value={feed.capabilities.questionAndAnswers.bestAnswer.id}
+                                                onclick={handleReply}
+                                                if:false={feed.capabilities.close.isClosed}
+                                                class="csp-button_brand csp-button_circle">
+                                            </lightning-button>
+                                            <lightning-button
+                                                label="Reply"
+                                                value={feed.capabilities.questionAndAnswers.bestAnswer.id}
+                                                onclick={handleReply}
+                                                if:false={feed.capabilities.close.isClosed}
+                                                class="csp-button_link csp-button_link-brand slds-var-m-left_medium">
+                                            </lightning-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </template>
+
+            <div class="slds-var-m-bottom_large">
+                <lightning-button
+                    class="csp-button_brand-white csp-button_stretch"
+                    label="LOAD EARLIER COMMENTS"
+                    if:true={nextPageToken}
+                    onclick={handleLoadMore}>
+                </lightning-button>
+            </div>
+
+            <template if:true={comments}>
+                <template iterator:comment={comments}>
+                    <div key={comment.value.id} class="slds-hide_medium">
+                        <div class="slds-grid slds-m-top_medium slds-m-bottom_x-small">
+                            <template if:true={comment.value.isBestAnswer}>
+                                <div>
+                                    <lightning-icon
+                                        icon-name="utility:ribbon"
+                                        size="small"
+                                        class="csp-fill_brand slds-m-right_xx-small">
+                                    </lightning-icon>
+                                </div>
+                                <div class="csp-text_strong slds-var-m-top_xxx-small csp-text_brand">
+                                    Best answer
+                                </div>
+                            </template>
+                            <template if:true={comment.value.capabilities.verified}>
+                                <template if:true={comment.value.isBestAnswer}>
+                                    <div class="slds-var-p-left_small"
+                                        if:true={comment.value.capabilities.verified.isVerified}>
+                                    </div>
+                                </template>
+                                <template if:true={comment.value.capabilities.verified.isVerified}>
+                                    <img src={accessLogoIcon} class="slds-var-m-right_xx-small" width="20">
+                                    <div class="csp-text_strong slds-var-m-top_xxx-small csp-text_brand">
+                                        Access verified
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+                    <div key={comment.value.id}
+                        class={comment.value.isBestAnswerClass}>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-text-align_center slds-show_small"  data-id={comment.value.user.id}>
+                                <div onmouseover={handleShowProfile}>
+                                    <lightning-avatar
+                                        size="large"
+                                        src={comment.value.user.photo.mediumPhotoUrl}
+                                        initials={comment.value.user.initials}
+                                        alternative-text={comment.value.user.displayName}
+                                        class={comment.value.user.avatar}>
+                                    </lightning-avatar>
+                                </div>
+                                <template if:false={comment.value.liked}>
+                                    <div class="csp-box csp-box-border_brand slds-var-p-around_small slds-var-m-top_medium slds-show_inline-block csp-mouse_pointer">
+                                        <lightning-icon
+                                            icon-name="utility:favorite"
+                                            size="small"
+                                            class="csp-fill_brand"
+                                            onclick={handleCommentLike}
+                                            data-id={comment.value.id}
+                                            data-liked={comment.value.liked}>
+                                        </lightning-icon>
+                                    </div>
+                                </template>
+                                <template if:true={comment.value.liked}>
+                                    <div class="csp-box csp-box_shaded-dark-green csp-box-border_green slds-var-p-around_small slds-var-m-top_medium slds-show_inline-block csp-mouse_pointer">
+                                        <lightning-icon
+                                            icon-name="utility:favorite"
+                                            size="small"
+                                            class="csp-fill_gold"
+                                            onclick={handleCommentLike}
+                                            data-id={comment.value.id}
+                                            data-liked={comment.value.liked}>
+                                        </lightning-icon>
+                                    </div>
+                                </template>
+                                <div class="slds-var-p-around_small slds-show_inline-block">
+                                    <div class="csp-text_brand csp-text_small">
+                                        <div class="csp-text_strong">{comment.value.likes.total}</div>
+                                        <span>votes</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-var-p-left_large slds-var-p-top_large slds-var-p-right_large slds-container_fluid">
+                                <div class="slds-float_right csp-menu slds-show_inline-block slds-var-m-left_medium" if:true={comment.value.menuOptionCount}>
+                                    <lightning-button-menu
+                                        variant="container"
+                                        nubbin
+                                        icon-name="utility:threedots"
+                                        onkeypup={handleEscape}
+                                        onselect={handleMenuSelect}
+                                        alternative-text="More">
+                                        <template iterator:option={comment.value.menuOptions}>
+                                            <lightning-menu-item
+                                                key={option.value.value}
+                                                value={option.value.value}
+                                                label={option.value.label}
+                                                if:true={option.value.visible}>
+                                            </lightning-menu-item>
+                                        </template>
+                                    </lightning-button-menu>
+                                </div>
+
+                                <template if:true={comment.value.moderationFlags}>
+                                    <div class="slds-var-m-left_medium slds-float_right csp-badge slds-show_inline-block slds-var-m-top_xxx-small"
+                                        if:true={comment.value.moderationFlags.flagCount}>
+                                        <div class="csp-badge_flagged">Flagged</div>
+                                    </div>
+                                    <template if:false={comment.value.moderationFlags.flagCount}>
+                                        <div class="slds-var-m-left_medium slds-float_right csp-badge slds-show_inline-block slds-var-m-top_xxx-small"
+                                            if:true={comment.value.moderationFlags.flaggedByMe}>
+                                            <div class="csp-badge_flagged">Flagged</div>
+                                        </div>
+                                    </template>
+                                </template>
+
+                                <div class="slds-float_right slds-var-m-top_xxx-small slds-show_x-large">
+                                    <lightning-icon
+                                        icon-name="utility:clock"
+                                        size="x-small"
+                                        class="slds-var-m-right_x-small">
+                                    </lightning-icon>
+                                    {comment.value.relativeCreatedDate}
+                                </div>
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-show_inline-block slds-var-m-right_large csp-text_medium csp-text_strong slds-float_left">
+                                        {comment.value.user.displayName}
+                                        <template if:true={comment.value.user.additionalLabel}>
+                                            <span> ({comment.value.user.additionalLabel})</span>
+                                        </template>
+                                    </div>
+                                    <div class="slds-show_inline-block slds-var-m-right_large">
+                                        <c-csp-community-reputation
+                                            horizontal="true"
+                                            level-number={comment.value.user.reputation.reputationLevel.levelNumber}
+                                            level-name={comment.value.user.reputation.reputationLevel.levelName}>
+                                        </c-csp-community-reputation>
+                                    </div>
+                                </div>
+                                <div class="slds-var-m-vertical_large csp-line-height_double">
+                                    <c-csp-community-post-render
+                                        oncsppopoverprofileevent={handleRichTextPopover}
+                                        data-id={comment.value.id}
+                                        post-body={comment.value.body}>
+                                    </c-csp-community-post-render>
+                                </div>
+                                <div class="slds-var-m-top_xx-small slds-hide_x-large">
+                                    <lightning-icon
+                                        icon-name="utility:clock"
+                                        size="x-small"
+                                        class="slds-var-m-right_x-small">
+                                    </lightning-icon>
+                                    {comment.value.relativeCreatedDate}
+                                </div>
+
+                                <div class="slds-var-p-top_small" if:true={feed.body}>
+                                    <div class="slds-var-m-top_small slds-show_inline-block">
+                                        <template if:false={feed.capabilities.close.isClosed}>
+                                            <template if:true={feed.capabilities.questionAndAnswers}>
+                                                <template if:true={feed.capabilities.questionAndAnswers.canCurrentUserSelectOrRemoveBestAnswer}>
+                                                    <lightning-button
+                                                        label="Select as best answer"
+                                                        icon-name="utility:ribbon"
+                                                        value={comment.value.id}
+                                                        if:false={comment.value.isBestAnswer}
+                                                        onclick={handleSelectBest}
+                                                        class="csp-button_link csp-button_link-brand slds-var-m-top_medium slds-var-p-right_small csp-button_compact">
+                                                    </lightning-button>
+
+                                                    <lightning-button
+                                                        label="Remove as best answer"
+                                                        icon-name="utility:ribbon"
+                                                        value={comment.value.id}
+                                                        if:true={comment.value.isBestAnswer}
+                                                        onclick={handleRemoveBest}
+                                                        class="csp-button_link csp-button_link-brand slds-var-m-top_medium slds-var-p-right_small csp-button_compact">
+                                                    </lightning-button>
+                                                </template>
+                                            </template>
+                                        </template>
+
+                                        <lightning-button
+                                            label="Report abuse"
+                                            icon-name="utility:priority"
+                                            value={comment.value.id}
+                                            onclick={handleReportAbuseComment}
+                                            class="csp-button_link csp-button_link-secondary slds-var-m-top_medium csp-button_compact">
+                                        </lightning-button>
+                                    </div>
+                                    <div class="slds-float_right">
+                                        <lightning-button
+                                            icon-name="utility:reply"
+                                            value={comment.value.id}
+                                            onclick={handleReply}
+                                            if:false={feed.capabilities.close.isClosed}
+                                            class="csp-button_brand csp-button_circle">
+                                        </lightning-button>
+                                        <lightning-button
+                                            label="Reply"
+                                            value={comment.value.id}
+                                            onclick={handleReply}
+                                            if:false={feed.capabilities.close.isClosed}
+                                            class="csp-button_link csp-button_link-brand slds-var-m-left_medium">
+                                        </lightning-button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div key={comment.value.id} class="slds-is-relative slds-show_medium">
+                                <div class="slds-is-absolute csp-feed_best-gutter">
+                                    <template if:true={comment.value.isBestAnswer}>
+                                        <div>
+                                            <lightning-icon
+                                                icon-name="utility:ribbon"
+                                                size="small"
+                                                class="csp-fill_brand">
+                                            </lightning-icon>
+                                        </div>
+                                        <div class="csp-text_strong slds-var-m-top_xxx-small csp-text_brand">
+                                            Best answer
+                                        </div>
+                                    </template>
+                                    <template if:true={comment.value.capabilities.verified}>
+                                        <template if:true={comment.value.isBestAnswer}>
+                                            <div class="slds-var-p-top_large"
+                                                if:true={comment.value.capabilities.verified.isVerified}>
+                                            </div>
+                                        </template>
+                                        <template if:true={comment.value.capabilities.verified.isVerified}>
+                                            <img src={accessLogoIcon} class="slds-var-m-left_xxx-small" width="20">
+                                            <div class="csp-text_strong slds-var-m-top_xxx-small csp-text_brand">
+                                                Access verified
+                                            </div>
+                                        </template>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </template>
+            <template if:true={feed.body}>
+                <template if:true={feed.capabilities.status}>
+                    <template if:true={feed.capabilities.close.isClosed}>
+                        <template if:false={feedList.length}>
+                            <div class="slds-box slds-var-m-top_xx-large csp-box csp-box_shaded-light slds-var-m-bottom_small">
+                                <div class="slds-var-p-around_large slds-grid">
+                                    <lightning-icon icon-name="utility:broadcast" size="medium"></lightning-icon>
+                                    <span class="slds-var-m-left_medium csp-text_medium">This post is now closed for comments</span>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                    <template if:false={feed.capabilities.close.isClosed}>
+                        <template if:false={feed.capabilities.status.isPendingReview}>
+                            <div class="csp-text_brand csp-text_strong csp-text_large slds-var-m-bottom_x-large slds-var-m-top_xx-large">
+                                Suggest an answer
+                            </div>
+
+                            <c-csp-community-post
+                                hide-tabs="true"
+                                feed-id={feed.id}>
+                            </c-csp-community-post>
+                        </template>
+                    </template>
+                </template>
+            </template>
+        </div>
+        <div class="slds-size_2-of-12 slds-show_medium">
+        </div>
+    </div>
+
+    <c-csp-modal
+        size="small"
+        onkeyup={handleEscape}
+        class="csp-edit-popup">
+        <span slot="header">Edit post</span>
+
+        <c-csp-community-post
+            hide-tabs="true"
+            body={popupData.html}
+            subject={popupData.subject}
+            feed-id={popupData.topicId}
+            record-id={popupData.id}>
+        </c-csp-community-post>
+    </c-csp-modal>
+
+    <c-csp-modal
+        size="small"
+        onkeyup={handleEscape}
+        class="csp-abuse-popup">
+        <span slot="header">Report abuse</span>
+
+        <div class="csp-input_base">
+            <lightning-radio-group name="radioGroup"
+                label="Please select why you are reporting this"
+                data-id="abuse-option"
+                options={popupData.options}
+                value={popupData.selected}
+                type="radio">
+            </lightning-radio-group>
+
+            <div class="slds-var-m-top_large">
+                <lightning-textarea
+                    data-id="abuse-message"
+                    label="Please enter a reason for reporting this"
+                    class="csp-feed_edit">
+                </lightning-textarea>
+            </div>
+
+            <div class="slds-var-m-top_large">
+                <lightning-button
+                    label="Update"
+                    class="csp-button_brand"
+                    value={popupData.id}
+                    onclick={handleReportAbuseSubmit}>
+                </lightning-button>
+            </div>
+        </div>
+    </c-csp-modal>
+
+    <c-csp-modal
+        onkeyup={handleEscape}
+        class="csp-delete-popup">
+        <span slot="header">Delete post</span>
+        <p>Are you sure you want to delete this post?</p>
+
+        <div slot="footer" class="slds-var-m-top_medium">
+            <lightning-button
+                label="CANCEL"
+                onclick={handleCancelDeleteElement}
+                value={popupData.id}
+                class="csp-button_brand-white slds-var-m-right_medium">
+            </lightning-button>
+
+            <lightning-button
+                label="Delete"
+                onclick={handleDeleteElement}
+                value={popupData.id}
+                class="csp-button_brand">
+            </lightning-button>
+        </div>
+    </c-csp-modal>
+
+    <div if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+</template>

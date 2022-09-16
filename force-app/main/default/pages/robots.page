@@ -1,0 +1,14 @@
+<apex:page contentType="text/plain" >
+  #
+  # updated robots.txt for sfdc communities sites
+  #
+  #
+  User-agent: *    # applies to all robots
+  Allow: /      # allow all
+  Disallow: */secur/forgotpassword.jsp?*
+  Disallow: */guidelines*
+  Disallow: */help-centre-global-search*
+
+  Sitemap: http://access-support.force.com/PWSuppliers/s/sitemap.xml
+  Sitemap: http://access-support.force.com/Support/s/sitemap.xml
+</apex:page>

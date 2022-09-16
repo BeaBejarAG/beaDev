@@ -1,0 +1,15 @@
+.csp-autocomplete {
+    background-color: rgb(240,240,240);
+}
+
+.csp-autocomplete-view-all {
+    background-color: var(--c-successPlatformLightGreen, rgb(177,217,215));
+    border-top: var(--c-borderStrokeWidthThick) solid rgb(109, 183, 179);
+}
+
+.csp-autocomplete button {
+    background-color: transparent;
+    border: var(--c-spacingNone,0);
+    padding: var(--c-spacingNone,0);
+    height: var(--c-lineHeightTab,2.5rem);
+}

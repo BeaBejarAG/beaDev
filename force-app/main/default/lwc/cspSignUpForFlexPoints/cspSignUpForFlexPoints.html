@@ -1,0 +1,19 @@
+<template>
+    <!-- Non Points Guardian -->
+    <template if:false={isPointsGuardian}>
+        <!-- Non Points User -->
+        <template if:true={isNonPointsUser}>
+            <div class="csp-sign-up-flex-points-container">
+                <div class="csp-sign-up-flex-points-block csp-sign-up-flex-points-info">
+                    <p lwc:dom="manual" class="csp-sign-up-flex-points-title"></p>
+                    <!-- <p class="csp-sign-up-flex-points-title"><lightning-formatted-text value={flexPointsTitle}></lightning-formatted-text></p> -->
+                    <p class="csp-sign-up-flex-points-desc">{flexPointsDesc}</p>
+                    <div class="csp-sign-up-flex-points-button"><lightning-button class="csp-button_brand" label="FIND OUT MORE" onclick={handleFindOutMore}></lightning-button></div>
+                </div>
+                <div class="csp-sign-up-flex-points-block csp-sign-up-flex-points-image">
+                    <img class="csp-sign-up-access-people-image" src={accessPeopleImage}/>
+                </div>
+            </div>
+        </template>
+    </template>
+</template>

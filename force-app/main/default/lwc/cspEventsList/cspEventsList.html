@@ -1,0 +1,260 @@
+<template>
+    <h1 class="slds-var-m-bottom_xx-large csp-text_page-heading">Events</h1>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-small-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_2-of-12" if:true={pageRef}>
+            <lightning-vertical-navigation
+                class="csp-vertical-navigation"
+                selected-item={pageRef.state.category}
+                onselect={handleViewCategory}>
+
+                <lightning-vertical-navigation-section>
+                    <lightning-vertical-navigation-item-icon
+                        label="All events"
+                        name="All"
+                        icon-name="utility:date_time">
+                    </lightning-vertical-navigation-item-icon>
+
+                    <lightning-vertical-navigation-item-icon
+                        label="Upcoming webinars"
+                        name="upcoming_webinars"
+                        icon-name="utility:desktop">
+                    </lightning-vertical-navigation-item-icon>
+
+                    <lightning-vertical-navigation-item-icon
+                        label="Previous events"
+                        name="previous_events"
+                        icon-name="utility:video">
+                    </lightning-vertical-navigation-item-icon>
+
+                    <lightning-vertical-navigation-item-icon
+                        label="User group events"
+                        name="user_group_events"
+                        icon-name="utility:groups">
+                    </lightning-vertical-navigation-item-icon>
+
+                    <lightning-vertical-navigation-item-icon
+                        label="Access World"
+                        name="access_world"
+                        icon-name="utility:groups">
+                    </lightning-vertical-navigation-item-icon>
+                </lightning-vertical-navigation-section>
+
+            </lightning-vertical-navigation>
+            <div class="slds-m-vertical_medium slds-text-color_weak slds-text-heading_small">
+                Your Customer Success Plan will determine which Events are available to you.<br>If you are unable to register for an event and would like to discuss your success plan, or leave us any feedback, <a target="_blank" href={Feedback_URL}>please click here</a>
+            </div>
+        </div>
+        <div class="slds-small-size_12-of-12 slds-medium-size_2-of-12"></div>
+        <div class="slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-var-p-top_large">
+            <template if:false={productSelected}>
+                <div >
+                    Please select one of your products from the product menu in order to view the associated Events.
+                </div>
+            </template>
+            <template if:true={productSelected}>
+                <template if:true={events}>
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <template iterator:event={events}>
+                            <div key={event.value.name} class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                <div class="csp-box slds-var-m-bottom_large" data-id={event.value.id}>
+                                    <div class="slds-is-absolute slds-badge csp-plan_label" if:true={event.value.premier}>Premier Only</div>
+    
+                                    <div class="csp-box_image slds-var-p-vertical_xx-large slds-is-relative slds-grid_vertical-align-start" if:false={event.value.inactive} style={event.value.image}>
+                                        <div class="slds-var-m-vertical_x-large slds-align_absolute-center">
+    
+                                            <div class="slds-is-absolute csp-play" if:true={event.value.recordingLink}>
+                                                <lightning-button-icon
+                                                    icon-name="utility:play"
+                                                    size="x-large"
+                                                    class="csp-button_link csp-box_shaded-dark csp-box_rounded slds-var-p-around_medium"
+                                                    onclick={handleViewRecording}
+                                                    value={event.value.recordingLink}
+                                                    if:false={event.value.future}>
+                                                </lightning-button-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="csp-event-disable slds-var-p-vertical_xx-large slds-is-relative slds-grid_vertical-align-start" if:true={event.value.inactive} style={event.value.image}>
+                                        <div class="slds-var-m-vertical_x-large slds-align_absolute-center">
+    
+                                        </div>
+                                    </div>
+    
+                                    <div class="slds-align_absolute-center slds-var-m-bottom_medium">
+                                        <template if:true={event.value.registrationLink}>
+                                            <lightning-button
+                                                onclick={handleRegister}
+                                                label="Register"
+                                                if:true={event.value.future}
+                                                disabled={event.value.inactive}
+                                                value={event.value.registrationLink}
+                                                class="csp-button_brand slds-is-absolute">
+                                            </lightning-button>
+                                        </template>
+                                    </div>
+    
+                                    <div class="slds-var-p-around_medium">
+                                        <div class="slds-grid slds-var-m-top_x-small">
+                                            <div class="slds-var-m-right_medium csp-text_small slds-grid">
+                                                <lightning-icon
+                                                    icon-name="utility:dayview"
+                                                    size="x-small"
+                                                    class="slds-var-m-right_x-small slds-var-m-top_xxx-small">
+                                                </lightning-icon>
+                                                <lightning-formatted-date-time
+                                                    value={event.value.start}
+                                                    year="2-digit"
+                                                    month="2-digit"
+                                                    day="2-digit">
+                                                </lightning-formatted-date-time>
+                                            </div>
+    
+                                            <div class="csp-text_small slds-grid">
+                                                <lightning-icon
+                                                    icon-name="utility:clock"
+                                                    size="x-small"
+                                                    class="slds-var-m-right_x-small slds-var-m-top_xxx-small">
+                                                </lightning-icon>
+                                                <lightning-formatted-date-time
+                                                    value={event.value.start}
+                                                    hour="2-digit"
+                                                    time-zone-name="short"
+                                                    minute="2-digit">
+                                                </lightning-formatted-date-time>
+                                            </div>
+                                        </div>
+    
+                                        <div class="slds-var-m-top_x-small">
+                                            <lightning-button
+                                                onclick={handleViewEvent}
+                                                onkeyup={handleEscape}
+                                                label={event.value.title}
+                                                value={event.value.name}
+                                                class="csp-button_link">
+                                            </lightning-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div>
+                        <lightning-button
+                            class="csp-button_brand-white csp-button_stretch"
+                            label="LOAD MORE"
+                            if:true={showMore}
+                            onclick={handleLoadMore}>
+                        </lightning-button>
+                    </div>
+                </template>
+            </template>
+            <template if:false={events}>
+                <template if:true={pageRef}>
+                    <template if:true={productSelected}>
+                        Sorry, no events match your criteria at the moment
+                    </template>
+                </template>
+            </template>
+        </div>
+    </div>
+    <div class="slds-small-size_12-of-12 slds-medium-size_1-of-12 slds-large-size_2-of-12"></div>
+
+    <c-csp-modal
+        size="small"
+        data-id="popup"
+        if:true={pageRef}
+        onclosedialog={handleCloseDialog}
+        onkeyup={handleEscape}>
+        <template if:true={active}>
+            <div slot="header">
+                <template if:false={active.registrationLink}>
+                    <p class="slds-float_left">
+                        {active.title}
+                    </p>
+                </template>
+                <template if:true={active.registrationLink}>
+                    <p class="slds-var-p-top_x-small slds-float_left">
+                        {active.title}
+                    </p>
+                    <div class="slds-float_right">
+                        <lightning-button
+                            onclick={handleRegister}
+                            label="Register"
+                            data-id={active.name}
+                            if:true={active.future}
+                            disabled={active.inactive}
+                            value={active.registrationLink}
+                            class="csp-button_brand">
+                        </lightning-button>
+                    </div>
+                </template>
+            </div>
+
+            <div class="slds-var-p-bottom_large">
+                <div class="slds-grid">
+                    <div class="slds-var-m-right_medium csp-text_small slds-grid">
+                        <lightning-icon
+                            icon-name="utility:dayview"
+                            size="x-small"
+                            class="slds-var-m-right_x-small slds-var-m-top_xxx-small">
+                        </lightning-icon>
+                        <lightning-formatted-date-time
+                            value={active.start}
+                            year="numeric"
+                            month="long"
+                            weekday="long"
+                            day="2-digit">
+                        </lightning-formatted-date-time>
+                    </div>
+
+                    <div class="slds-var-m-right_medium csp-text_small slds-grid">
+                        <lightning-icon
+                            icon-name="utility:clock"
+                            size="x-small"
+                            class="slds-var-m-right_x-small slds-var-m-top_xxx-small">
+                        </lightning-icon>
+                        <lightning-formatted-date-time
+                            value={active.start}
+                            hour="2-digit"
+                            time-zone-name="short"
+                            minute="2-digit">
+                        </lightning-formatted-date-time>
+                    </div>
+
+                    <div class="csp-text_small slds-grid">
+                        <lightning-icon
+                            icon-name="utility:stage_collection"
+                            size="x-small"
+                            class="slds-var-m-right_x-small slds-var-m-top_xxx-small">
+                        </lightning-icon>
+                        {active.duration} minutes
+                    </div>
+                </div>
+            </div>
+
+            <lightning-formatted-rich-text
+                value={active.description}>
+            </lightning-formatted-rich-text>
+
+        </template>
+    </c-csp-modal>
+
+    <c-csp-modal
+        data-id="share"
+        nested="true"
+        onkeyup={handleEscape}>
+        <span slot="header">Copy link to thread</span>
+        <span>
+            <lightning-input value={eventUrl} read-only="true" class="slds-var-m-bottom_medium csp-copy-link" variant="label-hidden"></lightning-input>
+            <div class="slds-grid">
+                <lightning-button label="Copy Link" class="csp-button_brand" onclick={handleCopy}></lightning-button>
+                <div class="csp-share-copied slds-hide slds-grid slds-var-m-top_small">
+                    <lightning-icon size="x-small" variant="success" class="slds-var-p-top_xxx-small slds-var-m-left_large slds-var-m-right_xx-small" icon-name="utility:success"></lightning-icon>
+                    <span class="slds-text-color_success">URL copied to clipboard</span>
+                </div>
+            </div>
+        </span>
+    </c-csp-modal>
+
+</template>

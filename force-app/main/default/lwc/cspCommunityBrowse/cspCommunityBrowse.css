@@ -1,0 +1,10 @@
+.csp-browse_group {
+    min-height: 10rem;
+}
+.csp-browse_group:hover {
+    background-color: var(--c-successPlatformLightGreenHover, rgb(237,247,246));
+    cursor: pointer;
+}
+.csp-browse_group-description {
+    min-height: 2.7rem;
+}

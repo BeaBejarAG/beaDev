@@ -1,0 +1,46 @@
+.csp-sign-up-flex-points-container {
+    width: 100%;
+    /* height: 200px; */
+    padding-left: 60px;
+    padding-right: 60px;
+    margin-bottom: 120px;
+    display: inline-flex;
+}
+
+.csp-sign-up-flex-points-block {
+    display: inline-block;
+}
+
+.csp-sign-up-flex-points-info {
+    width: 55%;
+    margin-top: 70px;
+}
+
+.csp-sign-up-flex-points-image {
+    width: 70%;
+    /* margin-left: 100px; */
+}
+
+.csp-sign-up-access-people-image {
+    height: 420px;
+    max-width: 100%;
+}
+
+.csp-sign-up-flex-points-title {
+    font-size: 52px;
+    font-weight: 100;
+    padding-bottom: 30px;
+    color: var(--c-successPlatformBrightRed, rgb(249,68,62));
+}
+
+.csp-sign-up-flex-points-desc {
+    line-height: 1.7;
+}
+
+.csp-sign-up-flex-points-title-span {
+    font-weight: 700;
+}
+
+.csp-sign-up-flex-points-button {
+    margin-top: 20px;
+}

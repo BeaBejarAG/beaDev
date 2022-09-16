@@ -1,0 +1,21 @@
+.article-item a {
+    color: rgb(67, 122, 207);
+}
+
+.article-item__product {
+    background-color: rgb(230,230,230);
+    padding: 0.2rem 0.6rem;
+    font-size: var(--c-fontSize3,0.8125rem);
+    font-weight: 600;
+    border-radius: 0.2rem;
+    line-height: 1.5rem;
+}
+
+.article-item__meta {
+    font-size: var(--c-varFontSize4,0.875rem);
+}
+
+.article-item__anon-feature {
+    margin-top: 0.3rem;
+    display: inline-block;
+}

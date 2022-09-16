@@ -1,0 +1,36 @@
+<template>
+    <div class="slds-grid slds-grid_align-center">
+        <div class="slds-grid slds-wrap slds-gutters_direct slds-grid_align-center slds-size_1-of-1">
+            <c-csp-navigation-card
+                class="slds-col"
+                active="true"
+                image={knowledgeBaseImage}
+                icon="utility:description"
+                heading="Knowledge Base"
+                description="Read our helpful knowledge content, designed to get you out of the starting blocks quickly."
+                link-text="Take me there"
+                link="/knowledge-base-landing">
+            </c-csp-navigation-card>
+            <c-csp-navigation-card
+                class="slds-col"
+                active="true"
+                image={eventsImage}
+                icon="utility:event"
+                heading="Events"
+                description="A dedicated space for you to register and view events and webinars."
+                link-text="Take me there"
+                link="/events">
+            </c-csp-navigation-card>
+            <c-csp-navigation-card
+                class="slds-col"
+                active="true"
+                image={releasesImage}
+                icon="utility:setup_assistant_guide"
+                heading="Release Information"
+                description="A dedicated space to view content related to previous and future releases."
+                link-text="Take me there"
+                link="/release-notes">
+            </c-csp-navigation-card>
+        </div>
+    </div>
+</template>

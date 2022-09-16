@@ -1,0 +1,18 @@
+<template> 
+    <div if:true={show} class="slds-m-top_large slds-m-bottom_medium csp-all-articles__title">
+        {componentTitle}
+    </div>
+    <div class="slds-grid">
+        <div class="slds-size_1-of-1 slds-large-size_9-of-12 slds-border_top">
+            <c-csp-search-results
+                articles-list-view=true
+                limit-amount={limitAmount}
+                include-knowledge-results={includeKnowledgeResults}
+                include-community-results={includeCommunityResults}
+                include-release-notes-results={includeReleaseNotesResults}
+                include-events-results={includeEventsResults}
+                oncspsearcheventcomplete={handleChange} >
+            </c-csp-search-results>
+        </div>
+    </div>
+</template>

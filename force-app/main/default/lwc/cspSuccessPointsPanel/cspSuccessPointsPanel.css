@@ -1,0 +1,22 @@
+.csp-success-points-panel-wrapper {
+    margin: auto;
+}
+
+.csp-success-points-panel-title {
+    font-size: 35px;
+    text-align: center;
+    padding-bottom: 35px;
+}
+
+.csp-success-points-footer {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.csp-success-points-button {
+    /* padding: 10px; */
+    /* padding-left: 30px; */
+    /* padding-right: 30px; */
+    border-color: rgb(213, 52, 62);
+    border-radius: 0px;
+}

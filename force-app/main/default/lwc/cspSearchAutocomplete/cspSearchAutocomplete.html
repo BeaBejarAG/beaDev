@@ -1,0 +1,32 @@
+<template>
+    <template if:true={categories}>
+        <div class="csp-autocomplete slds-hide slds-container_fluid" onmousedown={handleMouseDown}>
+            <div class="slds-var-p-bottom_small">
+                <template for:each={categories} for:item="category" for:index="index">
+                    <template if:true={category}>
+                        <template if:true={category.children}>
+                            <div key={category.category} class="slds-var-p-vertical_small slds-var-p-horizontal_large slds-text-color_weak">
+                                <lightning-icon icon-name={category.icon} size="x-small" class="slds-var-m-right_small"></lightning-icon>
+                                {category.category}
+                            </div>
+                            <div key={category.category} class="slds-var-p-horizontal_large">
+                                <lightning-menu-divider variant="compact"></lightning-menu-divider>
+                            </div>
+                            <template for:each={category.items} for:item="result">
+                                <div key={result.id} class="slds-var-p-horizontal_small">
+                                    <lightning-menu-item if:true={result.title} class="csp-autocomplete-item" prefix-icon-name="utility:search" value={result.url} label={result.title} onclick={handleSelect}></lightning-menu-item>
+                                </div>
+                            </template>
+                        </template>
+                    </template>
+                </template>
+            </div>
+            <div class="csp-autocomplete-view-all slds-var-p-horizontal_large"  if:true={hasMore}>
+                <button title="View all search result" class="slds-button_stretch slds-text-align_left" onclick={handleViewAll}>
+                    <lightning-icon icon-name="utility:chevronright" size="xx-small" class="slds-var-m-right_small"></lightning-icon>
+                    View all search results
+                </button>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,18 @@
+h1 {
+    font-size: large;
+}
+.buttonGroup{
+    text-align: right;
+    padding-bottom: 10px
+}
+
+.actionButton{
+    text-align: right;
+
+}
+
+.actionButtonText{
+    text-align: right;
+    padding-right: 4.5% !important;
+    
+}

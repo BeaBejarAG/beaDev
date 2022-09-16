@@ -1,0 +1,42 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="cspProductSelection" access="global">
+    <aura:attribute name="product" type="Object" />
+    <aura:attribute name="account" type="Object" />
+    <aura:attribute name="productList" type="Object[]" />
+    <aura:attribute name="showAsPicklist" type="Boolean" default="false" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.handleInit}"/>
+    <aura:handler event="forceCommunity:routeChange" action="{!c.handleRouteChange}"/>
+
+    <aura:registerEvent name="cspProductSelectionEvent" type="c:cspProductSelectionEvent"/>
+    <aura:handler event="c:cspProductSelectionEvent" action="{!c.handleProductSelection}" includeFacets="true"  />
+
+    <aura:handler event="c:cspAccountSelectionEvent" action="{!c.handleAccountSelection}" includeFacets="true" />
+
+    <div class="slds-grid_vertical-align-center slds-grid" aura:id="productSelectionMenu">
+        <aura:if isTrue="{!v.showAsPicklist != true}">
+            <div class="slds-var-p-around_xx-small slds-var-m-right_x-large slds-grid_align-center csp-product-icon-container">
+                <img src="{!v.product &amp;&amp; v.product.image ? v.product.image : $ContentAsset.csp_logo_black}"/>
+            </div>
+            <aura:if isTrue="{!v.productList.length == 1}">
+                {!v.productList[0].name}
+            </aura:if>
+        </aura:if>
+
+        <aura:if isTrue="{!v.productList.length > 1}">
+            <lightning:buttonMenu
+                label="{!v.product &amp;&amp; v.product.name ? v.product.name : 'All products'}"
+                class="{!v.showAsPicklist ? 'csp-product-select-picklist csp-button_neutral' : 'csp-product-select csp-button_neutral'}"
+                aura:id="buttonMenu"
+                alternativeText="Show menu"
+                onselect="{!c.handleMenuSelect}"
+                menuAlignment="{!v.showAsPicklist ? 'left' : 'centre'}"
+                variant="{!v.showAsPicklist ? 'border' : 'container'}">
+                <lightning:menuItem value="" label="All products" />
+                <aura:iteration items="{!v.productList}" var="item" indexVar="index">
+                    <lightning:menuDivider variant="compact"/>
+                    <lightning:menuItem class="{!v.product.id == item.id ? 'selected' : ''}" value="{!item.id}" label="{!item.name}" />
+                </aura:iteration>
+            </lightning:buttonMenu>
+        </aura:if>
+    </div>
+</aura:component>

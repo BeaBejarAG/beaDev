@@ -1,0 +1,106 @@
+/* Global Navigation */
+.THIS.global-nav {
+    white-space: nowrap;
+    padding-top: 2.2rem;
+}
+.THIS.global-nav a.active {
+    border-top: 0.2em solid token(successPlatformRed);
+    color: token(successPlatformRed);
+}
+.THIS.global-nav a {
+    font-size: 1.65rem;
+    font-weight: 400;
+}
+.THIS.global-nav a:hover {
+    color: #333;
+}
+
+@media (max-width: 370px) {
+    .THIS.global-nav {
+	    padding-top: 2rem;
+    }
+    .THIS.global-nav a {
+        font-size: 0.75rem;
+        padding-top: 1.9rem;
+        font-weight: 600;
+    }
+    .THIS.global-nav .slds-p-horizontal_x-large {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .THIS.global-nav .slds-p-left_x-large {
+        padding-left: 0.5rem;
+    }
+    .THIS.global-nav .slds-p-right_x-large {
+        padding-right: 0.5rem;
+    }
+}
+@media (min-width: 370px) and (max-width: 540px) {
+    .THIS.global-nav {
+	    padding-top: 2rem;
+    }
+    .THIS.global-nav a {
+        font-size: 0.95rem;
+        padding-top: 1.9rem;
+        font-weight: 600;
+    }
+    .THIS.global-nav .slds-p-horizontal_x-large {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .THIS.global-nav .slds-p-left_x-large {
+        padding-left: 0.5rem;
+    }
+    .THIS.global-nav .slds-p-right_x-large {
+        padding-right: 0.5rem;
+    }
+}
+@media (min-width: 540px) and (max-width: 700px) {
+    .THIS.global-nav a {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    .THIS.global-nav .slds-p-horizontal_x-large {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .THIS.global-nav .slds-p-left_x-large {
+        padding-left: 0.5rem;
+    }
+    .THIS.global-nav .slds-p-right_x-large {
+        padding-right: 0.5rem;
+    }
+}
+@media (min-width: 700px) and (max-width: 990px) {
+    .THIS.global-nav a {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+    .THIS.global-nav .slds-p-horizontal_x-large {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .THIS.global-nav .slds-p-left_x-large {
+        padding-left: 1rem;
+    }
+    .THIS.global-nav .slds-p-right_x-large {
+        padding-right: 1rem;
+    }
+}
+
+@media (min-width: 990px) and (max-width: 1120px) {
+    .THIS.global-nav a {
+        font-size: 1.4rem;
+        font-weight: 400;
+    }
+    .THIS.global-nav .slds-p-horizontal_x-large {
+        padding-left: 1.3rem;
+        padding-right: 1.3rem;
+    }
+    .THIS.global-nav .slds-p-left_x-large {
+        padding-left: 1.3rem;
+    }
+    .THIS.global-nav .slds-p-right_x-large {
+        padding-right: 1.3rem;
+    }
+}

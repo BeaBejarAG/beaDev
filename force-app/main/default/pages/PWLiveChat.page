@@ -1,0 +1,192 @@
+<apex:page showHeader="false" lightningStylesheets="true">
+ <apex:slds />
+<style>
+#liveAgentClientChat.liveAgentStateWaiting {
+// The CSS class that is applied when the chat request is waiting to be accepted
+// See "Waiting State" screenshot below
+}
+#liveAgentClientChat {
+// The CSS class that is applied when the chat is currently engaged
+// See "Engaged State" screenshot below
+}
+#liveAgentClientChat.liveAgentStateEnded {
+// The CSS class that is applied when the chat has ended
+// See "Ended State" screenshot below
+}
+body { overflow: hidden; width: 100%; height: 100%; padding: 0; margin: 0 }
+    
+#waitingMessage { 
+height: 100%; 
+width: 100%; 
+vertical-align: 
+middle; 
+text-align: center;
+display: none;
+}
+
+#waitingMessage td{
+
+    }
+    
+#QeuePos {
+top: 60px; 
+left: 80px; 
+right: 80px; 
+bottom: 290px; 
+position: absolute; 
+border-radius: 25px;
+border: 2px solid grey;
+text-align: center;
+}
+    
+#LeaveMsg {
+top: 140px; 
+left: 50px; 
+right:50px;  
+bottom: 20px; 
+position: absolute;    
+border-radius: 25px;
+border: 2px solid grey;
+    text-align: center;
+}   
+    
+#liveAgentClientChat.liveAgentStateWaiting #waitingMessage { display: table; }
+#liveAgentSaveButton, #liveAgentEndButton {}
+.liveAgentChatInput {
+height: 25px;
+border-width: 1px;
+border-style: solid;
+border-color: #000;
+padding: 2px 0 2px 4px;
+background: #fff;
+display: block;
+width: 99%;
+}
+.liveAgentSendButton {
+display: block;
+width: 60px;
+height: 31px;
+padding: 0 0 3px;
+position: absolute;
+top: 0;
+right: -67px;
+}
+    .slds-input {
+    width: 80px;
+    }
+#liveAgentChatLog {
+width: auto;
+height: 90%;
+top: 0px;
+position: absolute;
+overflow-y: auto;
+left: 0;
+right: 0;
+bottom: 0;
+}
+    
+    #ContactForm {
+text-align: center;
+    line-height: 24px;
+
+}
+</style>
+    <!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
+<!--  If necessary, please modify the charset parameter to specify the        -->
+<!--  character set of your HTML page.                                        -->
+<!--  ----------------------------------------------------------------------  -->
+
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"/>
+
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <FORM> element to your page.             -->
+<!--  ----------------------------------------------------------------------  -->
+      
+  
+<div>
+
+    <liveAgent:clientChat >
+<liveAgent:clientChatSaveButton />
+<liveAgent:clientChatEndButton />
+<div style="top: 25px; left: 10px; right:10px; bottom: 5px; position: absolute; z-index:
+10;">
+<liveAgent:clientChatAlertMessage />
+<liveAgent:clientChatStatusMessage />
+
+<table id="waitingMessage" cellpadding="0" cellspacing="0">
+<tr>
+    <style>
+    span.liveAgentQueuePosition:empty::before { content: 'Next'; }
+</style>
+<td >
+    <img src="https://www.theaccessgroup.com/media/9340/productlogos_microsites_accesssmall.png" style="top: -40px; left: 90px; right: 90px; position: absolute;"/>
+    <div id="QeuePos">
+     Thank you for contacting Access Support.<p>
+</p> Your current Queue position is: <liveAgent:clientChatQueuePosition id="QueuePosVF" />  
+    </div>
+    </td>
+    </tr>
+    <tr>
+   <td>
+       <div id="LeaveMsg">
+           
+<form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+If you do not want to wait, please complete the below which will create a case in the support hub and we will get back to you
+           <p>
+               
+    </p>
+    <div id="ContactForm">
+        
+    <input type="hidden" name="orgid" value="00D58000000Z4gm"/>
+    <input type="hidden" name="retURL" value="http://accesshelp.force.com/Chat/CaseFormSubmitted"/>
+<table style="width:100%">
+  <tr>
+    <td><label for="name">Contact Name</label></td>
+    <td><input width="20px" padding="2px" id="name" maxlength="80" name="name" size="20" type="text"  required="true" /></td> 
+  </tr>
+  <tr>
+    <td><label for="email">Email</label></td>
+    <td><input  id="email" maxlength="80" name="email" size="20" type="text"  required="true" /></td> 
+  </tr>
+      <tr>
+    <td><label for="Phone">Phone</label></td>
+    <td><input id="phone" maxlength="40" name="phone" size="20" type="text"  required="true" /></td> 
+  </tr>
+      <tr>
+    <td><label for="subject">Subject</label></td>
+    <td><input id="subject" maxlength="80" name="subject" size="20" type="text"  required="true" /></td> 
+  </tr>
+      <tr>
+    <td><label for="description">Description</label></td>
+    <td><textarea name="description" required="true"></textarea></td> 
+  </tr>
+</table> 
+    <input type="hidden"  id="external" name="external" value="1" />
+    <input type="hidden"  id="recordType" name="recordType" value="012580000006Hfc" />
+        <input type="hidden" id="00N5800000DWGXI" name="00N5800000DWGXI" value="Procure Wizard"/><br/>           </div>
+    <input type="submit" name="submit"/>
+
+
+</form>
+</div>
+    </td>
+
+    </tr>
+    </table>
+
+<div style="top: 0; right: 0; bottom: 41px; left: 0; padding: 0; word-wrap: break-word; z-index: 0;">
+<liveAgent:clientChatLog />
+</div>
+    
+<div style="position: absolute; height: auto; right: 0; bottom: 0; left: 0; margin-right:
+67px;">
+<liveagent:clientChatInput /><liveAgent:clientChatSendButton />
+<liveAgent:clientChatFileTransfer />
+</div>
+</div>
+
+
+</liveAgent:clientChat>
+</div>
+</apex:page>

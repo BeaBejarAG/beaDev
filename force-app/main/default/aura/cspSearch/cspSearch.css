@@ -1,0 +1,24 @@
+.THIS input {
+    height: 3rem;
+    border-radius: 0px;
+}
+.THIS .csp-autocomplete-component {
+    z-index: 10;
+}
+
+.THIS .csp-search-input input {
+    text-overflow: ellipsis;
+}
+
+.THIS .csp-product-selection-lhs .csp-product-select-picklist button {
+    border-right: 0px;
+}
+.THIS .csp-product-selection-rhs .csp-product-select-picklist button {
+    border-left: 0px;
+}
+
+@media(max-width: 650px) {
+    .THIS .searchButton {
+        display: none;
+    }
+}

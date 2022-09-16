@@ -1,0 +1,27 @@
+.THIS button:hover,
+.THIS button:active,
+.THIS button {
+    color: token(successPlatformLightGrey);
+    text-overflow: ellipsis;
+    max-width: 7rem;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.THIS.access-theme-profile-menu {
+    max-width: 10rem;
+}
+.THIS .slds-avatar__initials {
+    cursor: pointer;
+}
+.THIS .slds-avatar {
+    border-radius: 1rem;
+}
+.THIS lightning-primitive-icon {
+    display: none;
+}
+
+@media (max-width: 960px) {
+	.THIS .slds-dropdown-trigger {
+        display: none;
+    }
+}

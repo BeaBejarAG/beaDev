@@ -1,0 +1,37 @@
+<template>
+    <template if:true={showAccountSelection}>
+        <div class="slds-grid slds-align-middle">
+            <div class="slds-p-left_medium slds-p-bottom_small csp-account-selection-container">
+                <div class="csp-account-selector-wrapper">
+                    <div class="slds-p-top_large">Company account:</div>
+                    <div class="slds-p-left_small slds-p-top_small csp-account-selector">
+                        <div class="csp-account-dropdown">
+                            <lightning-button-menu class="csp-account-dropdown__button case-results__owner-filter" name="accountSelector" label={label} onselect={accountChangeHandler}>
+                                <div class="slds-dropdown slds-dropdown_left slds-dropdown_small csp-account-dropdown">
+                                    <template for:each={options} for:item="opt" aria-haspopup={showPopover}>
+                                        <lightning-menu-item key={opt.value}
+                                        class="case-results__menu-option"
+                                        value={opt.value}
+                                        label={opt.label}
+                                        aria-describedby="account-dropdown"></lightning-menu-item>
+                                    </template>
+                                </div>
+                            </lightning-button-menu>
+                            <template if:true={showPopover}>
+                                <div class="slds-popover slds-popover_tooltip slds-nubbin_top-left slds-popover_small csp-popover" role="tooltip" id="account-dropdown">
+                                    <div class="slds-popover__body csp-popover-body">
+                                        <p class="csp-popover-title">Company account selector</p>
+                                        <p class="slds-m-top_small">Please select the company account you are working within.</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <template if:true={showPopover}>
+            <div class="csp-dim-background"></div>
+        </template>
+    </template>
+</template>

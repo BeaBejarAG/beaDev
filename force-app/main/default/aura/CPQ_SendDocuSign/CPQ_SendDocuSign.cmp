@@ -1,0 +1,22 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-25-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global"  >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="QuoteObject" type="SBQQ__Quote__c" /> 
+    <aura:attribute type="Object" name="record"/>
+
+
+    <force:recordData aura:id="recordLoader"
+                    recordId="{!v.recordId}"
+                    fields="SBQQ__PrimaryContact__r.Email,SBQQ__PrimaryContact__r.FirstName,SBQQ__PrimaryContact__r.LastName"
+                    targetFields="{!v.QuoteObject}"
+                    targetRecord="{!v.record}"      
+                    recordUpdated="{!c.recordUpdated}"          
+  />
+	<lightning:button label="Send With DocuSign" onclick="{!c.sendDocu}"/>
+</aura:component>

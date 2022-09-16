@@ -1,0 +1,8 @@
+<design:component >
+<design:attribute name="message" label="Message"/>   
+<design:attribute name="backgroundColour" label="Background Colour"/>
+<design:supportedFormFactors>
+<design:supportedFormFactor type="Large"/>
+<design:supportedFormFactor type="Small"/>
+</design:supportedFormFactors>
+</design:component>

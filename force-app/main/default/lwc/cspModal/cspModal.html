@@ -1,0 +1,44 @@
+<template>
+    <template if:true={showModal}>
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class={sizeClass}>
+            <div class="slds-modal__container">
+                <header class="slds-modal__header csp-modal_header">
+                    <lightning-button-icon
+                        class="slds-modal__close"
+                        title="Close"
+                        icon-name="utility:close"
+                        icon-class="slds-button_icon-inverse"
+                        onclick={handleDialogClose}>
+                    </lightning-button-icon>
+
+                    <div class="header-string">
+                        <h2 class="slds-text-align_left slds-text-heading_medium slds-hyphenate slds-var-p-left_small slds-var-p-vertical_x-small header-string">
+                            <slot name="header" onslotchange={handleSlotHeaderChange}></slot>
+                        </h2>
+                    </div>
+
+                    <p class="slds-var-m-top_x-small slds-hide slds-var-p-left_small">
+                        <slot name="tagline" onslotchange={handleSlotTaglineChange}></slot>
+                    </p>
+                </header>
+                <div class={paddingClass} id="modal-content-id-1">
+                    <slot></slot>
+                </div>
+
+                <footer class="slds-modal__footer slds-hide">
+                    <slot name="footer" onslotchange={handleSlotFooterChange}></slot>
+                </footer>
+            </div>
+            <div if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+            </div>
+        </section>
+        <div if:false={isLoading} class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

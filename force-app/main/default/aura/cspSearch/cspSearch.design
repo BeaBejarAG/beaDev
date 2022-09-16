@@ -1,0 +1,12 @@
+<design:component label="CSP: Search">
+	<design:attribute name="assistiveText" label="Search prompt" />
+	<design:attribute name="showButton" label="Display search button" />
+	<design:attribute name="searchText" label="Default search value" />
+	<design:attribute name="handlerUrl" label="URL to redirect to" />
+	<design:attribute name="showProductSelection" label="Show product selection picklist" datasource="Hidden,Left Hand Side,Right Hand Side" default="Left Hand Side" />
+	<design:attribute name="includeKnowledgeResults" label="Include knowledge in autocomplete" />
+	<design:attribute name="includeCommunityResults" label="Include community in autocomplete" />
+	<design:attribute name="includeReleaseNotesResults" label="Include release notes in autocomplete" />
+	<design:attribute name="includeEventsResults" label="Include events in autocomplete" />
+	<design:attribute name="includeServicesCatalogueResults" label="Include service catalogue in autocomplete" />
+</design:component>

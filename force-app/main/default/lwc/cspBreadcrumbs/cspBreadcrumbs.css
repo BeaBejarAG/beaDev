@@ -1,0 +1,23 @@
+.csp-breadcrumbs {
+    font-size: 0.875rem;
+}
+
+.csp-breadcrumbs__home {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+    cursor: pointer;
+}
+
+.csp-breadcrumbs__product {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+    cursor: pointer;
+}
+
+.csp-breadcrumbs__subnav {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+    cursor: pointer;
+}
+
+.csp-breadcrumbs__feature {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+    cursor: pointer;
+}

@@ -1,0 +1,35 @@
+.csp-badge_discussion,
+.csp-badge_question {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.1rem 0.5rem;
+    border-radius: 5px;
+}
+
+.csp-badge_discussion {
+    background-color: rgb(136,129,189);
+}
+.csp-badge_question {
+    background-color: rgb(8,173,239);
+}
+.csp-feed_header {
+    background-color: rgb(104,117,140);
+    color: white;
+    fill: white;
+    box-shadow: none;
+    border: none;
+}
+
+.csp-feed_header.slds-nubbin_bottom-left:before,
+.csp-feed_header.slds-nubbin_bottom-left:after {
+        left: 3.5rem;
+}
+
+.csp-border-think_bottom {
+    border-bottom: 3px solid rgb(110,110,110);
+}
+
+.csp-avatar_placeholder {
+    background-color: rgb(233,244,243);
+}

@@ -1,0 +1,37 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+    <template if:false={isLoading}>
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_1-of-1">
+                <template if:true={contactRequest}>
+                    <div class="csp-purchase-points-desc">Click submit to register your interest in purchasing additional points. A representative will contact you directly.</div>
+                </template>
+                <template if:true={accountUpgrades}>
+                    <div class="csp-purchase-points-desc">Click submit to register your interest in upgrading your account. A representative will contact you directly.</div>
+                </template>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-grow-none csp-button_brand csp-flex-points-contact-team-button-wrapper">
+                        <template if:true={contactRequest}>
+                            <button class="csp-purchase-points-button slds-button" onclick={handleSubmitApplicationClick}>
+                                SUBMIT
+                            </button>
+                        </template>
+                        <template if:true={accountUpgrades}>
+                            <button class="csp-purchase-points-button slds-button" onclick={handleSubmitAccountUpgradeApplicationClick}>
+                                SUBMIT
+                            </button>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-grow-none csp-button_brand-cancel">
+                        <button class="modal-apply-for-service-cancel-button slds-button slds-var-m-vertical_small csp-purchase-points-cancel-button" onclick={handleDialogClose}>
+                        Cancel
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+</template>

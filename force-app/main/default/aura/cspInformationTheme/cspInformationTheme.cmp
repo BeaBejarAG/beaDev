@@ -1,0 +1,35 @@
+<aura:component implements="forceCommunity:themeLayout,flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="profileMenu" type="Aura.Component[]"/>
+    <aura:attribute name="globalNavigation" type="Aura.Component[]"/>
+    <aura:attribute name="title" type="Aura.Component[]"/>
+    <aura:attribute name="subtitle" type="Aura.Component[]"/>
+    <aura:attribute name="description" type="Aura.Component[]"/>
+
+    <header>
+        <c:cspAccountSelection />
+        <c:cspGlobalHeader profileMenu="{!v.profileMenu}" globalNavigation="{!v.globalNavigation}"/>
+        <div class="csp-info slds-var-m-top_x-large slds-var-p-horizontal_medium">
+            <div class="csp-info__inner slds-var-p-top_large slds-grid slds-gutters_direct slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-m-vertical_large">
+                    {!v.title}
+                </div>
+                <div class="slds-col slds-size_4-of-12">
+                    <img src="{!$ContentAsset.accessguidelines+'?v=2'}" class="slds-is-absolute slds-m-top_medium csp-info__image" />
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12 slds-large-size_6-of-12 slds-m-vertical_large">
+                    {!v.subtitle}
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="access-theme-body">
+        <div class="slds-grid slds-gutters_direct slds-wrap slds-var-m-horizontal_medium">
+            <div class="slds-col slds-size_4-of-12"></div>
+            <div class="slds-col slds-size_1-of-1 slds-large-size_6-of-12 slds-var-m-top_medium">
+                {!v.description}
+            </div>
+        </div>
+        {!v.body}
+    </div>
+    <div class="access-theme-footer"><c:cspGlobalFooter/></div>
+</aura:component>

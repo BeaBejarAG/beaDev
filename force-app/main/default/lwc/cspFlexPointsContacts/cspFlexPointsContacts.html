@@ -1,0 +1,50 @@
+<template>
+    <template if:true={showContacts}>
+        <div if:true={isNonPointsUser} class="slds-grid slds-wrap slds-grid_align-spread slds-p-around_x-large slds-m-bottom_large csp-flex-points-contacts-container">
+            <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12 slds-m-bottom_small">
+                <p class="csp-text_brand csp-text_medium csp-text_strong slds-m-bottom_x-small">All of our services can be purchased with FlexPoints.</p>
+                <p>Contact your account manager to discuss how becoming a FlexPoints customer could work for you.</p>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12">
+                <p class="csp-text_brand csp-text_medium csp-text_strong">Contact Your Account Manager</p>
+                <template if:true={errorMsg}>
+                    <p>{errorMsg}</p>
+                </template>
+                <div if:true={accountManager} class="slds-grid slds-grid_vertical-align-center">
+                    <lightning-avatar
+                    class={accountManager.avatar}
+                    src={accountManager.photoUrl}
+                    initials={accountManager.initials}>
+                    </lightning-avatar>
+                    <div class="slds-col slds-size_1-of-2 slds-max-small-size_1-of-3">{accountManager.Name}</div>
+                    <div class="slds-col"><lightning-formatted-email value={accountManager.Email} hide-icon></lightning-formatted-email></div>
+                </div>
+            </div>
+        </div>
+        <div if:false={isNonPointsUser} class="slds-grid slds-wrap slds-grid_align-spread slds-p-around_x-large slds-m-bottom_large csp-flex-points-contacts-container">
+            <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12 slds-m-bottom_small">
+                <p class="csp-text_brand csp-text_medium csp-text_strong slds-m-bottom_x-small">All of our services can be purchased with FlexPoints.</p>
+                <p>Contact your FlexPoints team to discuss booking services.</p>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12">
+                <p class="csp-text_brand csp-text_medium csp-text_strong">Contact Your FlexPoints Guardians</p>
+                <template if:true={errorMsg}>
+                    <p>{errorMsg}</p>
+                </template>
+                <template if:true={pointsGuardians}>
+                    <template for:each={pointsGuardians} for:item="pointsGuardian">
+                      <div key={pointsGuardian.id} class="slds-grid slds-grid_vertical-align-center slds-var-m-vertical_xxx-small">
+                        <lightning-avatar
+                            class={pointsGuardian.avatar}
+                            src={pointsGuardian.photoUrl}
+                            initials={pointsGuardian.initials}>
+                        </lightning-avatar>
+                        <div class="slds-col slds-col slds-truncate slds-size_1-of-3 slds-max-small-size_1-of-3">{pointsGuardian.Contact.Name}</div>
+                        <div class="slds-col slds-size_1-of-2 slds-truncate"><lightning-formatted-email class="slds-m-left_x-small" value={pointsGuardian.Contact.Email} hide-icon></lightning-formatted-email></div>
+                      </div>
+                    </template>
+                  </template>
+            </div>
+        </div>
+    </template>
+</template>

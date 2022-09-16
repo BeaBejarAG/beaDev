@@ -1,0 +1,13 @@
+<aura:component extends="forceCommunity:navigationMenuBase" implements="force:appHostable,forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="selected" type="String" />
+
+    <ul class="global-nav slds-grid" onclick="{!c.onClick}">
+        <aura:iteration items="{!v.menuItems}" var="item" indexVar="index">
+            <aura:if isTrue="{!item.id != 0}">
+                <li class="{!index le 1 ? 'slds-p-right_x-large slds-border_right slds-text-color_weak' : index == v.menuItems.length - 1 ? 'slds-p-left_x-large slds-text-color_weak' : 'slds-p-horizontal_x-large slds-border_right slds-text-color_weak'}">
+                    <a data-menu-item-id='{!item.id}' class="{!item.label == v.selected ? 'slds-text-link_reset slds-p-top_x-large active' : 'slds-text-link_reset slds-p-top_x-large'}">{!item.label}</a>
+                </li>
+            </aura:if>
+        </aura:iteration>
+    </ul>
+</aura:component>

@@ -1,0 +1,37 @@
+.csp-nav-card__active {
+    background-color: white;
+    min-height: 422px;
+    width: 250px;
+}
+
+.csp-nav-card__inactive {
+    background-color: white;
+    min-height: 422px;
+    width: 250px;
+}
+
+.csp-nav-card__active:hover {
+    background-color: var(--c-successPlatformLightGreenHover,rgb(237,247,246));
+    cursor: pointer;
+}
+
+.csp-nav-card__active:hover .csp-nav-card__link {
+    text-decoration: underline;
+}
+
+.csp-nav-card__img-container {
+    background-color: var(--c-successPlatformLightGreenHighlight,rgb(110,183,175));
+    height: 152px;
+}
+
+.csp-nav-card__title {
+    font-size: 1.375rem;
+    font-weight: 500;
+    min-height: 35px;
+}
+
+.csp-nav-card__description {
+    font-size: 0.875rem;
+    font-weight: 300;
+    min-height: 105px;
+}

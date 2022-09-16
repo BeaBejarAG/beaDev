@@ -1,0 +1,16 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="didArtSolveIssue" type="String" default="Did this article solve your issue?" access="global" />
+    <aura:attribute name="loggedInUser" type="boolean" default="false"/>
+    
+        <aura:if isTrue="{!v.loggedInUser}">
+ <div style="box">
+      <span class="didArtSolveIssue">{!v.didArtSolveIssue}</span>
+        <p>
+        <lightning:button variant="brand" label="Yes" onclick="{! c.handleClickYes }" />
+        <lightning:button variant="brand" label="Log Support Call" onclick="{! c.handleClickSupportCall }" />   
+            </p>
+    </div>
+    </aura:if>
+        <aura:set attribute="else">      
+    </aura:set>  
+</aura:component>

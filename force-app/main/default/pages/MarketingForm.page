@@ -1,0 +1,171 @@
+<apex:page showHeader="false" Controller="PreChatFormCtrl">
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <apex:stylesheet value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
+    <apex:includeScript value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
+    <script type="text/javascript">
+        (function() { 
+          function handlePageLoad() {
+            var endpointMatcher = new RegExp("[\\?\\&]endpoint=([^&#]*)");
+            document.getElementById('prechatForm').setAttribute('action',
+            decodeURIComponent(endpointMatcher.exec(document.location.search)[1]));
+          } 
+          if (window.addEventListener) {
+            window.addEventListener('load', handlePageLoad, false);
+          } else { 
+            window.attachEvent('onload', handlePageLoad, false);
+          }
+        })();
+        function loadUrl(newLocation){
+            window.location = newLocation;
+        }
+        
+        var controlingId = "ctrl"
+        window.onload = setupPage;
+        var ctrlFieldDesc;
+
+        function setupPage() {
+            //load page with selectlist component
+            ctrlFieldDesc = document.querySelectorAll('[id$="hiddenType"]')[0].value;      
+            
+            buildControlling();
+            
+        }
+
+        function buildControlling() {
+
+            var list = JSON.parse(ctrlFieldDesc);
+
+            var myDiv = document.getElementById("controllingOption");
+            appendSelectOption(myDiv, list, controlingId, 'liveagent.prechat:Related Product');
+
+        }
+    
+    //create every selectoption component
+    function appendSelectOption(myDiv, list, cId,  name) {
+    
+        selectList = document.createElement("select");
+        selectList.id = cId;
+        selectList.name = name;
+        var att = document.createAttribute("class");
+        att.value = "form-control";
+        selectList.setAttributeNode(att);
+        var attReq = document.createAttribute("required");
+        attReq.value = "true";
+        selectList.setAttributeNode(attReq);
+        
+        myDiv.appendChild(selectList);
+        
+        var option = document.createElement("option");
+        option.text = "--None--";
+        selectList.appendChild(option);
+        for (var item in list) {
+            if (list[item]["active"]) {
+                var option = document.createElement("option");
+                option.value = list[item]["label"];
+                option.text = list[item]["label"];
+                if (list[item]["defaultValue"]) {
+                    option.selected="selected";
+                }
+                selectList.appendChild(option);
+            }
+        }
+    }
+    </script>
+    <style>
+        .panel-body{
+            background-color: #f7f8f8;
+            padding-top: 15px;
+            padding-bottom:15px;
+            border-color:#d8ddd6;
+        }
+        .panel-heading{
+            background-color: #0070d2;
+            margin-bottom:0px;
+            margin-top:15px;
+            color:#fff;
+            border-color:#d8ddd6;
+        }
+        .form-group.required .control-label:after {
+            content:" *";
+            color:red;
+        }
+    </style>
+    <div class="container-fluid"> 
+        <div class="panel-heading">
+        <h2>
+        Live Agent Marketing
+        </h2>
+    </div>
+    <!-- Form that gathers information from the chat visitor and sets the values to Live Agent Custom Details used later in the example -->
+    <!--<form method='post' id='prechatForm'>-->
+    <form class="form-horizontal" method='post' id='prechatForm' data-toggle="validator" role="form">
+    <!-- Detail inputs -->
+        <div class="panel-body">
+        <div class="form-group required">
+            <label class="control-label col-sm-2" for="FirstName">First Name</label>
+             <div class="col-sm-10">
+                 <input type="text" class="form-control" name="liveagent.prechat:First Name" placeholder="Enter first name here" required="true"/>
+            </div>
+        </div>
+        <div class="form-group required">
+            <label class="control-label col-sm-2" for="LastName">Last Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="liveagent.prechat:Last Name" placeholder="Enter first name here" required="true"/>
+            </div>
+        </div>
+        <div class="form-group required">
+            <label class="control-label col-sm-2" for="Email">Email</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="liveagent.prechat:Email" placeholder="Enter first name here" required="true"/>
+            </div>
+        </div>
+        <div class="form-group required">
+             <label class="control-label col-sm-2" for="Company">Company</label>
+             <div class="col-sm-10">         
+                 <input type="text" class="form-control" name="liveagent.prechat:Account Name" placeholder="Enter first name here" required="true"/>
+             </div>
+        </div> 
+        <div class="form-group required">
+             <label class="control-label col-sm-2" for="controllingOption">Related Product:</label>
+                  <div class="col-sm-10" id="controllingOption"> </div>
+        </div>                 
+                    
+              
+    <input type="hidden" id="hiddenType" value="{!productGroupOptions}"/>
+        
+    <!-- Map the detail inputs to the Contact fields --> 
+    <input type="hidden" name="liveagent.prechat.findorcreate.map:Contact" value="FirstName,First Name;Last Name,Last Name;Email,Email;" />
+
+    <!-- Map the detail inputs to the Account fields --> 
+    <input type="hidden" name="liveagent.prechat.findorcreate.map:Account" value="Name,Account Name" /> 
+       
+    <!-- Try to find the Account by name -->
+    <input type="hidden" name="liveagent.prechat.findorcreate.map.doFind:Account" value="Name,true;" />
+ 
+    <!-- Save the Account on the Live Chat Transcript's Account Loookup -->
+    <input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript:Account" value="AccountId" />
+
+    <!-- Create a Lead every time -->
+    <input type="hidden" name="liveagent.prechat:Lead Source" value="Website" />
+    <input type="hidden" name="liveagent.prechat:Lead Status" value="New" />
+    <input type="hidden" name="liveagent.prechat.findorcreate.map:Lead" value="Company,Account Name;FirstName,First Name;LastName,Last Name;LeadSource,Lead Source;Status,Lead Status;Email,Email;RelatedProduct__c,Related Product;" />
+    <input type="hidden" name="liveagent.prechat.findorcreate.map.doCreate:Lead" value="Company,true;FirstName,true;LastName,true;Email,true;RelatedProduct__c,true;Status,true;LeadSource,true;" />
+    <input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript:Lead" value="Lead" />
+    <input type="hidden" name="liveagent.prechat.findorcreate.showOnCreate:Lead" value="true" />
+    
+    <!-- searchKnowledge: Searches knowledge article based on the text, this assumes that Knowledge is setup -->
+    <input type="hidden" name="liveagent.prechat.knowledgeSearch:Related Product" value="true" /> 
+    <input type="hidden" id="transcriptProduct" name="liveagent.prechat.save:Related Product" value="RelatedProduct__c" /> 
+            
+    </div>
+         <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+        <input type="submit" class="btn btn-default" value="Request Chat" id="prechat_submit" />
+        </div>
+    </div>
+ 
+    </form>
+</div>
+</apex:page>

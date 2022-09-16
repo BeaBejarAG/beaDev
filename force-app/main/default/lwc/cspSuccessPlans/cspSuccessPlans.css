@@ -1,0 +1,131 @@
+.csp-success-plan {
+    background-color: var(--c-successPlatformLightGreenHover, rgb(237,247,246));
+    border: 0.15rem solid rgb(76,175,169);
+}
+
+.csp-success-plan__header {
+    font-weight: 400;
+    font-size: 2.2rem;
+}
+
+.csp-success-plan__reset {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+}
+.csp-success-plan__reset:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.csp-success-plan__title {
+    font-size: 1.375rem;
+    font-weight: 500;
+}
+
+.csp-success-plan__product {
+    font-size: 1.375rem;
+    font-weight: 600;
+    min-width: max-content;
+}
+
+.csp-success-plan__description {
+    font-weight: 300;
+}
+
+.csp-success-plan__view {
+    min-width: 150px;
+}
+
+.csp-plan-card__selected {
+    background-color: var(--c-successPlatformLightGreenHover, rgb(237,247,246));
+    border: 0.15rem solid rgb(76,175,169);
+}
+.csp-plan-card__available {
+    border-width: 0.1rem 0.1rem 0.1rem 0;
+    border-style: solid;
+    border-color: var(--c-successPlatformLightGrey, rgb(119,119,119));
+}
+.csp-plan-card__title {
+    font-size: 1.375rem;
+}
+.csp-plan-card__pill {
+    background-color: var(--c-successPlatformLightGreenHighlight, rgb(110,183,175));
+    border-radius: 5px;
+    color: white;
+    cursor: default;
+    font-size: 12px;
+    font-weight: 600;
+}
+.csp-plan-card__subtitle {
+    font-weight: 300;
+}
+.csp-plan-card__feature {
+    color: var(--c-successPlatformMyAccessGrey, rgb(72,72,72));
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+.csp-plan-card__detail {
+    font-weight: 300;
+}
+
+.csp-portal-team__title {
+    font-size: 1.375rem;
+    font-weight: 600;
+}
+.csp-portal-team-filters {
+    background-color: var(--c-successPlatformGreyBackground,rgb(246,246,246));
+    font-size: 0.875rem;
+    min-height: 110px;
+}
+
+/* Shadow dom styling in cspstyles.css */
+
+.csp-portal-team-filters__display {
+    font-weight: 600;
+}
+
+.csp-portal-team__menu-option {
+    font-size: 0.875rem;
+}
+
+
+.csp-portal-team-header {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.csp-portal-team__top-border {
+    border-color: rgb(220, 220, 220);
+}
+
+.csp-portal-member {
+    border-color: rgb(220, 220, 220);
+    border-style: solid;
+    border-width: 0px 1px 1px 1px;
+    font-size: 0.875rem;
+    min-height: 60px;
+}
+.csp-portal-member:hover {
+    background-color: var(--c-successPlatformGreyBackground, rgb(246,246,246));
+}
+.csp-portal-member__name {
+    font-size: 15px;
+}
+.csp-portal-member__pill {
+    background-color: var(--c-successPlatformLightGrey, rgb(119,119,119));
+    border-radius: 4px;
+    color: white;
+    cursor: default;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+}
+
+.csp-portal-member__avatar {
+    border-radius: 1rem;
+}
+
+@media (max-width: 768px) {
+    .csp-portal-member {
+        font-size: 0.75rem !important;
+    }
+}

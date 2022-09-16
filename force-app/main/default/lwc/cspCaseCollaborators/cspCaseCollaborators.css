@@ -1,0 +1,21 @@
+.csp-portal-team__top-border {
+    border-color: rgb(220, 220, 220);
+}
+
+.csp-portal-member {
+    border-color: rgb(220, 220, 220);
+    border-style: solid;
+    border-width: 0px 1px 1px 1px;
+    font-size: 0.875rem;
+    min-height: 60px;
+}
+.csp-portal-member:hover {
+    background-color: var(--c-successPlatformGreyBackground, rgb(246,246,246));
+}
+.csp-portal-member__name {
+    font-size: 15px;
+}
+
+.csp-portal-member__avatar {
+    border-radius: 1rem;
+}

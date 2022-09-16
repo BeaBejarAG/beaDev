@@ -1,0 +1,81 @@
+<template>
+    <template if:true={isHorizontal}>
+        <div class="slds-grid slds-wrap slds-grid--vertical-stretch slds-m-vertical_small csp-article-card" onclick={handleclick}>
+            <div class="slds-size_1-of-2 slds-p-right_small slds-grid slds-grid--vertical-stretch">
+                <div style={componentStyle} class="csp-article-card__img-background slds-col"></div>
+            </div>
+            <div class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-vertical_large slds-p-right_large slds-p-left_small csp-article-card__details">
+                <div class="slds-text-heading_large slds-m-bottom_small csp-article-card__title">{article.title}</div>
+                <div class="slds-var-m-vertical_x-small slds-line-clamp_small csp-article-card__teaser">
+                    <lightning-formatted-rich-text class="csp-article-card__rich-text" value={article.snippet}></lightning-formatted-rich-text>
+                </div>
+                <div class="slds-col slds-grid slds-grid--vertical-align-end slds-var-m-top_small">
+                    <template if:true={showProduct}>
+                        <div class="slds-var-m-right_medium csp-search-product" if:true={article.product}>
+                            {article.product}
+                        </div>
+                    </template>
+                    <div class="slds-var-m-right_medium slds-var-m-bottom_xx-small">
+                        <lightning-icon icon-name="utility:preview" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                        {article.views}
+                    </div>
+                    <div class="slds-var-m-right_medium slds-var-m-top_xx-small csp-article-card__feature"  if:true={article.productCategory}>
+                        <lightning-icon icon-name="utility:summary" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                        <template iterator:category={article.productCategories}>
+                            <template if:true={userId.length}>
+                                <lightning-button class="csp-button_link-secondary" if:true={category.first} key={category.value} onclick={handleFeatureClick} data-feature={category.value} value={category.value} label={category.value} variant="base"></lightning-button>
+                            </template>
+                            <template if:false={userId.length}>
+                                <span key={category.value} if:true={category.first} class="csp-article-card__anon-feature">{category.value}</span>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:false={isHorizontal}>
+        <div class="slds-grid slds-wrap slds-grid--vertical-stretch slds-m-vertical_small csp-article-card" onclick={handleclick}>
+            <!-- <template if:true={article.image} >
+                <figure class="csp-article-card__image-horizontal slds-image slds-image--card slds-size_1-of-1">
+                    <div class="slds-image__crop slds-image__crop--16-by-9">
+                        <lightning-formatted-rich-text value={article.image}></lightning-formatted-rich-text>
+                    </div>
+                </figure>
+            </template> -->
+            <figure class="csp-article-card__image-horizontal slds-image slds-image--card slds-size_1-of-1">
+                <div class="slds-image__crop slds-image__crop--16-by-9">
+                    <img src={stockImage}></img>
+                </div>
+            </figure>
+            <div class="slds-grid slds-grid_vertical slds-size_1-of-1 slds-p-around_large csp-article-card__details-vertical">
+                <div class="slds-text-heading_large slds-m-bottom_small csp-article-card__title">{article.title}</div>
+                <div class="slds-var-m-vertical_x-small slds-line-clamp_small csp-article-card__teaser">
+                    <lightning-formatted-rich-text value={article.snippet}></lightning-formatted-rich-text>
+                </div>
+                <div class="slds-col slds-grid slds-grid--vertical-align-end slds-var-m-top_small">
+                    <template if:true={showProduct}>
+                        <div class="slds-var-m-right_medium csp-search-product" if:true={article.product}>
+                            {article.product}
+                        </div>
+                    </template>
+                    <div class="slds-var-m-right_medium slds-var-m-bottom_xx-small">
+                        <lightning-icon icon-name="utility:preview" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                        {article.views}
+                    </div>
+                    <div class="slds-var-m-right_medium slds-var-m-top_xx-small csp-article-card__feature"  if:true={article.productCategory}>
+                        <lightning-icon icon-name="utility:summary" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                        <template iterator:category={article.productCategories}>
+                            <template if:true={userId.length}>
+                                <lightning-button class="csp-button_link-secondary" if:true={category.first} key={category.value} onclick={handleFeatureClick} data-feature={category.value} value={category.value} label={category.value} variant="base"></lightning-button>
+                            </template>
+                            <template if:false={userId.length}>
+                                <span key={category.value} if:true={category.first} class="csp-article-card__anon-feature">{category.value}</span>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

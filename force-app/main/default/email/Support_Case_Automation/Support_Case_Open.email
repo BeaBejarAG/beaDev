@@ -1,0 +1,1004 @@
+<messaging:emailTemplate subject="Access Support Team | {!RelatedTo.CaseNumber} - Your Case Has Been Received" recipientType="Contact" relatedToType="Case">
+<messaging:htmlEmailBody >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+    <head>
+        <!-- NAME: EDUCATE -->
+        <!--[if gte mso 15]>
+        <xml>
+            <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+        <![endif]-->
+        <meta charset="UTF-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        
+    <style type="text/css">
+        p{
+            margin:10px 0;
+            padding:0;
+        }
+        table{
+            border-collapse:collapse;
+        }
+        h1,h2,h3,h4,h5,h6{
+            display:block;
+            margin:0;
+            padding:0;
+        }
+        img,a img{
+            border:0;
+            height:auto;
+            outline:none;
+            text-decoration:none;
+        }
+        body,#bodyTable,#bodyCell{
+            height:100%;
+            margin:0;
+            padding:0;
+            width:100%;
+        }
+        .mcnPreviewText{
+            display:none !important;
+        }
+        #outlook a{
+            padding:0;
+        }
+        img{
+            -ms-interpolation-mode:bicubic;
+        }
+        table{
+            mso-table-lspace:0pt;
+            mso-table-rspace:0pt;
+        }
+        .ReadMsgBody{
+            width:100%;
+        }
+        .ExternalClass{
+            width:100%;
+        }
+        p,a,li,td,blockquote{
+            mso-line-height-rule:exactly;
+        }
+        a[href^=tel],a[href^=sms]{
+            color:inherit;
+            cursor:default;
+            text-decoration:none;
+        }
+        p,a,li,td,body,table,blockquote{
+            -ms-text-size-adjust:100%;
+            -webkit-text-size-adjust:100%;
+        }
+        .ExternalClass,.ExternalClass p,.ExternalClass td,.ExternalClass div,.ExternalClass span,.ExternalClass font{
+            line-height:100%;
+        }
+        a[x-apple-data-detectors]{
+            color:inherit !important;
+            text-decoration:none !important;
+            font-size:inherit !important;
+            font-family:inherit !important;
+            font-weight:inherit !important;
+            line-height:inherit !important;
+        }
+        .templateContainer{
+            max-width:600px !important;
+        }
+        a.mcnButton{
+            display:block;
+        }
+        .mcnImage,.mcnRetinaImage{
+            vertical-align:bottom;
+        }
+        .mcnTextContent{
+            word-break:break-word;
+        }
+        .mcnTextContent img{
+            height:auto !important;
+        }
+        .mcnDividerBlock{
+            table-layout:fixed !important;
+        }
+    /*
+    @tab Page
+    @section Heading 1
+    @style heading 1
+    */
+        h1{
+            /*@editable*/color:#222222;
+            /*@editable*/font-family:Helvetica;
+            /*@editable*/font-size:40px;
+            /*@editable*/font-style:normal;
+            /*@editable*/font-weight:bold;
+            /*@editable*/line-height:150%;
+            /*@editable*/letter-spacing:normal;
+            /*@editable*/text-align:left;
+        }
+    /*
+    @tab Page
+    @section Heading 2
+    @style heading 2
+    */
+        h2{
+            /*@editable*/color:#222222;
+            /*@editable*/font-family:Helvetica;
+            /*@editable*/font-size:28px;
+            /*@editable*/font-style:normal;
+            /*@editable*/font-weight:bold;
+            /*@editable*/line-height:150%;
+            /*@editable*/letter-spacing:normal;
+            /*@editable*/text-align:left;
+        }
+    /*
+    @tab Page
+    @section Heading 3
+    @style heading 3
+    */
+        h3{
+            /*@editable*/color:#444444;
+            /*@editable*/font-family:Helvetica;
+            /*@editable*/font-size:22px;
+            /*@editable*/font-style:normal;
+            /*@editable*/font-weight:bold;
+            /*@editable*/line-height:150%;
+            /*@editable*/letter-spacing:normal;
+            /*@editable*/text-align:left;
+        }
+    /*
+    @tab Page
+    @section Heading 4
+    @style heading 4
+    */
+        h4{
+            /*@editable*/color:#949494;
+            /*@editable*/font-family:Georgia;
+            /*@editable*/font-size:20px;
+            /*@editable*/font-style:italic;
+            /*@editable*/font-weight:normal;
+            /*@editable*/line-height:125%;
+            /*@editable*/letter-spacing:normal;
+            /*@editable*/text-align:left;
+        }
+    /*
+    @tab Header
+    @section Header Container Style
+    */
+        #templateHeader{
+            /*@editable*/background-color:#f3f3f3;
+            /*@editable*/background-image:none;
+            /*@editable*/background-repeat:no-repeat;
+            /*@editable*/background-position:center;
+            /*@editable*/background-size:cover;
+            /*@editable*/border-top:0;
+            /*@editable*/border-bottom:2px none #222222;
+            /*@editable*/padding-top:0px;
+            /*@editable*/padding-bottom:0px;
+        }
+    /*
+    @tab Header
+    @section Header Interior Style
+    */
+        .headerContainer{
+            /*@editable*/background-color:#f3f3f3;
+            /*@editable*/background-image:none;
+            /*@editable*/background-repeat:no-repeat;
+            /*@editable*/background-position:center;
+            /*@editable*/background-size:cover;
+            /*@editable*/border-top:0;
+            /*@editable*/border-bottom:2px none ;
+            /*@editable*/padding-top:5px;
+            /*@editable*/padding-bottom:5px;
+        }
+    /*
+    @tab Header
+    @section Header Text
+    */
+        .headerContainer .mcnTextContent,.headerContainer .mcnTextContent p{
+            /*@editable*/color:#757575;
+            /*@editable*/font-family:Helvetica;
+            /*@editable*/font-size:16px;
+            /*@editable*/line-height:150%;
+            /*@editable*/text-align:left;
+        }
+    /*
+    @tab Header
+    @section Header Link
+    */
+        .headerContainer .mcnTextContent a,.headerContainer .mcnTextContent p a{
+            /*@editable*/color:#007C89;
+            /*@editable*/font-weight:normal;
+            /*@editable*/text-decoration:underline;
+        }
+    /*
+    @tab Body
+    @section Body Container Style
+    */
+        #templateBody{
+            /*@editable*/background-color:#f3f3f3;
+            /*@editable*/background-image:none;
+            /*@editable*/background-repeat:no-repeat;
+            /*@editable*/background-position:center;
+            /*@editable*/background-size:cover;
+            /*@editable*/border-top:0;
+            /*@editable*/border-bottom:0;
+            /*@editable*/padding-top:0px;
+            /*@editable*/padding-bottom:25px;
+        }
+    /*
+    @tab Body
+    @section Body Interior Style
+    */
+        .bodyContainer{
+            /*@editable*/background-color:#ffffff;
+            /*@editable*/background-image:none;
+            /*@editable*/background-repeat:no-repeat;
+            /*@editable*/background-position:center;
+            /*@editable*/background-size:cover;
+            /*@editable*/border-top:0;
+            /*@editable*/border-bottom:0;
+            /*@editable*/padding-top:0;
+            /*@editable*/padding-bottom:25px;
+        }
+    /*
+    @tab Body
+    @section Body Text
+    */
+        .bodyContainer .mcnTextContent,.bodyContainer .mcnTextContent p{
+            /*@editable*/color:#757575;
+            /*@editable*/font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            /*@editable*/font-size:16px;
+            /*@editable*/line-height:150%;
+            /*@editable*/text-align:left;
+        }
+    /*
+    @tab Body
+    @section Body Link
+    */
+        .bodyContainer .mcnTextContent a,.bodyContainer .mcnTextContent p a{
+            /*@editable*/color:#007C89;
+            /*@editable*/font-weight:normal;
+            /*@editable*/text-decoration:underline;
+        }
+    /*
+    @tab Footer
+    @section Footer Style
+    */
+        #templateFooter{
+            /*@editable*/background-color:#f3f3f3;
+            /*@editable*/background-image:none;
+            /*@editable*/background-repeat:no-repeat;
+            /*@editable*/background-position:center;
+            /*@editable*/background-size:cover;
+            /*@editable*/border-top:0;
+            /*@editable*/border-bottom:0;
+            /*@editable*/padding-top:1px;
+            /*@editable*/padding-bottom:0px;
+        }
+    /*
+    @tab Footer
+    @section Footer Interior Style
+    */
+        .footerContainer{
+            /*@editable*/background-color:#f3f3f3;
+            /*@editable*/background-image:none;
+            /*@editable*/background-repeat:no-repeat;
+            /*@editable*/background-position:center;
+            /*@editable*/background-size:cover;
+            /*@editable*/border-top:0;
+            /*@editable*/border-bottom:0;
+            /*@editable*/padding-top:0;
+            /*@editable*/padding-bottom:0;
+        }
+    /*
+    @tab Footer
+    @section Footer Text
+    */
+        .footerContainer .mcnTextContent,.footerContainer .mcnTextContent p{
+            /*@editable*/color:#FFFFFF;
+            /*@editable*/font-family:Helvetica;
+            /*@editable*/font-size:12px;
+            /*@editable*/line-height:150%;
+            /*@editable*/text-align:center;
+        }
+    /*
+    @tab Footer
+    @section Footer Link
+    */
+        .footerContainer .mcnTextContent a,.footerContainer .mcnTextContent p a{
+            /*@editable*/color:#FFFFFF;
+            /*@editable*/font-weight:normal;
+            /*@editable*/text-decoration:underline;
+        }
+    @media only screen and (min-width:768px){
+        .templateContainer{
+            width:600px !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        body,table,td,p,a,li,blockquote{
+            -webkit-text-size-adjust:none !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        body{
+            width:100% !important;
+            min-width:100% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnRetinaImage{
+            max-width:100% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnImage{
+            width:100% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnCartContainer,.mcnCaptionTopContent,.mcnRecContentContainer,.mcnCaptionBottomContent,.mcnTextContentContainer,.mcnBoxedTextContentContainer,.mcnImageGroupContentContainer,.mcnCaptionLeftTextContentContainer,.mcnCaptionRightTextContentContainer,.mcnCaptionLeftImageContentContainer,.mcnCaptionRightImageContentContainer,.mcnImageCardLeftTextContentContainer,.mcnImageCardRightTextContentContainer,.mcnImageCardLeftImageContentContainer,.mcnImageCardRightImageContentContainer{
+            max-width:100% !important;
+            width:100% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnBoxedTextContentContainer{
+            min-width:100% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnImageGroupContent{
+            padding:9px !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnCaptionLeftContentOuter .mcnTextContent,.mcnCaptionRightContentOuter .mcnTextContent{
+            padding-top:9px !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnImageCardTopImageContent,.mcnCaptionBottomContent:last-child .mcnCaptionBottomImageContent,.mcnCaptionBlockInner .mcnCaptionTopContent:last-child .mcnTextContent{
+            padding-top:18px !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnImageCardBottomImageContent{
+            padding-bottom:9px !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnImageGroupBlockInner{
+            padding-top:0 !important;
+            padding-bottom:0 !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnImageGroupBlockOuter{
+            padding-top:9px !important;
+            padding-bottom:9px !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnTextContent,.mcnBoxedTextContentColumn{
+            padding-right:18px !important;
+            padding-left:18px !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcnImageCardLeftImageContent,.mcnImageCardRightImageContent{
+            padding-right:18px !important;
+            padding-bottom:0 !important;
+            padding-left:18px !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+        .mcpreview-image-uploader{
+            display:none !important;
+            width:100% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+    /*
+    @tab Mobile Styles
+    @section Heading 1
+    @tip Make the first-level headings larger in size for better readability on small screens.
+    */
+        h1{
+            /*@editable*/font-size:30px !important;
+            /*@editable*/line-height:125% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+    /*
+    @tab Mobile Styles
+    @section Heading 2
+    @tip Make the second-level headings larger in size for better readability on small screens.
+    */
+        h2{
+            /*@editable*/font-size:26px !important;
+            /*@editable*/line-height:125% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+    /*
+    @tab Mobile Styles
+    @section Heading 3
+    @tip Make the third-level headings larger in size for better readability on small screens.
+    */
+        h3{
+            /*@editable*/font-size:20px !important;
+            /*@editable*/line-height:150% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+    /*
+    @tab Mobile Styles
+    @section Heading 4
+    @tip Make the fourth-level headings larger in size for better readability on small screens.
+    */
+        h4{
+            /*@editable*/font-size:18px !important;
+            /*@editable*/line-height:150% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+    /*
+    @tab Mobile Styles
+    @section Boxed Text
+    @tip Make the boxed text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+    */
+        .mcnBoxedTextContentContainer .mcnTextContent,.mcnBoxedTextContentContainer .mcnTextContent p{
+            /*@editable*/font-size:14px !important;
+            /*@editable*/line-height:150% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+    /*
+    @tab Mobile Styles
+    @section Header Text
+    @tip Make the header text larger in size for better readability on small screens.
+    */
+        .headerContainer .mcnTextContent,.headerContainer .mcnTextContent p{
+            /*@editable*/font-size:16px !important;
+            /*@editable*/line-height:150% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+    /*
+    @tab Mobile Styles
+    @section Body Text
+    @tip Make the body text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+    */
+        .bodyContainer .mcnTextContent,.bodyContainer .mcnTextContent p{
+            /*@editable*/font-size:16px !important;
+            /*@editable*/line-height:150% !important;
+        }
+
+}   @media only screen and (max-width: 480px){
+    /*
+    @tab Mobile Styles
+    @section Footer Text
+    @tip Make the footer content text larger in size for better readability on small screens.
+    */
+        .footerContainer .mcnTextContent,.footerContainer .mcnTextContent p{
+            /*@editable*/font-size:14px !important;
+            /*@editable*/line-height:150% !important;
+        }
+
+}</style></head>
+    <body>
+        <!--*|IF:MC_PREVIEW_TEXT|*-->
+        <!--[if !gte mso 9]><!----><span class="mcnPreviewText" style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;"></span><!--<![endif]-->
+        <!--*|END:IF|*-->
+        <center>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+                <tr>
+                    <td align="center" valign="top" id="bodyCell">
+                        <!-- BEGIN TEMPLATE // -->
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td align="center" valign="top" id="templateHeader">
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
+                                    <tr>
+                                    <td align="center" valign="top" width="600" style="width:600px;">
+                                    <![endif]-->
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
+                                        <tr>
+                                            <td valign="top" class="headerContainer"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="min-width:100%;">
+    <tbody class="mcnImageBlockOuter">
+            <tr>
+                <td valign="top" style="padding:0px" class="mcnImageBlockInner">
+                    <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
+                        <tbody><tr>
+                            <td class="mcnImageContent" valign="top" style="padding-right: 0px; padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;">
+                                
+                                    
+                                        <img align="center" alt="" src="https://mcusercontent.com/4ed433756de947c6eb529b592/images/e6fa712c-a4d2-8246-1ac9-35da708e21ba.png" width="263.865" style="max-width:1077px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnRetinaImage"></img>
+                                    
+                                
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="min-width:100%;">
+    <tbody class="mcnImageBlockOuter">
+            <tr>
+                <td valign="top" style="padding:0px" class="mcnImageBlockInner">
+                    <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
+                        <tbody><tr>
+                            <td class="mcnImageContent" valign="top" style="padding-right: 0px; padding-left: 0px; padding-top: 0; padding-bottom: 0; text-align:center;">
+                                
+                                    
+                                <img align="center" alt="" src="https://mcusercontent.com/4ed433756de947c6eb529b592/images/434ea2bc-4d3f-40e7-9fda-a040e60e258d.png" width="599.4666748046875" style="max-width:636px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage"></img>
+                                    
+                                
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+    </tbody>
+</table>
+<apex:outputPanel layout="none" rendered="{!NOT(ISNULL(RelatedTo.Entitlement.ProductRouting__r.Case_Received_Custom_Header__c))}">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnBoxedTextBlock" style="min-width:100%;">
+    <!--[if gte mso 9]>
+    <table align="center" border="0" cellspacing="0" cellpadding="0" width="100%">
+    <![endif]-->
+    <tbody class="mcnBoxedTextBlockOuter">
+        <tr>
+            <td valign="top" class="mcnBoxedTextBlockInner">
+                
+                <!--[if gte mso 9]>
+                <td align="center" valign="top" ">
+                <![endif]-->
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;" class="mcnBoxedTextContentContainer">
+                    <tbody><tr>
+                        
+                        <td style="padding-top:9px; padding-left:18px; padding-bottom:9px; padding-right:18px;">
+                        
+                            <table border="0" cellspacing="0" class="mcnTextContentContainer" width="100%" style="min-width: 100% !important;background-color: #FCD981;">
+                                <tbody><tr>
+                                    <td valign="top" class="mcnTextContent" style="padding: 18px;color: #3A3939;font-family: Helvetica;font-size: 14px;font-weight: normal;text-align: left;">
+                                    <apex:outputText value="{!RelatedTo.Entitlement.ProductRouting__r.Case_Received_Custom_Header__c}" escape="false" />
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <!--[if gte mso 9]>
+                </td>
+                <![endif]-->
+                
+                <!--[if gte mso 9]>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </tbody>
+</table>
+</apex:outputPanel></td>
+                                        </tr>
+                                    </table>
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]-->
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td align="center" valign="top" id="templateBody">
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
+                                    <tr>
+                                    <td align="center" valign="top" width="600" style="width:600px;">
+                                    <![endif]-->
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
+                                        <tr>
+                                            <td valign="top" class="bodyContainer"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
+    <tbody class="mcnTextBlockOuter">
+        <tr>
+            <td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
+                <!--[if mso]>
+                <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+                <tr>
+                <![endif]-->
+                
+                <!--[if mso]>
+                <td valign="top" width="599" style="width:599px;">
+                <![endif]-->
+                <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; font-family: &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
+                        
+                            <h2 style="text-align: center;"><span style="color:#008080"><span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif"><span style="font-size:42px">Case Received</span></span></span></h2>
+
+                        </td>
+                    </tr>
+                </tbody></table>
+                <!--[if mso]>
+                </td>
+                <![endif]-->
+                
+                <!--[if mso]>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
+    <tbody class="mcnTextBlockOuter">
+        <tr>
+            <td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
+                <!--[if mso]>
+                <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+                <tr>
+                <![endif]-->
+                
+                <!--[if mso]>
+                <td valign="top" width="600" style="width:600px;">
+                <![endif]-->
+                 <apex:outputPanel layout="none" rendered="{!AND(RelatedTo.Contact.Can_Log_Into_Community__c == false, RelatedTo.Entitlement.ProductRouting__r.Case_Received_Template__c == 'Portal Enabled',RelatedTo.Origin != 'Email',RelatedTo.Origin != 'Web - Phone')}">
+                <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
+                        
+                            <span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif"><span style="font-size:14px">Hi {!RelatedTo.Contact.FirstName},<br />
+<br />
+Thank you for opening this case with The Access Group Support.<br />
+<br />
+We've received your case and a member of our team will be in touch.<br />
+<br /></span></span>
+                        </td>
+                    </tr>
+                </tbody></table></apex:outputPanel>
+
+                                <apex:outputPanel layout="none" rendered="{!OR(RelatedTo.Entitlement.ProductRouting__r.Case_Received_Template__c == 'Portal Disabled',RelatedTo.Origin = 'Email')}">
+                <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
+                        
+                            <span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif"><span style="font-size:14px">Hi {!RelatedTo.Contact.FirstName},<br />
+<br />
+Thank you for opening this case with The Access Group Support.<br />
+<br />
+We've received your case and a member of our team will be in touch.<br />
+<br /></span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+                </apex:outputPanel>
+                
+                                              <!--  <apex:outputPanel layout="none" rendered="{!AND(ISNULL(RelatedTo.Entitlement.ProductRouting__c),RelatedTo.Origin != 'Web - Phone')}">-->
+                                               <apex:outputPanel layout="none" rendered="{!AND(ISNULL(RelatedTo.Entitlement.ProductRouting__c),RelatedTo.Origin != 'Web - Phone', RelatedTo.Origin != 'Email')}">
+
+                <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
+                        
+                            <span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif"><span style="font-size:14px">Hi {!RelatedTo.Contact.FirstName},<br />
+<br />
+Thank you for opening this case with The Access Group Support.<br />
+<br />
+We've received your case and a member of our team will be in touch.<br />
+<br /></span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+                </apex:outputPanel>
+                                                <apex:outputPanel layout="none" rendered="{!RelatedTo.Origin = 'Web - Phone'}">
+                <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
+                        
+                            <span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif"><span style="font-size:14px">Hi {!RelatedTo.Contact.FirstName},<br />
+<br />
+Thank you for opening this support case with our team.<br />
+<br />
+We note that you opted to discuss your case over the Phone and so if you haven't done so already, please call the number that was presented when you logged your case.<br />
+<br />
+If you'd like to add some further information, please click the 
+ link below.<br /></span></span>
+                        </td>
+                    </tr>
+                </tbody></table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width: 100%;background-color: #FFFFFF;">
+    <tbody class="mcnDividerBlockOuter">
+        <tr>
+            <td class="mcnDividerBlockInner" style="min-width: 100%; padding: 9px 18px;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 2px solid #FFFFFF;">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+<!--            
+                <td class="mcnDividerBlockInner" style="padding: 18px;">
+                <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
+-->
+            </td>
+        </tr>
+    </tbody>
+</table>                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
+    <tbody class="mcnButtonBlockOuter">
+        <tr>
+            <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px;" valign="top" align="center" class="mcnButtonBlockInner">
+                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-radius: 0px;background-color: #2BAADF;">
+                    <tbody>
+                        <tr>
+                            <td align="center" valign="middle" class="mcnButtonContent" style="font-family:Open Sans,Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 20px; padding: 18px;">
+                                                               <a class="mcnButton " title="VIEW CASE" href="https://access-support.force.com/Support/s/case/{!RelatedTo.Id}" target="_black" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">VIEW CASE</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+                </apex:outputPanel>
+ <apex:outputPanel layout="none" rendered="{!AND(RelatedTo.Contact.Can_Log_Into_Community__c == true, RelatedTo.Entitlement.ProductRouting__r.Case_Received_Template__c == 'Portal Enabled',RelatedTo.Origin != 'Email',RelatedTo.Origin != 'Web - Phone')}">
+                <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
+                        
+                            <span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif"><span style="font-size:14px">Hi {!RelatedTo.Contact.FirstName},<br />
+<br />
+Thank you for opening this case with The Access Group Support. We've received your case and a member of our team will be in touch.<br />
+<br />
+If you'd like to add some further information, please click the View Case link below.<br /></span></span>
+                        </td>
+                    </tr>
+                </tbody></table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width: 100%;background-color: #FFFFFF;">
+    <tbody class="mcnDividerBlockOuter">
+        <tr>
+            <td class="mcnDividerBlockInner" style="min-width: 100%; padding: 9px 18px;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 2px solid #FFFFFF;">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+<!--            
+                <td class="mcnDividerBlockInner" style="padding: 18px;">
+                <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
+-->
+            </td>
+        </tr>
+    </tbody>
+</table>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
+    <tbody class="mcnButtonBlockOuter">
+        <tr>
+            <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px;" valign="top" align="center" class="mcnButtonBlockInner">
+                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-radius: 0px;background-color: #2BAADF;">
+                    <tbody>
+                        <tr>
+                             <td align="center" valign="middle" class="mcnButtonContent" style="font-family:Open Sans,Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 20px; padding: 18px;">
+                                                               <a class="mcnButton " title="VIEW CASE" href="https://access-support.force.com/Support/s/case/{!RelatedTo.Id}" target="_black" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">VIEW CASE</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table></apex:outputPanel>
+                <!--[if mso]>
+                </td>
+                <![endif]-->
+                
+                <!--[if mso]>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width: 100%;background-color: #FFFFFF;">
+    <tbody class="mcnDividerBlockOuter">
+        <tr>
+            <td class="mcnDividerBlockInner" style="min-width: 100%; padding: 9px 18px;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 2px solid #FFFFFF;">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+<!--            
+                <td class="mcnDividerBlockInner" style="padding: 18px;">
+                <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
+-->
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width: 100%;background-color: #F3F3F3;">
+    <tbody class="mcnDividerBlockOuter">
+        <tr>
+            <td class="mcnDividerBlockInner" style="min-width: 100%; padding: 9px 18px;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 2px solid #F3F3F3;">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+<!--            
+                <td class="mcnDividerBlockInner" style="padding: 18px;">
+                <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
+-->
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
+    <tbody class="mcnDividerBlockOuter">
+        <tr>
+            <td class="mcnDividerBlockInner" style="min-width: 100%; padding: 18px 18px 0px;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+<!--            
+                <td class="mcnDividerBlockInner" style="padding: 18px;">
+                <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
+-->
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
+    <tbody class="mcnTextBlockOuter">
+        <tr>
+            <td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
+                <!--[if mso]>
+                <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+                <tr>
+                <![endif]-->
+                
+                <!--[if mso]>
+                <td valign="top" width="599" style="width:599px;">
+                <![endif]-->
+                <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
+                        
+                            <div><span style="color:#008080"><span style="font-size:16px"><strong><u>Case Details:</u></strong></span></span><br />
+<br />
+<span style="font-size:14px"><strong>Case Number: </strong>{!RelatedTo.CaseNumber}<br />
+<br />
+<strong>Subject: </strong>{!RelatedTo.Subject}<br />
+<br />
+<strong>Description: </strong>{!RelatedTo.Description}</span></div>
+
+                        </td>
+                    </tr>
+                </tbody></table>
+                <!--[if mso]>
+                </td>
+                <![endif]-->
+                
+                <!--[if mso]>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </tbody>
+</table></td>
+                                        </tr>
+                                    </table>
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" id="templateFooter">
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
+                                    <tr>
+                                    <td align="center" valign="top" width="600" style="width:600px;">
+                                    <![endif]-->
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
+                                        <tr>
+                                            <td valign="top" class="footerContainer"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
+    <tbody class="mcnDividerBlockOuter">
+        <tr>
+            <td class="mcnDividerBlockInner" style="min-width:100%; padding:18px;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 2px solid #505050;">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+<!--            
+                <td class="mcnDividerBlockInner" style="padding: 18px;">
+                <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
+-->
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
+    <tbody class="mcnTextBlockOuter">
+        <tr>
+            <td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
+                <!--[if mso]>
+                <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+                <tr>
+                <![endif]-->
+                
+                <!--[if mso]>
+                <td valign="top" width="599" style="width:599px;">
+                <![endif]-->
+                <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+                    <tbody><tr>
+                        
+                        <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px;color: #222222;">
+                        
+                            <span style="font-size:14px"><span style="color:#008080"><span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif"><em>Copyright © 2021 | All rights reserved.</em><br />
+<br />
+<strong><em>Our mailing address is:</em></strong><br />
+<em>The Old School, School Lane, Stratford St Mary, Colchester, Essex, CO7 6LZ</em><br /></span></span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <!--[if mso]>
+                </td>
+                <![endif]-->
+                
+                <!--[if mso]>
+                </tr>
+                </table>
+                <![endif]-->
+            </td>
+        </tr>
+    </tbody>
+</table></td>
+                                        </tr>
+                                    </table>
+                                    <!--[if (gte mso 9)|(IE)]>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                    <![endif]-->
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- // END TEMPLATE -->
+                    </td>
+                </tr>
+            </table>
+        </center>
+    <!--<script type="text/javascript"  src="/blxbbDuWc9dYH/2HPbZVyBh/BH3jM/OGEDrDw4/VXtXUF1EAg/fAseIAIs/QGsB"></script>-->
+    </body>
+</html>
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="CSP: Profile Event">
+    <aura:attribute name="event" type="String"/>
+    <aura:attribute name="userList" type="List"/>
+    <aura:attribute name="action" type="List"/>
+</aura:event>

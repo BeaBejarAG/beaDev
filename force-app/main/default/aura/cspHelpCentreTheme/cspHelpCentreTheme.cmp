@@ -1,0 +1,49 @@
+<aura:component implements="forceCommunity:themeLayout,flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="logo" type="Aura.Component[]"/>
+    <aura:attribute name="navBar" type="Aura.Component[]"/>
+    <aura:attribute name="search" type="Aura.Component[]"/>
+    <aura:attribute name="profileMenu" type="Aura.Component[]"/>
+    <aura:attribute name="navigation" type="Aura.Component[]"/>
+    <aura:attribute name="productSelection" type="Aura.Component[]"/>
+    <aura:attribute name="globalNavigation" type="Aura.Component[]"/>
+
+    <aura:attribute name="name" type="String"/>
+    <aura:attribute name="landingPageLayout" type="Boolean" default="false"/>
+
+    <ltng:require styles="{!$Resource.cspstyles}" />
+
+    <header>
+        <c:cspAccountSelection />
+        <c:cspGlobalHeader profileMenu="{!v.profileMenu}" globalNavigation="{!v.globalNavigation}"/>
+
+        <div class="access-theme-product slds-m-top_x-large">
+            <div class="access-theme-product-inner slds-p-top_large slds-p-bottom_large">
+                <aura:if isTrue="{!v.landingPageLayout}">
+                    <div class="slds-grid slds-wrap slds-p-top_x-large slds-p-bottom_xx-large slds-align_absolute-center slds-is-relative">
+                        <div class="slds-col--padded slds-size_1-of-1 slds-large-size_1-of-1 slds-align_absolute-center">
+                            <h1 class="slds-text-heading_large slds-p-bottom_large">What would you like help with today?</h1>
+                        </div>
+                        <div class="slds-col--padded slds-size_1-of-1 slds-large-size_8-of-12 slds-is-relative">
+                            {!v.search}
+                            <img src="{!$ContentAsset.csp_search}" class="csp-search-header_bkg-img slds-is-absolute" />
+                        </div>
+                        <div class="slds-col--padded slds-size_1-of-1 slds-large-size_1-of-1 slds-align_absolute-center slds-p-top_xx-large">
+                            Are you new to the portal? <lightning:button onclick="{!c.handleGuideClick}" label="Take the tour" iconName="utility:location" iconPosition="right" class="slds-m-left_medium slds-p-horizontal_large slds-p-vertical_xxx-small access-tour-button"/>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.landingPageLayout != true}">
+                    <div class="slds-grid slds-wrap slds-p-top_x-medium slds-p-bottom_large slds-align_absolute-center">
+                        <div class="slds-col--padded slds-size_1-of-1 slds-large-size_12-of-12">{!v.search}</div>
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+    </header>
+    <div class="access-theme-body">
+        <div class="access-theme-body__container">
+            {!v.body}
+        </div>
+    </div>
+    <div class="access-theme-footer"><c:cspGlobalFooter/></div>
+</aura:component>

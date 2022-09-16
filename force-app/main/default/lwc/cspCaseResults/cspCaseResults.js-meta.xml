@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Case Results</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="limitAmount" type="Integer" min="3" max="200" default="10" label="Default result limit"/>
+            <property name="displayOrganisationCases" type="Boolean" default="false" label="Allow view organisation cases"/>
+            <property name="displayCollaborationCases" type="Boolean" default="false" label="Allow view collaboration cases"/>
+            <property name="displayProductFilter" type="Boolean" default="false" label="Show product filter"/>
+            <property name="displayDownloadButton" type="Boolean" default="true" label="Show download button"/>
+            <property name="displayProjectCases" type="Boolean" default="false" label="Show project cases only"/>
+            <property name="superUser" type="Boolean" default="false" label="Allow super user access"/>
+            <property name="serviceUser" type="Boolean" default="false" label="Service Account User"/>
+            <property name="HideAllAccountCases" type="Boolean" default="false" label="Hide All Accounts Box"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

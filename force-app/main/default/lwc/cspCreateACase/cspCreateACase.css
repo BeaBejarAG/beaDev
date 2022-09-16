@@ -1,0 +1,14 @@
+.csp-create-case {
+    background-color: var(--c-successPlatformGreyBackground, rgb(246,246,246));
+    min-height: 260px;
+}
+
+.csp-create-case__title {
+    font-size: 1.375rem;
+    font-weight: 500;
+}
+
+.csp-create-case__description {
+    font-size: 0.875rem;
+    font-weight: 400;
+}

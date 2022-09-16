@@ -1,0 +1,12 @@
+<template>
+    <div class="slds-grid slds-var-m-bottom_large">
+        <div class="slds-size_1-of-1 slds-large-size_9-of-12 slds-grid slds-wrap slds-grid_align-center">
+            <template if:true={displayAssistiveText} >
+                <div class="csp-assistive-text slds-var-m-around_medium slds-col">{assistiveText}</div>
+            </template>
+            <div class="slds-col">
+                <lightning-button class="slds-button slds-var-p-horizontal_x-large csp-button_brand" label={buttonText} onclick={handleclick}></lightning-button>
+            </div>
+        </div>
+    </div>
+</template>

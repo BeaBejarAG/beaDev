@@ -1,0 +1,24 @@
+<aura:component implements="forceCommunity:profileMenuInterface,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="options" type="String[]" default="My Profile, Settings, Logout"/>
+	<aura:attribute name="user" type="User"/>
+	<aura:attribute name="colour" type="String"/>
+
+    <force:recordData aura:id="recordLoader" recordId="{!$SObjectType.CurrentUser.Id}" fields="Id,FirstName,IsProfilePhotoActive,SmallPhotoUrl" targetFields="{!v.user}" recordUpdated="{!c.handleUser}" />
+
+    <div class="slds-grid access-theme-profile-menu slds-m-left_x-small">
+        <div class="" aura:id="profile-button">
+            <lightning:buttonMenu variant="bare" onselect="{!c.handleMenuSelect}" alternativeText="Show menu" label="{!v.user.FirstName.length > 0 ? 'Hi, ' + v.user.FirstName : ''}" class="slds-m-right_small">
+                <aura:iteration items="{!v.options}" var="itemLabel">
+                    <lightning:menuItem value="{!itemLabel}" label="{!itemLabel}"/>
+                </aura:iteration>
+            </lightning:buttonMenu>
+        </div>
+        <div class="{!v.user == null ? 'slds-hide' : ''}">
+            <button class="slds-button" onclick="{!c.handleAvatarClick}">
+    			<lightning:avatar src="{!v.user.IsProfilePhotoActive ? v.user.SmallPhotoUrl : ''}" class="{!v.colour}" initials="{!v.user.FirstName[0]}" alternativeText="{!v.user.FirstName}"/>
+            </button>
+        </div>
+    </div>
+
+
+</aura:component>

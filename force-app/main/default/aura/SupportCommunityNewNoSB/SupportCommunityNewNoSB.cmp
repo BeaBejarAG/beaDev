@@ -1,0 +1,21 @@
+<aura:component implements="forceCommunity:themeLayout">
+        <aura:attribute name="search" type="Aura.Component[]"/>
+        <!-- <aura:attribute name="sidebarFooter" type="Aura.Component[]"/>  -->
+
+    <div class="scnmain">
+        <div class="scnheader">
+            <div class="AccessLogo">
+            <img src="/sfsites/c/resource/AccessGroupLogo"/>
+            </div>
+                    </div>     
+
+               <div class="scnbody">
+                {!v.body}
+            </div>
+            
+        
+        
+    </div>
+
+    
+</aura:component>

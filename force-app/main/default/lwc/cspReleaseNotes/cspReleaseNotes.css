@@ -1,0 +1,39 @@
+.release-notes-header {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.release-notes__top-border {
+    border-color: rgb(220, 220, 220);
+}
+
+.release-note {
+    border-color: rgb(220, 220, 220);
+    border-style: solid;
+    border-width: 0px 1px 1px 1px;
+    font-size: 0.875rem;
+    min-height: 60px;
+}
+.release-note:hover {
+    background-color: var(--c-successPlatformGreyBackground, rgb(246,246,246));
+}
+
+.release-note__status-released {
+    background-color: rgb(68,219,170);
+}
+.release-note__status-scheduled {
+    background-color: rgb(254,195,93);
+}
+.release-note__status-postponed {
+    background-color: rgb(254,177,177);
+}
+
+@media (max-width: 768px) {
+    .release-notes-header {
+        font-size: 0.75rem;
+    }
+
+    .release-note {
+        font-size: 0.75rem;
+    }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Help Centre Breadcrumbs</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="displayProduct" type="Boolean" default="false" label="Display Product Name" />
+            <property name="displaySubNavItem" type="Boolean" default="false" label="Display Sub Navigation Item" />
+            <property name="subNavItemName" type="String" default="Knowledge Base" label="Sub Navigation Item Name" />
+            <property name="subNavLink" type="String" default="/knowledge-base-landing" label="Sub Navigation Link" />
+            <property name="displayFeature" type="Boolean" default="false" label="Display Product Feature" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

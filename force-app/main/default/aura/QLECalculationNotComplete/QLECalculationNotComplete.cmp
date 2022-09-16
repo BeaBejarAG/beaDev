@@ -1,0 +1,18 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+ 
+<aura:attribute name="message" type="String"/>
+<aura:attribute name="backgroundColour" type="String"/>
+
+
+<div >
+            <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem padding="around-small" flexibility="auto">
+            <lightning:icon class="warning" iconName="utility:warning" alternativeText="Warning!" variant="warning" size="small"/>
+            <lightning:formattedText value="{!v.message}" />
+            </lightning:layoutItem>
+            </lightning:layout >
+</div>
+	
+</aura:component>

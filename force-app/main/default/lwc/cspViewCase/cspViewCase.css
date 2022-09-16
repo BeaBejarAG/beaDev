@@ -1,0 +1,10 @@
+.slds-avatar {
+    height: 4.8rem;
+    width: 4.8rem;
+    border-radius: 2.4rem;
+    border: 0.25rem solid white;
+    text-align: center;
+    font-size: 2rem;
+    background-color: #642188;
+    color: white;
+}

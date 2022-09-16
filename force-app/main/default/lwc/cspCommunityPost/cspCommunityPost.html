@@ -1,0 +1,367 @@
+<template>
+    <template if:false={hideTabs}>
+        <ul class="csp-tabset_large slds-tabs_default__nav slds-var-m-bottom_large">
+            <li class="csp-tab csp-box-shaded-brand_light csp-box-shaded-bottom_brand"
+                onclick={handleSelectQuestion}
+                data-id="question-tab">
+                <div class="slds-var-p-top_medium slds-grid slds-var-p-horizontal_x-large">
+                    <div class="slds-show_inline-block slds-show_small slds-var-m-right_medium">
+                        <lightning-icon
+                            icon-name="utility:question"
+                            size="medium">
+                        </lightning-icon>
+                    </div>
+                    <div class="slds-show_inline-block csp-text_large csp-text_thicker">
+                        Ask a question
+                    </div>
+                </div>
+                <div class="slds-var-p-top_medium csp-text_light slds-var-p-horizontal_x-large csp-text_small slds-show_small">
+                    Use this option to ask our community a question about your software.
+                </div>
+            </li>
+            <li class="csp-tab" onclick={handleSelectDiscussion} data-id="discussion-tab">
+                <div class="slds-var-p-top_medium slds-grid slds-var-p-horizontal_x-large">
+                    <div class="slds-show_inline-block slds-var-m-top_xxx-small slds-show_small slds-var-m-right_medium">
+                        <lightning-icon
+                            icon-name="utility:comments"
+                            size="medium">
+                        </lightning-icon>
+                    </div>
+                    <div class="slds-show_inline-block csp-text_large csp-text_thicker">
+                        Start a discussion
+                    </div>
+                </div>
+                <div class="slds-var-p-top_medium csp-text_light slds-var-p-horizontal_x-large csp-text_small slds-show_small">
+                    Use this option to start a discussion with members of a community group.
+                </div>
+            </li>
+        </ul>
+    </template>
+    <template if:true={showQuestion}>
+        <div class='slds-grid slds-wrap csp-box_shaded-light slds-var-p-bottom_xx-large'>
+            <div class='slds-size_2-of-12'></div>
+            <div class='slds-size_1-of-1 slds-medium-size_8-of-12'>
+                <lightning-combobox
+                    label="Which product is your question about?"
+                    placeholder="Select a product..."
+                    options={products}
+                    data-id="product"
+                    value={pageRef.state.productId}
+                    onchange={handleValidateFields}
+                    message-when-value-missing=" "
+                    required
+                    class="slds-var-m-top_large csp-input_base">
+                </lightning-combobox>
+
+                <lightning-input
+                    placeholder="Write a short title for your question..."
+                    message-when-value-missing=" "
+                    if:false={pageRef.state.sharedId}
+                    required
+                    max-length="150"
+                    message-when-too-long="Please keep your title to less than 150 characters"
+                    label="What would you like to ask?"
+                    value=""
+                    onchange={handleValidateFields}
+                    class="slds-var-m-top_xx-large csp-input_base"
+                    data-id="question-title">
+                </lightning-input>
+
+                <div class="slds-var-m-top_large csp-input_base">
+                    <label class="slds-form-element__label slds-no-flex">
+                        What details would you like to add?
+                    </label>
+                    <lightning-input-rich-text
+                        formats={rteFormats}
+                        share-with-entity-id={communityId}
+                        data-id="question-body"
+                        label="What are the details of your question?"
+                        placeholder="Add more information to help the community answer your question..."
+                        valid={richTextValidity}
+                        onchange={handlePostContent}
+                        onblur={handleRichTextBlur}
+                        class="csp-feed_input">
+                    </lightning-input-rich-text>
+
+                    <template if:true={mentionResults.mentionCompletions}>
+                        <div class="slds-is-absolute slds-var-m-top_small slds-container_fluid">
+                            <div class="slds-nubbin_top-left csp-box csp-box_shaded-darker slds-popover slds-var-p-vertical_small slds-var-p-horizontal_large slds-grid slds-wrap slds-size_7-of-12"
+                                if:true={mentionResults.mentionCompletions.length}>
+                                <template iterator:user={mentionResults.mentionCompletions}>
+                                    <div class="slds-size_3-of-12" key={user.value.recordId}>
+                                        <lightning-menu-item
+                                            label={user.value.name}
+                                            class="csp-fill_white csp-text_white"
+                                            value={user.value.recordId}
+                                            onclick={handleMentionSelect}
+                                            prefix-icon-name="utility:user">
+                                        </lightning-menu-item>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="slds-hide slds-nubbin_top-left csp-box csp-box_shaded-darker slds-popover slds-var-p-vertical_small slds-var-p-horizontal_large slds-container_fluid csp-text_white csp-popover_guidelines"
+                    if:false={mentionsShowing}>
+                    <span>Ready to post? Please be sure that your post adheres to our <a href={guidelinesPath} target="_blank">Portal Guidelines</a> and does not include any personal information such as email addresses, passwords, phone numbers or billing information.</span>
+                </div>
+
+                <div class="slds-var-m-top_large">
+                    <lightning-button
+                        label="Submit"
+                        data-id="submit-button"
+                        disabled
+                        onclick={handlePostQuestion}
+                        class="csp-button_brand">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+        <div class='slds-size_2-of-12'></div>
+    </template>
+
+    <template if:true={showDiscussion}>
+        <template if:true={groups}>
+            <div class="slds-size_7-of-12 slds-align_absolute-center" if:false={groups.length}>
+                <div class="csp-text_medium slds-var-p-top_x-large slds-var-p-bottom_x-large">
+                    You haven’t joined any groups yet! You need to join a community group before you can start a discussion. To browse the available groups,
+                    <div class="slds-show_inline-block slds-var-m-left_xx-small">
+                        <lightning-button
+                            class="csp-button_link csp-button_link-weak csp-text_medium csp-vertical-align_bottom"
+                            onclick={handleViewGroups}
+                            label="click here.">
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class='slds-grid slds-wrap csp-box_shaded-light slds-var-p-bottom_xx-large' if:true={groups.length}>
+                <div class='slds-size_2-of-12'></div>
+                <div class='slds-size_1-of-1 slds-medium-size_8-of-12'>
+                    <template if:true={sharedPost}>
+                        <div class="csp-input_base">
+                            <label class="slds-form-element__label slds-no-flex">
+                                The post you are sharing:
+                            </label>
+                            <c-csp-community-post-render
+                                shared-post={sharedPost}>
+                            </c-csp-community-post-render>
+                        </div>
+                    </template>
+
+                    <lightning-combobox
+                        label="Which group would you like to post to?"
+                        placeholder="Select a group..."
+                        options={groups}
+                        value={pageRef.state.groupId}
+                        data-id="group"
+                        onchange={handleValidateFields}
+                        message-when-value-missing=" "
+                        required
+                        class="slds-var-m-top_large csp-input_base">
+                    </lightning-combobox>
+
+                    <lightning-input
+                        placeholder="Write a short title for your discussion..."
+                        onchange={handleValidateFields}
+                        max-length="150"
+                        message-when-too-long="Please keep your title to less than 150 characters"
+                        message-when-value-missing=" "
+                        required
+                        label="What would you like to discuss?"
+                        value=""
+                        if:false={pageRef.state.sharedId}
+                        class="slds-var-m-top_xx-large csp-input_base"
+                        data-id="discussion-title">
+                    </lightning-input>
+
+                    <div class="slds-var-m-top_large csp-input_base">
+                        <label class="slds-form-element__label slds-no-flex">
+                            What details would you like to add?
+                        </label>
+                        <lightning-input-rich-text
+                            formats={rteFormats}
+                            share-with-entity-id={communityId}
+                            data-id="discussion-body"
+                            label="What details would you like to add?"
+                            placeholder="Write a post..."
+                            onchange={handlePostContent}
+                            onblur={handleRichTextBlur}
+                            valid={richTextValidity}
+                            class="csp-feed_input">
+                        </lightning-input-rich-text>
+
+                        <template if:true={mentionResults.mentionCompletions}>
+                            <div class="slds-is-absolute slds-var-m-top_small slds-container_fluid">
+                                <div class="slds-nubbin_top-left csp-box csp-box_shaded-darker slds-popover slds-var-p-vertical_small slds-var-p-horizontal_large slds-grid slds-wrap slds-size_7-of-12"
+                                    if:true={mentionResults.mentionCompletions.length}>
+                                    <template iterator:user={mentionResults.mentionCompletions}>
+                                        <div class="slds-size_3-of-12" key={user.value.recordId}>
+                                            <lightning-menu-item
+                                                label={user.value.name}
+                                                class="csp-fill_white csp-text_white"
+                                                value={user.value.recordId}
+                                                onclick={handleMentionSelect}
+                                                prefix-icon-name="utility:user">
+                                            </lightning-menu-item>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="slds-hide slds-nubbin_top-left csp-box csp-box_shaded-darker slds-popover slds-var-p-vertical_small slds-var-p-horizontal_large slds-container_fluid csp-text_white csp-popover_guidelines"
+                        if:false={mentionsShowing}>
+                        <span>Ready to post? Please be sure that your post adheres to our <a href={guidelinesPath} target="_blank">Portal Guidelines</a> and does not include any personal information such as email addresses, passwords, phone numbers or billing information.</span>
+                    </div>
+
+
+                    <div class="slds-var-m-top_large">
+                        <lightning-button
+                            label="Submit"
+                            data-id="submit-button"
+                            disabled
+                            onclick={handlePostDiscussion}
+                            class="csp-button_brand">
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+            <div class='slds-size_2-of-12'></div>
+        </template>
+    </template>
+
+    <template if:true={feedId}>
+        <template if:false={recordId}>
+            <lightning-input-rich-text
+                formats={rteFormats}
+                share-with-entity-id={communityId}
+                data-id="feed-body"
+                label="What are the details of your question?"
+                placeholder="Write a response. You can tag people by typing “@”!"
+                valid={richTextValidity}
+                onchange={handlePostContent}
+                onblur={handleRichTextBlur}
+                class="csp-feed_input">
+            </lightning-input-rich-text>
+
+            <template if:true={mentionResults.mentionCompletions}>
+                <div class="slds-is-absolute slds-var-m-top_small slds-container_fluid">
+                    <div class="slds-nubbin_top-left csp-box csp-box_shaded-darker slds-popover slds-var-p-vertical_small slds-var-p-horizontal_large slds-grid slds-wrap slds-size_7-of-12"
+                        if:true={mentionResults.mentionCompletions.length}>
+                        <template iterator:user={mentionResults.mentionCompletions}>
+                            <div class="slds-size_3-of-12" key={user.value.recordId}>
+                                <lightning-menu-item
+                                    label={user.value.name}
+                                    class="csp-fill_white csp-text_white"
+                                    value={user.value.recordId}
+                                    onclick={handleMentionSelect}
+                                    prefix-icon-name="utility:user">
+                                </lightning-menu-item>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <div class="slds-hide slds-nubbin_top-left csp-box csp-box_shaded-darker slds-popover slds-var-p-vertical_small slds-var-p-horizontal_large slds-container_fluid csp-text_white csp-popover_guidelines"
+                if:false={mentionsShowing}>
+                <span>Ready to post? Please be sure that your post adheres to our <a href={guidelinesPath} target="_blank">Portal Guidelines</a> and does not include any personal information such as email addresses, passwords, phone numbers or billing information.</span>
+            </div>
+
+            <div class="slds-var-m-top_large">
+                <lightning-button
+                    label="Submit"
+                    data-id="submit-button"
+                    disabled
+                    onclick={handlePost}
+                    class="csp-button_brand">
+                </lightning-button>
+            </div>
+        </template>
+    </template>
+
+    <template if:true={recordId}>
+        <template if:true={canPostAnyTopic}>
+            <lightning-combobox
+                label="Which product is your question about?"
+                placeholder="Select a product..."
+                options={products}
+                data-id="product"
+                value={feedId}
+                onchange={handleValidateFields}
+                message-when-value-missing=" "
+                required
+                if:true={feedId}
+                class="slds-var-m-bottom_large csp-input_base">
+            </lightning-combobox>
+        </template>
+
+        <lightning-input
+            placeholder="Add a discussion title..."
+            message-when-value-missing=" "
+            required
+            max-length="150"
+            message-when-too-long="Please keep your title to less than 150 characters"
+            if:false={isComment}
+            label="What is the title of your discussion?"
+            value={subject}
+            onchange={handleValidateFields}
+            data-id="update-title"
+            class="csp-input_base slds-var-m-bottom_large">
+        </lightning-input>
+
+        <lightning-input-rich-text
+            formats={rteFormats}
+            share-with-entity-id={communityId}
+            data-id="update-body"
+            label="What are the details of your question?"
+            placeholder="Add question details..."
+            valid={richTextValidity}
+            onchange={handlePostContent}
+            onblur={handleRichTextBlur}
+            value={body}
+            class="csp-feed_input">
+        </lightning-input-rich-text>
+
+        <template if:true={mentionResults.mentionCompletions}>
+            <div class="slds-var-m-top_small slds-container_fluid">
+                <div class="slds-nubbin_top-left csp-box csp-box_shaded-darker slds-popover slds-var-p-vertical_small slds-var-p-horizontal_large slds-grid slds-wrap slds-size_1-of-1"
+                    if:true={mentionResults.mentionCompletions.length}>
+                    <template iterator:user={mentionResults.mentionCompletions}>
+                        <div class="slds-size_3-of-12" key={user.value.recordId}>
+                            <lightning-menu-item
+                                label={user.value.name}
+                                class="csp-fill_white csp-text_white"
+                                value={user.value.recordId}
+                                onclick={handleMentionSelect}
+                                prefix-icon-name="utility:user">
+                            </lightning-menu-item>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+        <div class="slds-var-m-top_large">
+            <lightning-button
+                label="Submit"
+                data-id="submit-button"
+                disabled
+                onclick={handleUpdatePost}
+                class="csp-button_brand">
+            </lightning-button>
+        </div>
+    </template>
+
+    <div if:true={isPosting}>
+        <lightning-spinner
+            alternative-text="Loading"
+            size="large">
+        </lightning-spinner>
+    </div>
+</template>

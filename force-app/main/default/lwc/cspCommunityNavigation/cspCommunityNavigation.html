@@ -1,0 +1,86 @@
+<template>
+    <lightning-vertical-navigation
+        class="csp-vertical-navigation csp-vertical-navigation_border-top"
+        selected-item={selectedItem}
+        if:true={profileNavigation}
+        onselect={handleSelected}>
+
+        <lightning-vertical-navigation-section>
+            <lightning-vertical-navigation-item-icon
+                label="Manage your profile"
+                name="profile"
+                if:true={isCurrentUser}
+                icon-name="utility:user_role">
+            </lightning-vertical-navigation-item-icon>
+
+            <lightning-vertical-navigation-item-icon
+                label="Password"
+                name="password"
+                if:true={isCurrentUser}
+                icon-name="utility:password">
+            </lightning-vertical-navigation-item-icon>
+
+            <lightning-vertical-navigation-item-icon
+                label="Recent activity"
+                name="recent"
+                if:true={isCurrentUser}
+                icon-name="utility:announcement">
+            </lightning-vertical-navigation-item-icon>
+
+            <lightning-vertical-navigation-item-icon
+                label="Posts"
+                name="posts"
+                icon-name="utility:touch_action">
+            </lightning-vertical-navigation-item-icon>
+
+            <lightning-vertical-navigation-item-icon
+                label="Unanswered posts"
+                name="unanswered"
+                icon-name="utility:ribbon">
+            </lightning-vertical-navigation-item-icon>
+
+            <lightning-vertical-navigation-item-icon
+                label="Badges"
+                name="badges"
+                icon-name="utility:locker_service_console">
+            </lightning-vertical-navigation-item-icon>
+
+            <lightning-vertical-navigation-item-icon
+                label="Groups"
+                name="groups"
+                icon-name="utility:hierarchy">
+            </lightning-vertical-navigation-item-icon>
+
+            <lightning-vertical-navigation-item-icon
+                label="Logout"
+                name="logout"
+                if:true={isCurrentUser}
+                icon-name="utility:outcome">
+            </lightning-vertical-navigation-item-icon>
+        </lightning-vertical-navigation-section>
+    </lightning-vertical-navigation>
+
+    <lightning-vertical-navigation
+        class="csp-vertical-navigation csp-vertical-navigation_border-top"
+        selected-item={selectedItem}
+        if:false={profileNavigation}
+        onselect={handleSelected}>
+
+        <lightning-vertical-navigation-section>
+            <template iterator:featuredtopic={featuredTopics}>
+                <lightning-vertical-navigation-item-icon
+                    key={featuredtopic.value.id}
+                    label={featuredtopic.value.label}
+                    name={featuredtopic.value.value}
+                    icon-name="utility:announcement">
+                </lightning-vertical-navigation-item-icon>
+            </template>
+
+            <lightning-vertical-navigation-item-icon
+                label="My feed"
+                name="recent"
+                icon-name="utility:touch_action">
+            </lightning-vertical-navigation-item-icon>
+        </lightning-vertical-navigation-section>
+    </lightning-vertical-navigation>
+</template>

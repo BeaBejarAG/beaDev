@@ -1,0 +1,21 @@
+/* Notifications Component */
+.THIS .slds-global-actions__notifications {
+    border: 1px solid token(successPlatformRed);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+.THIS .slds-global-actions__notifications svg {
+    fill: token(successPlatformRed) !important;
+}
+.THIS .slds-global-actions__notifications.unsNotificationsCounter .countDot {
+    top: -.4rem;
+    right: -1.7rem;
+    padding: .2rem;
+    background-color: token(successPlatformRed);
+}
+.THIS .slds-global-actions__notifications .slds-global-header__icon,
+.THIS .slds-global-actions__notifications .slds-global-header__icon .slds-icon {
+    width: 1.05rem;
+    height: 1.05rem;
+}
