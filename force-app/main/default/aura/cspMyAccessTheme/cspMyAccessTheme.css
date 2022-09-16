@@ -1,0 +1,28 @@
+.THIS .access-theme-nav-bar .subMenuItem a {
+    color: token(successPlatformDarkGrey);
+}
+.THIS .slds-breadcrumb__item a,
+.THIS .slds-breadcrumb__item {
+    color: rgb(230, 230, 230);
+    font-size: 1rem;
+}
+
+.THIS .slds-breadcrumb__item a{
+    margin: 0px 0.8rem;
+}
+.THIS .slds-breadcrumb__item:first-child a {
+    margin-left: 0;
+}
+
+.THIS .access-theme-myaccess {
+    background-color: token(successPlatformMyAccessGrey);
+}
+.THIS .access-theme-myaccess-inner {
+    max-width: token(successPlatformPageWidth);
+    margin: 0 auto;
+}
+.THIS .access-theme-myaccess-inner .slds-text-heading_large {
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: white;
+}

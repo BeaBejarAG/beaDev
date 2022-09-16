@@ -1,0 +1,54 @@
+.THIS .access-theme-nav-bar .subMenuItem a {
+    color: red;
+}
+.THIS .slds-breadcrumb__item a,
+.THIS .slds-breadcrumb__item {
+    color: rgb(230, 230, 230);
+    font-size: 1rem;
+}
+
+.THIS .slds-breadcrumb__item a{
+    margin: 0px 0.8rem;
+}
+.THIS .slds-breadcrumb__item:first-child a {
+    margin-left: 0;
+}
+
+.THIS .access-theme-myaccess {
+    background-color: #54B9B3;
+}
+.THIS .access-theme-myaccess-inner {
+    max-width: token(successPlatformPageWidth);
+    margin: 1% auto 0 6%;
+}
+.THIS .access-theme-myaccess-bottom {
+    max-width: token(successPlatformPageWidth);
+    margin: 0 30% 0 30%;
+}
+.THIS .access-theme-myaccess-inner .slds-text-heading_large {
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: White;
+    padding-top: 5rem;
+}
+
+
+.THIS .Blue-Page-Image {
+width:25vh;
+position: absolute;
+left:12vh;
+margin-top:-12vh
+}
+
+@media only screen and (max-width: 775px) {
+    .THIS .Blue-Page-Image {
+        display: none;
+    }
+}
+
+.THIS .access-theme-body__container {
+    max-width: var(--c-successPlatformPageWidth,1420px);
+    margin: 0px auto;
+    font-size: 1rem;
+    margin: 0 30% 0 30%;
+}

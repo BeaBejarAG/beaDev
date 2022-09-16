@@ -1,0 +1,51 @@
+.transactions-header {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.csp-transactions-service {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.csp-transactions-cancelled {
+    color: var(--c-successPlatformPurple,rgb(147,112,219));
+}
+
+.csp-transactions-redeemed {
+    color: var(--c-successPlatformPurple,rgb(147,112,219));
+}
+
+.csp-transactions-pending {
+    color: var(--c-successPlatformOrange,rgb(255,136,38));
+}
+
+.csp-transactions-complete
+.csp-transactions-confirmed {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+}
+
+.csp-transactions-topup {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+}
+
+.csp-transactions-expired {
+    color: var(--c-successPlatformRed,rgb(213,52,62));
+}
+
+.csp-transactions-boughtforward {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+}
+
+.csp-points-guardian-table-border {
+    border-color: var(--c-successPlatformLightLightGrey,rgb(220,220,220));
+}
+
+.csp-points-guardian-transaction-result:hover {
+    background-color: var(--c-successPlatformGreyBackground, rgb(246,246,246));
+    cursor: pointer;
+}
+.csp-points-guardian-transaction-result:hover a {
+    text-decoration: underline;
+}

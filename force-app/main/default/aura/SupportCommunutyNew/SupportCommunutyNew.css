@@ -1,0 +1,136 @@
+.THIS{
+    
+}
+
+.THIS .scnheader{
+background: linear-gradient(184.48deg, #7B8092 0.74%, #555B70 99.46%);
+
+}
+
+.THIS .scnlogin{
+
+     position: absolute;
+  right:50px;
+    top:28px;
+    height:33px;
+    width: 85px;
+
+color: white;
+background: linear-gradient(360deg, #34AA44 2.22%, #38B249 100%);
+border: 1px solid #2D9C3C;
+box-sizing: border-box;
+box-shadow: 0px 1px 1px rgba(19, 31, 21, 0.1), inset 0px 2px 0px rgba(255, 255, 255, 0.06);
+border-radius: 4px;
+    
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 22px;
+/* or 110% */
+text-align: center;
+}
+
+.THIS .scnsearch {
+width: 100%;
+height: 200px;
+
+background: #EFF3F6;
+}
+
+.THIS .scnsearcharea {
+padding-top:35px;
+}
+
+.THIS .scnbody{
+background: #EDEDED;
+box-shadow: 0px 1px 0px #DFE2E5;
+height:100%;
+    padding-left:18%;
+    padding-top: 5%;
+    height:100%;
+    min-height: 78.2vh;
+    display: flex;
+}
+
+.THIS .search-button{
+    background: linear-gradient(0deg, #1665D8 2.22%, #1F6FE5 98.44%);
+border: 1px solid #1461D2;
+box-sizing: border-box;
+box-shadow: 0px 1px 1px rgba(22, 29, 37, 0.1), inset 0px 2px 0px rgba(255, 255, 255, 0.06);
+border-radius: 0px 4px 4px 0px;
+    width:136px; 
+}
+
+.THIS .scnsearchtext{
+    font-family: Open Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 26px;
+text-align: center;
+    padding-bottom:25px;
+
+color: #3E3F42;
+}
+
+.THIS ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-size: 16px;
+}
+.THIS ::-moz-placeholder { /* Firefox 19+ */
+  font-size: 16px;
+}
+.THIS :-ms-input-placeholder { /* IE 10+ */
+  font-size: 16px;
+}
+.THIS :-moz-placeholder { /* Firefox 18- */
+  font-size: 16px;
+}
+
+@media 
+only screen and (max-width: 1360px),
+(min-device-width: 1014px) and (max-device-width: 892px)  {
+      .THIS .scnbody {
+       padding-left:5%;
+    padding-right:5%;
+  }
+}
+
+@media 
+only screen and (max-width: 1140px),
+(min-device-width: 1014px) and (max-device-width: 892px)  {
+      .THIS .scnbody {
+       padding-left:0%;
+    padding-right:0%;
+  }
+}
+
+@media 
+only screen and (max-width: 1014px),
+(min-device-width: 1014px) and (max-device-width: 892px)  {
+
+	/* Force table to not be like tables anymore */
+.THIS	table, .THIS thead, .THIS tbody, .THIS th, .THIS td, .THIS tr { 
+		display: inline-block; 
+        padding:none;
+        padding-top:0% !important;
+        padding-left:1% !important;
+        padding-right:0% !important;
+        max-width:91vw;
+	}
+    
+  .THIS .scnbody {
+       padding-left:0%;
+    padding-right:0%;
+  }
+    
+      .THIS .LandHeader {
+max-width:50%;
+        text-align:center;
+  }
+    
+      .THIS img {
+       padding:0%;
+  }
+    
+    
+}

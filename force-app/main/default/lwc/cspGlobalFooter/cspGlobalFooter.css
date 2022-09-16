@@ -1,0 +1,33 @@
+.csp-footer-container {
+    background-color: var(--c-successPlatformDarkGrey, rgb(62,62,62));
+}
+
+.csp-footer {
+    font-size: 0.9375rem;
+    font-weight: 300;
+    max-width: var(--c-successPlatformPageWidth, 1420px);
+    min-height: 255px;
+}
+
+.csp-footer__logo {
+    max-height: 50px;
+}
+
+.csp-footer__copyright {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+    font-size: 0.875rem;
+}
+
+.csp-footer__more-access-title {
+    color: var(--c-successPlatformLightGreenText,rgb(84,185,179));
+}
+
+.csp-footer__link {
+    color: white;
+}
+
+.csp-footer__link:hover,:focus {
+    color: white;
+    cursor: pointer;
+    text-decoration: underline;
+}

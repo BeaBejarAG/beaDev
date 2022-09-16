@@ -1,0 +1,18 @@
+.support_analyst_card {
+    background-color: white;
+    border: 1px solid rgb(235, 235, 235);
+    max-width: 685px;
+    border-radius: 3px;
+}
+
+.support_analyst_card__logo {
+    height: 85px;
+    padding: 10px;
+    float: left;
+    border-radius: inherit;
+    width: 85px;
+}
+
+.support_analyst__subtitle {
+    font-size: 1.375rem;
+}

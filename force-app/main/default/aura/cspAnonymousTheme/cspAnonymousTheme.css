@@ -1,0 +1,12 @@
+.THIS .access-theme-anonymous {
+    background-color: token(successPlatformLightGreen);
+}
+.THIS .access-theme-anonymous-inner {
+    max-width: token(successPlatformPageWidth);
+    margin: 0 auto;
+    font-size: 0.9rem;
+}
+.THIS .access-theme-anonymous-inner .slds-text-heading_large {
+    font-weight: 400;
+    font-size: 2.2rem;
+}

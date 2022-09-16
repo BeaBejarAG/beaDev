@@ -1,0 +1,48 @@
+<template>
+    <template if:true={refreshing}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+    <template if:false={refreshing}>
+        <template if:true={isGuardian}>
+            <template if:false={isNonPointsUser}>
+                <template if:true={showOpenQuoteRequests}>
+                    <div class="csp-points-guardian-transaction-title csp-points-guardian-transaction-title-pending">Quote Pending</div>
+                    <c-csp-points-guardian-open-quote-requests onquoteapproval={handleQuoteAction} onquotereject={handleQuoteAction} case-id={caseId} reference={reference} handle-open-quote-request-click={handleOpenQuoteCaseClick} open-quote-requests={openQuoteRequests}></c-csp-points-guardian-open-quote-requests>
+                    <div class="slds-var-m-top_medium slds-size_1-of-1 slds-align_absolute-center">
+                        <button if:true={showMoreCases} class="slds-button slds-button_neutral slds-var-p-vertical_small slds-var-p-horizontal_large csp-search-button" onclick={handleLoadMoreOpenQuoteRequestsCases}>Load More</button>
+                    </div>
+                </template>
+
+                <template if:true={showPending}>
+                    <template if:true={showOpenQuoteRequests}>
+                        <div class="csp-points-guardian-transaction-title csp-points-guardian-transaction-title-pending csp-points-guardian-transaction-title-margin">Requested</div>
+                    </template>
+                    <template if:false={showOpenQuoteRequests}>
+                        <div class="csp-points-guardian-transaction-title csp-points-guardian-transaction-title-pending">Requested</div>
+                    </template>
+                    <c-csp-points-guardian-transactions-results onquoteapproval={handleQuoteAction} case-id={caseId} reference={reference} handle-transaction-click={handleTransactionClick} transactions={pendingTransactions}></c-csp-points-guardian-transactions-results>
+                </template>
+            </template>
+
+            <template if:true={showConfirmed}>
+                <div class="csp-points-guardian-transaction-title csp-points-guardian-transaction-title-confirmed csp-points-guardian-transaction-title-margin">Booked</div>
+                <c-csp-points-guardian-transactions-results onquoteapproval={handleQuoteApproval} case-id={caseId} reference={reference} handle-transaction-click={handleTransactionClick} transactions={confirmedTransactions}></c-csp-points-guardian-transactions-results>
+            </template>
+
+            <div class="csp-points-guardian-transaction-title-history csp-points-guardian-transaction-title-margin-2">Transaction History</div>
+            <c-csp-points-guardian-transactions-results onquoteapproval={handleQuoteAction} case-id={caseId} reference={reference} handle-transaction-click={handleTransactionClick} transactions={historyTransactions}></c-csp-points-guardian-transactions-results>
+            <div class="slds-var-m-top_medium slds-size_1-of-1 slds-align_absolute-center">
+                <button if:true={showMore} class="slds-button slds-button_neutral slds-var-p-vertical_small slds-var-p-horizontal_large csp-search-button" onclick={handleLoadMore}>Load More</button>
+            </div>
+        </template>
+
+        <template if:false={isGuardian}>
+            <template if:false={isNonPointsUser}>
+                <div class="slds-var-m-vertical_xx-large">You are not a points guardian, please contact your guardian for more information</div>
+            </template>
+            <template if:true={isNonPointsUser}>
+                <div class="slds-var-m-vertical_xx-large">Think this service would benefit your organisation? Contact your account manager to sign up for FlexPoints</div>
+            </template>
+        </template>
+    </template>
+</template>

@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <aura:handler event="c:cspProductSelectionEvent" action="{!c.handleProductSelection}" phase="default" includeFacets="true"  />
+    <aura:handler event="c:cspSearchEvent" action="{!c.handleSearch}" phase="default" includeFacets="true"  />
+    <aura:registerEvent name="cspProductSelectionEvent" type="c:cspProductSelectionEvent"/>
+    <aura:registerEvent name="cspSearchEvent" type="c:cspSearchEvent"/>
+
+    <c:cspMessageBroker onaccountselection="{!c.fireAccountSelection}" onproductselection="{!c.fireProductSelection}" onprofileevent="{!c.fireProfile}" aura:id="messageBroker"></c:cspMessageBroker>
+</aura:component>

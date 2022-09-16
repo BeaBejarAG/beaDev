@@ -1,0 +1,29 @@
+<aura:component >
+    <aura:attribute name="profileMenu" type="Aura.Component[]"/>
+    <aura:attribute name="globalNavigation" type="Aura.Component[]"/>
+
+    <div class="slds-grid slds-gutters slds-align_absolute-center access-theme-header"> 
+        <div class="slds-col--padded slds-small-size_2-of-12 access-theme-logo slds-m-top_x-large slds-align-middle">
+            <a href="/Support/">
+                <img width="160" src="{!$ContentAsset.accessgroup}" class="slds-p-right_medium"/> 
+            </a>
+        </div>     
+        <div class="slds-col--padded slds-size_9-of-12 slds-small-size_5-of-12">
+            {!v.globalNavigation}
+        </div>
+        <div class="slds-col--padded slds-size_3-of-12 slds-small-size_5-of-12 slds-m-top_x-large slds-align-middle slds-clearfix access-theme-header-links">
+            <ul class="slds-float_right slds-clearfix slds-grid slds-grid_vertical-align-center"> 
+                <li class="{!$SObjectType.CurrentUser.Id == null ? 'slds-text-color_weak slds-m-right_x-small access-theme-website-link' : 'slds-p-right_medium slds-border_right slds-text-color_weak slds-m-right_small access-theme-website-link'}">
+                    <a href='https://www.theaccessgroup.com/' target='_blank' class="slds-text-link_reset">
+                        {!$Label.c.Company_Name}
+                    </a>
+                    <lightning:icon class="slds-m-left_x-small" iconName="utility:share" alternativeText="Open" title="Open" size="x-small" />
+                </li>
+                <aura:if isTrue="{!$SObjectType.CurrentUser.Id != null}">
+                    <li class="slds-m-right_medium">{!v.profileMenu}</li>  
+                    <li><forceCommunity:notifications/></li>
+                </aura:if>
+            </ul>
+        </div>
+    </div> 
+</aura:component>

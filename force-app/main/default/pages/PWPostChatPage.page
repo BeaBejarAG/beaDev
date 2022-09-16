@@ -1,0 +1,50 @@
+<apex:page showHeader="false" controller="CustomLiveChat">
+    <style>
+    #details {
+top: 120px; 
+left: 80px; 
+right: 80px; 
+bottom: 75px; 
+position: absolute; 
+border-radius: 25px;
+border: 2px solid grey;
+text-align: center;
+}
+    </style>
+
+           <img src="https://www.theaccessgroup.com/media/9340/productlogos_microsites_accesssmall.png" style="top: -20px; left: 60px; right: 90px; position: absolute;"/>
+          <div id='details'>
+            <h1>Thank you for contacting Access Support</h1>   
+              <p> Please note a case has been created for you. 
+              </p>You can view your Case and Chat Transcript on the Support Hub <apex:outputLink value="https://access-support.force.com/Support/{!caseId}" id="theLink"> Here</apex:outputLink>
+               <P> </P>
+                   
+              <h1>Access Support Hub</h1><P>
+              
+              </P>
+              If you are a new user to our Hub you will receive an e-mail
+              with password reset detials to enable you to manage your case further. 
+              <apex:outputLink value="https://access-support.force.com/Support" id="Shub">Support Hub</apex:outputLink><p>
+              A few small benefits of the support hub are that you will have an audit trail of all your logged cases, we have an active community and a bursting knowledge base filled with relevant articles to help you with your queries. 
+              </p>
+          
+
+
+      </div>
+      <hr/>
+      <!-- Message to show if chat is abandoned -->
+      <div id='abandoned' style='display: none;'>
+          We are sorry you decided to leave the chat. Feel free to initiate a new session.
+      </div>
+      <!-- Code to decide if we show the abandoned block or the full data -->
+      <script type='text/javascript'>
+            var requestTime = '{!$CurrentPage.parameters.requestTime}';
+            var startTime = '{!$CurrentPage.parameters.startTime}';
+            // when startTime doesn't have a value, it means the chat never started
+            if (!startTime) {
+                  document.getElementById('details').style.display = 'none';
+                  document.getElementById('abandoned').style.display = 'block';
+            }
+      </script>
+
+</apex:page>

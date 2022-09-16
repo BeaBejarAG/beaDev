@@ -1,0 +1,26 @@
+<aura:tokens extends="force:base">
+    <aura:token name="successPlatformPageWidth" value="1420px"/>
+    <aura:token name="successPlatformPageHeight" value="590px"/>
+    <aura:token name="successPlatformBoxShadow" value="2px 3px 4px rgb(220, 220, 220)"/>
+    <aura:token name="successPlatformDarkGreen" value="rgb(187,228,160)"/>
+    <aura:token name="successPlatformYellow" value="rgb(230,229,161)"/>
+    <aura:token name="successPlatformBlue" value="rgb(142,176,225)"/>
+    <aura:token name="successPlatformLightGreen" value="rgb(177,217,215)"/>
+    <aura:token name="successPlatformLightGreenCard" value="rgb(152,210,206)"/>
+    <aura:token name="successPlatformLightGreenHighlight" value="rgb(110,183,175)"/>
+    <aura:token name="successPlatformLightGreenHover" value="rgb(237,247,246)"/>
+    <aura:token name="successPlatformLightGreenText" value="rgb(84,185,179)"/>
+    <aura:token name="successPlatformLightGrey" value="rgb(119,119,119)"/>
+    <aura:token name="successPlatformLightGreyBackground" value="rgb(251,251,251)"/>
+    <aura:token name="successPlatformGreyBackground" value="rgb(246,246,246)"/>
+    <aura:token name="successPlatformDarkGrey" value="rgb(62,62,62)"/>
+    <aura:token name="successPlatformMyAccessGrey" value="rgb(72,72,72)"/>
+    <aura:token name="successPlatformLightBlue" value="rgb(142,176,225)"/>
+    <aura:token name="successPlatformRed" value="rgb(213,52,62)"/>
+    <aura:token name="successPlatformLightRed" value="rgb(247,236,237)"/>
+    <aura:token name="successPlatformOrange" value="rgb(255,136,38)"/>
+    <aura:token name="successPlatformLightLightGrey" value="rgb(220,220,220)"/>
+    <aura:token name="successPlatformBrightRed" value="rgb(249,68,62)"/> 
+    <aura:token name="successPlatformLimeGreen" value="rgb(75,199,142)"/>
+    <aura:token name="successPlatformPurple" value="rgb(147,112,219)"/>
+</aura:tokens>

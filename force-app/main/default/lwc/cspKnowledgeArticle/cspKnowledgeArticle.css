@@ -1,0 +1,38 @@
+.csp-article-published,
+.csp-article-published *,
+.csp-article-views {
+    font-size: 0.9rem;
+}
+
+.csp-article-link {
+    color: rgb(19,101,207);
+}
+.csp-article-link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.csp-article-features {
+    font-size: 1rem;
+}
+
+.csp-article__environment {
+    white-space: pre;
+}
+
+.csp-article-product {
+    background-color: rgb(230,230,230) !important;
+    padding: 0.2rem 0.6rem;
+    font-size: var(--c-fontSize3,0.8125rem);
+    font-weight: 600;
+    border-radius: 0.2rem;
+    line-height: 1.5rem;
+}
+
+.csp-article-features-icon {
+    vertical-align: top;
+}
+
+.csp-knowledge-large {
+    font-size: 1.6rem;
+}

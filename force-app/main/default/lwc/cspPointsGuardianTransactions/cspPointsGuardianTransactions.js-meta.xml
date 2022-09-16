@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Points Guardian Transactions</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="limitAmount" type="Integer" min="3" max="50" default="10" label="Default transaction result limit"/>
+            <property name="caseLimitAmount" type="Integer" min="3" max="50" default="10" label="Default open quote requests result limit"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

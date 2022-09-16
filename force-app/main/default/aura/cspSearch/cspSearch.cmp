@@ -1,0 +1,44 @@
+<aura:component implements="forceCommunity:searchInterface,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="assistiveText" type="String" default="Describe your issue..." access="global" />
+    <aura:attribute name="showButton" type="Boolean" default="false" access="global" />
+    <aura:attribute name="showProductSelection" type="String" default="false" access="global" />
+    <aura:attribute name="searchText" type="String" default="" access="global"/>
+    <aura:attribute name="handlerUrl" type="String" default="" access="global" />
+    <aura:attribute name="product" type="Object" access="global"/>
+    <aura:attribute name="includeKnowledgeResults" type="Boolean" default="true" access="global"/>
+    <aura:attribute name="includeCommunityResults" type="Boolean" default="true" access="global"/>
+    <aura:attribute name="includeReleaseNotesResults" type="Boolean" default="true" access="global"/>
+    <aura:attribute name="includeEventsResults" type="Boolean" default="true" access="global"/>
+    <aura:attribute name="includeServicesCatalogueResults" type="Boolean" default="true" access="global"/>
+
+    <aura:handler event="forceCommunity:routeChange" action="{!c.handleRouteChange}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.handleInit}"/>
+
+    <aura:registerEvent name="cspSearchEvent" type="c:cspSearchEvent"/>
+
+    <c:cspMessageBrokerWrapper />
+
+    <div>
+        <div data-region-name="search" class="slds-grid slds-wrap">
+            <aura:if isTrue="{!v.showProductSelection == 'Left Hand Side'}">
+                <div class="csp-product-selection-lhs slds-m-bottom_xx-small">
+                    <c:cspProductSelection showAsPicklist="true"></c:cspProductSelection>
+                </div>
+            </aura:if>
+            <div class="slds-grow slds-is-relative" onkeyup="{!c.handleSearchKeyPress}" onmouseup="{!c.handleSearchKeyPress}">
+                <lightning:input aura:id="searchBox" class="csp-search-input" label="{!v.assistiveText}" type="search" maxlength="100" value="{!v.searchText}" placeholder="{!v.assistiveText}" variant="label-hidden" onfocus="{!c.handleFocus}" onblur="{!c.handleBlur}" />
+                <c:cspSearchAutocomplete aura:id="autocomplete" class="slds-is-absolute csp-autocomplete-component slds-container_fluid"></c:cspSearchAutocomplete>
+            </div>
+            <aura:if isTrue="{!v.showProductSelection == 'Right Hand Side'}">
+                <div class="csp-product-selection-rhs">
+                    <c:cspProductSelection showAsPicklist="true"></c:cspProductSelection>
+                </div>
+            </aura:if>
+            <div class="csp-button_brand">
+                <aura:if isTrue="{!v.showButton}">
+                    <lightning:button class="searchButton" aura:id="searchButton" label="SEARCH" variant="brand" onclick="{!c.handleSearch}" />
+                </aura:if>
+            </div>
+        </div>
+    </div>
+</aura:component>

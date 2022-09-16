@@ -1,0 +1,51 @@
+<template>
+    <article class="slds-card">
+        <!-- Header -->
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+              <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                    <span class="slds-avatar slds-avatar_small">
+                        <lightning-icon class="slds-icon" icon-name="standard:reward" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">FlexPoints Balance</span>
+                    </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate" title="FlexPoints Balances">FlexPoints Balances</span>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- Body -->
+        <div class="slds-card__body slds-card__body_inner">
+            <template if:false={loading}>
+                <template if:true={isValidRecordId}>
+                    <template if:true={showPoints}>
+                        <template if:true={balances}>
+                            <div>Booked: {balances.totalConfirmed}</div>
+                            <div>Requested: {balances.totalPending}</div>
+                            <div>Available: {balances.availablePoints}</div>
+                            <div>Expiring soon: {balances.expiringSoon}</div>
+                        </template>
+                    </template>
+                    <template if:false={showPoints}>
+                        <span>This account is not a points customer.</span>
+                    </template>
+                </template>
+
+                <template if:false={isValidRecordId}>
+                    <span>This case does not have a linked account.</span>
+                </template>
+            </template>
+        </div>
+        <footer class="slds-card__footer"></footer>
+    </article>
+</template>

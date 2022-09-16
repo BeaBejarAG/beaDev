@@ -1,0 +1,45 @@
+<template>
+    <div if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+    <div if:false={isLoading}>
+        <div class="slds-grid slds-wrap slds-gutters slds-m-vertical_xx-large">
+            <div class="slds-col slds-medium-size_1-of-3 slds-small-size_1-of-1 slds-var-m-vertical_small">
+                <template if:true={supportAnalysts}>
+                    <p class="support_analyst__subtitle csp-text_brand">Your <strong>Support Engineers</strong></p>
+                    <p class="slds-m-top_small slds-p-right_large slds-m-bottom_small">As your designated support engineers, we are here to help you with any queries or issues you may have with your Access solution.  As your named contact, I understand how you’re using your Access technology in your organisation and can therefore offer you personalised support.</p>
+                    <p class="slds-m-top_small slds-m-bottom_small"><b>Note:</b> You only have a designated support engineer assigned to the products that have a Premier Success Plan attached to them.</p>
+                    <template if:false={supportAnalysts.length}>
+                        <p><strong>You currently do not have access to any named Support Engineers. To discuss your upgrade options, please contact your Account Manager.</strong></p>
+                    </template>
+                </template>
+            </div>
+            <div class="slds-col slds-medium-size_2-of-3 slds-small-size_1-of-1">
+                <template if:true={supportAnalysts}>
+                    <template for:each={supportAnalysts} for:item='supportAnalyst'>
+                        <div key={supportAnalyst.Id} class="slds-grid slds-grid--vertical-align-center slds-var-m-vertical_small support_analyst_card">
+                            <div class={supportAnalyst.colour}>
+                                <img class="support_analyst_card__logo slds-align_absolute-center" src={supportAnalyst.image}></img>
+                            </div>
+                            <div class="slds-col slds-medium-size_5-of-12 slds-large-size_5-of-12 slds-max-small-size_4-of-12 support_analyst__subtitle">{supportAnalyst.AssociatedProductRange__c}</div>
+                            <div class="slds-col slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-max-small-size_2-of-12 slds-p-left_none">
+                                <template if:true={supportAnalyst.NamedAgentEntitlement__c}>
+                                    <lightning-avatar
+                                    src={supportAnalyst.photoUrl}
+                                    initials={supportAnalyst.initials}
+                                    class={supportAnalyst.avatar}>
+                                    </lightning-avatar>
+                                </template>
+                            </div>
+                            <div class="slds-col slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-max-small-size_4-of-12">
+                                <template if:true={supportAnalyst.NamedAgentEntitlement__c}>
+                                    {supportAnalyst.NamedAgentEntitlement__r.Name}
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,15 @@
+<template>
+	<template if:true={showPanel}>
+		<div class="csp-success-points-panel-title">{title}</div>
+		<div class="csp-success-points-panel-wrapper slds-grid slds-gutters slds-wrap">
+			<template for:each={lServices} for:item="iservice">
+				<div class="slds-col slds-small-size_4-of-4 slds-medium-size_2-of-4 slds-large-size_1-of-4 slds-p-top_small csp-success-points-card-wrapper" key={iservice.Id} data-id={iservice.Id} onclick={handleSelectService}>
+					<c-csp-success-points-card service={iservice}></c-csp-success-points-card>
+				</div>
+			</template>
+		</div>
+		<div class="csp-success-points-footer">
+			<a class="csp-success-points-button slds-button slds-button_text-destructive slds-p-horizontal_x-large slds-p-vertical_medium" onclick={handleButtonClick}>VIEW ALL SERVICES</a>
+		</div>
+	</template>
+</template>

@@ -1,0 +1,73 @@
+<template>
+    <template if:true={isHorizontal}>
+        <div class="csp-feature-selection slds-m-around_large">
+            <div class="csp-feature-selection__title slds-align_absolute-center slds-m-around_small">
+                {title}
+            </div>
+            <div class="csp-feature-selection__subtitle slds-align_absolute-center slds-m-around_small">
+                {subtitle}
+            </div>
+            <div class="slds-grid slds-wrap slds-gutters_direct slds-grid--align-space">
+                <template iterator:feature={features}>
+                    <div key={feature.value.name} class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-medium-size_1-of-3 slds-large-size_1-of-4" >
+                        <div class="csp-feature-selection__card slds-m-vertical_medium slds-grid" data-feature={feature.value.name} onclick={handleFeatureCardClick}>
+                            <template if:true={displayIcons}>
+                                <lightning-icon icon-name={feature.value.icon} variant="inverse" size="x-small" class="slds-p-around_medium csp-feature-selection__card-icon"></lightning-icon>
+                            </template>
+                            <template if:false={displayIcons}>
+                                <div class="csp-feature-selection__card-box"></div>
+                            </template>
+                            <div class="csp-feature-selection__card-title slds-m-horizontal_medium slds-m-vertical_small slds-truncate">
+                                {feature.value.name}
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+    <template if:false={isHorizontal}>
+        <div class="csp-feature-selection slds-m-vertical_large slds-size_1-of-1 slds-large-size_3-of-4">
+            <div class="csp-feature-selection__title slds-m-vertical_small slds-grid slds-grid_align-spread" onclick={handleSectionClick}>
+                <div class="slds-col">
+                    {title}
+                </div>
+                <div class="slds-col slds-col_bump-left">
+                    <template if:true={sectionOpen}>
+                        <lightning-icon icon-name="utility:chevrondown" size="x-small"></lightning-icon>
+                    </template>
+                    <template if:false={sectionOpen}>
+                        <lightning-icon icon-name="utility:chevronleft" size="x-small"></lightning-icon>
+                    </template>
+                </div>
+            </div>
+            <template if:true={sectionOpen}>
+                <div class="csp-feature-selection__subtitle slds-m-vertical_small">
+                    {subtitle}
+                </div>
+                <template iterator:feature={features}>
+                    <div key={feature.value.name} >
+                        <div class="csp-feature-selection__item slds-m-vertical_x-small slds-grid slds-grid_vertical-align-center" data-feature={feature.value.name} onclick={handleFeatureFilterClick}>
+                            <template if:true={displayIcons}>
+                                <lightning-icon icon-name={feature.value.icon} size="x-small" class="csp-feature-selection__item-icon"></lightning-icon>
+                            </template>
+                            <template if:true={feature.value.active}>
+                                <div class="active csp-feature-selection__item-title slds-m-horizontal_medium slds-m-vertical_small slds-truncate">
+                                    {feature.value.name}
+                                </div>
+                            </template>
+                            <template if:false={feature.value.active}>
+                                <div class="csp-feature-selection__item-title slds-m-horizontal_medium slds-m-vertical_small slds-truncate">
+                                    {feature.value.name}
+                                </div>
+                            </template>
+                        </div>
+                        <template if:false={feature.last}>
+                            <div class="slds-border_bottom cspfeature-selection__item-border"></div>
+                        </template>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </template>
+</template>

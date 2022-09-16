@@ -1,0 +1,97 @@
+.THIS{
+    
+}
+
+.THIS .scnheader{
+background: linear-gradient(184.48deg, #7B8092 0.74%, #555B70 99.46%);
+
+}
+
+.THIS .scnlogin{
+
+     position: absolute;
+  right:50px;
+    top:28px;
+    height:33px;
+    width: 85px;
+
+color: white;
+background: linear-gradient(360deg, #34AA44 2.22%, #38B249 100%);
+border: 1px solid #2D9C3C;
+box-sizing: border-box;
+box-shadow: 0px 1px 1px rgba(19, 31, 21, 0.1), inset 0px 2px 0px rgba(255, 255, 255, 0.06);
+border-radius: 4px;
+    
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 22px;
+/* or 110% */
+text-align: center;
+}
+
+.THIS .scnsearch {
+width: 100%;
+height: 200px;
+
+background: #EFF3F6;
+}
+
+.THIS .scnsearcharea {
+padding-top:75px;
+}
+
+.THIS .carousel-control.next{
+background-image: none  !important;
+}
+
+.THIS .carousel-control.prev{
+background-image: none  !important;
+}
+
+.THIS .carousel-switcher.selected{
+    width:0px  !important;
+    height: 0px  !important;
+    font-size:0px !important;
+}
+.THIS .scnbody{
+background: #EDEDED;
+box-shadow: 0px 1px 0px #DFE2E5;
+    display: flex;
+height:100%;
+    padding-top:5%;
+    padding-left:20%;
+    padding-right:20%;
+    min-height: 93.4vh;
+
+}
+@media only screen and (max-width: 700px) {
+  .THIS .scnbody {
+       padding-left:0%;
+    padding-right:0%;
+  }
+    
+    .THIS table {
+       margin-top:5%;
+  }
+}
+
+.THIS .search-button{
+    background: linear-gradient(0deg, #1665D8 2.22%, #1F6FE5 98.44%);
+border: 1px solid #1461D2;
+box-sizing: border-box;
+box-shadow: 0px 1px 1px rgba(22, 29, 37, 0.1), inset 0px 2px 0px rgba(255, 255, 255, 0.06);
+border-radius: 0px 4px 4px 0px;
+    width:136px; 
+}
+
+.THIS .scnsearchtext{
+    font-family: Tahoma;
+font-style: normal;
+font-weight: bold;
+font-size: 26px;
+text-align: center;
+
+color: #3E3F42;
+}

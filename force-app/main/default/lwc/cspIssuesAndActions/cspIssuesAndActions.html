@@ -1,0 +1,125 @@
+<template>
+    <template if:true={showComponent}>
+        <div class="slds-grid slds-var-m-bottom_small">
+            <div class="slds-show_inline-block slds-text-heading_large slds-var-m-top_x-small">Issues and Actions</div>
+            <div class="slds-show_inline-block slds-text-align_right slds-col">
+                <lightning-button
+                    label="CREATE NEW ISSUE / ACTION"
+                    class="csp-button_brand"
+                    onclick={handleCreate}>
+                </lightning-button>
+            </div>
+        </div>
+
+        <c-csp-case-results
+            record-id={recordId}
+            limit-amount=10
+            display-download-button=true
+            ina=true
+            oncspcaseselectresult={handleSelectCaseResult}>
+        </c-csp-case-results>
+
+        <c-csp-modal
+            size="medium"
+            data-id="issue-action-view-popup">
+            <span slot="header">
+                <c-csp-view-case
+                    record-id={selectIssueAction}
+                    header-view=true
+                    modal-view=true>
+                </c-csp-view-case>
+            </span>
+            <template if:true={selectIssueAction}>
+                <div class="slds-grid slds-wrap slds-gutters_direct">
+                    <c-csp-case-comments
+                        class="slds-col slds-size_1-of-1 slds-large-size_7-of-12"
+                        record-id={selectIssueAction}>
+                    </c-csp-case-comments>
+                    <c-csp-view-case
+                        class="slds-col slds-size_1-of-1 slds-large-size_5-of-12"
+                        record-id={selectIssueAction}
+                        disable-product-event=true>
+                    </c-csp-view-case>
+                </div>
+            </template>
+        </c-csp-modal>
+
+        <c-csp-modal
+            size="medium"
+            data-id="issue-action-popup">
+            <span slot="header">Create new issue or action</span>
+
+            <lightning-combobox
+                label="What is the type of issue or action?"
+                placeholder="Select a type..."
+                options={typePicklistValues.data.values}
+                data-id="type"
+                message-when-value-missing=" "
+                required
+                class="csp-input_base">
+            </lightning-combobox>
+
+            <lightning-combobox
+                label="What is the impact of this issue or action?"
+                placeholder="Select an impact..."
+                options={impactPicklist}
+                data-id="impact"
+                message-when-value-missing=" "
+                required
+                class="slds-var-m-top_large csp-input_base">
+            </lightning-combobox>
+
+            <lightning-input
+                placeholder="Add an issue or action subject..."
+                message-when-value-missing=" "
+                required
+                label="What is the subject of your issue or action?"
+                value=""
+                class="slds-var-m-top_large csp-input_base"
+                data-id="title">
+            </lightning-input>
+
+            <lightning-textarea
+                data-id="description"
+                message-when-value-missing=" "
+                required
+                label="What are the details of your issue or action?"
+                placeholder="Add issue or action details..."
+                class="slds-var-m-top_large csp-input_base">
+            </lightning-textarea>
+
+            <lightning-input
+                data-id="user1"
+                label="User Field 1"
+                max-length=225
+                placeholder="Add further details..."
+                class="slds-var-m-top_medium csp-input_base">
+            </lightning-input>
+
+            <lightning-input
+                data-id="user2"
+                label="User Field 2"
+                max-length=225
+                placeholder="Add further details..."
+                class="slds-var-m-top_large csp-input_base">
+            </lightning-input>
+
+            <lightning-input
+                data-id="user3"
+                label="User Field 3"
+                max-length=225
+                placeholder="Add further details..."
+                class="slds-var-m-top_large csp-input_base">
+            </lightning-input>
+
+            <div class="slds-var-m-top_x-large">
+                <lightning-button
+                    label="Submit"
+                    onclick={handleSubmitCase}
+                    class="csp-button_brand">
+                </lightning-button>
+            </div>
+            <lightning-spinner alternative-text="Loading" size="large" if:true={creatingCase}></lightning-spinner>
+        </c-csp-modal>
+    </template>
+</template>

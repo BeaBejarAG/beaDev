@@ -1,0 +1,75 @@
+<template>
+    <template if:true={displayFlexPoints}>
+        <div if:true={showHeader} class="slds-grid slds-grid_vertical-align-center">
+            <div class="slds-col csp-flex-point-title slds-align_absolute-center">View FlexPoints Transactions</div>
+        </div>
+        <template if:true={balances}>
+            <p class="csp-flex-point-current-balance"><span class="csp-flex-point-balance-value">Click an amount below to view your Transaction History</span> </p>
+            <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+                <div class="slds-col slds-m-bottom_x-small">
+                    <div class="csp-flex-point-card-container">
+                        <div class="csp-flex-card-group">
+                            <div class="csp-flex-point-card csp-flex-point-booked" onclick={handleClick}>
+                                <span class="csp-flex-point">{balances.totalConfirmed} pts</span>
+                                <p class="csp-flex-point-type">Booked</p>
+                            </div>
+                            <div class="slds-popover slds-popover_tooltip slds-nubbin_top-left slds-popover_small csp-flex-point-booked-popover" role="tooltip">
+                                <div class="slds-popover__body csp-popover-body">
+                                    <p>These points are allocated to booked services.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="csp-flex-card-group">
+                            <div class="csp-flex-point-card csp-flex-point-requested" onclick={handleClick}>
+                                <span class="csp-flex-point">{balances.totalPending} pts</span>
+                                <p class="csp-flex-point-type">Requested</p>
+                            </div>
+                            <div class="slds-popover slds-popover_tooltip slds-nubbin_top-left slds-popover_small csp-flex-point-requested-popover" role="tooltip">
+                                <div class="slds-popover__body csp-popover-body">
+                                    <p>These points are allocated to existing requests.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="csp-flex-card-group">
+                            <div class="csp-flex-point-card csp-flex-point-available" onclick={handleClick}>
+                                <span class="csp-flex-point">{balances.availablePoints} pts</span>
+                                <p class="csp-flex-point-type">Available</p>
+                            </div>
+                            <div class="slds-popover slds-popover_tooltip slds-nubbin_top-left slds-popover_small csp-flex-point-available-popover" role="tooltip">
+                                <div class="slds-popover__body csp-popover-body">
+                                    <p>These points are available for you to use.</p>
+                                </div>
+                            </div>
+                            <div class="csp-flex-point-card csp-flex-point-expiring-soon" onclick={handleClick}>
+                                <span class="csp-flex-point">{balances.expiringSoon} pts</span>
+                                <p class="csp-flex-point-type">Expiring Soon</p>
+                            </div>
+                            <div class="slds-popover slds-popover_tooltip slds-nubbin_top-left slds-popover_small csp-expiring-soon-popover" role="tooltip">
+                                <div class="slds-popover__body csp-popover-body">
+                                    <p>These points will expire within the next 30 days.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="slds-col slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                    <div class="slds-grid slds-wrap slds-align_absolute-center slds-float_right">
+                        <span class="slds-col slds-m-bottom_x-small slds-m-right_small">Need to discuss purchasing additional points?</span>
+                        <lightning-button class="slds-button csp-button_brand-white slds-col" label="CONTACT OUR TEAM" onclick={handleContactTeamClick}></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <c-csp-modal
+            size="small"
+            padding="large"
+            onkeyup={handleEscape}
+            class="csp-purchase-additional-points-popup"
+            data-id="csp-purchase-additional-points-popup">
+            <span slot="header">Contact request</span>
+            <c-csp-purchase-additional-points oncancelpointspurchase={handleCancelPointsPurchase} contact-request=true handle-submit-application-click={handleSubmitApplicationClick}></c-csp-purchase-additional-points>
+        </c-csp-modal>
+        <lightning-spinner class="csp-flex-points-loading-spinner" if:true={isLoading} alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+</template>

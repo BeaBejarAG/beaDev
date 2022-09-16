@@ -1,0 +1,34 @@
+.THIS{
+    
+}
+
+.THIS .scnheader{
+background: linear-gradient(184.48deg, #7B8092 0.74%, #555B70 99.46%);
+
+}
+
+
+.THIS .scnsearcharea {
+padding-top:75px;
+}
+
+.THIS .scnbody{
+background: #EDEDED;
+box-shadow: 0px 1px 0px #DFE2E5;
+height:100%;
+    min-height: 93.4vh;
+    padding-top:2.5%;
+    padding-left:30%;
+
+}
+@media only screen and (max-width: 600px) {
+  .THIS .cForgotPassword {
+        height:0% !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .THIS .scnbody {
+       padding-left:0%;
+    padding-right:0%;
+  }
+}

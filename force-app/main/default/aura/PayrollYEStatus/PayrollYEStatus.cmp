@@ -1,0 +1,53 @@
+<aura:component controller="GetProductEntitlementsComm" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+   <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+<aura:attribute name="myObject" type="Entitlement"/>
+    <aura:attribute name="ispaid" type="string" default="PAID"/>
+    <aura:attribute name="url" type="boolean" default="false"/>
+    <aura:attribute name="numberOfPeople" type="Integer" default="0"/>
+    <ul class="topicList" data-aura-rendered-by="22:2;a">
+<aura:iteration items="{!v.myObject}" var="obj">
+
+      <div class="PAID">
+          
+      <aura:if isTrue="{!and(obj.Payroll_Licence_Paid__c, !obj.Payroll_Is_Dealer__c )}">
+          <aura:if isTrue="{!(!obj.Payroll_Is_Hosted__c)}">
+          <p>Product: {!obj.Payroll_Product__c}</p>
+        <p>Reference: {!obj.Payroll_Ref__c}</p>
+        <p>Number Of Users: {!obj.Payroll_Users__c}</p>
+        <p>EMPS: {!obj.Payroll_EMPS__c}</p>
+              <aura:renderIf isTrue="{!obj.Payroll_Is_URL__c}">
+          <p></p>Licence: Click <a href ="{!obj.Payroll_Licence__c}">Here</a> to download
+                  <aura:set attribute="else">
+          <p></p>Licence: {!obj.Payroll_Licence__c}
+                      <p>Serial: {!obj.Payroll_Serial__c}</p>
+                  </aura:set>
+                  </aura:renderIf>
+              </aura:if>
+</aura:if>
+           <aura:if isTrue="{!obj.Payroll_Is_Dealer__c}">
+               Your software licence is currently dealt with by your dealer.
+                <p>&nbsp;</p>For further information, please contact your payroll dealer.
+      </aura:if>
+          
+            <aura:if isTrue="{!and(obj.Payroll_Licence_Paid__c, obj.Payroll_Is_Hosted__c )}">
+               According to our records we have you listed as a hosted customer.
+                 <p>&nbsp;</p>
+                Hosted upgrades to version 2019r1 will be taking place between 18th Feb and 16th March. 
+                 <p>&nbsp;</p>You will receive an email with your scheduled date.
+      </aura:if>
+          
+                <aura:if isTrue="{!(!obj.Payroll_Licence_Paid__c)}">
+               According to our records, your payroll invoice is currently outstanding.
+                    <p>&nbsp;</p>
+              <p>Product: {!obj.Payroll_Product__c}</p>
+              <p>Reference: {!obj.Payroll_Ref__c}</p>
+                     <p>&nbsp;</p>
+To contact your credit controller, please call 0845 345 3300 and ask for {!obj.Payroll_Credit_Controller__c}. Alternatively you can email them on {!obj.Payroll_CC_Email__c}.<P>
+                    <p>&nbsp;</p>
+                    Please note it can take up to 24 hours for this page to update.</P>
+      </aura:if>
+          </div>
+  </aura:iteration>
+  
+        </ul>
+</aura:component>

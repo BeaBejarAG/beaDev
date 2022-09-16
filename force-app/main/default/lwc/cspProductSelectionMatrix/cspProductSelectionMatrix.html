@@ -1,0 +1,103 @@
+<template>
+    <div class={wrapperClass}>
+        <div class="slds-grid slds-wrap slds-align_absolute-center">
+            <slot name="header">
+                <h1 class="slds-size_1-of-1 slds-text-heading_large slds-var-m-around_large slds-align_absolute-center access-product-matrix__header">What product do you need help with?</h1>
+            </slot>
+            <div class={productMatrixClass}>
+                <div class="slds-grid slds-wrap">
+                    <template if:true={products}>
+                        <template for:each={products} for:item='product'>
+                            <div key={product.id} class={gridClass}>
+                                <template if:true={twoColumn}>
+                                    <div class="slds-grid slds-var-p-horizontal_small slds-grid_align-center">
+                                        <template if:true={disableAccountProducts}>
+                                            <template if:false={product.admin}>
+                                                <div class="slds-is-relative slds-size_1-of-1 slds-grid slds-m-vertical_medium slds-m-horizontal_small access-product-card__disabled">
+                                                    <div class={product.colour} style="display: flex;">
+                                                        <img class="access-product-card__logo slds-align_absolute-center" src={product.image}></img>
+                                                    </div>
+                                                    <ul class=" slds-p-vertical_medium slds-truncate_container_75">
+                                                        <div class="slds-m-horizontal_large slds-truncate access-product-card__name">{product.name}</div>
+                                                        <div class=" slds-m-horizontal_large slds-m-top_xxxx-small access-product-card__plan">{product.successPlan}</div>
+                                                    </ul>
+                                                    <div class="slds-is-absolute access-product-card__label">
+                                                        Content Only
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <template if:true={product.admin}>
+                                                <div class="slds-size_1-of-1 slds-grid slds-m-vertical_medium slds-m-horizontal_small access-product-card" onclick={handleProductSelect} data-product-id={product.id} data-product-enabled={product.enabledForCommunity} data-product-redirect={product.communityRedirect}>
+                                                    <div class={product.colour} style="display: flex;">
+                                                        <img class="access-product-card__logo slds-align_absolute-center" src={product.image}></img>
+                                                    </div>
+                                                    <ul class=" slds-p-vertical_medium slds-truncate_container_75">
+                                                        <div class="slds-m-horizontal_large slds-truncate access-product-card__name">{product.name}</div>
+                                                        <div class=" slds-m-horizontal_large slds-m-top_xxxx-small access-product-card__plan">{product.successPlan}</div>
+                                                    </ul>
+                                                </div>
+                                            </template>
+                                        </template>
+                                        <template if:false={disableAccountProducts}>
+                                            <div class="slds-size_1-of-1 slds-grid slds-m-vertical_medium slds-m-horizontal_small access-product-card" onclick={handleProductSelect} data-product-id={product.id} data-product-enabled={product.enabledForCommunity} data-product-redirect={product.communityRedirect}>
+                                                <div class={product.colour} style="display: flex;">
+                                                    <img class="access-product-card__logo slds-align_absolute-center" src={product.image}></img>
+                                                </div>
+                                                <ul class=" slds-p-vertical_medium slds-truncate_container_75">
+                                                    <div class="slds-m-horizontal_large slds-truncate access-product-card__name">{product.name}</div>
+                                                    <div class=" slds-m-horizontal_large slds-m-top_xxxx-small access-product-card__plan">{product.successPlan}</div>
+                                                </ul>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                                <template if:true={compact}>
+                                    <div class="slds-grid slds-var-p-horizontal_small slds-grid_align-center">
+                                        <div class="slds-size_1-of-1 slds-grid slds-var-m-vertical_small slds-var-m-horizontal_small access-product-card" onclick={handleProductSelect} data-product-id={product.id} data-product-enabled={product.enabledForCommunity} data-product-redirect={product.communityRedirect}>
+                                            <div class={product.colour} style="display: flex;">
+                                                <img class="access-product-card__logo slds-align_absolute-center" src={product.image}></img>
+                                            </div>
+                                            <ul class="slds-var-p-vertical_x-small csp-truncate_85">
+                                                <div class="slds-var-m-horizontal_small slds-truncate access-product-card__name">{product.name}</div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template if:true={oneColumn}>
+                                    <div class="slds-grid slds-var-p-horizontal_small slds-grid_align-center">
+                                        <div class="slds-size_1-of-1 slds-grid slds-var-m-vertical_x-small slds-var-m-horizontal_small access-product-card" onclick={handleProductSelect} data-product-id={product.id} data-product-enabled={product.enabledForCommunity} data-product-redirect={product.communityRedirect}>
+                                            <div class={product.colour} style="display: flex;">
+                                                <img class="access-product-card__logo slds-align_absolute-center" src={product.image}></img>
+                                            </div>
+                                            <ul class="slds-var-p-vertical_x-small csp-truncate_85">
+                                                <div class="slds-var-m-horizontal_large slds-truncate access-product-card__name slds-var-p-top_small">{product.name}</div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </template>
+                    <template if:false={products}>
+                        <div class="access-product-matrix__error slds-var-m-around_small">
+                            {errorMessage}
+                        </div>
+                    </template>
+                </div>
+                <div class={faderClass}></div>
+            </div>
+            <template if:true={moreProducts}>
+                <div class="access-product-matrix__expand slds-align_absolute-center slds-size_1-of-1">
+                    <button title="Expand products" class="access-product-matrix__button" onclick={handleExpandClick}>
+                        <lightning-icon icon-name={buttonIcon} size="x-small" variant="error" class="access-product-matrix__button-icon"></lightning-icon>
+                    </button>
+                </div>
+            </template>
+            <template if:true={refreshing}>
+                <div class="access-products-spinner">
+                    <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

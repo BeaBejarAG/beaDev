@@ -1,0 +1,58 @@
+<template>
+  <lightning-card>
+    <h3 slot="title">
+      <lightning-icon icon-name="standard:groups" size="small" class="slds-m-right_x-small"></lightning-icon>
+      Case Collaborators
+    </h3>
+    <lightning-button label="New" onclick={createCollaborator} slot="actions"></lightning-button>
+    <div class="slds-p-horizontal_medium">
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <template if:true={loading}>
+          <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+        </template>
+        <thead>
+          <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Contact Name">Contact Name</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Add To Entitlement">Action</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <template for:each={collaborators} for:item="collaborator">
+            <tr key={collaborator.id} class="slds-hint-parent">
+    
+              <td data-label="Contact Name">
+                <lightning-button variant="base" id={collaborator.id} data-id={collaborator.contactId} onclick={navigateToContact} label={collaborator.contactName}>{collaborator.contactName}</lightning-button>
+              </td>
+    
+              <td data-label="Remove Collaborator">
+                <lightning-button-icon-stateful id={collaborator.id} data-name={collaborator.id} icon-name="action:delete"
+                  onclick={RemoveCollaborator} alternative-text="Remove Collaborator"></lightning-button-icon-stateful>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+      <template if:false={hasCollaborators}>
+        <div class="slds-text-align_center slds-text-color_weak slds-m-vertical_small">
+          No collaborators for this case
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+
+  <c-csp-modal overflow="true" onclosedialog={handleCloseDialog} show-modal={showNewModal} size="small">
+      <span slot="header">Add Case Collaborator</span>
+      <lightning-record-edit-form onsubmit={handleSubmit} onsuccess={handleSuccess} object-api-name="Portal_Case_Collaborator__c" mode="edit">
+        <lightning-input-field field-name="Contact__c"> </lightning-input-field>
+        <lightning-input-field field-name="Case__c" value={recordId}> </lightning-input-field>
+          <div class="slds-var-m-top_medium">
+              <lightning-button variant="brand" type="submit" label="Save">
+              </lightning-button>
+          </div>
+      </lightning-record-edit-form>
+    </c-csp-modal>
+</template>

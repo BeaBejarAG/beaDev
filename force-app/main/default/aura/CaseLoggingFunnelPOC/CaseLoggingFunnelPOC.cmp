@@ -1,0 +1,320 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="CaseLogFlow" access="global" >
+
+    
+    <aura:registerEvent name="appEvent" type="selfService:caseCreateFieldChange"/>    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="myObject" type="ContactEntitlement__c"/>
+    <aura:attribute name="UpFiles" type="object"/>
+    <aura:attribute name="Product" type="string"/>  
+    <aura:attribute name="EntID" type="string"/>
+    <aura:attribute name="LiveChatAllowed" type="boolean"/>
+    <aura:attribute name="ContactEmail" type="string"/>
+    <aura:attribute name="LCContactID" type="string"/>
+    <aura:attribute name="DynamicList" type="map"/>
+    <aura:attribute name="SubList" type="List"/>
+    <aura:attribute name="PPLiveChatText" type="string" default="If you need immediate help, Live Chat is now available. If you’d prefer to log your case via our wizard, you can continue to do so. Just select Create Case below."/>
+    <aura:attribute name="priorty" type="List" default="[
+    {'label': 'Critical – My system is not available', 'value': '1'},
+    {'label': 'Major – A major feature has stopped working', 'value': '2'},
+    {'label': 'Moderate – A feature I am using is not working as expected', 'value': '3'},
+    {'label': 'Limited – I have a question about how to do something', 'value': '4'},
+    ]"/>
+      
+    <aura:attribute name="accept" type="List" default="['.jpg', '.jpeg','.txt','.docx','.xlsx','.csv','.doc','.xls','.rpt']"/>
+    <aura:attribute name="multiple" type="Boolean" default="true"/>
+    <aura:attribute name="disabled" type="Boolean" default="false"/>
+    <aura:attribute name="userID" type="string" />
+    <aura:attribute name="caseOut" type="case" />
+      <aura:attribute name="IsSpinner" type="Boolean" default="true"/>
+      <aura:attribute name="IsSpinner1" type="Boolean"/>
+    
+       <aura:if isTrue="{!v.IsSpinner}">
+       <lightning:spinner variant="brand"  size="large" />
+    </aura:if>
+
+  <div class="pickproduct"  aura:id="pickproduct">
+      <div class="textmiddle">Please select which product you need assistance with</div>
+   <div class="slds-box">
+    <ul class="topicList" data-aura-rendered-by="22:2;a">
+  <aura:iteration items="{!v.myObject}" var="obj">
+      <li class="topicItem forceTopicFeaturedTopicItem" data-aura-rendered-by="27:2;a" data-aura-class="forceTopicFeaturedTopicItem">
+    <lightning:button class = "prodbutt" variant="brand" label="{!obj.Product__c}" value="{!obj.Real_Entitlement__c}" name="{!obj.Real_Entitlement__r.PlanType__c}" onclick="{! c.handleClick }" /> <br></br>
+</li>
+         	
+        </aura:iteration>
+       
+    </ul>
+    </div>
+      </div>
+    
+    <div class="defaultlogcase" aura:id="defaultlogcase">
+        <div class="slds-box">
+        You are currently logging a case for {!v.Product}
+           
+        <lightning:input required ="true" messageWhenValueMissing="Subject is required" fieldName="Subject" aura:id="CaseSubject" name="Subject" label="Subject" onchange="{!c.itemsChange}" placeholder="Question\Issue Description...."/>
+        <lightning:textarea required ="true" messageWhenValueMissing="Description is required" label="Issue Description" aura:id="CaseDesc" class="textarea" placeholder="Full Details, Replication Steps, Software Version and any other important information..."/>
+        <lightning:combobox name="Priorty" default="3" label="Priority" aura:id="CasePrio" placeholder="Moderate – A feature I am using is not working as expected" options="{! v.priorty }" onchange="{! c.handleChange }"/>
+        <lightning:fileUpload name="fileUploader"
+                           label= "Upload Files"
+                           multiple="{!v.multiple}"
+                           disabled="{!v.disabled}"
+                           recordId="{!v.userID}"
+                           onuploadfinished="{!c.handleUploadFinished}"/>
+            <p>&nbsp;</p>  
+    
+                 <div stlye="10rem">
+            <aura:iteration items="{!v.UpFiles}" var="obj">               
+      <lightning:fileCard fileId="{!obj.documentId}"/><lightning:button label="Remove File" title="Remove File" value="{!obj.documentId}" aura:id="{obj.documentId}" onclick="{! c.removefile }"/>
+                </aura:iteration>
+                     </div>
+                             
+            
+            
+
+
+                    <p class="textmiddle"><lightning:button variant="brand" label="Submit" value="default" aura:id="defaultcase" title="Submit" onclick="{! c.submitCase }" /></p>
+        </div>
+    </div>
+    
+                        <div class="AMMPreChatCase" aura:id="AMMPreChatCase">
+        <div class="slds-box textmiddlebutt">
+            <div class="slds-box"> {!v.PPLiveChatText} <p></p></div>
+        <lightning:button label="Create Case" variant="brand" aura:id="CaseScreen" onclick="{! c.CaseScreen }" disabled = "false" title="Create Case" />
+                               <aura:if isTrue="{!v.LiveChatAllowed}">
+                                <!--<iframe src="{! 'https://access-support.force.com/Support/LiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.ContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/> -->
+                                <iframe src="{!'https://access-support.force.com/Support/AMMChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.LCContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/>   
+                        <aura:set attribute="else">
+                            <lightning:button label="Live Chat" variant="brand" aura:id="ammLC" onclick="{! c.startLiveChat }" disabled = "false" title="Enter Live Chat" />
+                        </aura:set>
+                        </aura:if>  
+        </div>
+    </div>
+    
+                        <div class="CACPreChatCase" aura:id="CACPreChatCase">
+        <div class="slds-box textmiddlebutt">
+            <div class="slds-box"> {!v.PPLiveChatText} <p></p></div>
+        <lightning:button label="Create Case" variant="brand" aura:id="CaseScreen" onclick="{! c.CaseScreen }" disabled = "false" title="Create Case" />
+                               <aura:if isTrue="{!v.LiveChatAllowed}">
+                                <!--<iframe src="{! 'https://access-support.force.com/Support/LiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.ContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/> -->
+                                <iframe src="{!'https://access-support.force.com/Support/CACChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.LCContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/>   
+                        <aura:set attribute="else">
+                            <lightning:button label="Live Chat" variant="brand" aura:id="cacLC" onclick="{! c.startLiveChat }" disabled = "false" title="Enter Live Chat" />
+                        </aura:set>
+                        </aura:if>  
+        </div>
+    </div>
+    
+          <div class="MSLogCase" aura:id="MSLogCase">
+        <div class="slds-box">
+        You are currently logging a case for {!v.Product}
+        <lightning:combobox required = "true" messageWhenValueMissing="Product Area is required" name="ModuleTab" aura:id="MSModTab" label="Product Area" value="inProgress" placeholder="Select Product Area" options="{! v.SubList }" onchange="{! c.handleChange }"/>    
+        <lightning:input required = "true" messageWhenValueMissing="Subject is required" fieldName="Subject" aura:id="MSCaseSubject" name="Subject" label="Subject" onchange="{!c.itemsChange}" placeholder="Question\Issue Description...."/>
+        <lightning:textarea required ="true" messageWhenValueMissing="Description is required" label="Issue Description" aura:id="MSCaseDesc" class="textarea" placeholder="Include full details of the issue, replication steps and any relevant references and examples"/>
+        <lightning:combobox name="Priorty" default="3" label="Priority" aura:id="MSCasePrio" placeholder="Moderate – A feature I am using is not working as expected" options="{! v.priorty }"/>
+        <lightning:fileUpload name="fileUploader"
+                           label= "Upload Files"
+                           multiple="{!v.multiple}"
+                           disabled="{!v.disabled}"
+                           recordId="{!v.userID}"
+                           onuploadfinished="{!c.handleUploadFinished}"/>
+            <p>&nbsp;</p>  
+    
+                 <div stlye="10rem">
+            <aura:iteration items="{!v.UpFiles}" var="obj">               
+      <lightning:fileCard fileId="{!obj.documentId}"/><lightning:button label="Remove File" title="Remove File" value="{!obj.documentId}" aura:id="{obj.documentId}" onclick="{! c.removefile }"/>
+                </aura:iteration>
+                     </div>
+                    <p class="textmiddlebutt">
+
+        <lightning:button label="Create Case" variant="brand" value="MScase" aura:id="MScase" onclick="{! c.submitCase }"  />                   
+ </p>
+        </div>
+    </div>
+    
+                        <div class="WRLogCase" aura:id="WRLogCase">
+        <div class="slds-box">
+        You are currently logging a case for {!v.Product}
+        <lightning:input required = "true" messageWhenValueMissing="Subject is required" fieldName="Subject" aura:id="wrCaseSubject" name="Subject" label="Subject" onchange="{!c.itemsChange}" placeholder="(3-4 words of what it is regarding)...."/>
+        <lightning:combobox required = "true" messageWhenValueMissing="Product Area is required" name="Module" aura:id="wrMod" label="Product Area" value="inProgress" placeholder="Select Product Area" options="{! v.SubList }" onchange="{! c.handleChange }"/>    
+        <lightning:textarea required ="true" messageWhenValueMissing="Description is required" label="Description" aura:id="wrCaseDesc" class="textarea" placeholder="What the issue is Replication steps along with screenshots where possible Contact details of person who reported the issue (name, phone number and email) ..."/>
+        <lightning:combobox name="Priorty" default="3" label="Bussiness Impact" aura:id="wrCasePrio" placeholder="Moderate – A feature I am using is not working as expected" options="{! v.priorty }"/>
+        <lightning:fileUpload name="fileUploader"
+                           label= "Upload Files"
+                           multiple="{!v.multiple}"
+                           disabled="{!v.disabled}"
+                           recordId="{!v.userID}"
+                           onuploadfinished="{!c.handleUploadFinished}"/>
+            <p>&nbsp;</p>  
+    
+                 <div stlye="10rem">
+            <aura:iteration items="{!v.UpFiles}" var="obj">               
+      <lightning:fileCard fileId="{!obj.documentId}"/><lightning:button label="Remove File" title="Remove File" value="{!obj.documentId}" aura:id="{obj.documentId}" onclick="{! c.removefile }"/>
+                </aura:iteration>
+                     </div>                
+                    <p class="textmiddlebutt">
+
+        <lightning:button label="Create Case" variant="brand" value="wrcase" aura:id="wrcase" onclick="{! c.submitCase }"  />                                        
+</p>
+        </div>
+    </div>
+    
+    
+    
+    
+        <div class="PPLogCase" aura:id="PPLogCase">
+        <div class="slds-box">
+        You are currently logging a case for {!v.Product}
+            <aura:iteration items='{!v.DynamicList.Focalpoint}' var="item">
+                {!v.item}
+            </aura:iteration>
+        <lightning:input required = "true" messageWhenValueMissing="Client ID is required" fieldName="Client ID" aura:id="ppClientId" name="Client ID" label="Client ID" placeholder="Client ID (6 digit database number)...."/>
+        <lightning:input required = "true" messageWhenValueMissing="Subject is required" fieldName="Subject" aura:id="ppCaseSubject" name="Subject" label="Subject" onchange="{!c.itemsChange}" placeholder="Question\Issue Description...."/>
+              <lightning:combobox required = "true" messageWhenValueMissing="Product Area is required" name="ModuleTab" aura:id="ppModTab" label="Product Area" value="inProgress" placeholder="Select Product Area" options="{! v.SubList }" onchange="{! c.handleChange }"/>    
+        <lightning:textarea required ="true" messageWhenValueMissing="Description is required" label="Issue Description" aura:id="ppCaseDesc" class="textarea" placeholder="Include full details of the issue, replication steps and any relevant references and examples  e.g. client/employee name, visit start/end date and times..."/>
+        <lightning:combobox name="Priorty" default="3" label="Priority" aura:id="ppCasePrio" placeholder="Moderate – A feature I am using is not working as expected" options="{! v.priorty }"/>
+        <lightning:fileUpload name="fileUploader"
+                           label= "Upload Files"
+                           multiple="{!v.multiple}"
+                           disabled="{!v.disabled}"
+                           recordId="{!v.userID}"
+                           onuploadfinished="{!c.handleUploadFinished}"/>
+            <p>&nbsp;</p>  
+    
+                 <div stlye="10rem">
+            <aura:iteration items="{!v.UpFiles}" var="obj">               
+      <lightning:fileCard fileId="{!obj.documentId}"/><lightning:button label="Remove File" title="Remove File" value="{!obj.documentId}" aura:id="{obj.documentId}" onclick="{! c.removefile }"/>
+                </aura:iteration>
+                     </div>
+                                                 <p class="textmiddlebutt">
+
+        <lightning:button label="Create Case" variant="brand" value="ppcase" aura:id="ppcase" onclick="{! c.submitCase }"  />
+                        
+
+
+
+                      
+
+</p>
+        </div>
+    </div>
+                <div class="ACCLogCase" aura:id="ACCLogCase">
+        <div class="slds-box">
+        You are currently logging a case for {!v.Product}
+            <lightning:input required = "true" messageWhenValueMissing="Home Name/User affected is required" fieldName="HomeUser Affected" aura:id="accHomeAff" name="HomeUser Affected" label="Home/User Affected" placeholder="Home name/ user affected if IT/HO...."/>
+        <lightning:input required = "true" messageWhenValueMissing="Subject is required" fieldName="Subject" aura:id="accCaseSubject" name="Subject" label="Subject" onchange="{!c.itemsChange}" placeholder="(3-4 words of what it is regarding)...."/>
+        <lightning:combobox required = "true" messageWhenValueMissing="Product Area is required" name="Module" aura:id="accMod" label="Product Area" value="inProgress" placeholder="Select Product Area" options="{! v.SubList }" onchange="{! c.handleChange }"/>    
+        <lightning:textarea required ="true" messageWhenValueMissing="Description is required" label="Description" aura:id="accCaseDesc" class="textarea" placeholder="What the issue is Replication steps along with screenshots where possible Contact details of person who reported the issue (name, phone number and email) ..."/>
+        <lightning:combobox name="Priorty" default="3" label="Priority" aura:id="accCasePrio" placeholder="Moderate – A feature I am using is not working as expected" options="{! v.priorty }"/>
+        <lightning:fileUpload name="fileUploader"
+                           label= "Upload Files"
+                           multiple="{!v.multiple}"
+                           disabled="{!v.disabled}"
+                           recordId="{!v.userID}"
+                           onuploadfinished="{!c.handleUploadFinished}"/>
+            <p>&nbsp;</p>  
+    
+                 <div stlye="10rem">
+            <aura:iteration items="{!v.UpFiles}" var="obj">               
+      <lightning:fileCard fileId="{!obj.documentId}"/><lightning:button label="Remove File" title="Remove File" value="{!obj.documentId}" aura:id="{obj.documentId}" onclick="{! c.removefile }"/>
+                </aura:iteration>
+                     </div>
+                             
+            
+            
+
+
+                    <p class="textmiddlebutt">
+
+        <lightning:button label="Create Case" variant="brand" value="acccase" aura:id="accase" onclick="{! c.submitCase }"  />
+                        
+
+
+
+                      
+
+</p>
+        </div>
+    </div>
+    <div class="PreChatCase" aura:id="PreChatCase">
+        <div class="slds-box textmiddlebutt">
+            <div class="slds-box"> {!v.PPLiveChatText} <p></p></div>
+        <lightning:button label="Create Case" variant="brand" aura:id="CaseScreen" onclick="{! c.CaseScreen }" disabled = "false" title="Create Case" />
+                               <aura:if isTrue="{!v.LiveChatAllowed}">
+                                <!--<iframe src="{! 'https://access-support.force.com/Support/LiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.ContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/> -->
+                                <iframe src="{!'https://access-support.force.com/Support/LiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.LCContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/>   
+                        <aura:set attribute="else">
+                            <lightning:button label="Live Chat" variant="brand" aura:id="ppLC"  disabled = "false" title="Enter Live Chat" />
+                        </aura:set>
+                        </aura:if>  
+        </div>
+    </div>
+    
+            <div class="TQPreChatCase" aura:id="TQPreChatCase">
+        <div class="slds-box textmiddlebutt">
+            <div class="slds-box"> {!v.PPLiveChatText} <p></p></div>
+        <lightning:button label="Create Case" variant="brand" aura:id="CaseScreen" onclick="{! c.CaseScreen }" disabled = "false" title="Create Case" />
+                               <aura:if isTrue="{!v.LiveChatAllowed}">
+                                <!--<iframe src="{! 'https://access-support.force.com/Support/LiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.ContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/> -->
+                                <iframe src="{!'https://access-support.force.com/Support/TQLiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.LCContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/>   
+                        <aura:set attribute="else">
+                            <lightning:button label="Live Chat" variant="brand" aura:id="tqLC" disabled = "false" title="Enter Live Chat" />
+                        </aura:set>
+                        </aura:if>  
+        </div>
+    </div>
+    
+        <div class="ACCPreChatCase" aura:id="ACCPreChatCase">
+        <div class="slds-box textmiddlebutt">
+            <div class="slds-box"> {!v.PPLiveChatText} <p></p></div>
+        <lightning:button label="Create Case" variant="brand" aura:id="CaseScreen" onclick="{! c.CaseScreen }" disabled = "false" title="Create Case" />
+                               <aura:if isTrue="{!v.LiveChatAllowed}">
+                                <!--<iframe src="{! 'https://access-support.force.com/Support/LiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.ContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/> -->
+                                <iframe src="{!'https://access-support.force.com/Support/ACCLiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.LCContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/>   
+                        <aura:set attribute="else">
+                            <lightning:button label="Live Chat" variant="brand" aura:id="acLC"  disabled = "false" title="Enter Live Chat" />
+                        </aura:set>
+                        </aura:if>  
+        </div>
+    </div>
+    
+            <div class="ACPPreChatCase" aura:id="ACPPreChatCase">
+        <div class="slds-box textmiddlebutt">
+            <div class="slds-box"> {!v.PPLiveChatText} <p></p></div>
+        <lightning:button label="Create Case" variant="brand" aura:id="CaseScreen" onclick="{! c.CaseScreen }" disabled = "false" title="Create Case" />
+                               <aura:if isTrue="{!v.LiveChatAllowed}">
+                                <!--<iframe src="{! 'https://access-support.force.com/Support/LiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.ContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/> -->
+                                <iframe src="{!'https://access-support.force.com/Support/ACPLiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.LCContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/>   
+                        <aura:set attribute="else">
+                            <lightning:button label="Live Chat" variant="brand" aura:id="acpLC"  disabled = "false" title="Enter Live Chat" />
+                        </aura:set>
+                        </aura:if>  
+        </div>
+    </div>
+    
+                <div class="ProPreChatCase" aura:id="ProPreChatCase">
+        <div class="slds-box textmiddlebutt">
+            <div class="slds-box"> {!v.PPLiveChatText} <p></p></div>
+        <lightning:button label="Create Case" variant="brand" aura:id="CaseScreen" onclick="{! c.CaseScreen }" disabled = "false" title="Create Case" />
+                               <aura:if isTrue="{!v.LiveChatAllowed}">
+                                <!--<iframe src="{! 'https://access-support.force.com/Support/LiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.ContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/> -->
+                                <iframe src="{!'https://access-support.force.com/Support/PROLiveChat?ContactEmail=' + v.ContactEmail + '&amp;EntitlementID=' + v.EntID + '&amp;ContactID=' + v.LCContactID}" width="130px;" scrolling="no" height="48px;" frameBorder="0"/>   
+                        <aura:set attribute="else">
+                            <lightning:button label="Live Chat" variant="brand" aura:id="propLC" disabled = "false" title="Enter Live Chat" />
+                        </aura:set>
+                        </aura:if>  
+        </div>
+    </div>
+    
+        <div class="CaseCreated" aura:id="CaseCreated">
+            <div class="slds-box">
+        <p class="textmiddlebutt">Thank you for logging your Support Case, an agent will be in touch shortly</p>
+                
+                <p class="textmiddlebutt">Your Case number:<a href="{!'https://access-support.force.com/Support/s/case/' + v.caseOut.Id}">{!v.caseOut.CaseNumber}</a> </p>
+                <p class="textmiddlebutt"><a href="https://access-support.force.com/Support/s/createcase"><lightning:button variant="brand" label="Create New Case" title="Create New Case" /> </a></p>
+
+                </div>
+    </div>
+    
+
+</aura:component>

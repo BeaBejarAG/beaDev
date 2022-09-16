@@ -1,0 +1,7 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+    <div style="box">
+        <p>
+        <lightning:button variant="brand" label="New Case" onclick="{! c.handleClick }" />
+            </p>
+    </div>
+</aura:component>

@@ -1,0 +1,8 @@
+<template>
+    <template if:true={showPointsComponent}>
+        <c-lsc-points-expiring-soon record-id={accountId}></c-lsc-points-expiring-soon>
+    </template>
+    <template if:false={showPointsComponent}>
+        <c-lsc-points-expiring-soon record-id=null></c-lsc-points-expiring-soon>
+    </template>
+</template>

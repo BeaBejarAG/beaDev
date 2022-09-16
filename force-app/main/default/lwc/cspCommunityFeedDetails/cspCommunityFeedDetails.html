@@ -1,0 +1,401 @@
+<template>
+    <div class="slds-var-p-bottom_large">
+        <template if:true={isTypeFeed}>
+            <div class="slds-var-p-top_xx-large slds-var-m-top_xx-large slds-var-m-bottom_xx-large">
+                <div class="slds-var-m-top_medium">
+                    <div class="slds-var-m-top_small slds-show_inline-block">
+                        <template if:false={isMember}>
+                            <lightning-button
+                                class="csp-button_brand slds-var-m-right_large"
+                                label="UNMUTE"
+                                if:true={feed.id}
+                                onclick={handleUnmute}
+                                icon-name="utility:unmuted">
+                            </lightning-button>
+                        </template>
+                        <template if:true={isMember}>
+                            <lightning-button
+                                class="csp-button_brand-white slds-var-m-right_large"
+                                label="MUTE"
+                                if:true={feed.id}
+                                onclick={handleMute}
+                                icon-name="utility:muted">
+                            </lightning-button>
+                        </template>
+                    </div>
+                    <div class="slds-var-m-top_small slds-show_inline-block">
+                        <lightning-button
+                            class="csp-button_brand-white"
+                            label="SHARE"
+                            value={recordId}
+                            if:true={feed.id}
+                            onclick={handleShare}
+                            icon-name="utility:share">
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+            <template if:false={feed.id}>
+                <div class="slds-var-p-vertical_medium"></div>
+                <div class="slds-var-p-vertical_x-small">
+                        <div class="csp-loading_2"></div>
+                    <div class="csp-loading_10"></div>
+                </div>
+                <div class="slds-var-p-vertical_x-small">
+                    <div class="csp-loading_2"></div>
+                    <div class="csp-loading_10"></div>
+                </div>
+                <div class="slds-var-p-vertical_x-small">
+                    <div class="csp-loading_2"></div>
+                    <div class="csp-loading_10"></div>
+                </div>
+                <div class="slds-var-p-vertical_x-small">
+                    <div class="csp-loading_2"></div>
+                    <div class="csp-loading_10"></div>
+                </div>
+                <div class="slds-var-p-vertical_x-small">
+                    <div class="csp-loading_2"></div>
+                    <div class="csp-loading_10"></div>
+                </div>
+            </template>
+
+            <template if:true={feed.id}>
+                <div class="slds-var-p-vertical_x-small csp-text_strong csp-text_weak">
+                    <lightning-icon icon-name="utility:comments" size="small"></lightning-icon>
+                    <span class="slds-var-p-left_small">{feed.capabilities.comments.page.total} comments</span>
+                </div>
+                <div class="slds-var-p-vertical_x-small csp-text_strong csp-text_weak">
+                    <lightning-icon icon-name="utility:preview" size="small"></lightning-icon>
+                    <span class="slds-var-p-left_small">{feed.capabilities.interactions.count} views</span>
+                </div>
+                <div class="slds-var-p-vertical_x-small csp-text_strong csp-text_weak">
+                    <lightning-icon icon-name="utility:date_input" size="small"></lightning-icon>
+                    <span class="slds-var-p-left_small">Published: {feed.relativeCreatedDate}</span>
+                </div>
+                <div class="slds-var-p-vertical_x-small csp-text_strong csp-text_weak">
+                    <lightning-icon icon-name="utility:date_input" size="small"></lightning-icon>
+                    <span class="slds-var-p-left_small">
+                        Updated: <lightning-relative-date-time value={feed.modifiedDate}></lightning-relative-date-time>
+                    </span>
+                </div>
+                <div class="slds-var-p-vertical_x-small csp-text_strong csp-text_weak slds-grid" if:true={feed.capabilities.topics}>
+                    <div class="slds-show_inline-block csp-vertical-align_top" if:true={feed.capabilities.topics.items.length}>
+                        <lightning-icon icon-name="utility:summary" size="small"></lightning-icon>
+                    </div>
+                    <div class="slds-show_inline-block slds-var-p-left_small">
+                        <template iterator:topic={feed.capabilities.topics.items}>
+                            <div key={topic.value.id} class="slds-truncate csp-max-width_100">
+                                <lightning-button
+                                    label={topic.value.name}
+                                    value={topic.value.id}
+                                    onclick={handleViewTopic}
+                                    class="csp-button_link csp-button_link-secondary">
+                                </lightning-button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </template>
+        <template if:true={isTypeTopic}>
+            <template if:true={feed.id}>
+                <div class="slds-var-m-bottom_xx-large" if:true={feed.images.featuredImageUrl}>
+                    <img src={feed.images.featuredImageUrl} width="87">
+                </div>
+            </template>
+
+            <div class="csp-text_medium csp-text_strong slds-var-m-bottom_medium">
+                <lightning-formatted-rich-text value={feed.name}></lightning-formatted-rich-text>
+            </div>
+            <div class="slds-var-m-bottom_xx-large slds-line-clamp_large">
+                <lightning-formatted-rich-text value={feed.description}></lightning-formatted-rich-text>
+            </div>
+            <template if:false={feed.id}>
+                <div class="csp-text_medium csp-text_strong slds-var-m-bottom_medium">
+                    <div class="csp-loading_10 csp-loading_thick"></div>
+                </div>
+                <div class="slds-var-m-bottom_xx-large slds-line-clamp_large">
+                    <div class="csp-loading_5"></div>
+                    <div class="csp-loading_10"></div>
+                    <div class="csp-loading_10"></div>
+                    <div class="csp-loading_5"></div>
+                    <div class="csp-loading_2"></div>
+                    <div class="csp-loading_10"></div>
+                </div>
+            </template>
+
+            <div class="slds-var-m-bottom_xx-large">
+                <div class="slds-var-m-top_small slds-show_inline-block">
+                    <template if:false={isMember}>
+                        <lightning-button
+                            class="csp-button_brand slds-var-m-right_medium"
+                            label="FOLLOW"
+                            if:true={feed.id}
+                            onclick={handleFollow}
+                            icon-name="utility:comments">
+                        </lightning-button>
+                    </template>
+                    <template if:true={isMember}>
+                        <lightning-button
+                            class="csp-button_brand-white slds-var-m-right_medium"
+                            label="UNFOLLOW"
+                            if:true={feed.id}
+                            onclick={handleUnfollow}
+                            icon-name="utility:comments">
+                        </lightning-button>
+                    </template>
+                </div>
+                <div class="slds-var-m-top_small slds-show_inline-block">
+                    <lightning-button
+                        class="csp-button_brand-white"
+                        if:true={feed.id}
+                        label="SHARE"
+                        icon-name="utility:share"
+                        onclick={handleShare}>
+                    </lightning-button>
+                </div>
+            </div>
+
+            <div class="csp-text_medium csp-text_strong slds-var-m-bottom_xx-small">
+                <lightning-icon
+                    icon-name="utility:sort"
+                    size="small"
+                    class="slds-var-m-right_x-small">
+                </lightning-icon>
+                Active members
+            </div>
+            <div class="slds-border_bottom slds-var-m-bottom_medium"></div>
+            <div class="slds-grid slds-var-m-bottom_xx-large">
+                <span if:true={feed.id}>{feed.talkingAbout} users</span>
+                <div if:false={feed.id} class="csp-loading_5"></div>
+            </div>
+
+            <div class="csp-text_medium slds-var-m-bottom_xx-small slds-grid">
+                <div class="slds-var-m-right_x-small">
+                    <lightning-icon icon-name="utility:groups" size="small"></lightning-icon>
+                </div>
+                <div class="csp-text_strong slds-truncate slds-truncate slds-show_inline csp-max-width_100">
+                    Followers of <lightning-formatted-rich-text value={feed.name}></lightning-formatted-rich-text>
+                </div>
+                <div class="slds-col slds-text-align_right">{members.total}</div>
+            </div>
+            <div class="slds-border_bottom slds-var-m-bottom_medium"></div>
+            <template if:false={feed.if}>
+                <template if:false={members.followers}>
+                    <div>
+                        <div class="csp-loading_2"></div>
+                        <div class="csp-loading_10"></div>
+                    </div>
+                    <div>
+                        <div class="csp-loading_2"></div>
+                        <div class="csp-loading_10"></div>
+                    </div>
+                    <div>
+                        <div class="csp-loading_2"></div>
+                        <div class="csp-loading_10"></div>
+                    </div>
+                </template>
+            </template>
+            <template if:true={members.followers}>
+                    <template iterator:follower={members.followers}>
+                    <div key={follower.value.subscriber.id}>
+                        <div class="show_inline-block slds-clear slds-var-p-right_medium slds-grid slds-grid_vertical-align-center"
+                            data-id={follower.value.subscriber.id}>
+                            <div class="slds-show_inline-block slds-var-m-right_x-small slds-float_left"
+                                onmouseover={handleShowProfile}>
+                                <lightning-avatar
+                                    size="small"
+                                    src={follower.value.subscriber.photo.mediumPhotoUrl}
+                                    initials={follower.value.subscriber.initials}
+                                    alternative-text={follower.value.subscriber.displayName}
+                                    class={follower.value.subscriber.avatar}
+                                ></lightning-avatar>
+                            </div>
+                            <div class="slds-show_inline-block slds-var-m-right_medium csp-user slds-float_left slds-truncate">
+                                {follower.value.subscriber.displayName}
+                            </div>
+                            <c-csp-community-reputation
+                                horizontal="true"
+                                level-number={follower.value.subscriber.reputation.reputationLevel.levelNumber}
+                                level-name={follower.value.subscriber.reputation.reputationLevel.levelName}>
+                            </c-csp-community-reputation>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </template>
+        <template if:true={isTypeGroup}>
+            <template if:true={feed.id}>
+                <div class="slds-var-m-bottom_xx-large" if:true={feed.photo.smallPhotoUrl}>
+                    <img src={feed.photo.mediumPhotoUrl} width="87">
+                </div>
+            </template>
+            <div class="csp-text_medium csp-text_strong slds-var-m-bottom_medium">
+                    <lightning-formatted-rich-text value={feed.name}></lightning-formatted-rich-text>
+                </div>
+            <div class="slds-var-m-bottom_xx-large slds-line-clamp_large">
+                <lightning-formatted-rich-text value={feed.description}></lightning-formatted-rich-text>
+            </div>
+            <template if:false={feed.id}>
+                <div class="csp-text_medium csp-text_strong slds-var-m-bottom_medium">
+                    <div class="csp-loading_10 csp-loading_thick"></div>
+                </div>
+                <div class="slds-var-m-bottom_xx-large slds-line-clamp_large">
+                    <div class="csp-loading_5"></div>
+                    <div class="csp-loading_10"></div>
+                    <div class="csp-loading_10"></div>
+                    <div class="csp-loading_5"></div>
+                    <div class="csp-loading_2"></div>
+                    <div class="csp-loading_10"></div>
+                </div>
+            </template>
+
+            <div class="slds-var-m-bottom_xx-large">
+                <div class="slds-var-m-top_small slds-show_inline-block">
+                    <template if:true={isMember}>
+                        <lightning-button
+                            class="csp-button_brand-white slds-var-m-right_large"
+                            value={feed.mySubscription.id}
+                            onclick={handleLeave}
+                            if:true={feed.id}
+                            label="LEAVE" icon-name="utility:comments">
+                        </lightning-button>
+                    </template>
+                    <template if:false={isMember}>
+                        <lightning-button
+                            onclick={handleJoin}
+                            value={feed.id}
+                            if:true={feed.id}
+                            class="csp-button_brand slds-var-m-right_large"
+                            label="JOIN" icon-name="utility:comments">
+                        </lightning-button>
+                    </template>
+                </div>
+                <div class="slds-var-m-top_small slds-show_inline-block">
+                    <lightning-button
+                        class="csp-button_brand-white"
+                        label="SHARE"
+                        if:true={feed.id}
+                        icon-name="utility:share"
+                        onclick={handleShare}>
+                    </lightning-button>
+                </div>
+            </div>
+
+            <div class="csp-text_medium csp-text_strong slds-var-m-bottom_xx-small" >
+                <lightning-icon
+                    icon-name="utility:user_role"
+                    size="small"
+                    class="slds-var-m-right_x-small">
+                </lightning-icon>
+                Owner
+            </div>
+            <div class="slds-border_bottom slds-var-m-bottom_medium"></div>
+
+            <div class="slds-var-m-bottom_xx-large">
+                <div if:false={feed.id} class="csp-loading_2"></div>
+                <div if:false={feed.id} class="csp-loading_10"></div>
+                <div class="show_inline-block slds-clear slds-var-p-right_medium slds-grid slds-grid_vertical-align-center"
+                    if:true={feed.id}
+                    data-id={feed.owner.id}>
+                    <div class="slds-show_inline-block slds-var-m-right_x-small slds-float_left">
+                        <lightning-avatar
+                            size="small"
+                            src={feed.owner.photo.mediumPhotoUrl}
+                            onmouseover={handleShowProfile}
+                            initials={feed.owner.initials}
+                            alternative-text={feed.owner.displayName}
+                            class={feed.owner.avatar}>
+                        </lightning-avatar>
+                    </div>
+                    <div class="slds-show_inline-block slds-var-m-right_medium csp-user slds-float_left slds-truncate">
+                        {feed.owner.displayName}
+                    </div>
+                    <c-csp-community-reputation
+                        horizontal="true"
+                        level-number={feed.owner.reputation.reputationLevel.levelNumber}
+                        level-name={feed.owner.reputation.reputationLevel.levelName}>
+                    </c-csp-community-reputation>
+                </div>
+            </div>
+
+            <div class="csp-text_medium csp-text_strong slds-var-m-bottom_xx-small">
+                <lightning-icon
+                    icon-name="utility:sort"
+                    size="small"
+                    class="slds-var-m-right_x-small">
+                </lightning-icon>
+                Latest activity
+            </div>
+            <div class="slds-border_bottom slds-var-m-bottom_medium"></div>
+            <div class="slds-grid slds-var-m-bottom_xx-large">
+                <lightning-relative-date-time value={feed.lastFeedElementPostDate}></lightning-relative-date-time>
+                <div if:false={feed.lastFeedElementPostDate} class="csp-loading_5"></div>
+            </div>
+
+            <div class="csp-text_medium slds-var-m-bottom_xx-small">
+                <span class="slds-float_right">{feed.memberCount}</span>
+                <lightning-icon icon-name="utility:groups" size="small" class="slds-var-m-right_x-small"></lightning-icon>
+                <span class="csp-text_strong">Group members</span>
+            </div>
+
+            <div class="slds-border_bottom slds-var-m-bottom_medium"></div>
+            <template if:false={members.members}>
+                <div>
+                    <div class="csp-loading_2"></div>
+                    <div class="csp-loading_10"></div>
+                </div>
+                <div>
+                    <div class="csp-loading_2"></div>
+                    <div class="csp-loading_10"></div>
+                </div>
+                <div>
+                    <div class="csp-loading_2"></div>
+                    <div class="csp-loading_10"></div>
+                </div>
+            </template>
+            <template if:true={members.members}>
+                <template iterator:member={members.members}>
+                    <div key={member.value.user.id}>
+                        <div class="show_inline-block slds-clear slds-var-p-right_medium slds-grid slds-grid_vertical-align-center"
+                            data-id={member.value.user.id}>
+                            <div class="slds-show_inline-block slds-var-m-right_x-small slds-float_left"
+                                onmouseover={handleShowProfile}>
+                                <lightning-avatar
+                                    size="small"
+                                    src={member.value.user.photo.mediumPhotoUrl}
+                                    initials={member.value.user.initials}
+                                    alternative-text={member.value.user.displayName}
+                                    class={member.value.user.avatar}>
+                                </lightning-avatar>
+                            </div>
+                            <div class="slds-show_inline-block slds-var-m-right_medium csp-user slds-float_left slds-truncate">
+                                {member.value.user.displayName}
+                            </div>
+                            <c-csp-community-reputation
+                                horizontal="true"
+                                level-number={member.value.user.reputation.reputationLevel.levelNumber}
+                                level-name={member.value.user.reputation.reputationLevel.levelName}>
+                            </c-csp-community-reputation>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </template>
+
+        <c-csp-modal>
+            <span slot="header">Copy link to thread</span>
+            <span>
+                <lightning-input value={shareLink} read-only="true" class="slds-var-m-bottom_medium csp-copy-link" variant="label-hidden"></lightning-input>
+                <div class="slds-grid">
+                    <lightning-button label="Copy Link" class="csp-button_brand" onclick={handleCopy}></lightning-button>
+                    <div class="csp-knowledge-copied slds-hide slds-grid slds-var-m-top_small">
+                        <lightning-icon size="x-small" variant="success" class="slds-var-p-top_xxx-small slds-var-m-left_large slds-var-m-right_xx-small" icon-name="utility:success"></lightning-icon>
+                        <span class="slds-text-color_success">URL copied to clipboard</span>
+                    </div>
+                </div>
+            </span>
+        </c-csp-modal>
+    </div>
+
+</template>

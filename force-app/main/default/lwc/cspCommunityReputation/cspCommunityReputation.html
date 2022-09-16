@@ -1,0 +1,42 @@
+<template>
+    <div class={reputationClass}>
+        <div class={levelClass} if:true={levelStars}>
+            <template if:true={levelStars.length}>
+                <div class="csp-reputation_stars slds-var-p-horizontal_x-small slds-text-align_center">
+                    <div class={typePaddingClass}>
+                        <template iterator:star={levelStars}>
+                            <template if:false={star.last}>
+                                <lightning-icon
+                                    key={star.value.id}
+                                    size="x-small"
+                                    icon-name="utility:favorite"
+                                    class="slds-var-m-right_xxx-small csp-fill_white">
+                                </lightning-icon>
+                            </template>
+                            <template if:true={star.last}>
+                                <lightning-icon
+                                    key={star.value.id}
+                                    size="x-small"
+                                    class="csp-fill_white"
+                                    icon-name="utility:favorite">
+                                </lightning-icon>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+                <div class="csp-reputation_level slds-var-p-horizontal_xx-small slds-text-align_center">
+                    <div class={typePaddingClass}>
+                        {levelName}
+                    </div>
+                </div>
+            </template>
+            <template if:false={levelStars.length}>
+                <div class="csp-reputation_level csp-reputation_level-no-stars slds-var-p-horizontal_xx-small slds-text-align_center">
+                    <div class={typePaddingClass}>
+                        {levelName}
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

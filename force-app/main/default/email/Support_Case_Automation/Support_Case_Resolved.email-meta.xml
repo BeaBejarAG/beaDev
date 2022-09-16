@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Resolved Case E-mail sent when case is resolved</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Support - Case Resolved</name>
+    <style>none</style>
+    <subject>Access Support Team | {!Case.CaseNumber} - Your Case Has Been Resolved</subject>
+    <textOnly>Case Resolved
+
+Hi {!Contact.FirstName},
+
+Thank you for working with The Access Group Support.
+
+If you&apos;d like to view details about this specific case, please click the View Case link below.
+
+If the case has not been resolved to your satisfaction, please add a  comment to let us know and we&apos;ll be happy to contact you to investigate further.
+
+If that isn&apos;t the case, then there is no further action required on your part and your case will self-close in the next few days.
+
+VIEW CASE
+
+Solution Details:
+
+{!Case.Solution__c}
+
+Case Details:
+
+Case Number: {!Case.CaseNumber}
+
+Product Name: {!Case.RelatedProduct__c}
+
+Business Impact: {!Case.Priority}
+
+Subject: {!Case.Subject}
+
+Description: {!Case.Description}
+
+Copyright © 2020 | All rights reserved.
+
+Our mailing address is:
+The Old School, School Lane, Stratford St Mary, Colchester, Essex, CO7 6LZ</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

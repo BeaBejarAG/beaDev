@@ -1,0 +1,18 @@
+<template>
+    <template for:each={alerts} for:item="alertsu">
+         <div key={alertsu.id} class="ServiceUpdate slds-align_absolute-center">
+        <div class="box-content">
+            <span class="box-content-header">Service Update</span> : {alertsu.Description__c}
+         </div>
+         </div>
+</template>
+<template if:true={showNoti}>
+<template for:each={notifications} for:item="notisu">
+    <div key={notisu.id} class="Notification slds-align_absolute-center">
+   <div class="box-content">
+    <span class="box-content-header">Notification</span> : {notisu.Description__c}
+    </div>
+    </div>
+</template>
+</template>
+</template>

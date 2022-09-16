@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Contacts</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="showFinanceCard" type="Boolean" default="false" label="Show finance card"/>
+            <property name="showCSMCard" type="Boolean" default="false" label="Show customer success manager card"/>
+            <property name="showAMCard" type="Boolean" default="false" label="Show account manager card"/>
+            <property name="financeDescription" type="String" label="Finance team description"/>
+            <property name="financeEmail" type="String" label="Finance team email"/>
+            <property name="financeMobile" type="String" label="Finance team mobile"/>
+            <property name="financePhone" type="String" label="Finance team phone"/>
+            <property name="accountManagerDesc" type="String" default="I can help you to explore which Access solutions and services will be most effective for your organisation and support you with any commercial queries" label="Account manager description"/>
+            <property name="csmDesc" type="String" default="I can help you get the most out of your Access software. I can offer continued guidance and advice to ensure you are maximising on the value from your Access tools to make your organisation as successful as possible" label="CSM description"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

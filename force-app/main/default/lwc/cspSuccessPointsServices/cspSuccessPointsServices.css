@@ -1,0 +1,50 @@
+.csp-success-points-services-slds-card {
+    height:370px;
+    width:340px;
+    border: 0px;
+}
+
+.csp-success-points-services-slds-card:hover {
+    background-color: var(--c-successPlatformLightGreenHover,#edf7f6);
+    cursor: pointer;
+}
+
+.csp-success-points-services-container {
+    background-color: var(--c-successPlatformLightGreenCard,rgb(152,210,206));
+    padding: 20px;
+    padding-bottom: 55px; 
+    height: 195px;
+}
+
+.csp-success-points-services-name {
+    font-size: x-large;
+    margin-bottom: 27px;
+    height: 70px;
+}
+
+.csp-success-points-services-category {
+    border-top: 1px solid var(--c-successPlatformLightGrey,rgb(119,119,119));
+    padding-top: 10px;
+}
+
+.csp-success-points-services-points {
+    background-color: var(--c-successPlatformRed,#d5343e);
+}
+
+.csp-success-points-services-points-container {
+    margin-left: 25px;
+}
+
+.csp-success-points-services-usertype {
+    background-color: var(--c-successPlatformDarkGrey,rgb(62,62,62));
+}
+
+.csp-success-points-services-banner {
+    padding: 10px;
+    display: inline;
+    color: white;
+    z-index: 1;
+    position: relative;
+    bottom: 15px;
+    font-weight: 600
+}

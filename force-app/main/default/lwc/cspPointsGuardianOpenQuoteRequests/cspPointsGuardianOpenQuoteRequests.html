@@ -1,0 +1,82 @@
+<template>
+    <template if:true={openQuoteRequests}>
+        <div class="open-quote-requests-header slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid_vertical-align-center slds-p-vertical_medium">
+            <div class="slds-show_medium slds-col slds-size_2-of-12 slds-medium-size_2-of-12 slds-large-size_1-of-12 slds-p-horizontal_small">
+                Ref
+            </div>
+            <div class="slds-col slds-size_4-of-12 slds-max-small-size_2-of-12 slds-p-horizontal_x-small">
+                Case name
+            </div>
+            <div class="slds-show_medium slds-col slds-size_2-of-12 slds-medium-size_1-of-12 slds-p-horizontal_x-small">
+                Owner
+            </div>
+            <div class="slds-col slds-size_2-of-12 slds-medium-size_1-of-12 slds-max-small-size_1-of-12 slds-p-horizontal_x-small">
+                Date
+            </div>
+            <div class="slds-col slds-size_1-of-12 slds-medium-size_1-of-12 slds-p-horizontal_x-small">
+                Points
+            </div>
+            <div class="slds-col slds-size_2-of-12 slds-medium-size_2-of-12 slds-small-size_1-of-4 slds-max-small-size_4-of-12 slds-p-horizontal_x-small">
+                Status
+            </div>
+        </div>
+        <div class="transactions-result">
+            <template iterator:result={openQuoteRequests}>
+                <div if:true={result.first} key={result.value.id} class="csp-open-quote-requests-table-border slds-border_top"></div>
+                    <div key={result.value.id} data-id={result.value.caseId} onclick={handleOpenQuoteRequestClick} class="csp-open-quote-requests-table-border slds-p-left_x-small slds-border_right slds-border_left slds-border_bottom csp-open-quote-requests-result slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid--vertical-stretch">
+                    <div class="slds-show_medium slds-col slds-size_2-of-12 slds-medium-size_2-of-12 slds-large-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                        <a class="slds-m-vertical_small slds-line-clamp_x-small">{result.value.ref}</a>
+                    </div>
+                    <div class="slds-col slds-size_4-of-12 slds-max-small-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                        <div class="csp-open-quote-requests-service slds-m-vertical_small">{result.value.subject}</div>
+                    </div>
+                    <div class="slds-show_medium slds-col slds-size_2-of-12 slds-medium-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                        <div class="slds-m-vertical_small">{result.value.owner}</div>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12 slds-medium-size_1-of-12 slds-max-small-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                        <div class="slds-m-vertical_small">{result.value.date}</div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-12 slds-medium-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                        <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.points}</div>
+                    </div>
+                    <template if:true={result.value.isPending}>
+                        <div class="csp-transactions-pending slds-col slds-size_2-of-12 slds-medium-size_2-of-12 slds-small-size_1-of-4 slds-max-small-size_4-of-12 slds-grid slds-grid_vertical-align-center">
+                            <lightning-icon class="slds-show_small" icon-name="utility:spinner" size="x-small" alternative-text="StatusPending" title="StatusPending"></lightning-icon>
+                            <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.status}</div>
+                        </div>
+                    </template>
+                    <!-- quote -->
+                    <template if:true={result.value.isQuoteReceived}>
+                        <div class="csp-transactions-quote-received slds-col slds-size_2-of-12 slds-medium-size_2-of-12 slds-small-size_1-of-4 slds-max-small-size_4-of-12 slds-grid slds-grid_vertical-align-center">
+                            <lightning-icon class="slds-show_small" icon-name="utility:product_service_campaign_item" size="x-small" alternative-text="QuoteReceived" title="QuoteReceived"></lightning-icon>
+                            <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.status}</div>
+                        </div>
+                    </template>
+                    <template if:true={result.value.isQuoteRequested}>
+                        <div class="csp-transactions-quote-requested slds-col slds-size_2-of-12 slds-medium-size_2-of-12 slds-small-size_1-of-4 slds-max-small-size_4-of-12 slds-grid slds-grid_vertical-align-center">
+                            <lightning-icon class="slds-show_small" icon-name="utility:quote" size="x-small" alternative-text="QuoteRequested" title="QuoteRequested"></lightning-icon>
+                            <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.status}</div>
+                        </div>
+                    </template>
+                    <template if:true={result.value.isUnknown}>
+                        <div class="slds-col slds-size_2-of-12 slds-medium-size_2-of-12 slds-small-size_1-of-4 slds-max-small-size_4-of-12 slds-grid slds-grid_vertical-align-center">
+                            <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.status}</div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </template>
+    <c-csp-modal
+        size="large"
+        onkeyup={handleEscape}
+        data-id="csp-open-quote-view-popup">
+        <span slot="header">Case Reference: {reference}</span>
+        <c-csp-view-flex-points-case
+            onquoteapproval={handleQuoteAction}
+            onquotereject={handleQuoteAction}
+            show-reject-button={showRejectButton}
+            case-id={caseId}>
+        </c-csp-view-flex-points-case>
+    </c-csp-modal>
+</template>

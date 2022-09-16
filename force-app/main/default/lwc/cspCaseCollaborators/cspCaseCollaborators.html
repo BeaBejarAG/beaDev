@@ -1,0 +1,71 @@
+<template>
+
+    <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+        <div class="slds-size_2-of-3 slds-var-m-bottom_medium slds-text-color_weak">Case collaborators:</div>
+        <lightning-button if:true={canEdit}
+            class="slds-size_1-of-3 slds-var-m-bottom_medium csp-button_brand-white slds-button slds-var-m-bottom_medium csp-button_stretch"
+            label="Add" onclick={addCollaborator}></lightning-button>
+        <div class="slds-size_1-of-1">
+            <template iterator:collaborator={collaborators}>
+                <div if:true={collaborator.first} key={collaborator.value.id} class="slds-border_top csp-portal-team__top-border"></div>
+                <div key={collaborator.value.id} class="csp-portal-member slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid--vertical-stretch">
+                    <div class="csp-portal-member__name slds-col slds-size_10-of-12 slds-grid slds-grid_vertical-align-center">
+                        <lightning-avatar class={collaborator.value.avatar} src={collaborator.value.photoUrl}
+                            initials={collaborator.value.initials}>
+                        </lightning-avatar>
+                        <div class="slds-m-vertical_small slds-m-horizontal_x-small slds-truncate">
+                            {collaborator.value.contactName}</div>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                        <lightning-button-icon-stateful if:true={canEdit} id={collaborator.value.id}
+                            data-name={collaborator.value.id} icon-name="action:delete" onclick={RemoveCollaborator}
+                            alternative-text="Remove Collaborator"></lightning-button-icon-stateful>
+                    </div>
+                </div>
+            </template>
+            <template if:false={hasCollaborators}>
+                <div class="slds-size_1-of-1 slds-text-align_center slds-text-color_weak slds-m-vertical_small">
+                    No collaborators for this case
+                </div>
+            </template>
+        </div>
+    </div>
+
+
+    <c-csp-modal onclosedialog={handleCloseDialog} show-modal={showNewModal} size="small" onkeyup={handleEscape}>
+        <span slot="header">Add Case Collaborator</span>
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-center slds-var-m-bottom_medium">
+            <div class="slds-m-right_xx-small">Available Case collaborators:</div>
+            <div class="slds-size_1-of-1 slds-text-color_weak slds-text-body_regular slds-m-right_xx-small slds-m-top_xx-small">Note - Named support contacts for the associated product can be added as a collaborator</div>
+        </div>
+        <template if:true={potentialCollaborators} iterator:collaborator={potentialCollaborators}>
+            <div if:true={collaborator.first} key={collaborator.value.id} class="slds-border_top csp-portal-team__top-border"></div>
+            <div key={collaborator.value.id}
+                class="csp-portal-member slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid--vertical-stretch">
+                <div class="csp-portal-member__name slds-col slds-size_5-of-12 slds-grid slds-grid_vertical-align-center">
+                    <lightning-avatar class={collaborator.value.avatar} src={collaborator.value.photoUrl}
+                        initials={collaborator.value.initials}>
+                    </lightning-avatar>
+                    <div class="slds-m-vertical_small slds-m-horizontal_x-small slds-truncate">{collaborator.value.contactName}</div>
+                </div>
+                <div class="csp-portal-member__name slds-col slds-size_5-of-12 slds-grid slds-grid_vertical-align-center">
+                    <lightning-formatted-text class="slds-m-vertical_small slds-m-horizontal_x-small slds-truncate" value={collaborator.value.email} linkify></lightning-formatted-text>
+                </div>
+                <div class="slds-col slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                    <lightning-button-icon-stateful id={collaborator.value.id} data-name={collaborator.value.id}
+                        icon-name="action:approval" onclick={createCollaborator} alternative-text="Add Collaborator">
+                    </lightning-button-icon-stateful>
+                </div>
+            </div>
+        </template>
+        <template if:false={hasPotentialCollaborators}>
+            <div class="slds-size_1-of-1 slds-text-align_center slds-text-color_weak slds-m-vertical_small">
+                No potential collaborators for this case
+            </div>
+        </template>
+    </c-csp-modal>
+
+    <div if:true={loading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+</template>

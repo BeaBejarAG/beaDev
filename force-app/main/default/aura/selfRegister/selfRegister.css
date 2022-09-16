@@ -1,0 +1,249 @@
+.THIS .register-form {
+    align-content: center;
+    align-items: center;
+    background-color:white;
+    justify-content: center;
+    margin: auto;
+    max-width: 800px;
+}
+
+.THIS .register-form_header {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    color: token(successPlatformRed);
+}
+
+.THIS .register-form_error {
+    color: token(successPlatformRed);
+}
+
+.THIS .register-form_input {
+    border-radius: 0px;
+    padding: 0.3rem 0.75rem;
+}
+
+.THIS .register-form_submit {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-radius: 0;
+}
+
+.THIS .register-form_cancel {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 0;
+}
+
+.THIS  a {
+    color:token(successPlatformRed);
+    text-decoration: none;
+    font-weight:normal;
+}
+.THIS  a:hover {
+    color:token(successPlatformRed);
+    text-decoration: underline;
+}
+
+/* Old styles just in case */
+
+@media only screen and (max-width: 600px) {
+  .THIS .scnbody .td {
+       padding-left:0%;
+    padding-right:0%;
+  }
+}
+
+.THIS #sfdc_nickname_container{
+    margin-bottom:10px;
+    padding: 12px;
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS #sfdc_email_container{
+    margin-bottom:10px;
+    padding: 12px;
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS #sfdc_extrafield_container{
+    margin-bottom:10px;
+    padding: 12px;
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS #sfdc_user{
+    float:left;
+    width:23px;
+    height:25px;
+    padding-top:1px;
+    padding-left:2px;
+    margin:0px;
+
+}
+
+.THIS #sfdc_lock{
+    float:left;
+    width:23px;
+    height:25px;
+    padding-top:1px;
+    padding-left:2px;
+    margin:0px;
+}
+
+.THIS  .login-icon {
+    color:#ccc;font-size:22px;
+}
+
+.THIS .uiButton--default .label
+{
+    color: #FFFFFF;
+}
+.THIS #sfdc_password_container{
+    margin-bottom:10px;
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS #sfdc_confirm_password_container{
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS  button.sfdc_button {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+
+    background-color: #34AA44;
+
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-image: none;
+border: 1px solid #2D9C3C;
+    white-space: nowrap;
+    padding: 10px 12px;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 22px;
+    font-weight: 300;
+    line-height: 1.42857143;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.THIS  button.sfdc_button_back {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: red !important;
+
+    background-color: #E5173F;
+    
+    border: 1px solid #E5173F;
+box-sizing: border-box;
+box-shadow: 0px 1px 1px rgba(19, 31, 21, 0.1), inset 0px 2px 0px rgba(255, 255, 255, 0.06);
+border-radius: 4px;
+
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-image: none;
+    white-space: nowrap;
+    padding: 10px 12px;
+font-family: Open Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 22px;
+    font-weight: 300;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.THIS  button:hover {
+    border-color:#285e8e;
+    cursor:pointer;
+}
+
+.THIS #sfdc_forgot{
+    font-family: 'Open Sans', 'sans-serif';
+    font-weight:300;
+    font-size: 14px;
+    margin-top: 10px
+}
+
+.THIS  a.privacy {
+    color:blue;
+    text-decoration: none;
+    font-weight:normal;
+}
+.THIS  a.privacy:hover {
+    color:green;
+    text-decoration: none;
+}
+
+.THIS input[type="checkbox"] {
+    appearance: none;
+    border: 1px solid white;
+    height: 22px;
+    width: 22px;
+    vertical-align: middle;
+}
+
+.THIS input[type="checkbox"]:checked {
+    border: 1px solid ;
+}
+
+.THIS input[type="checkbox"]:checked:after {
+    display: block;
+    position: relative;
+    content: '';
+    left: 3px;
+    top: 3px;
+    height: 6px;
+    width: 10px;
+    border-bottom: 4px solid /*#354452*/ white;
+    border-left: 4px solid /*#354452*/ white;
+    transform:rotate(-45deg);
+}
+
+.THIS input[type="checkbox"].disabled {
+    opacity: 0.35;
+}
+
+.THIS input[type="checkbox"] + label {
+    vertical-align: middle;
+}
+
+.THIS .select_height {
+    height: 42px !important;
+}

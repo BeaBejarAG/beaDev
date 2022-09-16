@@ -1,0 +1,33 @@
+<aura:component implements="forceCommunity:themeLayout">
+        <aura:attribute name="search" type="Aura.Component[]"/>
+    <aura:attribute name="fplogin" type="String" required="false" default="/login/"/>
+        <!-- <aura:attribute name="sidebarFooter" type="Aura.Component[]"/>  -->
+
+    <div class="scnmain">
+        <div class="scnheader">
+            <div class="AccessLogo">
+            <img src="/sfsites/c/resource/AccessGroupLogo"/>
+            </div>
+                  <div class="sfdc">
+                      <a href="login"> <ui:button aura:id="submitButton" label="Login" class="sfdc_button slds-button slds-button_success scnlogin"/></a>
+            </div>
+                    </div>
+            <div class="scnsearch">
+                <div class="scnsearcharea">
+                              <div class="scnsearchtext">  What would you like help with today?</div>
+                    {!v.search}
+                </div>
+                
+            </div>
+     
+
+               <div class="scnbody">
+                {!v.body}
+            </div>
+            
+        
+        
+    </div>
+
+    
+</aura:component>

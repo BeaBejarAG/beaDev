@@ -1,0 +1,15 @@
+<template>
+    <template if:true={title}>
+        <div class="slds-border_bottom csp-related-header">
+            <strong>Related articles</strong>
+        </div>
+        <c-csp-search-results
+            limit-amount=5
+            search-text={title}
+            suppress-highlighting=true
+            suppress-product=true
+            exclude-object={excludeId}
+            include-knowledge-results=true>
+        </c-csp-search-results>
+    </template>
+</template>

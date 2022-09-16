@@ -1,0 +1,203 @@
+.THIS #lftxtlrg {
+font-family: Open Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 26px;
+line-height: 38px;
+padding-bottom: 25px;
+/* identical to box height, or 146% */
+
+color: #3E3F42;
+}
+
+.THIS #lftxtmed {
+font-family: Open Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 16pt;
+line-height: 28px;
+/* identical to box height, or 156% */
+
+color: #3E3F42;
+}
+
+.THIS #spacer{
+padding-top:25px;
+}
+
+.THIS  a.privacy {
+    color:blue;
+    text-decoration: none;
+    font-weight:normal;
+}
+.THIS  a.privacy:hover {
+    color:green;
+    text-decoration: none;
+}
+
+.THIS #lftxtlbl
+{
+    font-family: Open Sans;
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-transform: uppercase;
+
+color: #3E3F42;
+    padding-bottom:5px;
+}
+
+.THIS #sfdc_user{
+    float:left;
+    width:23px;
+    height:25px;
+    padding-top:1px;
+    padding-left:2px;
+    margin:0px;
+
+}
+
+.THIS #sfdc_lock{
+    float:left;
+    width:23px;
+    height:25px;
+    padding-top:1px;
+    padding-left:2px;
+    margin:0px;
+}
+
+.THIS  #error {
+    text-align: left;
+    color:#FF0000;
+    line-height: 2;
+}
+
+.THIS  .login-icon {
+    color:#ccc;font-size:22px;
+}
+
+.THIS #sfdc_username_container{
+ width:100%;
+background: #FFFFFF;
+border: 1px solid #E2E5ED;
+box-sizing: border-box;
+box-shadow: inset 0px 1px 2px rgba(102, 113, 123, 0.21);
+border-radius: 4px;
+padding:0px;
+}
+
+.THIS #sfdc_password_container{
+ width:100%;
+background: #FFFFFF;
+border: 1px solid #E2E5ED;
+box-sizing: border-box;
+box-shadow: inset 0px 1px 2px rgba(102, 113, 123, 0.21);
+border-radius: 4px;
+}
+
+.THIS  button.sfdc_button {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #fff;
+    background-color: #34AA44;
+    border-color: #357ebd;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 10px 12px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.42857143;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.THIS  button.sfdc_button_emps {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #fff;
+    background-color: #1665D8;
+    border-color: #357ebd;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 10px 12px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.42857143;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.THIS  button.sfdc_button_aws {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #fff;
+    background-color: #E5173F;
+    border-color: #357ebd;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 10px 12px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.42857143;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.THIS  button:hover {
+
+    border-color:#285e8e;
+    cursor:pointer;
+}
+
+.THIS button .label {
+    color: #fff;	
+}
+
+.THIS  input {
+
+    border: 0px solid transparent;
+    width: 100%;
+    height: 25px;
+    -webkit-appearance: none;
+    font-size: 14px;
+}
+
+
+.THIS  a {
+    color:#1665D8;
+    text-decoration: none;
+}
+.THIS  a:hover {
+    color:red;
+    text-decoration: none;
+}
+
+.THIS label.uiLabel-hidden {
+    display:none;
+}

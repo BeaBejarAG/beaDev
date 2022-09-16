@@ -1,0 +1,159 @@
+<template>
+  <div class = "buttonGroup">
+    <lightning-button label="Add Contact" title="Add Contact" icon-name="utility:adduser" onclick={modalClick}  disabled={active} class="slds-m-right_x-small"></lightning-button>  
+    <template if:true={active}>
+    <lightning-helptext icon-name="utility:warning" content={warningmessage}></lightning-helptext>
+  </template> 
+  </div>
+    <template if:true={record}>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+        <tr class="slds-line-height_reset">
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Contact Name">Contact Name</div>
+        </th>
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Direct Account">Direct Account</div>
+          </th>
+        <th class="" scope="col">
+        <div class="slds-truncate" title="Email">Email</div>
+        </th>
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Email">Status</div>
+          </th>
+          <th class="" scope="col">
+            <div class="slds-truncate" title="Email">Community Profile</div>
+            </th>
+        <th class="actionButtonText" scope="col">
+        <div class="slds-truncate" title="Action">Action</div>
+        </th>
+
+
+        </tr>
+        </thead>
+        <tbody>      
+        <template if:true={entcont}>
+          <template if:true={loaded}>
+            <template for:each={entcont} for:item="EntContact">
+              <tr key={EntContact.Id} class="slds-hint-parent">
+                  <th data-label="Opportunity Name" scope="row">
+                      <div class="slds-truncate" title="View Contact">
+                        <lightning-button variant="base" id={EntContact.Id} data-name={EntContact.Contact.Id} label={EntContact.Contact.Name} onclick={navigatetouser}>{EntContact.Contact.Name}</lightning-button >
+
+                      </div>
+                    </th>
+
+                    <td data-label="DirectAccount">
+                      <div class="slds-truncate">{EntContact.Contact.Account.Name}</div>
+                    </td>
+
+               <td data-label="Email">
+                  <div class="slds-truncate">{EntContact.Contact.Email}</div>
+                </td>
+
+                <td data-label="Email">
+                  <div class="slds-truncate">{EntContact.Contact.Status__c}</div>
+                </td>
+
+                <td data-label="Email">
+                  <div class="slds-truncate">{EntContact.Contact.Community_User_Profile__c}</div>
+                </td>
+
+                <td data-label="Action">
+                  <div class = "actionButton">
+                    <lightning-button variant="Success" label="New Case" data-name={EntContact.Contact.Id} title="Create Case" onclick={CreateNewCase} icon-name="utility:case" icon-position="center" class="slds-m-left_x-small"></lightning-button>
+                  <lightning-button variant="destructive" label="Remove"  data-name={EntContact.Id} title="Delete Contact" onclick={removeContactClick} icon-name="utility:delete" icon-position="center" class="slds-m-left_x-small"></lightning-button>
+                 
+                </div>
+                </td>
+
+              </tr >
+
+              
+          </template>
+        </template>
+        <template if:false={loaded}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+        </template>
+    </tbody>
+        </table>
+
+</template>
+<template if:true={popModal}>
+<section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+    <div class="slds-modal__container">
+      <header class="slds-modal__header">
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+          <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+          </svg>
+          <span class="slds-assistive-text">Close</span>
+        </button>
+        <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Add Contact To Entitlement</h2>
+      </header>
+      <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        <div onkeyup={handleKeyUp}>
+          <lightning-input
+              name="enter-search"
+              label="Search Contact Name"
+              type="search"
+          ></lightning-input>
+      </div>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+            <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Contact Name">Select</div>
+            </th>
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Email">Contact Name</div>
+            </th>
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Action">Email</div>
+            </th>
+    
+    
+            </tr>
+            </thead>
+            <tbody>
+                            
+            <template if:true={acccont}>
+    
+                <template for:each={acccont} for:item="EntContact">
+                    <tr key={EntContact.Id} class="slds-hint-parent">
+                        <th data-label="Opportunity Name" scope="row">
+                            <div class="slds-truncate" title="Cloudhub + Anypoint Connectors">
+                              <input type="checkbox" id={EntContact.Id} data-name={EntContact.Id} onclick={PopConIdClick} value="checkbox-unique-id-73"  />
+                            </div>
+                          </th>
+
+                          <td data-label="Close Date">
+                            <div class="slds-truncate" title="Cloudhub + Anypoint Connectors">
+                              <a href="javascript:void(0);" tabindex="-1">{EntContact.Name}</a>
+                              </div>
+                          </td>
+                   
+    
+                     <td data-label="Account Name">
+                        <div class="slds-truncate" title="Cloudhub">{EntContact.Email}</div>
+                      </td>
+    
+                    </tr >
+    
+                    
+                </template>
+            </template>
+        </tbody>
+            </table>
+    
+      </div>
+      <footer class="slds-modal__footer">
+        <button class="slds-button slds-button_neutral" onclick={stopModal}>Cancel</button>
+        <button class="slds-button slds-button_brand" onclick={AddConIdClick}>Add</button>
+      </footer>
+    </div>
+  </section>
+  <div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+</template>

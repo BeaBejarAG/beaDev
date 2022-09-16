@@ -1,0 +1,96 @@
+/* Global Page Elements */
+.THIS .access-theme-header {
+    max-width: token(successPlatformPageWidth);
+    align-items: normal;
+}
+.THIS .access-theme-header-links {
+    font-size: 0.9rem;
+}
+.THIS.access-theme-body {
+    max-width: 1050px;
+    margin: 0px auto;
+}
+.THIS .access-theme-login {
+    background-color: rgb(82,185,179);
+}
+.THIS .access-theme-login-inner {
+    max-width: 1250px;
+    margin: 0 auto -60px;
+    color: white;
+}
+.THIS .access-theme-login-inner > div {
+    margin-left: 100px;
+}
+.THIS .access-theme-login-inner h1 {
+    font-size: 2.125rem;
+    font-weight: 200;
+    line-height: 4rem;
+}
+.THIS .access-theme-login-inner h3 {
+    font-size: 1.1rem;
+    font-weight: 200;
+    line-height: 1.75rem;
+}
+.THIS .access-theme-login-inner .slds-text-heading_large {
+    font-weight: 400;
+    font-size: 22.125rem;
+}
+.THIS .access-theme-login-box-inner {
+    box-shadow: 0 token(borderWidthThin) 3px token(borderWidthThin) rgb(0, 0, 0, 0.15);
+    min-height: 375px;
+    background-color: white;
+}
+.THIS .access-theme-login-box-active {
+    margin-top: -55px;
+    font-size: 0.9rem;
+}
+.THIS .access-theme-login-box-active .access-theme-login-box-inner {
+    min-height: 470px;
+}
+.THIS .access-theme-login-box-inner h1 {
+    padding-bottom: 0.5rem;
+    font-size: 1.45rem;
+}
+.THIS .access-theme-login-box-inner p {
+    font-size: 0.95rem;
+    font-weight: 200;
+    line-height: 1.6rem;
+    color: #666;
+}
+.THIS .access-theme-login-box-inner .slds-button {
+    bottom: 0px;
+    font-size: 1.05rem;
+}
+.THIS .access-theme-login-box-inner .slds-input {
+    padding: .7rem;
+    font-size: 1.1rem;
+    border-radius: 0;
+    line-height: 1rem;
+}
+.THIS .access-theme-login-box-inner .slds-form-element__label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.3rem 0;
+}
+.THIS .access-theme-login-box-active .access-theme-login-box-inner .slds-button {
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    border-radius: 0;
+    color: white;
+    font-weight: 200;
+}
+.THIS .access-theme-login-box-red {
+    height: 155px;
+    background-color: rgb(229,22,63);
+}
+.THIS .access-theme-login-box-red img {
+    bottom: -10px;
+    left: 160px;
+}
+.THIS .access-theme-login-box-active .access-theme-login-box-inner .slds-button_success {
+    background-color: rgb(82,185,179);
+}
+.THIS .access-theme-login-box__error {
+    color: token(successPlatformRed);;
+}

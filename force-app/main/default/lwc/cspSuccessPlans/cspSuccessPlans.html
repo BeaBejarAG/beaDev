@@ -1,0 +1,364 @@
+<template>
+    <template if:true={showStepProduct}>
+        <div class="slds-grid">
+            <div class="slds-size_1-of-12">
+            </div>
+            <div class="slds-size_10-of-12">
+                <c-csp-product-selection-matrix product-target="">
+                    <div slot="header">
+                        <h1 class="slds-size_1-of-1 slds-text-heading_large slds-var-m-vertical_large slds-align_absolute-center csp-success-plan__header">Select a product to manage</h1>
+                        <div class="slds-m-top_medium slds-m-bottom_small">
+                            Get the best from your Access solution by understanding more about your chosen Success Plan with our Success Plan <a target="_blank" href="https://pages.theaccessgroup.com/FY21-P05-GROUP-CDP-TOF-Resource-Customer-Success-Service-Delivery_PDF.html">Service Delivery Guide</a>.
+                        </div>
+                    </div>
+                </c-csp-product-selection-matrix>
+            </div>
+            <div class="slds-size_1-of-12">
+            </div>
+        </div>
+    </template>
+    <template if:false={showStepProduct}>
+        <div class="csp-success-plan__reset slds-m-vertical_small" onclick={resetProduct}>
+            &larr; Manage a different product
+        </div>
+        <div class="csp-success-plan slds-grid slds-p-vertical_medium slds-p-horizontal_large slds-m-vertical_medium slds-show_medium">
+            <div class="slds-col">
+                <div class="csp-success-plan__title slds-var-m-bottom_medium">
+                    Your customer success plan: <b>{product.successPlanName}</b>
+                </div>
+                <div if:true={internalPlan} class="csp-success-plan__description">
+                    Internal access granted for Access Employees to interact with the customer portal
+                </div>
+                <div if:true={essentialPlan} class="csp-success-plan__description">
+                    {essentialTagline}
+                </div>
+                <div if:true={standardPlan} class="csp-success-plan__description">
+                    {standardTagline}
+                </div>
+                <div if:true={premierPlan} class="csp-success-plan__description">
+                    {premierTagline}
+                </div>
+            </div>
+            <div class="slds-col slds-grow-none">
+                <div class="csp-success-plan__product slds-m-bottom_x-small">
+                    {product.name}
+                </div>
+                <lightning-button if:false={classicPlan} onclick={handleViewPlan}
+                    class="csp-success-plan__view slds-float_right slds-m-vertical_x-small slds-button csp-button_brand-white"
+                    label="VIEW PLAN"></lightning-button>
+            </div>
+        </div>
+        <div class="csp-success-plan slds-p-vertical_medium slds-p-horizontal_large slds-m-vertical_medium slds-hide_medium">
+            <div>
+                <div class="csp-success-plan__title slds-var-m-bottom_medium">
+                    Your customer success plan: <b>{product.successPlanName}</b>
+                </div>
+                <div if:true={internalPlan} class="csp-success-plan__description">
+                    Internal access granted for Access Employees to interact with the customer portal
+                </div>
+                <div if:true={essentialPlan} class="csp-success-plan__description">
+                    {essentialTagline}
+                </div>
+                <div if:true={standardPlan} class="csp-success-plan__description">
+                    {standardTagline}
+                </div>
+                <div if:true={premierPlan} class="csp-success-plan__description">
+                    {premierTagline}
+                </div>
+            </div>
+            <div class="slds-m-vertical_small slds-grid slds-wrap slds-grid_vertical-align-center">
+                <div class="csp-success-plan__product slds-m-bottom_x-small slds-m-right_small">
+                    {product.name}
+                </div>
+                <lightning-button if:false={classicPlan} onclick={handleViewPlan}
+                    class="slds-m-bottom_x-small slds-button csp-button_brand-white"
+                    label="VIEW PLAN">
+                </lightning-button>
+            </div>
+        </div>
+        <div class="csp-portal-team">
+            <div class="csp-portal-team__title slds-var-m-bottom_medium slds-var-m-top_large">
+                Your success portal team:
+            </div>
+
+            <div class="csp-portal-team-filters slds-grid slds-wrap slds-gutters-direct slds-grid_vertical-align-center slds-p-horizontal_small">
+                <div class="slds-col" onkeyup={handleSearchKeyPress}>
+                    <lightning-input class="csp-portal-team-filters__search slds-p-around_x-small" label="Find a member..." type="search" maxlength="100" value={searchText} placeholder="Find a member..." variant="label-hidden"></lightning-input>
+                </div>
+                <div class="slds-col slds-grow-none slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+                    <div class="csp-portal-team-filters__display">
+                        Filter by level:
+                    </div>
+                    <div class="slds-p-vertical_small slds-p-horizontal_x-small">
+                        <lightning-button-menu label={levelFilter} onselect={handleLevelFilterSelect} class="csp-portal-team__level-filter">
+                            <lightning-menu-item class="csp-portal-team__menu-option" value="All" label="All"></lightning-menu-item>
+                            <lightning-menu-divider class="csp-portal-team__menu-divider"></lightning-menu-divider>
+                            <lightning-menu-item class="csp-portal-team__menu-option" value="Super Member" label="Super Member"></lightning-menu-item>
+                            <lightning-menu-divider class="csp-portal-team__menu-divider"></lightning-menu-divider>
+                            <lightning-menu-item class="csp-portal-team__menu-option" value="Support Member" label="Support Member"></lightning-menu-item>
+                            <lightning-menu-divider class="csp-portal-team__menu-divider"></lightning-menu-divider>
+                            <lightning-menu-item class="csp-portal-team__menu-option" value="Read Only" label="Read Only"></lightning-menu-item>
+                            <lightning-menu-divider class="csp-portal-team__menu-divider"></lightning-menu-divider>
+                            <lightning-menu-item class="csp-portal-team__menu-option" value="Awaiting Confirmation" label="Awaiting Confirmation"></lightning-menu-item>
+                        </lightning-button-menu>
+                    </div>
+                </div>
+                <div if:true={displayCreatedButton} class="slds-col slds-grow-none csp-button_brand-white slds-p-horizontal_x-small">
+                    <button class="csp-portal-team__create-button slds-button slds-var-m-vertical_small" onclick={handleCreateMember}>
+                        CREATE NEW MEMBER
+                    </button>
+                </div>
+            </div>
+            <div class="csp-portal-team-header slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid_vertical-align-center slds-p-vertical_medium">
+                <div class="csp-portal-team-header__name slds-col slds-size_4-of-12 slds-p-horizontal_x-small">
+                    Name
+                </div>
+                <div class="csp-portal-team-header__email slds-col slds-size_4-of-12 slds-p-horizontal_x-small">
+                    Contact email
+                </div>
+                <div class="csp-portal-team-header__level slds-col slds-size_4-of-12" if:false={displayProjectCases}>
+                    Level
+                </div>
+            </div>
+            <div class="csp-portal-team">
+                <template iterator:result={contactList}>
+                    <div if:true={result.first} key={result.value.id} class="slds-border_top csp-portal-team__top-border"></div>
+                    <div key={result.value.id} class="csp-portal-member slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid--vertical-stretch">
+                        <div class="csp-portal-member__name slds-col slds-size_4-of-12 slds-grid slds-grid_vertical-align-center">
+                            <lightning-avatar
+                                class={result.value.avatar}
+                                src={result.value.photoUrl}
+                                initials={result.value.initials}>
+                            </lightning-avatar>
+                            <div class="slds-m-vertical_small slds-m-horizontal_x-small slds-truncate">{result.value.name}</div>
+                        </div>
+                        <div class="csp-portal-member__email slds-col slds-size_4-of-12 slds-grid slds-grid_vertical-align-center">
+                            <lightning-formatted-text class="slds-m-vertical_small slds-m-horizontal_x-small slds-truncate" value={result.value.email} linkify></lightning-formatted-text>
+                        </div>
+                        <div class="csp-portal-member__level slds-col slds-size_4-of-12 slds-grid slds-grid_vertical-align-center">
+                            <template iterator:level={result.value.levelList}>
+                                <div key={level.value} class="csp-portal-member__pill slds-m-vertical_small slds-m-horizontal_x-small" title={level.value.description}>{level.value.label}</div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+                <div class="slds-var-m-top_medium slds-size_1-of-1 slds-align_absolute-center">
+                    <button if:true={showMore} class="slds-button slds-button_neutral slds-var-p-vertical_small slds-var-p-horizontal_large csp-search-button" onclick={handleLoadMore}>Load More</button>
+                </div>
+                <div if:true={refreshing}>
+                    <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                </div>
+                <template if:true={completedSearch}>
+                    <div class="slds-var-m-vertical_medium">No team members found</div>
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <c-csp-modal size={popupSize} data-id="plan-popup" onkeydown={handleEscape}>
+        <span slot="header" if:true={product}>
+            <div class="slds-var-m-vertical_medium">
+                <b>{product.name}:</b> Success plan options
+            </div>
+        </span>
+        <div class="slds-grid slds-wrap slds-grid--vertical-stretch">
+            <template if:true={essentialPlan}>
+                <div class="slds-m-bottom_medium">
+                    <b>To discuss your upgrade options,</b> please contact your Account Manager. You can find your Account Manager's contact details on the My Access Contacts page.
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-p-around_large csp-plan-card__selected">
+                    <div class="slds-grid slds-wrap slds-m-bottom_small">
+                        <div class="csp-plan-card__title slds-col">
+                            <b>Essential</b> plan:
+                        </div>
+                        <div class="csp-plan-card__pill slds-p-vertical_xx-small slds-p-horizontal_x-small slds-col slds-grow-none">
+                            YOUR PLAN
+                        </div>
+                    </div>
+                    <div class="csp-plan-card__subtitle slds-m-top_small slds-m-bottom_medium">
+                        {essentialTagline}
+                    </div>
+                    <template iterator:feature={essentialPlanDetails}>
+                        <div key={feature.value.name}
+                            class="csp-plan-card__feature slds-m-bottom_small slds-m-top_medium">
+                            {feature.value.name}
+                        </div>
+                        <template iterator:detail={feature.value.details}>
+                            <div key={detail.value} class="csp-plan-card__detail slds-m-vertical_x-small">
+                                <lightning-icon icon-name="utility:check" size="x-small"
+                                    class="slds-var-m-right_x-small"></lightning-icon>
+                                {detail.value}
+                            </div>
+                        </template>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-p-around_large csp-plan-card__available">
+                    <div class="csp-plan-card__title slds-m-bottom_small">
+                        <b>Standard</b> plan:
+                    </div>
+                    <div class="csp-plan-card__subtitle slds-m-top_small slds-m-bottom_medium">
+                        {standardTagline}
+                    </div>
+                    <template iterator:feature={standardPlanDetails}>
+                        <div key={feature.value.name}
+                            class="csp-plan-card__feature slds-m-bottom_small slds-m-top_medium">
+                            {feature.value.name}
+                        </div>
+                        <template iterator:detail={feature.value.details}>
+                            <div key={detail.value} class="csp-plan-card__detail slds-m-vertical_x-small">
+                                <lightning-icon icon-name="utility:check" size="x-small"
+                                    class="slds-var-m-right_x-small"></lightning-icon>
+                                {detail.value}
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </template>
+            <template if:true={standardPlan}>
+                <div class="slds-m-bottom_medium">
+                    <b>To discuss your upgrade options,</b> please contact your Account Manager. You can find your Account Manager's contact details on the My Access Contacts page.
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-p-around_large csp-plan-card__selected">
+                    <div class="slds-grid slds-wrap slds-m-bottom_small">
+                        <div class="csp-plan-card__title slds-col">
+                            <b>Standard</b> plan:
+                        </div>
+                        <div class="csp-plan-card__pill slds-p-vertical_xx-small slds-p-horizontal_x-small slds-col slds-grow-none">
+                            YOUR PLAN
+                        </div>
+                    </div>
+                    <div class="csp-plan-card__subtitle slds-m-top_small slds-m-bottom_medium">
+                        {standardTagline}
+                    </div>
+                    <template iterator:feature={standardPlanDetails}>
+                        <div key={feature.value.name}
+                            class="csp-plan-card__feature slds-m-bottom_small slds-m-top_medium">
+                            {feature.value.name}
+                        </div>
+                        <template iterator:detail={feature.value.details}>
+                            <div key={detail.value} class="csp-plan-card__detail slds-m-vertical_x-small">
+                                <lightning-icon icon-name="utility:check" size="x-small"
+                                    class="slds-var-m-right_x-small"></lightning-icon>
+                                {detail.value}
+                            </div>
+                        </template>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-p-around_large csp-plan-card__available">
+                    <div class="csp-plan-card__title slds-m-bottom_small">
+                        <b>Premier</b> plan:
+                    </div>
+                    <div class="csp-plan-card__subtitle slds-m-top_small slds-m-bottom_medium">
+                        {premierTagline}
+                    </div>
+                    <template iterator:feature={premierPlanDetails}>
+                        <div key={feature.value.name}
+                            class="csp-plan-card__feature slds-m-bottom_small slds-m-top_medium">
+                            {feature.value.name}
+                        </div>
+                        <template iterator:detail={feature.value.details}>
+                            <div key={detail.value} class="csp-plan-card__detail slds-m-vertical_x-small">
+                                <lightning-icon icon-name="utility:check" size="x-small"
+                                    class="slds-var-m-right_x-small"></lightning-icon>
+                                {detail.value}
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </template>
+            <template if:true={premierPlan}>
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-1 slds-p-around_large csp-plan-card__selected">
+                    <div class="slds-grid slds-wrap slds-m-bottom_small">
+                        <div class="csp-plan-card__title slds-col">
+                            <b>Premier</b> plan:
+                        </div>
+                        <div class="csp-plan-card__pill slds-p-vertical_xx-small slds-p-horizontal_x-small slds-col slds-grow-none">
+                            YOUR PLAN
+                        </div>
+                    </div>
+                    <div class="csp-plan-card__subtitle slds-m-top_small slds-m-bottom_medium">
+                        {premierTagline}
+                    </div>
+                    <template iterator:feature={premierPlanDetails}>
+                        <div key={feature.value.name}
+                            class="csp-plan-card__feature slds-m-bottom_small slds-m-top_medium">
+                            {feature.value.name}
+                        </div>
+                        <template iterator:detail={feature.value.details}>
+                            <div key={detail.value} class="csp-plan-card__detail slds-m-vertical_x-small">
+                                <lightning-icon icon-name="utility:check" size="x-small"
+                                    class="slds-var-m-right_x-small"></lightning-icon>
+                                {detail.value}
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </template>
+            <template if:true={internalPlan}>
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-3 slds-p-around_large csp-plan-card__available">
+                    <div class="csp-plan-card__title slds-m-bottom_small">
+                        <b>Essential</b> plan:
+                    </div>
+                    <div class="csp-plan-card__subtitle slds-m-top_small slds-m-bottom_medium">
+                        {essentialTagline}
+                    </div>
+                    <template iterator:feature={essentialPlanDetails}>
+                        <div key={feature.value.name}
+                            class="csp-plan-card__feature slds-m-bottom_small slds-m-top_medium">
+                            {feature.value.name}
+                        </div>
+                        <template iterator:detail={feature.value.details}>
+                            <div key={detail.value} class="csp-plan-card__detail slds-m-vertical_x-small">
+                                <lightning-icon icon-name="utility:check" size="x-small"
+                                    class="slds-var-m-right_x-small"></lightning-icon>
+                                {detail.value}
+                            </div>
+                        </template>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-3 slds-p-around_large csp-plan-card__available">
+                    <div class="csp-plan-card__title slds-m-bottom_small">
+                        <b>Standard</b> plan:
+                    </div>
+                    <div class="csp-plan-card__subtitle slds-m-top_small slds-m-bottom_medium">
+                        {standardTagline}
+                    </div>
+                    <template iterator:feature={standardPlanDetails}>
+                        <div key={feature.value.name}
+                            class="csp-plan-card__feature slds-m-bottom_small slds-m-top_medium">
+                            {feature.value.name}
+                        </div>
+                        <template iterator:detail={feature.value.details}>
+                            <div key={detail.value} class="csp-plan-card__detail slds-m-vertical_x-small">
+                                <lightning-icon icon-name="utility:check" size="x-small"
+                                    class="slds-var-m-right_x-small"></lightning-icon>
+                                {detail.value}
+                            </div>
+                        </template>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-3 slds-p-around_large csp-plan-card__available">
+                    <div class="csp-plan-card__title slds-m-bottom_small">
+                        <b>Premier</b> plan:
+                    </div>
+                    <div class="csp-plan-card__subtitle slds-m-top_small slds-m-bottom_medium">
+                        {premierTagline}
+                    </div>
+                    <template iterator:feature={premierPlanDetails}>
+                        <div key={feature.value.name}
+                            class="csp-plan-card__feature slds-m-bottom_small slds-m-top_medium">
+                            {feature.value.name}
+                        </div>
+                        <template iterator:detail={feature.value.details}>
+                            <div key={detail.value} class="csp-plan-card__detail slds-m-vertical_x-small">
+                                <lightning-icon icon-name="utility:check" size="x-small"
+                                    class="slds-var-m-right_x-small"></lightning-icon>
+                                {detail.value}
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </c-csp-modal>
+</template>

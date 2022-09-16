@@ -1,0 +1,126 @@
+<template>
+    <div if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+    <div if:false={isLoading}>
+        <div if:false={error} class="slds-grid slds-gutters slds-wrap slds-m-vertical--medium">
+            <div if:true={showAMCard} class={cardClass}>
+                <p class="csp-contacts__subtitle slds-p-bottom--medium csp-text_brand">Your <strong>Account Manager</strong></p>
+                    <div class="csp-contacts__card slds-card">
+                        <div class="slds-card__body slds-card__body_inner csp-contacts__body slds-p-horizontal_large">
+                            <template if:true={accountManager}>
+                                <div class="csp-contacts-details-outer">
+                                    <lightning-avatar
+                                        class={accountManager.avatar}
+                                        src={accountManager.photoUrl}
+                                        initials={accountManager.initials}>
+                                    </lightning-avatar>
+                                    <p class="slds-p-around--x-large"><strong>{accountManager.Name}</strong></p>
+                                </div>
+                                <div class="csp-contacts-details-outer slds-m-top_xx-small">
+                                    <span class="csp-contacts-details"><strong>E:</strong></span>
+                                    <span><lightning-formatted-email value={accountManager.Email} hide-icon></lightning-formatted-email></span>
+                                </div>
+                                <div class="csp-contacts-details-outer slds-m-top_xx-small">
+                                    <span class="csp-contacts-details"><strong>M:</strong></span>
+                                    <span>{accountManager.MobilePhone}</span>
+                                </div>
+                                <div class="csp-contacts-details-outer slds-m-top_xx-small">
+                                    <span class="csp-contacts-details"><strong>T:</strong></span>
+                                    <span>{accountManager.Phone}</span>
+                                </div>
+                            </template>
+                        </div>
+                        <div>
+                            <footer class="slds-var-p-around_large slds-card__footer csp-contacts__footer">{accountManagerDesc}</footer>
+                        </div>
+                    </div>
+            </div>
+            <div if:true={showCSMCard} class={cardClass}>
+                <p class="csp-contacts__subtitle slds-p-bottom--medium csp-text_brand">Your <strong>Customer Success Manager</strong></p>
+                <div class="csp-contacts__card slds-card">
+                    <div class="slds-card__body slds-card__body_inner csp-contacts__body slds-p-horizontal_large">
+                        <template if:true={csm}>
+                            <template if:true={isPremier}>
+                                <div class="csp-contacts-details-outer">
+                                    <lightning-avatar
+                                    class={csm.avatar}
+                                    src={csm.photoUrl}
+                                    initials={csm.initials}>
+                                    </lightning-avatar>
+                                    <p class="slds-p-around--x-large"><strong>{csm.Name}</strong></p>
+                                </div>
+                                <div class="csp-contacts-details-outer slds-m-top_xx-small">
+                                    <span class="csp-contacts-details"><strong>E:</strong></span>
+                                    <span><lightning-formatted-email value={csm.Email} hide-icon></lightning-formatted-email></span>
+                                </div>
+                                <div class="csp-contacts-details-outer slds-m-top_xx-small">
+                                    <span class="csp-contacts-details"><strong>M:</strong></span>
+                                    <span>{csm.MobilePhone}</span>
+                                </div>
+                                <div class="csp-contacts-details-outer slds-m-top_xx-small">
+                                    <span class="csp-contacts-details"><strong>T:</strong></span>
+                                    <span>{csm.Phone}</span>
+                                </div>
+                            </template>
+                        </template>
+                        <template if:true={isEssential}>
+                            <div class="csp-contacts-details-outer">
+                                <lightning-avatar
+                                    src="/Support/profilephoto/005/M"
+                                    class="slds-float_left slds-m-right_medium slds-m-vertical_small csp-avatar">
+                                </lightning-avatar>
+                            </div>
+                            <div class="slds-m-top_xx-small">
+                                You currently do not have access to the Customer Success team. To discuss your upgrade options, please contact your Account Manager.
+                            </div>
+                        </template>
+                        <template if:true={isStandard}>
+                            <div class="csp-contacts-details-outer">
+                                <lightning-avatar
+                                    src="/Support/profilephoto/005/M"
+                                    class="slds-float_left slds-m-right_medium slds-m-vertical_small csp-avatar">
+                                </lightning-avatar>
+                            </div>
+                            <div class="slds-m-top_xx-small">
+                                You currently have access to the wider Customer Success team, but you do not have a named customer success manager. To discuss upgrading to a Premier Customer Success plan, please contact your Account Manager.
+                            </div>
+                        </template>
+                    </div>
+                    <div>
+                        <footer class="slds-var-p-around_large slds-card__footer csp-contacts__footer">{csmDesc}</footer>
+                    </div>
+                </div>
+            </div>
+            <div if:true={showFinanceCard} class="slds-col slds-large-size_1-of-3 slds-medium-size_1-of-2 slds-small-size_1-of-1 slds-m-top_small">
+                <p class="csp-contacts__subtitle slds-p-bottom--medium csp-text_brand">Your <strong>Finance Team</strong></p>
+                    <div class="csp-contacts__card slds-card">
+                        <div class="slds-card__body slds-card__body_inner csp-contacts__body">
+                            <div class="csp-contacts-details-outer">
+                                <lightning-avatar
+                                    class="slds-float_left slds-m-right_medium slds-m-vertical_small csp-avatar access-theme-user-cat18"
+                                    initials="FT">
+                                </lightning-avatar>
+                                <p class="slds-p-around--x-large"><strong>Finance Team</strong></p>
+                            </div>
+                            <div class="csp-contacts-details-outer slds-m-top_xx-small">
+                                <span class="csp-contacts-details"><strong>E:</strong></span>
+                                <span><lightning-formatted-email value={financeEmail} hide-icon></lightning-formatted-email></span>
+                            </div>
+                            <div class="csp-contacts-details-outer slds-m-top_xx-small">
+                                <span class="csp-contacts-details"><strong>M:</strong></span>
+                                <span>{financeMobile}</span>
+                            </div>
+                            <div class="csp-contacts-details-outer slds-m-top_xx-small">
+                                <span class="csp-contacts-details"><strong>T:</strong></span>
+                                <span>{financePhone}</span>
+                            </div>
+                    </div>
+                    <div>
+                        <footer class="slds-var-p-around_large slds-card__footer csp-contacts__footer">{financeDescription}</footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

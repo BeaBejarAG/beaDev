@@ -1,0 +1,31 @@
+.csp-flex-points-case-status {
+    color: var(--c-successPlatformOrange,rgb(255,136,38));
+}
+
+.csp-quote-reject-button {
+    margin-left: 0;
+}
+
+.csp-flexpoint-approve-quote {
+    pointer-events: all !important;
+}
+
+.csp-flexpoint-approve-quote:hover + .csp-flexpoint-approve-quote-popover {
+    display: flex;
+    position: absolute;
+    margin-left: 0px;
+    margin-top: 115px;
+}
+
+.csp-flexpoint-approve-quote-popover {
+    display: none;
+}
+
+.csp-popover-body {
+    background-color: rgb(107, 188, 169);
+    box-shadow: rgba(0, 0, 0, 0.5);
+    margin: auto;
+    font-size: 15px;
+    width: 300px;
+    padding: 15px;
+}

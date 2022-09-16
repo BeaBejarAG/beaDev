@@ -1,0 +1,29 @@
+.csp-avatar {
+    height: 2.7rem;
+    width: 2.7rem;
+    border-radius: 1.35rem;
+    font-size: 1.1rem;
+}
+
+.csp-popover_profile {
+    z-index: 12000;
+}
+
+.csp-box_profile .csp-avatar {
+    height: 3.4rem;
+    width: 3.4rem;
+    border-radius: 1.7rem;
+    font-size: 1.1rem;
+}
+
+.csp-user {
+    cursor: default;
+}
+
+.csp-reputation {
+    cursor: default;
+}
+
+.csp-vertical-align_top {
+    vertical-align: top;
+}

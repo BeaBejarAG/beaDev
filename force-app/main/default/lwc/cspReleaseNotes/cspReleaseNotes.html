@@ -1,0 +1,109 @@
+<template>
+    <div class="release-notes-header slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid_vertical-align-center slds-p-vertical_medium">
+        <div class="release-notes-header__subject slds-col slds-show_medium slds-size_1-of-12 slds-p-horizontal_x-small">
+            Version
+        </div>
+        <div class="release-notes-header__subject slds-hide_medium slds-col slds-size_1-of-12 slds-p-horizontal_x-small">
+            #
+        </div>
+        <div class="release-notes-header__reference slds-col slds-size_2-of-12 slds-p-horizontal_x-small">
+            Release Notes
+        </div>
+        <div class="release-notes-header__product slds-col slds-size_2-of-12 slds-p-horizontal_x-small">
+            Release Webinar
+        </div>
+        <div class="release-notes-header__created slds-col slds-size_2-of-12 slds-small-size_2-of-12 slds-p-horizontal_small">
+            Release Date
+        </div>
+        <div class="release-notes-header__createdBy slds-show_small slds-col slds-size_2-of-12 slds-p-horizontal_small">
+            Upgrade Type
+        </div>
+        <div class="release-notes-header__component slds-col slds-show_medium slds-size_2-of-12 slds-p-horizontal_x-small">
+            Component
+        </div>
+        <div class="release-notes-header__modified slds-col slds-size_2-of-12 slds-small-size_1-of-12 slds-p-horizontal_x-small">
+            Status
+        </div>
+    </div>
+    <div class="release-notes">
+        <template iterator:result={releaseNotes}>
+            <div if:true={result.first} key={result.value.id} class="slds-border_top release-notes__top-border"></div>
+            <div key={result.value.id} class="release-note slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid--vertical-stretch">
+                <div class="release-note__version slds-col slds-size_1-of-12 slds-grid slds-grid_vertical-align-center">
+                    <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.version}</div>
+                </div>
+                <div class="release-note__notes slds-col slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                    <a class="slds-m-vertical_small slds-m-horizontal_x-small slds-line-clamp_x-small" onclick={handleSelectResult} data-url={result.value.articleUrl}>Notes available here</a>
+                </div>
+                <div class="release-note__webinar slds-col slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                    <lightning-icon icon-name="utility:video" size="x-small" class="slds-var-m-left_x-small slds-show_medium"></lightning-icon>
+                    <a if:true={result.value.recordingLink} class="slds-m-vertical_small slds-m-horizontal_x-small" data-url={result.value.recordingLink} onclick={handleWebinarClick}>Watch the webinar here</a>
+                    <div if:false={result.value.recordingLink} class="slds-m-vertical_small slds-m-horizontal_x-small">No webinar</div>
+                </div>
+                <div class="release-note__date slds-col slds-size_2-of-12 slds-small-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                    <lightning-formatted-date-time class="slds-m-vertical_small slds-m-horizontal_small" value={result.value.releaseDate} year="numeric" day="2-digit" month="long"></lightning-formatted-date-time>
+                </div>
+                <div class="release-note__type slds-col slds-show_small slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                    <div class="slds-m-vertical_small slds-m-horizontal_small">{result.value.upgradeType}</div>
+                </div>
+                <div class="release-note__component slds-col slds-show_medium slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                    <div class="slds-m-vertical_small slds-m-horizontal_x-small">{result.value.component}</div>
+                </div>
+                <template if:true={result.value.isReleased}>
+                    <div class="release-note__status-released slds-col slds-size_2-of-12 slds-small-size_1-of-12 slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+                        <lightning-icon icon-name="utility:check" alternative-text="Released" size="x-small" class="slds-var-m-horizontal_xx-small"></lightning-icon>
+                        <div class="slds-show_x-large slds-m-vertical_small slds-m-horizontal_xx-small">{result.value.status}</div>
+                    </div>
+                </template>
+                <template if:true={result.value.isScheduled}>
+                    <div class="release-note__status-scheduled slds-col slds-size_2-of-12 slds-small-size_1-of-12 slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+                        <lightning-icon icon-name="utility:date_time" alternative-text="Scheduled" size="x-small" class="slds-var-m-horizontal_xx-small"></lightning-icon>
+                        <div class="slds-show_x-large slds-m-vertical_small slds-var-m-horizontal_xx-small">{result.value.status}</div>
+                    </div>
+                </template>
+                <template if:true={result.value.postponed}>
+                    <div class="release-note__status-postponed slds-col slds-size_2-of-12 slds-small-size_1-of-12 slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+                        <lightning-icon icon-name="utility:macros" alternative-text="Postponed" size="x-small" class="slds-var-m-horizontal_xx-small"></lightning-icon>
+                        <div class="slds-show_x-large slds-m-vertical_small slds-var-m-horizontal_xx-small">{result.value.status}</div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <div class="slds-var-m-top_medium slds-size_1-of-1 slds-align_absolute-center">
+            <button if:true={showMore} class="slds-button slds-button_neutral slds-var-p-vertical_small slds-var-p-horizontal_large csp-search-button" onclick={handleLoadMore}>Load More</button>
+        </div>
+        <template if:true={completedSearch}>
+            <div class="slds-var-m-vertical_xx-large">Release notes will be available here shortly. In the meantime, if you’d like to know more about upcoming releases, please contact your account manager.</div>
+        </template>
+    </div>
+
+    <c-csp-modal
+        size="medium"
+        data-id="article-popup"
+        onkeydown={handleEscape}>
+        <template if:true={articleUrl.length}>
+            <span slot="header">
+                <c-csp-knowledge-article
+                    show-title="true"
+                    show-feedback-component="false"
+                    hide-action-buttons="true"
+                    url-name={articleUrl}>
+                </c-csp-knowledge-article>
+            </span>
+            <div class="slds-is-relative">
+                <div if:false={hasLoadedArticle}>
+                    <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                </div>
+                <c-csp-knowledge-article onkeydown={handleEscape}
+                    show-body="true"
+                    show-feedback-component="true"
+                    hide-action-buttons="true"
+                    show-product="true"
+                    oncspsubmittedarticlefeedback={handleArticleFeedback}
+                    oncsparticleloaded={handleArticleLoaded}
+                    url-name={articleUrl}>
+                </c-csp-knowledge-article>
+            </div>
+        </template>
+    </c-csp-modal>
+</template>

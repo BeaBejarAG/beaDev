@@ -1,0 +1,11 @@
+.csp-modal_header {
+    background-color: rgb(240, 240, 240);
+}
+.csp-modal_header h2 {
+    font-size: 1.4rem;
+    font-weight: var(--c-fontWeightRegular,400);
+}
+
+.csp-modal-content__overflow {
+    overflow: initial;
+}

@@ -1,0 +1,25 @@
+.THIS .access-theme-product {
+    background-color: token(successPlatformLightGreen);
+}
+
+.THIS .access-theme-product-inner {
+    max-width: token(successPlatformPageWidth);
+    margin: 0 auto;
+    font-size: 0.9rem;
+}
+
+.THIS .access-theme-product-inner .access-tour-button {
+    background-color: token(successPlatformDarkGrey);
+    border-radius: 20px;
+    border-width: 0px;
+    color: white;
+}
+
+.THIS .access-theme-product-inner .access-tour-button:hover {
+    background-color: black;
+}
+
+.THIS .access-theme-product-inner .slds-text-heading_large {
+    font-weight: 400;
+    font-size: 2.2rem;
+}

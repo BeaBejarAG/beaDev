@@ -1,0 +1,116 @@
+<aura:component implements="forceCommunity:themeLayout,flexipage:availableForAllPageTypes" controller="CspLogin" access="global">
+    <aura:attribute name="logo" type="Aura.Component[]"/>
+    <aura:attribute name="hero" type="Aura.Component[]"/>
+    <aura:attribute name="customer" type="Aura.Component[]"/>
+    <aura:attribute name="guest" type="Aura.Component[]"/>
+    <aura:attribute name="register" type="Aura.Component[]"/>
+
+    <aura:attribute name="expid" type="String" required="false"/>
+
+    <aura:attribute name="showLoginForm" type="Boolean" default="false"/>
+    <aura:attribute name="startUrl" type="String" default="/"/>
+    <aura:attribute name="errorMessage" type="String" default=""/>
+
+    <aura:registerevent name="sitePropagatedStartUrl" type="c:setStartUrl"/>
+    <aura:handler name="init" value="{!this}" action="{!c.initialize}"/>
+    <aura:dependency resource="c:setStartUrl" type="EVENT"/>
+    <aura:handler event="c:setStartUrl" action="{!c.setStartUrl}"/>
+    <aura:handler event="c:setExpId" action="{!c.setExpId}"/>
+    <aura:dependency resource="c:setExpId" type="EVENT"/>
+    <header>
+        <c:cspAccountSelection />
+        <div class="slds-grid slds-gutters slds-align_absolute-center access-theme-header">
+            <div class="slds-col_padded slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_2-of-12 access-theme-logo slds-var-m-top_x-large">
+                <a href="/Support/">
+                    <img width="160" style="height: 43px" src="{!$ContentAsset.AccessGroupsvg+'?v=6'}" class="slds-var-p-right_small"/>
+                </a>
+            </div>
+            <div class="slds-col_padded slds-size_9-of-12 slds-small-size_5-of-12 slds-medium-size_5-of-12 slds-large-size_6-of-12">
+            </div>
+            <div class="slds-col_padded slds-size_3-of-12 slds-small-size_4-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-var-m-top_medium slds-var-p-top_large slds-clearfix access-theme-header-links">
+                <ul class="slds-float_right slds-clearfix slds-grid">
+                    <li class="slds-text-color_weak slds-var-m-right_x-small access-theme-website-link">
+                        <a href='https://www.theaccessgroup.com/' target='_blank' class="slds-text-link_reset">
+                            The Access Group
+                        </a>
+                        <lightning:icon class="slds-var-m-left_x-small slds-var-m-top_xxx-small" iconName="utility:share" alternativeText="Open" title="Open" size="x-small" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="access-theme-login slds-var-m-top_x-large">
+            <div class="access-theme-login-inner slds-var-p-top_large slds-var-p-bottom_xx-large">
+                <div class="slds-grid slds-wrap slds-var-p-top_x-large slds-var-p-bottom_xx-large slds-var-m-bottom_medium">
+                    <div class="slds-size_8-of-12 slds-var-p-top_large">
+                        {!v.hero}
+                    </div>
+                    <div class="slds-size_4-of-12">
+                        <img width="335" src="{!$ContentAsset.accesspeopleheader5}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="access-theme-body">
+        <div class="slds-grid slds-wrap slds-var-m-bottom_large access-theme-login-boxes">
+            <aura:if isTrue="{!v.showLoginForm}">
+                <div class="slds-col_padded slds-size_1-of-1 slds-large-size_4-of-12 slds-var-m-bottom_large access-theme-login-box access-theme-login-box-active">
+                    <div class="access-theme-login-box-inner slds-is-relative">
+                        <div class="slds-var-m-horizontal_medium slds-var-p-horizontal_xxx-small slds-var-p-vertical_small" onkeydown="{!c.handleKeyDown}">
+                            <img width="85" src="{!$ContentAsset.accessloginformicon}" class="slds-float_right" />
+                            <h1 class="slds-var-p-bottom_small slds-var-p-top_x-large">I'm a Customer</h1>
+                            <div class="access-theme-login-box__error">
+                                {!v.errorMessage}
+                            </div>
+                            <lightning:input value="" placeholder="Enter Username..." aura:id="username" label="Username" class="slds-var-m-vertical_x-small" />
+                            <lightning:input value="" placeholder="Enter Password.." aura:id="password" label="Password" class="slds-var-m-vertical_x-small" type="password" />
+                            <div class="slds-var-p-top_xx-small slds-var-p-bottom_x-small">
+                                <a href="/Support/s/ForgotPassword">Forgotten password?</a>
+                            </div>
+                            <lightning:button class="slds-button_stretch slds-var-m-vertical_x-small" variant="brand" aura:id="submitButton" label="Sign in" onclick="{!c.handleLogin}" />
+                            <span class="slds-align_absolute-center">&mdash; OR &mdash;</span>
+                            <lightning:button class="slds-button_stretch slds-var-m-vertical_x-small" variant="success" aura:id="submitButton" label="Sign in with Workspace" onclick="{!c.handleLogin}" />
+                        </div>
+                    </div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.showLoginForm != true}">
+                <div class="slds-col_padded slds-size_1-of-1 slds-large-size_4-of-12 slds-var-m-bottom_large access-theme-login-box">
+                    <div class="access-theme-login-box-inner slds-is-relative">
+                        <div class="access-theme-login-box-red slds-is-relative slds-var-m-bottom_large">
+                            <img src="{!$ContentAsset.accesslogincustomer+'?v=2'}" height="" class="slds-is-absolute" />
+                        </div>
+                        <div class="slds-var-m-horizontal_medium slds-var-p-horizontal_xxx-small slds-var-m-bottom_x-large">
+                            {!v.customer}
+                        </div>
+                        <lightning:button label="Sign in to my portal" iconName="utility:forward" class="slds-button slds-is-absolute slds-var-m-around_medium" iconPosition="right" variant="base" onclick="{!c.login}"/>
+                    </div>
+                </div>
+            </aura:if>
+            <div class="slds-col_padded slds-size_1-of-1 slds-large-size_4-of-12 slds-var-m-bottom_large access-theme-login-box">
+                <div class="access-theme-login-box-inner slds-is-relative">
+                    <div class="access-theme-login-box-red slds-is-relative slds-var-m-bottom_large">
+                        <img src="{!$ContentAsset.accessloginguest+'?v=2'}" class="slds-is-absolute" />
+                    </div>
+                    <div class="slds-var-m-horizontal_medium slds-var-p-horizontal_xxx-small slds-var-m-bottom_x-large">
+                        {!v.guest}
+                    </div>
+                    <lightning:button label="Access knowledge base" iconName="utility:forward" class="slds-button slds-is-absolute slds-var-m-around_medium" iconPosition="right" variant="base" onclick="{!c.continueToKnowledge}"/>
+                </div>
+            </div>
+            <div class="slds-col_padded slds-size_1-of-1 slds-large-size_4-of-12 slds-var-m-bottom_large access-theme-login-box">
+                <div class="access-theme-login-box-inner slds-is-relative">
+                    <div class="access-theme-login-box-red slds-is-relative slds-var-m-bottom_large">
+                        <img src="{!$ContentAsset.accessloginregister+'?v=2'}" class="slds-is-absolute" />
+                    </div>
+                    <div class="slds-var-m-horizontal_medium slds-var-p-horizontal_xxx-small slds-var-m-bottom_x-large">
+                        {!v.register}
+                    </div>
+                    <lightning:button label="Register for an account" iconName="utility:forward" class="slds-button slds-is-absolute slds-var-m-around_medium" iconPosition="right" variant="base" onclick="{!c.register}"/>
+                </div>
+            </div>
+        </div>
+        {!v.body}
+    </div>
+    <div class="access-theme-footer"><c:cspGlobalFooter/></div>
+</aura:component>

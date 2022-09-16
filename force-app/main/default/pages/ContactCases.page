@@ -1,0 +1,39 @@
+<!--
+    VF page as a container to allow community users to export their cases and related fields.
+-->
+<apex:page controller="ContactCaseList" contentType="application/vnd.ms-excel#mycases.xls">
+    <apex:pageBlock title="Cases">
+        <apex:pageBlockTable value="{!cse}" var="case">
+            <apex:column value="{!case.CaseNumber}"/>
+            <apex:column value="{!case.Status}"/>
+            <apex:column value="{!case.Priority}"/>
+            <apex:column value="{!case.Origin}"/>
+            <apex:column value="{!case.contact.Name}"/> 
+            <apex:column value="{!case.Subject}"/>
+            <apex:column value="{!case.Description}"/>
+            <apex:column value="{!case.Solution__c}"/>
+            <apex:column value="{!case.Type}"/>
+            <apex:column value="{!case.Status_Summary__c}"/>
+            <apex:column value="{!case.Created_Post_Go_Live__c}"/>
+            <apex:column value="{!case.Division__c}"/>
+            <apex:column value="{!case.Modified_In_Last_7_Days__c}"/>
+            <apex:column value="{!case.Parent.CaseNumber}"/>
+            <apex:column value="{!case.CaseImportance__c}"/>
+            <apex:column value="{!case.RelatedProduct__c}"/>
+            <apex:column value="{!case.SubAnalysis__c}"/>
+            <apex:column value="{!case.Case_Escalated__c}"/>
+            <apex:column value="{!case.CustomerLastContacted__c}"/>
+            <apex:column value="{!case.NextContactDate__c}"/>
+            <apex:column value="{!case.CreatedDate}"/>
+            <apex:column value="{!case.ClosedDate}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    
+     <apex:pageBlock title="Cases With Comments">
+        <apex:pageBlockTable value="{!cseCmts}" var="cc">
+            <apex:column value="{!cc.Parent.CaseNumber}"/>
+            <apex:column value="{!cc.CreatedDate}"/>
+            <apex:column value="{!cc.CommentBody}"/>
+        </apex:pageBlockTable>
+     </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,192 @@
+<template>
+    <template if:true={showProducts}>
+        <div class="csp-text_page-heading slds-var-m-bottom_xx-large">Q&A Forums</div>
+        <div class="slds-grid slds-var-m-bottom_xx-large">
+            <div class="slds-size_1-of-12"></div>
+            <div class="slds-size_11-of-12">
+                <div class="csp-text_large csp-text_light slds-border_bottom slds-var-p-vertical_x-small slds-var-m-bottom_xx-large">My products</div>
+                <div class="slds-grid">
+                    <div class="slds-size_12-of-12 slds-var-p-left_xx-large slds-var-p-right_x-large">
+                        <c-csp-product-selection-matrix
+                            product-target=""
+                            show-all={showAll}
+                            display-style="Compact"
+                            community-visibility="true">
+                            <span slot="header"></span>
+                        </c-csp-product-selection-matrix>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-var-m-bottom_xx-large">
+            <div class="slds-size_1-of-12"></div>
+            <div class="slds-size_11-of-12">
+                <div class="csp-text_large csp-text_light slds-border_bottom slds-var-p-vertical_x-small">Browse all products</div>
+                <div class="slds-grid">
+                    <div class="slds-size_12-of-12">
+                        <c-csp-product-division-filter
+                            matrix-view="true"
+                            community-visibility="true"
+                            title="">
+                        </c-csp-product-division-filter>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:true={showGroups}>
+        <div class="csp-text_page-heading slds-var-m-bottom_large">Groups</div>
+        <div class='slds-grid slds-wrap slds-var-m-bottom_xx-large'>
+            <div class='slds-size_1-of-12'></div>
+            <div class="slds-size_11-of-12" if:true={memberGroups}>
+                <div class="csp-text_large csp-text_light slds-border_bottom slds-var-p-vertical_x-small slds-var-m-top_large slds-var-m-bottom_large" if:true={memberGroups.length}>My groups</div>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template iterator:group={memberGroups}>
+                        <div key={group.value.id} class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_4-of-12 slds-var-m-bottom_medium">
+                            <div class="slds-box csp-box_shaded-light slds-grid csp-browse_group" onclick={handleViewGroup} data-id={group.value.id}>
+                                <div class="slds-size_3-of-12 slds-var-p-around_xx-small slds-var-m-top_medium slds-var-m-right_small">
+                                    <img src={group.value.photo.mediumPhotoUrl}>
+                                </div>
+                                <div class="slds-size_9-of-12 slds-var-p-horizontal_small">
+
+                                    <div class="slds-var-m-top_small slds-var-m-bottom_x-small slds-truncate csp-max-width_100">
+                                        <span class="csp-text_strong">{group.value.name}</span>
+                                    </div>
+                                    <p class="slds-line-clamp_x-small csp-text_small csp-browse_group-description">
+                                        {group.value.description}
+                                    </p>
+
+                                    <div class="slds-var-m-top_x-small slds-grid">
+                                        <lightning-icon
+                                            icon-name="utility:groups"
+                                            size="x-small"
+                                            class="slds-var-m-right_small">
+                                        </lightning-icon>
+                                        <div class="csp-text_small">{group.value.memberCountLabel}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <div class='slds-grid slds-var-m-bottom_xx-large'>
+            <div class='slds-size_1-of-12'></div>
+            <div class='slds-size_11-of-12' if:true={groups}>
+                <div class="csp-text_large csp-text_light slds-border_bottom slds-var-p-vertical_x-small slds-var-m-top_large slds-var-m-bottom_large">Browse all groups</div>
+                <div class="slds-grid slds-wrap slds-gutters" if:true={groups.groups}>
+                    <template iterator:group={groups.groups}>
+                        <div key={group.value.id} class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_4-of-12 slds-var-m-bottom_medium">
+                            <div class="slds-box csp-box_shaded-light slds-grid csp-browse_group" onclick={handleViewGroup} data-id={group.value.id}>
+                                <div class="slds-size_3-of-12 slds-var-p-around_xx-small slds-var-m-top_medium slds-var-m-right_small">
+                                    <img src={group.value.photo.mediumPhotoUrl}>
+                                </div>
+                                <div class="slds-size_9-of-12 slds-var-p-horizontal_small">
+
+                                    <div class="slds-var-m-top_small slds-var-m-bottom_x-small slds-truncate csp-max-width_100">
+                                        <span class="csp-text_strong">{group.value.name}</span>
+                                    </div>
+                                    <p class="slds-line-clamp_x-small csp-text_small csp-browse_group-description">
+                                        {group.value.description}
+                                    </p>
+
+                                    <div class="slds-var-m-top_x-small slds-grid">
+                                        <lightning-icon
+                                            icon-name="utility:groups"
+                                            size="x-small"
+                                            class="slds-var-m-right_small">
+                                        </lightning-icon>
+                                        <div class="csp-text_small">{group.value.memberCountLabel}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={showProductsAndGroups}>
+        <lightning-tabset>
+            <lightning-tab label="Q&A Forums" icon-name="utility:fulfillment_order">
+                <div class="csp-text_large slds-var-m-top_medium slds-var-m-bottom_medium">
+                    My products
+                </div>
+                <c-csp-product-selection-matrix
+                    product-target=""
+                    display-style={displayStyle}
+                    community-visibility="true">
+                    <span slot="header"></span>
+                </c-csp-product-selection-matrix>
+                <div class="">
+                    <lightning-button
+                        class="csp-button_link csp-button_link-weak csp-text_medium"
+                        onclick={handleViewProducts}
+                        label="View all">
+                    </lightning-button>
+                </div>
+            </lightning-tab>
+
+            <lightning-tab label="Groups" icon-name="utility:hierarchy" onactive={handleGetGroups}>
+                <div class="csp-text_large slds-var-m-top_medium slds-var-m-bottom_large">
+                    My groups
+                </div>
+
+                <template if:true={memberGroups}>
+                    <div class="slds-grid slds-wrap slds-gutters" if:false={memberGroups.length}>
+                        <span class="slds-var-m-left_medium csp-text_medium slds-var-p-top_xxx-small">You are not a member of any groups yet, you can</span>
+                        <div class="slds-show_inline-block slds-var-m-left_xx-small slds-var-m-bottom_xxx-small">
+                            <lightning-button
+                                class="csp-button_link csp-button_link-weak csp-text_medium"
+                                onclick={handleViewGroups}
+                                label="view all groups here">
+                            </lightning-button>
+                        </div>
+                    </div>
+
+                    <div class="slds-grid slds-wrap slds-gutters" if:true={memberGroups.length}>
+                        <template iterator:group={memberGroups}>
+                            <div key={group.value.id} class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_4-of-12 slds-var-m-bottom_medium">
+                                <div class="slds-box csp-box_shaded slds-grid csp-browse_group" onclick={handleViewGroup} data-id={group.value.id}>
+                                    <div class="slds-size_3-of-12 slds-var-p-around_xx-small slds-var-m-top_medium slds-var-m-right_small">
+                                        <img src={group.value.photo.mediumPhotoUrl}>
+                                    </div>
+                                    <div class="slds-size_9-of-12 slds-var-p-horizontal_small">
+
+                                        <div class="slds-var-m-top_small slds-var-m-bottom_x-small slds-truncate csp-max-width_100">
+                                            <span class="csp-text_strong">{group.value.name}</span>
+                                        </div>
+                                        <p class="slds-line-clamp_x-small csp-text_small csp-browse_group-description">
+                                            {group.value.description}
+                                        </p>
+
+                                        <div class="slds-var-m-top_x-small slds-grid">
+                                            <lightning-icon
+                                                icon-name="utility:groups"
+                                                size="x-small"
+                                                class="slds-var-m-right_small">
+                                            </lightning-icon>
+                                            <div class="csp-text_small">{group.value.memberCountLabel}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="slds-var-m-top_medium">
+                        <lightning-button
+                            class="csp-button_link csp-button_link-weak csp-text_medium"
+                            onclick={handleViewGroups}
+                            if:true={memberGroups.length}
+                            label="View all">
+                        </lightning-button>
+                    </div>
+                </template>
+            </lightning-tab>
+        </lightning-tabset>
+    </template>
+</template>

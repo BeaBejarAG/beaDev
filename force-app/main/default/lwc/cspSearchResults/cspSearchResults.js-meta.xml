@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>47.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Global Search Results</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="searchText" type="String" default="" label="Default search text"/>
+            <property name="limitAmount" type="Integer" min="3" max="200" default="10" label="Default search result limit"/>
+            <property name="showTabs" type="Boolean" default="true" label="Show tabs to group results"/>
+            <property name="includeKnowledgeResults" type="Boolean" default="true" label="Include knowledge in results"/>
+            <property name="includeCommunityResults" type="Boolean" default="true" label="Include community in results"/>
+            <property name="includeReleaseNotesResults" type="Boolean" default="true" label="Include release notes in results"/>
+            <property name="includeServicesCatalogueResults" type="Boolean" default="true" label="Include services catalogue in results"/>
+            <property name="includeEventsResults" type="Boolean" default="true" label="Include events in results"/>
+            <property name="showFeatureFilter" type="Boolean" default="true" label="Show feature filter"/>
+            <property name="showProductFilter" type="Boolean" default="true" label="Show product filter"/>
+            <property name="ignoreProduct" type="Boolean" default="false" label="Ignore product selection"/>
+            <property name="showTypeIcons" type="Boolean" default="false" label="Show type icons in All"/>
+            <property name="communityFilters" type="Boolean" default="false" label="Show community filters"/>
+            <property name="defaultTab" type="String" datasource="ALL,EVENTS,KNOWLEDGE,COMMUNITY,RELEASENOTES,SERVICESCATALOGUE" default="ALL" label="Default search tab" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

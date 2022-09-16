@@ -1,0 +1,17 @@
+<template>
+    <template if:true={collectionObject}>
+        <template if:true={titleView}>
+            <div class="collection__title slds-var-m-bottom_medium">{collectionObject.title}</div>
+        </template>
+        <template if:false={titleView}>
+            <div class="slds-grid slds-wrap slds-grid_align-start slds-size_1-of-1 slds-large-size_3-of-4">
+                <div class="collection__icon slds-grid slds-grid_vertical-align-center slds-var-m-vertical_small">
+                    <lightning-icon icon-name={collectionObject.icon} size="large" variant="inverse" class="slds-align_absolute-center"></lightning-icon>
+                </div>
+                <div class="collection__description slds-var-m-vertical_small slds-size_1-of-1">
+                    {collectionObject.description}
+                </div>
+            </div>
+        </template>
+    </template>
+</template>

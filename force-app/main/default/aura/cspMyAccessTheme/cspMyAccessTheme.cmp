@@ -1,0 +1,70 @@
+<aura:component implements="forceCommunity:themeLayout,flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="logo" type="Aura.Component[]"/>
+    <aura:attribute name="navBar" type="Aura.Component[]"/>
+    <aura:attribute name="search" type="Aura.Component[]"/>
+    <aura:attribute name="profileMenu" type="Aura.Component[]"/>
+    <aura:attribute name="navigation" type="Aura.Component[]"/>
+    <aura:attribute name="breadcrumbs" type="Aura.Component[]"/>
+    <aura:attribute name="globalNavigation" type="Aura.Component[]"/>
+    <aura:attribute name="product" type="Object" />
+
+    <aura:attribute name="pageTitle" type="String"/>
+    <aura:handler name="render" value="{!this}" action="{!c.handleInit}"/>
+    <aura:handler event="forceCommunity:routeChange" action="{!c.rerender}"/>
+
+    <aura:handler event="c:cspProductSelectionEvent" action="{!c.handleProductSelection}" includeFacets="true" />
+
+    <ltng:require styles="{!$Resource.cspstyles}" />
+
+    <header>
+        <c:cspAccountSelection />
+        <c:cspGlobalHeader profileMenu="{!v.profileMenu}" globalNavigation="{!v.globalNavigation}"/>
+        <div class="access-theme-nav-bar slds-m-top_x-large">
+            <div class="slds-grid slds-gutters slds-align_absolute-center">
+                <div class="slds-size_12-of-12 access-theme-nav">{!v.navBar}</div>
+            </div>
+        </div>
+        <div class="access-theme-myaccess">
+            <div class="access-theme-myaccess-inner slds-p-top_medium">
+                <div class="slds-grid slds-wrap slds-p-bottom_x-large">
+                    <div class="slds-col--padded slds-size_1-of-1 slds-large-size_1-of-1">
+                        <lightning:breadcrumbs class="slds-p-top_medium slds-p-bottom_xx-small">
+                            <lightning:breadcrumb label="Portal Home" href="/Support/s/"/>
+                            <aura:if isTrue="{!v.pageTitle != 'My Access'}">
+                                <lightning:breadcrumb label="My Access" href="/Support/s/my-access"/>
+                            </aura:if>
+	                        <lightning:breadcrumb label="" href=""/>
+                        </lightning:breadcrumbs>
+                        <h1 class="slds-text-heading_large slds-p-bottom_medium slds-p-top_medium">{!v.pageTitle}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="access-theme-product-bar slds-hide" aura:id="access-theme-product-bar">
+        <div class="slds-grid slds-wrap slds-gutters slds-align_absolute-center">
+            <div class="slds-col--padded slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_7-of-12 slds-p-vertical_small slds-text-heading_medium slds-align_absolute-left">
+                <c:cspProductSelection></c:cspProductSelection>
+            </div>
+            <div class="slds-col--padded slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_5-of-12 slds-p-vertical_x-small access-theme-search">
+                <c:cspSearch
+                    aura:id="search"
+                    assistiveText="Search services..."
+                    includeKnowledgeResults="false"
+                    includeCommunityResults="false"
+                    includeReleaseNotesResults="false"
+                    includeEventsResults="false"
+                    handlerUrl="/help-centre-global-search">
+                </c:cspSearch>
+            </div>
+        </div>
+    </div>
+
+    <div class="access-theme-body">
+        <div class="access-theme-body__container">
+            {!v.body}
+        </div>
+    </div>
+    <div class="access-theme-footer"><c:cspGlobalFooter/></div>
+</aura:component>

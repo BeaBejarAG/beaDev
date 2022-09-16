@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sent to CSM when P1 case is opened.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Access_Letterhead</letterhead>
+    <name>New Customer P1 Support Case Created</name>
+    <style>freeForm</style>
+    <subject>New Customer P1 Support Case {!Case.CaseNumber}</subject>
+    <textOnly>Hi {!Account.CSM_Owner__c} ,
+
+A new case has been raised with the following details.
+
+Account {!Account.Name}
+
+Case Number {!Case.CaseNumber}
+
+Case Type {!Case.CaseType__c}
+
+Case Priority {!Case.Priority}
+
+Case Subject {!Case.Subject}
+
+Case Description {!Case.Description}
+
+
+Click here to view the case {Here}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

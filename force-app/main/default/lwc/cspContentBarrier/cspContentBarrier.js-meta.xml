@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Content Barrier</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="title" type="String" default="Sign In Required" label="Title" />
+            <property name="barrierDetail1" type="String" default="Please sign in to the Customer Success Portal in order to view this content." label="Message part 1" />
+            <property name="barrierDetail2" type="String" default="If you are not currently a member, please Register." label="Message part 2" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

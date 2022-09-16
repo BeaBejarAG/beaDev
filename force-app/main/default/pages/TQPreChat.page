@@ -1,0 +1,178 @@
+<apex:page showHeader="false" lightningStylesheets="true" >
+    <style>
+    #details {
+top: 120px;
+left: 40px;
+right: 40px;
+bottom: 75px;
+position: absolute;
+border-radius: 25px;
+border: 2px solid grey;
+text-align: center;
+}
+
+  table.center {
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  input.FieldLength{
+        width: 220px;
+        }
+
+         .commbuttononline
+        {
+            font-family: arial;
+    margin-left: 0.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid rgb(217, 219, 221);
+    transition: border .15s linear;
+    background-color: rgb(84, 185, 179);
+    border-color: rgb(84, 185, 179);
+    color: rgb(255, 255, 255);
+        position: relative;
+    display: inline-block;
+    line-height: 1.805rem;
+    -webkit-appearance: none;
+    white-space: normal;
+    user-select: none;
+padding: 0px, 0px, 5px, 5px;
+
+    border-radius: 0.25rem;
+    text-decoration: none;
+        }
+
+
+    </style>
+
+<!-- This script takes the endpoint URL parameter passed from the deployment page and makes it the action for the form -->
+<script type='text/javascript'>
+(function() {
+function handlePageLoad() {
+var endpointMatcher = new RegExp("[\\?\\&]endpoint=([^&#]*)");
+document.getElementById('prechatForm').setAttribute('action',
+decodeURIComponent(endpointMatcher.exec(document.location.search)[1].replace("javascript:", "")));
+} if (window.addEventListener) {
+window.addEventListener('load', handlePageLoad, false);
+} else { window.attachEvent('onload', handlePageLoad, false);
+}})();
+</script>
+
+
+    <script type='text/javascript' src='https://c.la1-c1cs-lo3.salesforceliveagent.com/content/g/js/48.0/deployment.js'></script>
+<script type="text/javascript">
+    //Get Custom Details data
+    function ChatCallBack(Object) {
+    //alert('Callback hit' + Object.customDetails.length);
+        for (var i = 0; i < Object.customDetails.length; i++) {
+
+            if (Object.customDetails[i].label == 'ContactID') {
+                //Get ContactID
+                console.log(Object.customDetails[i].value);
+                document.getElementById("ClientId").value = Object.customDetails[i].value;
+            }
+
+        }
+    };
+    liveagent.details.preChatInit('https://d.la1-c1cs-lo3.salesforceliveagent.com/chat', 'ChatCallBack');
+</script>
+
+<!-- Form that gathers information from the chat visitor and sets the values to Live Agent Custom Details used later in the example -->
+           <img src="https://www.theaccessgroup.com/media/9340/productlogos_microsites_accesssmall.png" style="top: -20px; left: 60px; right: 90px; position: absolute;"/>
+<div id='details'>
+<form method='post' id='prechatForm'>
+<table class ="center">
+<tr>
+    <td>Prodcut Area:</td>
+<td><select name="liveagent.prechat:ModuleTab" placeholder="Select Module" style="width: 225px;" id='Modtab'>
+  <option value="Add-ins">Add-ins</option>
+  <option value="Admin">Admin</option>
+  <option value="Consent Portal">Consent Portal</option>
+  <option value="CRM">CRM</option>
+  <option value="Data Tools">Data Tools</option>
+  <option value="Enviroment">Enviroment</option>
+  <option value="Events">Events</option>
+  <option value="Finance">Finance</option>
+  <option value="Fundraising">Fundraising</option>
+  <option value="Grants">Grants</option>
+  <option value="Lightning">Lightning</option>
+  <option value="Mailing">Mailing</option>
+  <option value="Membership">Membership</option>
+  <option value="Other">Other</option>
+  <option value="Reporting">Reporting</option>
+  <option value="Volunteers">Volunteers</option>
+  <option value="Web">Web</option>
+    </select></td>
+</tr>
+</table>
+
+<!-- Hidden fields used to set additional custom details -->
+    <input type="hidden" name="liveagent.prechat:CaseStatus" value="Support Outstanding" />
+    <input type="hidden" name="liveagent.prechat:RelatedProduct" value="Access Care Compliance" />
+    <input type="hidden" name="liveagent.prechat:PFOrigin" value="Live Chat" />
+    <input type="hidden" name="liveagent.prechat:PFSource" value="Support" />
+    <input type="hidden" name="liveagent.prechat:PFCaseType" value="Support issue" />
+
+
+    <!-- This example assumes that "Chat" was added as picklist value to the Case Origin field -->
+    <input type="hidden" name="liveagent.prechat:CaseOrigin" value="Live Chat" />
+
+    <!-- This example will set the Case Record Type to a specific value for the record type configured on the org. Lookup the case record type's id on your org and set it here -->
+    <input type="hidden" name="liveagent.prechat:CaseRecordType" value="012580000006Hfd" />
+
+    <!-- Used to set the visitor's name for the agent in the Console -->
+    <input type="hidden" name="liveagent.prechat.name" id="prechat_field_name" />
+
+<!-- map: Use the data from prechat form to map it to the Salesforce record's fields -->
+<input type="hidden" name="liveagent.prechat.findorcreate.map:Contact" value="id,LCContactId;FirstName,ContactFirstName;LastName,ContactLastName;Email,ContactEmail;Phone,ContactPhone" />
+
+<input type="hidden" name="liveagent.prechat.findorcreate.map:Case" value="id,LCCaseId;RecordTypeId,CaseRecordType;EntitlementId,EntyId;Subject,Subject;Description,Description;Status,CaseStatus;RelatedProduct__c,RelatedProduct;Origin,PFOrigin;Source__c,PFSource;CaseType__c,PFCaseType" />
+
+<!-- doFind, doCreate and isExactMatch example for a Contact:
+    Find a contact whose Email exactly matches the value provided by the customer in the form
+    If there's no match, then create a Contact record and set it's First Name, Last Name, Email, and Phone to the values provided by the customer -->
+<input type="hidden" name="liveagent.prechat.findorcreate.map.doFind:Contact" value="id,true" />
+<input type="hidden" name="liveagent.prechat.findorcreate.map.isExactMatch:Contact" value="id,true" />
+
+<input type="hidden" name="liveagent.prechat.findorcreate.map.doFind:Case" value="id,true" />
+<input type="hidden" name="liveagent.prechat.findorcreate.map.isExactMatch:Case" value="id,true" />
+
+<!-- showOnCreate: Open the Contact and Case records as sub-tabs to the chat for the agent in the Console -->
+<input type="hidden" name="liveagent.prechat.findorcreate.showOnCreate:Contact" value="true" />
+<input type="hidden" name="liveagent.prechat.findorcreate.showOnCreate:Case" value="true" />
+
+<!-- saveToTranscript: Associates the records found / created, i.e. Contact and Case, to the Live Chat Transcript record. -->
+<input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript:Contact" value="ContactId" />
+<input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript:Case" value="CaseId" />
+
+<!-- displayToAgent: Hides the case record type from the agent -->
+    <input type="hidden" name="liveagent.prechat.findorcreate.displayToAgent:CaseRecordType" value="false" />
+    <input type="hidden" name="liveagent.prechat.findorcreate.displayToAgent:CaseStatus" value="false" />
+    <input type="hidden" name="liveagent.prechat.findorcreate.displayToAgent:RelatedProduct" value="false" />
+    <input type="hidden" name="liveagent.prechat.findorcreate.displayToAgent:PFOrigin" value="false" />
+    <input type="hidden" name="liveagent.prechat.findorcreate.displayToAgent:PFSource" value="false" />
+    <input type="hidden" name="liveagent.prechat.findorcreate.displayToAgent:PFCaseType" value="false" />
+
+<!-- searchKnowledge: Searches knowledge article based on the text, this assumes that Knowledge is setup -->
+<input type="hidden" name="liveagent.prechat.knowledgeSearch:CaseSubject" value="true" />
+
+<input type='submit' class="commbuttononline" value='Chat Now' id='prechat_submit' onclick="setName()"/>
+
+<!-- Set the visitor's name for the agent in the Console to first and last name provided by the customer -->
+<script type="text/javascript">
+   function setName() {
+    document.getElementById("prechat_field_name").value =
+        document.getElementById("firstName").value + " " + document.getElementById("lastName").value;
+    }
+</script>
+
+<style type="text/css">
+p {font-weight: bolder }
+</style>
+
+</form>
+</div>
+</apex:page>

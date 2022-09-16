@@ -1,0 +1,87 @@
+<template>
+    <template if:false={matrixView}>
+        <div class="slds-m-vertical_large csp-product-filter__title slds-grid slds-grid_align-spread" onclick={handleSectionClick}>
+            <div class="slds-col">
+                {title}
+            </div>
+            <div class="slds-col slds-col_bump-left">
+                <template if:true={sectionOpen}>
+                    <lightning-icon icon-name="utility:chevrondown" size="x-small"></lightning-icon>
+                </template>
+                <template if:false={sectionOpen}>
+                    <lightning-icon icon-name="utility:chevronleft" size="x-small"></lightning-icon>
+                </template>
+            </div>
+        </div>
+        <template if:true={sectionOpen}>
+            <div class="slds-m-vertical_medium csp-product-filter__subtitle">
+                {subtitle}
+            </div>
+            <div class="slds-grid slds-size_1-of-1 slds-large-size_3-of-4 slds-border_top slds-border_bottom slds-p-horizontal_xx-small">
+                <lightning-accordion class="slds-size_1-of-1 slds-grid" allow-multiple-sections-open onsectiontoggle={handleSectionToggle} active-section-name={activeSections}>
+                    <div class="csp-all-products slds-m-around_small slds-grid slds-grid_vertical-align-center" onclick={handleAllProductsClick}>
+                        <lightning-icon icon-name="utility:all" size="x-small" class="csp-feature-selection__item-icon"></lightning-icon>
+                        <template if:true={allProductsSelected}>
+                            <div class="selected csp-all-products__title slds-m-around_small slds-truncate">
+                                All Products
+                            </div>
+                        </template>
+                        <template if:false={allProductsSelected}>
+                            <div class="csp-all-products__title slds-m-around_small slds-truncate">
+                                All Products
+                            </div>
+                        </template>
+                    </div>
+                    <template iterator:division={divisions}>
+                        <lightning-accordion-section key={division.value.name} name={division.value.name} label={division.value.name} class="csp-product-filter__division slds-p-vertical_x-small">
+                            <template iterator:product={division.value.products}>
+                                <template if:true={product.value.active}>
+                                    <div key={product.value.id} class="active csp-product-filter__product slds-m-vertical_x-small slds-m-left_large" data-product={product.value.id} onclick={handleProductFilterClick}>
+                                        {product.value.name}
+                                    </div>
+                                </template>
+                                <template if:false={product.value.active}>
+                                    <div key={product.value.id} class="csp-product-filter__product slds-m-vertical_x-small slds-m-left_large" data-product={product.value.id} onclick={handleProductFilterClick}>
+                                        {product.value.name}
+                                    </div>
+                                </template>
+                            </template>
+                        </lightning-accordion-section>
+                    </template>
+                </lightning-accordion>
+            </div>
+        </template>
+    </template>
+    <template if:true={matrixView}>
+        <div class="slds-m-vertical_large csp-product-filter__title slds-grid slds-grid_align-spread">
+            {title}
+        </div>
+        <div class="slds-grid slds-wrap slds-p-horizontal_xx-large">
+            <template if:true={divisions} iterator:division={divisions}>
+                <div key={division.value.name} class="slds-size_1-of-1 slds-m-vertical_medium csp-product-filter__subtitle">
+                    {division.value.name}
+                </div>
+                <template if:true={division.value.products}>
+                    <template for:each={division.value.products} for:item='product'>
+                        <div key={product.id} class="slds-grid slds-p-horizontal_small slds-shrink-none slds-size_1-of-1 slds-large-size_3-of-12">
+                            <div class="slds-grid slds-var-p-horizontal_small slds-grid_align-center">
+                                <div class="slds-size_1-of-1 slds-grid slds-var-m-vertical_small slds-var-m-horizontal_small access-product-card"
+                                    onclick={handleMatrixSelect}
+                                    data-product-id={product.id}
+                                    data-product-enabled={product.enabledForCommunity}
+                                    data-product-redirect={product.communityRedirect}>
+                                    <div class={product.colour} style="display: flex;">
+                                        <img class="access-product-card__logo slds-align_absolute-center" src={product.image}></img>
+                                    </div>
+                                    <ul class="slds-var-p-vertical_x-small csp-truncate_85">
+                                        <div class="slds-var-m-horizontal_small slds-truncate access-product-card__name">{product.name}</div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </template>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,98 @@
+<template>
+  <template if:true={loading}><lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+  </template>
+  <lightning-combobox
+        name="related-accounts"
+        label="Related Accounts"
+        value={acctId}
+        placeholder="Select Account"
+        options={options}
+        onchange={handleChange} ></lightning-combobox>
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <caption>Entitlements Assigned To</caption>
+          <thead>
+          <tr class="slds-line-height_reset">
+          <th class="" scope="col">
+          <div class="slds-truncate" title="Entitlement Name">Entitlement Name</div>
+          </th>
+          <th class="" scope="col">
+          <div class="slds-truncate" title="Current Used Seats">Current Seats</div>
+          </th>
+          <th class="" scope="col">
+            <div class="slds-truncate" title="Remaining Seats">Remaining Seats</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Add To Entitlement">Action</div>
+            </th>    
+          </tr>
+          </thead>
+          <tbody>
+            <template for:each={entcont} for:item="EntContact">
+                <tr key={EntContact.Id} class="slds-hint-parent">     
+  
+                 <td data-label="Entitlement Name">
+                    <lightning-button variant="base" id={EntContact.Id} data-name={EntContact.Id} label={EntContact.Name} onclick={navigatetouser}>{EntContact.Name}</lightning-button >
+                  </td>
+  
+                  <td data-label="Current Seats">
+                    <div class="slds-truncate">{EntContact.AuthorisedContacts__c}</div>
+                  </td>
+  
+                  <td data-label="Remaining Seats">
+                    <div class="slds-truncate">{EntContact.RemainingAuthorisedContacts__c}</div>
+                  </td>
+
+                  <td data-label="Remove User">
+                    <lightning-button-icon-stateful id={EntContact.Id} data-name={EntContact.Id} icon-name="standard:case" onclick={CreateNewCase} alternative-text="Create Case"></lightning-button-icon-stateful>
+                    <lightning-button-icon-stateful id={EntContact.Id} data-name={EntContact.Id} icon-name="action:delete" onclick={RemoveFromEnitlement} alternative-text="Remove User"></lightning-button-icon-stateful>
+                  </td>               
+                </tr >               
+            </template>
+              </tbody>
+              </table>
+              
+              <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <caption>Entitlements Not Assigned To</caption>
+                <thead>
+                  <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                    <div class="slds-truncate" title="Entitlement Name">Entitlement Name</div>
+                    </th>
+                    <th class="" scope="col">
+                    <div class="slds-truncate" title="Current Used Seats">Current Seats</div>
+                    </th>
+                    <th class="" scope="col">
+                      <div class="slds-truncate" title="Remaining Seats">Remaining Seats</div>
+                      </th> 
+                      <th class="" scope="col">
+                        <div class="slds-truncate" title="Add To Entitlement">Action</div>
+                      </th>  
+                    </tr>
+                </thead>
+                <tbody>
+                  <template for:each={acccont} for:item="Acccontact">
+                      <tr key={acccont.Id} class="slds-hint-parent">     
+        
+                       <td data-label="Entitlement Name">
+                          <lightning-button variant="base" id={Acccontact.Id} data-name={Acccontact.Id} label={Acccontact.Name} onclick={navigatetouser}>{Acccontact.Name}</lightning-button >
+                        </td>
+        
+                        <td data-label="Current Seats">
+                          <div class="slds-truncate">{Acccontact.AuthorisedContacts__c}</div>
+                        </td>
+        
+                        <td data-label="Remaining Seats">
+                          <div class="slds-truncate">{Acccontact.RemainingAuthorisedContacts__c}</div>
+                        </td>
+
+                        <td data-label="Add Contact">
+                          <lightning-button-icon-stateful icon-name="action:join_group" id={Acccontact.Id} data-name={Acccontact.Id} onclick={AddToEntitlement} alternative-text="Add Contact To Entitlement"></lightning-button-icon-stateful>
+                        </td>
+                      </tr >
+        
+                      
+                  </template>
+                    </tbody>
+                    </table>     
+                
+  </template>

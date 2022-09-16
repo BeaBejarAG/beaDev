@@ -1,0 +1,100 @@
+<!-- add implements="forceCommunity:availableForAllPageTypes" to surface the component in community builder -->
+<aura:component controller="LightningSelfRegisterController" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="timezoneSelectOptionsRetrieved" type="Boolean" default="false" description="Boolean on whether the Timezone select options were retrieved successfully" />
+    <aura:attribute name="regionSelectOptionsRetrieved" type="Boolean" default="false" description="Boolean on whether the Region select options were retrieved successfully" />
+    <aura:attribute name="isLoading" type="Boolean" required="true" default="true" description="Boolean value as to whether the form is loading" />
+    <aura:attribute name="accountId" type="String" required="false" description="accountId for creating the user. If not specified, it will create a PersonAccount if possible for B2C scenario. Or otherwise if it's in a community, the community's self-registration accountId will be used." />
+    <aura:attribute name="regConfirmUrl" type="String" required="true" />
+    <aura:attribute name="startUrl" type="String" required="false" description="The url you go to after a successful login" />
+    <aura:attribute name="showError" type="Boolean" required="true" description="" default="false" access="private" />
+    <aura:attribute name="errorMessage" type="String" required="false" description="" access="private" />
+    <aura:attribute name="firstnameLabel" type="String" required="false" default="First Name" />
+    <aura:attribute name="lastnameLabel" type="String" required="false" default="Last Name" />
+    <aura:attribute name="emailLabel" type="String" required="false" default="Email" />
+    <aura:attribute name="emailLabelCon" type="String" required="false" default="Email" />
+    <aura:attribute name="passwordLabel" type="String" required="false" default="Create Password" />
+    <aura:attribute name="confirmPasswordLabel" type="String" required="false" default="Confirm Password" />
+    <aura:attribute name="submitButtonLabel" type="String" required="false" default="Register" />
+    <aura:attribute name="loginbuttonLabel" type="String" required="false" default="Cancel" />
+    <aura:attribute name="includePasswordField" type="Boolean" required="false" default="false" description="Whether to include password" />
+    <aura:attribute name="extraFieldsFieldSet" type="String" required="false" description="A field set name whose fields are desired for user registration" />
+    <aura:attribute name="extraFields" type="list" required="false" description="A field set name whose fields are desired for user registration" />
+    <aura:handler name="init" value="{!this}" action="{!c.initialize}" />
+    <aura:attribute name="expid" type="String" required="false" description="The branding experience ID" />
+    <aura:attribute name="fplogin" type="String" required="false" default="/" />
+    <aura:registerevent name="sitePropagatedStartUrl" type="c:setStartUrl" />
+    <aura:handler name="init" value="{!this}" action="{!c.initialize}" />
+    <aura:dependency resource="c:setStartUrl" type="EVENT" />
+    <!-- Please uncomment
+    <aura:dependency resource="siteforce:registerQueryEventMap" type="EVENT"/>
+    -->
+    <aura:handler event="c:setStartUrl" action="{!c.setStartUrl}" />
+    <aura:handler event="c:setExpId" action="{!c.setExpId}" />
+    <aura:dependency resource="c:setExpId" type="EVENT" />
+
+    <!-- Spinner renders on page to show a loading state when form is initialising or a request has been submitted to the server -->
+    <aura:renderIf isTrue="{!v.isLoading}">
+        <lightning:spinner alternativeText="Loading" size="large" class="slds-is-fixed" />
+    </aura:renderIf>
+    <table>
+        <td class="slds-m-around_small">
+            <div class="register-form slds-p-around_large">
+                <p class="register-form_header slds-m-bottom_medium">Registration form</p>
+                <aura:renderIf isTrue="{!v.showError}">
+                    <div class="register-form_error slds-m-vertical_small">
+                        <ui:outputRichText value="{!v.errorMessage}" />
+                    </div>
+                </aura:renderIf>
+                <div class="slds-m-bottom_x-small">First Name</div>
+                <ui:inputText value="" placeholder="First Name" aura:id="firstname" keyup="{!c.onKeyUp}" class="register-form_input input slds-m-bottom_medium"/>
+                <div class="slds-m-bottom_x-small">Last Name</div>
+                <ui:inputText value="" placeholder="Last Name" aura:id="lastname" keyup="{!c.onKeyUp}" class="register-form_input input slds-m-bottom_medium" />
+                <div class="slds-m-bottom_x-small">E-mail Address</div>
+                <ui:inputemail value="" placeholder="E-mail" aura:id="email" keyup="{!c.onKeyUp}" class="register-form_input input slds-m-bottom_medium" />
+                <div class="slds-m-bottom_x-small">Confirm E-mail Address </div>
+                <ui:inputemail value="" placeholder="E-mail" aura:id="emailcon" keyup="{!c.onKeyUp}" class="register-form_input input slds-m-bottom_medium" />
+
+                <aura:renderIf isTrue="{!v.timezoneSelectOptionsRetrieved}">
+                    <div class="slds-m-bottom_x-small">Timezone</div>
+                    <ui:inputSelect aura:id="TimezoneSelectSingle" class="register-form_input input slds-m-bottom_medium select_height"></ui:inputSelect>
+                </aura:renderIf>
+
+                <aura:renderIf isTrue="{!v.regionSelectOptionsRetrieved}">
+                    <div class="slds-m-bottom_x-small">Region</div>
+                    <ui:inputSelect aura:id="RegionSelectSingle" class="register-form_input input slds-m-bottom_medium select_height"></ui:inputSelect>
+                </aura:renderIf>
+
+                <div class="slds-m-bottom_x-small">Your Company Name </div>
+                <aura:iteration aura:id="extraFields" items="{!v.extraFields}" var="curField" indexVar="index">
+                    <ui:inputText value="{!curField.value}" aura:id="{!curField.fieldPath}"
+                        placeholder="{!curField.label}" keyup="{!c.onKeyUp}"
+                        class="register-form_input input slds-m-bottom_medium" />
+                </aura:iteration>
+
+                <aura:renderIf isTrue="{!v.includePasswordField}">
+                    <div id="sfdc_password_container" class="sfdc">
+                        <ui:inputSecret value="" aura:id="password" placeholder="{!v.passwordLabel}"
+                            keyup="{!c.onKeyUp}" class="input sfdc_passwordinput sfdc" />
+                    </div>
+                    <div id="sfdc_confirm_password_container" class="sfdc">
+                        <ui:inputSecret value="" aura:id="confirmPassword" placeholder="{!v.confirmPasswordLabel}"
+                            keyup="{!c.onKeyUp}" class="input sfdc_passwordinput sfdc" />
+                    </div>
+                </aura:renderIf>
+
+                <div class="slds-grid">
+                    <lightning:button class="register-form_submit slds-button slds-var-m-vertical_x-small slds-var-m-right_x-small" variant="brand" aura:id="submitButton" label="{!v.submitButtonLabel}" onclick="{!c.handleSelfRegister}" />
+                    <lightning:button class="register-form_cancel slds-button slds-var-m-vertical_x-small slds-var-m-left_x-small" variant="base" aura:id="loginButton" label="{!v.loginbuttonLabel}" onclick="{!c.navigateToLogin}" />
+                </div>
+                <!-- <div class="sfdc">
+                    <ui:button aura:id="submitButton" label="{!v.submitButtonLabel}" press="{!c.handleSelfRegister}"
+                        class="sfdc_button" />
+                </div>
+                <div class="sfdc">
+                    <ui:button aura:id="loginbutton" label="{!v.loginbuttonLabel}" press="{!c.navigateToLogin}"
+                        class="sfdc_button_back" />
+                </div> -->
+            </div>
+        </td>
+    </table>
+</aura:component>

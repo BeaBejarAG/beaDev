@@ -1,0 +1,58 @@
+<aura:component implements="forceCommunity:themeLayout,flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="logo" type="Aura.Component[]"/>
+    <aura:attribute name="navBar" type="Aura.Component[]"/>
+    <aura:attribute name="search" type="Aura.Component[]"/>
+    <aura:attribute name="profileMenu" type="Aura.Component[]"/>
+    <aura:attribute name="globalNavigation" type="Aura.Component[]"/>
+
+    <aura:attribute name="landingPageLayout" type="Boolean" default="false"/>
+
+    <aura:handler event="c:cspProfileEvent" action="{!c.handleShowProfile}" phase="default" includeFacets="true"  />
+
+    <ltng:require styles="{!$Resource.cspstyles}" />
+
+    <header>
+        <c:cspAccountSelection />
+        <c:cspGlobalHeader profileMenu="{!v.profileMenu}" globalNavigation="{!v.globalNavigation}"/>
+        <div class="access-theme-community slds-var-m-top_x-large">
+            <div class="access-theme-community-inner slds-var-p-vertical_xx-large">
+                <aura:if isTrue="{!v.landingPageLayout == true}">
+                    <div class="slds-grid slds-wrap slds-var-p-top_medium slds-align_absolute-center">
+                        <div class="slds-col_padded slds-size_1-of-1 slds-large-size_1-of-1 slds-align_absolute-center">
+                            <h1 class="slds-text-heading_large slds-var-p-bottom_large">How can the community help you today?</h1>
+                        </div>
+                        <div class="slds-col_padded slds-size_1-of-1 slds-large-size_8-of-12 slds-is-relative">
+                            <div class="slds-is-absolute slds-show_x-large csp-community_logo">
+                                <img src="{!$ContentAsset.csp_community_landing}" width="150"/>
+                            </div>
+                            {!v.search}
+                        </div>
+                        <div class="slds-col_padded slds-size_1-of-1 slds-large-size_1-of-1 slds-align_absolute-center slds-var-p-top_xx-large">
+                            <lightning:button class="access-theme-button" iconName="utility:quip" variant="brand" label="Ask the community" title="Ask the community" onclick="{! c.handleClick }"/>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.landingPageLayout != true}">
+                    <div class="slds-grid slds-wrap slds-align_absolute-center">
+                        <div class="slds-col_padded slds-size_1-of-1 slds-large-size_12-of-12">{!v.search}</div>
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+    </header>
+    <div class="access-theme-body" onmouseover="{!c.handleHideProfile}">
+        <div class="access-theme-body__container">
+            {!v.body}
+        </div>
+    </div>
+    <div class="access-theme-footer"><c:cspGlobalFooter/></div>
+
+    <c:cspCommunityProfilePopover
+        user="{}"
+        onprofileevent="{!c.handleShowProfile}"
+        onprofileviewevent="{!c.handleViewProfile}"
+        aura:id="popover"
+        data-id="popover">
+    </c:cspCommunityProfilePopover>
+
+</aura:component>

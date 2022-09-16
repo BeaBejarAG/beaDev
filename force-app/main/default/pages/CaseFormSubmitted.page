@@ -1,0 +1,30 @@
+<apex:page showHeader="false">
+    <style>
+    #details {
+top: 120px; 
+left: 80px; 
+right: 80px; 
+bottom: 180px; 
+position: absolute; 
+border-radius: 25px;
+border: 2px solid grey;
+text-align: center;
+}
+    </style>
+
+           <img src="https://www.theaccessgroup.com/media/9340/productlogos_microsites_accesssmall.png" style="top: -20px; left: 60px; right: 90px; position: absolute;"/>
+          <div id='details'>
+            <h1>Thank you for contacting Access Support</h1>   
+                <p> A case has been created for your issue and someone will get in touch as soon as possible. 
+                  </p> 
+              <h1>Access Support Hub</h1><P>
+              
+              </P>
+              If you have a Support Hub account you can raise and manage your case online 
+              <apex:outputLink value="https://access-support.force.com/Support" id="Shub"> Support Hub</apex:outputLink>
+          
+
+
+      </div>
+      <hr/>
+</apex:page>

@@ -1,0 +1,80 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" >
+   
+    <style type="text/css">
+        .commbutton
+        {
+            font-family: Montserrat;
+    margin-left: 0.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid rgb(217, 219, 221);
+    transition: border .15s linear;
+    background-color: rgb(255,0,0);
+    border-color: rgb(84, 185, 179);
+    color: rgb(255, 255, 255);
+        position: relative;
+    display: inline-block;
+    line-height: 1.805rem;
+    -webkit-appearance: none;
+    white-space: normal;
+    user-select: none;
+padding: 0px, 0px, 5px, 5px;
+
+    border-radius: 0.25rem;
+    text-decoration: none;
+        }
+        
+                .commbuttononline
+        {
+            font-family: Montserrat;
+    margin-left: 0.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid rgb(217, 219, 221);
+    transition: border .15s linear;
+    background-color: rgb(84, 185, 179);
+    border-color: rgb(84, 185, 179); 
+    color: rgb(255, 255, 255);
+        position: relative;
+    display: inline-block;
+    line-height: 1.805rem;
+    -webkit-appearance: none;
+    white-space: normal;
+    user-select: none;
+padding: 0px, 0px, 5px, 5px;
+
+    border-radius: 0.25rem;
+    text-decoration: none;
+        }
+    </style>
+    
+    
+<a id="liveagent_button_online_5734I000000PF7Q" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('5734I000000PF7Q')"><button class="commbuttononline">Live Chat</button></a><div id="liveagent_button_offline_5734I000000PF7Q" style="display: none;"><button class="commbutton">Chat Offline</button></div><script type="text/javascript">
+if (!window._laq) { window._laq = []; }
+window._laq.push(function(){liveagent.showWhenOnline('5734I000000PF7Q', document.getElementById('liveagent_button_online_5734I000000PF7Q'));
+liveagent.showWhenOffline('5734I000000PF7Q', document.getElementById('liveagent_button_offline_5734I000000PF7Q'));
+});</script>   
+
+
+
+
+<script type='text/javascript' src='https://c.la1-c2-lo2.salesforceliveagent.com/content/g/js/48.0/deployment.js'></script>
+<script type='text/javascript'>
+liveagent.init('https://d.la1-c2-lo2.salesforceliveagent.com/chat', '57258000000045T', '00D58000000Z4gm');
+
+
+
+
+
+        //Set Get Custom Detials
+    liveagent.addCustomDetail('EntyId', '{!$CurrentPage.parameters.EntitlementID}');
+    liveagent.addCustomDetail('ContactEmail', '{!$CurrentPage.parameters.ContactEmail}');
+    liveagent.addCustomDetail('LCContactId', '{!$CurrentPage.parameters.ContactID}');
+</script>
+
+    
+</apex:page>

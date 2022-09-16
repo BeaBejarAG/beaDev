@@ -1,0 +1,29 @@
+.csp-feed_best-gutter {
+    right: -10rem;
+    width: 8rem;
+    top: 0rem;
+}
+
+.csp-badge_flagged {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.1rem 0.5rem;
+    border-radius: 5px;
+    background-color: #F0F5CE;
+}
+
+.csp-invisible {
+    opacity: 0;
+}
+
+.csp-post:hover .csp-invisible {
+    opacity: 1;
+}
+
+.csp-mouse_pointer {
+    cursor: pointer;
+}
+
+.csp-avatar_placeholder {
+    background-color: rgb(233,244,243);
+}

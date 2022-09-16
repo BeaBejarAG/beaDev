@@ -1,0 +1,161 @@
+<template>
+    <div if:true={showTabs} class="slds-var-p-top_large">
+        <lightning-tabset active-tab-value={defaultTab}>
+            <lightning-tab label="All" value="ALL" onactive={handleSearchTab}></lightning-tab>
+            <template if:true={includeKnowledgeResults}>
+                <lightning-tab label="Knowledge Base" value="KNOWLEDGE" icon-name="utility:knowledge_base" onactive={handleSearchTab}></lightning-tab>
+            </template>
+            <template if:true={includeEventsResults}>
+                <lightning-tab label="Events" value="EVENTS" icon-name="utility:date_time" onactive={handleSearchTab}>
+                </lightning-tab>
+            </template>
+            <template if:true={includeCommunityResults}>
+                <lightning-tab label="Community" value="COMMUNITY" icon-name="utility:quip" onactive={handleSearchTab}>
+                </lightning-tab>
+            </template>
+            <template if:true={includeReleaseNotesResults}>
+                <lightning-tab label="Release Notes" value="RELEASENOTES" icon-name="utility:setup_assistant_guide" onactive={handleSearchTab}>
+                </lightning-tab>
+            </template>
+            <template if:true={includeServicesCatalogueResults}>
+                <lightning-tab label="Service Catalogue" value="SERVICESCATALOGUE" icon-name="utility:service_territory_policy" onactive={handleSearchTab}>
+                </lightning-tab>
+            </template>
+        </lightning-tabset>
+    </div>
+
+    <template if:true={resultList}>
+        <template if:false={featuredLayout}>
+            <div class="slds-grid slds-wrap">
+                <template if:true={displayFeatureFilter} >
+                    <div class="slds-size_1-of-1 slds-medium-size_3-of-12 slds-p-horizontal_x-small">
+                        <c-csp-feature-selection display-style='Vertical' title='Feature Filter' display-icons=true></c-csp-feature-selection>
+                    </div>
+                </template>
+                <template if:true={displayProductFilter} >
+                    <div class="slds-size_1-of-1 slds-medium-size_3-of-12 slds-p-horizontal_x-small">
+                        <c-csp-product-division-filter title='Filter Knowledge Base' subtitle='By product'></c-csp-product-division-filter>
+                    </div>
+                </template>
+                <template if:true={displayCommunityFilters} >
+                    <div class="slds-size_1-of-1 slds-medium-size_3-of-12 slds-p-horizontal_x-small slds-m-vertical_large">
+                        <div class="community-filter__title slds-m-bottom_small">
+                            Filter Community
+                        </div>
+                        <div class='slds-m-vertical_small'>
+                            <div class="community-filter__subtitle slds-m-vertical_small slds-m-right_x-small">
+                                By Product:
+                            </div>
+                            <lightning-button-menu label={topic} onselect={handleTopicFilterSelect} class="community-filter__filter">
+                                <template iterator:t={topicList}>
+                                    <lightning-menu-divider key={t.value.name} if:false={t.first} class="community-filter__menu-divider"></lightning-menu-divider>
+                                    <lightning-menu-item key={t.value.name} class="community-filter__menu-option" value={t.value.name} label={t.value.name}></lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+                        <div class='slds-m-vertical_large'>
+                            <div class="community-filter__subtitle slds-m-vertical_small slds-m-right_x-small">
+                                By group:
+                            </div>
+                            <lightning-button-menu label={group} onselect={handleGroupFilterSelect} class="community-filter__filter">
+                                <template iterator:g={groupList}>
+                                    <lightning-menu-divider key={g.value.name} if:false={g.first} class="community-filter__menu-divider"></lightning-menu-divider>
+                                    <lightning-menu-item key={g.value.name} class="community-filter__menu-option" value={g.value.name} label={g.value.name}></lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+                    </div>
+                </template>
+                <div class={resultsClass}>
+                    <template iterator:result={resultList}>
+                        <div key={result.value.id} class="csp-search-result slds-var-p-vertical_medium slds-var-p-horizontal_xx-small">
+                            <div class="slds-grid">
+                                <lightning-icon if:true={typeIconsVisible} icon-name={result.value.icon} size="x-small" class="slds-var-m-right_x-small slds-var-m-vertical_xx-small"></lightning-icon>
+                                <lightning-button if:true={result.value.title} onclick={handleResultClick} value={result.value.url} label={result.value.title} variant="base" class="csp-button_link"></lightning-button>
+                                <lightning-button if:false={result.value.title} onclick={handleResultClick} value={result.value.url} label='*No title' variant="base" style="font-style: italic;" class="csp-button_link slds-text-color_weak "></lightning-button>
+                            </div>
+                            <div class="slds-var-m-vertical_x-small slds-line-clamp_small csp-search-snippet">
+                                <lightning-formatted-rich-text if:true={result.value.snippet} value={result.value.snippet}></lightning-formatted-rich-text>
+                            </div>
+                            <div class="slds-grid slds-wrap csp-search-result-meta slds-var-m-top_medium">
+                                <template if:false={suppressProduct}>
+                                    <template iterator:product={result.value.products}>
+                                        <div key={product.value} class="slds-var-m-right_medium slds-var-m-top_xx-small csp-search-product">
+                                            {product.value}
+                                        </div>
+                                    </template>
+                                    <template iterator:topic={result.value.topics}>
+                                        <div if:true={topic.value} key={topic.value} class="slds-var-m-right_medium slds-var-m-top_xx-small csp-search-product">
+                                            {topic.value}
+                                        </div>
+                                    </template>
+                                    <div if:true={result.value.group} class="slds-var-m-right_medium slds-var-m-top_xx-small csp-search-product">
+                                        {result.value.group}
+                                    </div>
+                                </template>
+                                <div if:true={result.value.views} class="slds-var-m-right_medium slds-var-m-top_x-small">
+                                    <lightning-icon icon-name="utility:preview" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                                    {result.value.views}
+                                </div>
+                                <div if:true={result.value.community} class="slds-var-m-right_medium slds-var-m-top_x-small">
+                                    <lightning-icon icon-name="utility:comments" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                                    {result.value.comments}
+                                </div>
+                                <div if:true={result.value.dttm} class="slds-var-m-right_medium slds-var-m-top_x-small">
+                                    <lightning-icon icon-name="utility:clock" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                                    <lightning-relative-date-time value={result.value.dttm}></lightning-relative-date-time>
+                                </div>
+                                <div class="slds-var-m-right_medium slds-var-m-top_xxx-small"  if:true={result.value.productCategories}>
+                                    <lightning-icon icon-name="utility:summary" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                                    <template iterator:category={result.value.productCategories}>
+                                        <template if:true={userId.length}>
+                                            <lightning-button key={category.value} onclick={handleFeatureClick} value={category.value} label={category.value} class="csp-button_link-secondary" variant="base"></lightning-button><span key={category.value} if:false={category.last}>, </span>
+                                        </template>
+                                        <template if:false={userId.length}>
+                                            <span key={category.value} if:true={category.first} class="csp-search-results__anon-feature">{category.value}</span>
+                                        </template>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={result.last}>
+                            <div key={result.value.id} if:false={suppressMoreButton} class="slds-border_bottom"></div>
+                        </template>
+                        <div key={result.value.id} if:false={result.last} class="slds-border_bottom"></div>
+                    </template>
+                    <div class="slds-var-m-top_large slds-size_1-of-1">
+                        <button if:true={showMore} class="slds-button slds-button_neutral slds-grow slds-container_fluid slds-var-p-around_small csp-search-button" onclick={handleLoadMore}>Load More</button>
+                    </div>
+                    <template if:true={error}>
+                        <lightning-card>{error}</lightning-card>
+                    </template>
+                    <template if:false={suppressNoResults}>
+                        <template if:true={completedSearch}>
+                            <div class="slds-var-m-vertical_xx-large">No results found</div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </template>
+        <template if:true={featuredLayout}>
+            <div class="slds-grid slds-gutters_direct slds-wrap">
+                <template iterator:result={featuredList}>
+                    <template if:true={result.first}>
+                        <template if:true={horizontalFirstFeature}>
+                            <c-csp-article-card class="slds-col slds-size_1-of-1" direction="horizontal" article={result.value} key={result.value.id}></c-csp-article-card>
+                        </template>
+                        <template if:false={horizontalFirstFeature}>
+                            <c-csp-article-card class="slds-col slds-size_1-of-1 slds-large-size_1-of-2" direction="vertical" article={result.value} key={result.value.id}></c-csp-article-card>
+                        </template>
+                    </template>
+                    <template if:false={result.first}>
+                        <c-csp-article-card class="slds-col slds-size_1-of-1 slds-large-size_1-of-2" direction="vertical" article={result.value} key={result.value.id}></c-csp-article-card>
+                    </template>
+                </template>
+            </div>
+            <template if:true={error}>
+                <lightning-card>{error}</lightning-card>
+            </template>
+        </template>
+    </template>
+</template>

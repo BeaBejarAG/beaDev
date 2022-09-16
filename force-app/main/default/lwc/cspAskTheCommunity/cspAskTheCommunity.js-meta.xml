@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Ask The Community</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="assistiveText" type="String" default="" label="Call to action text" />
+            <property name="buttonText" type="String" default="ASK THE COMMUNITY" label="Button text" />
+            <property name="target" type="String" default="/" label="Relative link url" />
+            <property name="displayAssistiveText" type="Boolean" default="true" label="Display assistive text" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

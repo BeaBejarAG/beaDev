@@ -1,0 +1,5 @@
+<design:component label="CSP: Product Theme">
+    <design:attribute name="landingPageLayout" label="Use landing page layout"/>
+    <design:attribute name="ShowServiceAlert" label="Show Service Alert Banner On Page"/>
+    <design:attribute name="name" label="Name"/>
+</design:component>

@@ -1,0 +1,4 @@
+({
+    currentProduct: null,
+    currentAccount: null
+})

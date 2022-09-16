@@ -1,0 +1,62 @@
+/* Global Page Elements */
+.THIS {
+    font-size: 1rem;
+}
+
+.THIS .access-theme-community-inner {
+    max-width: token(successPlatformPageWidth);
+    margin: 0 auto;
+}
+
+.THIS .access-theme-community {
+    background-color: token(successPlatformLightBlue);
+}
+
+.THIS .access-theme-community-inner {
+    max-width: token(successPlatformPageWidth);
+    margin: 0 auto;
+}
+
+.THIS .access-theme-community-inner .slds-text-heading_large {
+    font-weight: 400;
+    font-size: 2.2rem;
+}
+
+.THIS .access-theme-community-inner .access-theme-button svg {
+    vertical-align: unset;
+}
+
+.THIS .access-theme-community-inner .access-theme-button {
+	padding: 0.6rem 2rem;
+    text-transform: uppercase;
+    border-radius: 0;
+}
+
+.THIS .inputWrapper {
+    background-color: white;
+}
+
+.THIS .inputWrapper input {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.THIS .curtain-blur.enabled {
+    display: none;
+}
+
+.THIS .csp-community_logo {
+    right: -80px;
+    top: -90px;
+}
+
+@media (max-width: 450px) {
+	.THIS .access-theme-logo {
+        display: none;
+    }
+}
+@media (max-width: 920px) {
+    .THIS .access-theme-website-link {
+        display: none;
+    }
+}

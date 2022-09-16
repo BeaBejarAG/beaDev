@@ -1,0 +1,16 @@
+<aura:component controller="CommunityAlerts" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    
+    <aura:attribute type="Service_Status_Update__c" name="ServiceStatusData" />  
+    <aura:attribute type="List" name="columns" />
+    
+        <div style="height: 300px">
+        <lightning:datatable
+                keyField="id"
+                data="{! v.ServiceStatusData }"
+                columns="{! v.columns }"
+                hideCheckboxColumn="true"/>
+    </div>
+
+</aura:component>

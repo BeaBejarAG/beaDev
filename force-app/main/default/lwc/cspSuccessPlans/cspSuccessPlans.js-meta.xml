@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Success Plans</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="essentialTagline" type="String" default="The online service - Providing you a reactive online support experience." label="Essential tagline" />
+            <property name="standardTagline" type="String" default="Get answers faster - Provides faster response times and access to our advisory services, to enable your team to be more productive." label="Standard tagline" />
+            <property name="premierTagline" type="String" default="Boost productivity with direct access to the Experts - Provides you with a proactive designated Customer Success Manager and Technical Support Engineer. Your personal team of experts understand how you’re using the Access technology and can advise on how to increase productivity and achieve more." label="Premier tagline" />
+            <property name="essentialPlanDetailsString" type="String" label="Essential details json string" />
+            <property name="standardPlanDetailsString" type="String" label="Standard details json string" />
+            <property name="premierPlanDetailsString" type="String" label="Premier details json string" />
+            <property name="limitAmount" type="Integer" min="3" max="200" default="10" label="Default result limit"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

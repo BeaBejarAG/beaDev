@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: All Articles</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="limitAmount" type="Integer" min="3" max="200" default="10" label="Default search result limit" />
+            <property name="includeKnowledgeResults" type="Boolean" default="true" label="Include knowledge in results" />
+            <property name="includeCommunityResults" type="Boolean" default="true" label="Include community in results" />
+            <property name="includeReleaseNotesResults" type="Boolean" default="true" label="Include release notes in results" />
+            <property name="includeServicesCatalogueResults" type="Boolean" default="true" label="Include services catalogue in results" />
+            <property name="includeEventsResults" type="Boolean" default="true" label="Include events in results" />
+            <property name="componentTitle" type="String" default="All articles" label="Title" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

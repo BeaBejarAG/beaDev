@@ -1,0 +1,155 @@
+<template>
+    <div if:true={state}>
+        <div class="slds-grid slds-grid-align-spread slds-p-around_x-large slds-m-bottom_large csp-service-catalogue-browse-services-container">
+            <div class="slds-col slds-large-size_10-of-12 slds-text-heading_large slds-p-top_x-small slds-show_medium">Want to see all our services?</div>
+            <div class="slds-col slds-large-size_2-of-12 slds-align_absolute-center">
+                <lightning-button class="csp-button_brand" label="BROWSE ALL SERVICES" onclick={handleServices}></lightning-button>
+            </div>
+        </div>
+
+        <div class="csp-service-catalogue-browse-services-container slds-p-around_x-large">
+            <div class="slds-text-heading_large">Need some help finding the best services for you?</div>
+            <div class="slds-grid slds-wrap slds-gutters slds-p-top_large">
+                <div class="slds-col slds-p-bottom_small slds-large-size_4-of-12">
+                    How long have you been using this product?
+                    <div class="slds-p-top_small">
+                        <lightning-button-menu label={journeyLevelLabel} onselect={journeyLevelFilterSelectBestServicesHandler} class="csp-services-catalogue-filter csp-service-catalogue-browse-filter">
+                            <template for:each={journeyLevelList} for:item="item">
+                                <lightning-menu-divider key={item.value} if:false={item.first} class="case-results__menu-divider"></lightning-menu-divider>
+                                <lightning-menu-item key={item.value} class="case-results__menu-option" value={item.value} label={item.label}></lightning-menu-item>
+                            </template>
+                        </lightning-button-menu>
+                    </div>
+                </div>
+                <div class="slds-col slds-p-bottom_small slds-large-size_4-of-12">
+                    How confident are you with this product?
+                    <div class="slds-p-top_small">
+                        <lightning-button-menu label={userLevelLabel} onselect={userLevelFilterSelectBestServicesHandler} class="csp-services-catalogue-filter csp-service-catalogue-browse-filter">
+                            <template for:each={userLevelList} for:item="item">
+                                <lightning-menu-divider key={item.value} if:false={item.first} class="case-results__menu-divider"></lightning-menu-divider>
+                                <lightning-menu-item key={item.value} class="case-results__menu-option" value={item.value} label={item.label}></lightning-menu-item>
+                            </template>
+                        </lightning-button-menu>
+                    </div>
+                </div>
+                <div class="slds-col slds-p-bottom_small slds-large-size_4-of-12">
+                    What type of service are you interested in?
+                    <div class="slds-p-top_small">
+                        <lightning-button-menu label={serviceTypeLabel} onselect={serviceTypeFilterSelectBestServicesHandler} class="csp-services-catalogue-filter csp-service-catalogue-browse-filter">
+                            <template for:each={serviceTypeList} for:item="item">
+                                <lightning-menu-divider key={item.value} if:false={item.first} class="case-results__menu-divider"></lightning-menu-divider>
+                                <lightning-menu-item key={item.value} class="case-results__menu-option" value={item.value} label={item.label}></lightning-menu-item>
+                            </template>
+                        </lightning-button-menu>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-grid slds-grid--align-center slds-m-top_large">
+                <lightning-button class="csp-button_brand" label="SHOW ME RELEVANT SERVICES" onclick={handleServices}></lightning-button>
+            </div>
+        </div>
+    </div>
+
+    <template if:false={state}>
+        <template if:true={flexPointsEnabled}>
+            <div if:true={displayFilters} class="slds-m-horizontal_small csp-services-catalogue-filter-container">
+                <div class="csp-services-catalogue-filter-title">Browse our services</div>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-small-size_4-of-4 slds-medium-size_1-of-4 slds-large-size_1-of-7 slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+                        <div class="slds-p-vertical_small slds-p-right_x-small">
+                            <lightning-button-menu label={serviceTypeLabel} onselect={serviceTypeFilterSelectHandler} class="csp-services-catalogue-filter">
+                                <template for:each={serviceTypeList} for:item="item">
+                                    <lightning-menu-divider key={item.value} if:false={item.first} class="case-results__menu-divider"></lightning-menu-divider>
+                                    <lightning-menu-item key={item.value} class="case-results__menu-option" value={item.value} label={item.label}></lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-small-size_4-of-4 slds-medium-size_1-of-4 slds-large-size_1-of-7 slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+                        <div class="slds-p-vertical_small slds-p-right_x-small">
+                            <lightning-button-menu label={userLevelLabel} onselect={userLevelFilterSelectHandler} class="csp-services-catalogue-filter">
+                                <template for:each={userLevelList} for:item="item">
+                                    <lightning-menu-divider key={item.value} if:false={item.first} class="case-results__menu-divider"></lightning-menu-divider>
+                                    <lightning-menu-item key={item.value} class="case-results__menu-option" value={item.value} label={item.label}></lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-small-size_4-of-4 slds-medium-size_1-of-4 slds-large-size_1-of-7 slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+                        <div class="slds-p-vertical_small slds-p-right_x-small">
+                            <lightning-button-menu label={journeyLevelLabel} onselect={journeyLevelFilterSelectHandler} class="csp-services-catalogue-filter">
+                                <template for:each={journeyLevelList} for:item="item">
+                                    <lightning-menu-divider key={item.value} if:false={item.first} class="case-results__menu-divider"></lightning-menu-divider>
+                                    <lightning-menu-item key={item.value} class="case-results__menu-option" value={item.value} label={item.label}></lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-small-size_4-of-4 slds-medium-size_1-of-4 slds-large-size_1-of-7 slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+                        <div class="slds-p-vertical_small slds-p-right_x-small">
+                            <lightning-button-menu label={deliveryTypeLabel} onselect={deliveryTypeFilterSelectHandler} class="csp-services-catalogue-filter">
+                                <template for:each={deliveryTypeList} for:item="item">
+                                    <lightning-menu-divider key={item.value} if:false={item.first} class="case-results__menu-divider"></lightning-menu-divider>
+                                    <lightning-menu-item key={item.value} class="case-results__menu-option" value={item.value} label={item.label}></lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-small-size_4-of-4 slds-medium-size_1-of-4 slds-large-size_1-of-7 slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+                        <div class="slds-p-vertical_small slds-p-right_x-small">
+                            <lightning-button-menu label={deliveredByLabel} onselect={deliveredByFilterSelectHandler} class="csp-services-catalogue-filter">
+                                <template for:each={deliveredByList} for:item="item">
+                                    <lightning-menu-divider key={item.value} if:false={item.first} class="case-results__menu-divider"></lightning-menu-divider>
+                                    <lightning-menu-item key={item.value} class="case-results__menu-option" value={item.value} label={item.label}></lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-small-size_4-of-4 slds-medium-size_1-of-4 slds-large-size_1-of-7 slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+                        <div class="slds-p-vertical_small slds-p-right_x-small">
+                            <lightning-button-menu label={locationLabel} onselect={locationFilterSelectHandler} class="csp-services-catalogue-filter">
+                                <template for:each={locationList} for:item="item">
+                                    <lightning-menu-divider key={item.value} if:false={item.first} class="case-results__menu-divider"></lightning-menu-divider>
+                                    <lightning-menu-item key={item.value} class="case-results__menu-option" value={item.value} label={item.label}></lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-small-size_4-of-4 slds-medium-size_1-of-4 slds-large-size_1-of-7 slds-grid slds-grid_vertical-align-center slds-p-horizontal_x-small">
+                        <div class="slds-p-vertical_small slds-p-right_x-small">
+                            <lightning-button-menu label={premierOnlyLabel} onselect={premierOnlyFilterSelectHandler} class="csp-services-catalogue-filter">
+                                <template for:each={premierOnlyList} for:item="item">
+                                    <lightning-menu-divider key={item.value} if:false={item.first} class="case-results__menu-divider"></lightning-menu-divider>
+                                    <lightning-menu-item key={item.value} class="case-results__menu-option" value={item.value} label={item.label}></lightning-menu-item>
+                                </template>
+                            </lightning-button-menu>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <template if:true={services}>
+                <div class="csp-service-catalogue-services-wrapper slds-grid slds-gutters slds-wrap">
+                    <template for:each={services} for:item="iservice">
+                        <div class="slds-col slds-small-size_4-of-4 slds-medium-size_2-of-4 slds-large-size_1-of-4 slds-p-top_small" key={iservice.Id} data-id={iservice.Id} onclick={handleSelectService}>
+                            <c-csp-success-points-services service={iservice}></c-csp-success-points-services>
+                        </div>
+                    </template>
+                </div>
+                <div class="csp-service-catalogue-services-footer">
+                    <lightning-spinner if:true={refreshing} alternative-text="Loading" size="medium"></lightning-spinner>
+                    <button if:true={showMore} onclick={loadMoreServices} class="csp-service-catalogue-services-button slds-button slds-p-horizontal_x-large slds-p-vertical_medium slds-m-left_x-small">LOAD MORE</button>
+                </div>
+            </template>
+            <template if:true={servicesEmpty}>
+                <div class="csp-service-catalogue-services-no-services">No services found matching your selected criteria</div>
+            </template>
+        </template>
+        <template if:false={flexPointsEnabled}>
+            <div class="csp-flex-points-not-available">
+                FlexPoints services are not yet available for this product...
+            </div>
+        </template>
+        <c-csp-services-catalogue-modal is-guardian={isGuardian} service-id={serviceId}></c-csp-services-catalogue-modal>
+    </template>
+</template>

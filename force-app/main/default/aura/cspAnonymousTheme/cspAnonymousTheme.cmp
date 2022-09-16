@@ -1,0 +1,57 @@
+<aura:component implements="forceCommunity:themeLayout" access="global">
+    <aura:attribute name="search" type="Aura.Component[]" access="global"/>
+    <aura:attribute name="globalNavigation" type="Aura.Component[]" access="global"/>
+
+    <ltng:require styles="{!$Resource.cspstyles}" />
+
+    <header>
+        <c:cspAccountSelection />
+        <div class="slds-grid slds-gutters slds-align_absolute-center access-theme-header">
+            <div class="slds-col--padded slds-small-size_2-of-12 access-theme-logo slds-m-top_x-large slds-align-middle">
+                <a href="/Support/">
+                    <img width="160" src="{!$ContentAsset.accessgroup}" class="slds-p-right_medium"/>
+                </a>
+            </div>
+            <div class="slds-col--padded slds-size_8-of-12 slds-small-size_5-of-12">
+                {!v.globalNavigation}
+            </div>
+            <div class="slds-col_padded slds-size_4-of-12 slds-small-size_5-of-12 slds-var-m-top_x-large slds-clearfix slds-align-middle access-theme-header-links">
+                <ul class="slds-float_right slds-clearfix slds-grid slds-grid_vertical-align-center">
+                    <li class="slds-text-color_weak slds-border_right access-theme-company-link">
+                        <a href='https://www.theaccessgroup.com/' target='_blank' class="slds-text-link_reset">
+                            {!$Label.c.Company_Name}
+                        </a>
+                        <lightning:icon class="slds-float_right slds-var-m-left_x-small slds-var-m-top_xxx-small slds-var-m-right_medium " iconName="utility:share" alternativeText="Open" title="Open" size="x-small" />
+                    </li>
+                    <li class="access-theme-full-access">
+                        <div class="slds-var-m-left_medium slds-text-color_weak">
+                            To enjoy full access
+                        </div>
+                    </li>
+                    <li>
+                        <lightning:button class="slds-var-m-left_small access-theme__signin" label="Sign in" variant="brand" onclick="{!c.handleLoginClick}"/>
+                    </li>
+                    <li class="access-theme__register">
+                        <lightning:button class="slds-var-m-left_small slds-button_outline-brand access-theme__register" label="Register" onclick="{!c.handleRegisterClick}"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="access-theme-anonymous slds-var-m-top_x-large">
+            <div class="access-theme-anonymous-inner slds-var-p-top_large">
+                <div class="slds-grid slds-wrap slds-var-p-top_xx-large slds-var-p-bottom_x-large">
+                    <div class="slds-col_padded slds-size_1-of-1 slds-large-size_4-of-12">
+                        <h1 class="slds-text-heading_large slds-var-p-top_xx-small slds-var-p-bottom_medium">Knowledge Base</h1>
+                    </div>
+                    <div class="slds-col_padded slds-size_1-of-1 slds-large-size_8-of-12">{!v.search}</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="access-theme-body">
+        <div class="access-theme-body__container">
+            {!v.body}
+        </div>
+    </div>
+    <div class="access-theme-footer"><c:cspGlobalFooter/></div>
+</aura:component>

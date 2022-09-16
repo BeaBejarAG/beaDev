@@ -1,0 +1,52 @@
+.THIS .forceCommunityGlobalNavigation  .comm-navigation__item a:hover,
+.THIS .forceCommunityGlobalNavigation  .comm-navigation__item a,
+.THIS .forceCommunityGlobalNavigation  .comm-navigation__item button:hover,
+.THIS .forceCommunityGlobalNavigation  .comm-navigation__item button {
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.THIS .forceCommunityGlobalNavigation  .comm-navigation__item button svg {
+    fill: white;
+}
+.THIS .forceCommunityGlobalNavigation  .comm-navigation__item ul {
+    z-index: 100;
+}
+.THIS .forceCommunityGlobalNavigation  .comm-navigation__item .comm-navigation__item {
+    background-color: #444;
+    color: white;
+}
+.THIS .forceCommunityGlobalNavigation .access-sidemenu-button button {
+    color: white;
+}
+.THIS .forceCommunityGlobalNavigation .slds-is-fixed {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.1);
+    z-index: 7000;
+}
+
+.THIS .forceCommunityGlobalNavigation .slds-list_vertical  .slds-list__item a {
+    display: block;
+    width: 100%;
+}
+
+.THIS .forceCommunityGlobalNavigation .slds-list_vertical {
+    background-color: rgb(128,128,128);
+}
+
+.THIS .forceCommunityGlobalNavigation .slds-is-fixed>.slds-list_vertical {
+    height: 100%;
+    width: 80%;
+    overflow-y: scroll;
+}
+.THIS .forceCommunityGlobalNavigation .slds-is-fixed>.slds-list_vertical>.slds-list__item>.comm-navigation__item>a, 
+.THIS .forceCommunityGlobalNavigation .slds-is-fixed>.slds-list_vertical>.slds-list__item>.comm-navigation__item>button:not(.slds-is-open), 
+.THIS .forceCommunityGlobalNavigation .slds-is-fixed .slds-is-nested {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.THIS .forceCommunityGlobalNavigation .slds-is-fixed>.slds-list_vertical a * {
+    padding-left: 28px;
+}

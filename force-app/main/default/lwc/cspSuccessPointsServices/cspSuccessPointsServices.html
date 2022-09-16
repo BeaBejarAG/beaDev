@@ -1,0 +1,35 @@
+<template>
+	<article class="csp-success-points-services-slds-card slds-card csp-success-points-services-body">
+		<header>
+			<div>
+				<div class="csp-success-points-services-container">
+					<div class="slds-line-clamp_x-small slds-truncate csp-success-points-services-name">{service.Service_Title__c}</div>
+					<div class="csp-success-points-services-category slds-truncate">
+						{serviceType}
+					</div>
+				</div>
+				<template if:true={showQuote}>
+					<div class="csp-success-points-services-points-container">
+						<div class="csp-success-points-services-points csp-success-points-services-banner">
+							Request a quote
+						</div>
+					</div>
+				</template>
+				<template if:false={showQuote}>
+					<div class="csp-success-points-services-points-container">
+						<div class="csp-success-points-services-points csp-success-points-services-banner">
+							<lightning-formatted-number value={service.Points_Conversion__c}></lightning-formatted-number> points
+						</div>
+						<div if:true={service.Premier_Only__c} class="csp-success-points-services-usertype csp-success-points-services-banner">
+							Premier Only
+						</div>
+					</div>
+				</template>
+			</div>
+		</header>
+		<div class="slds-card__body slds-card__body_inner">
+			<lightning-formatted-rich-text class="slds-line-clamp_medium" value={service.Service_Description__c}></lightning-formatted-rich-text>
+		</div>
+		<footer class="slds-card__footer"></footer>
+	</article>
+</template>

@@ -1,0 +1,57 @@
+.csp-feature-selection__title {
+    color: var(--c-successPlatformRed, rgb(213,52,62));
+    font-size: 1.375rem;
+    font-weight: 600;
+}
+
+.csp-feature-selection__subtitle {
+    font-weight: 300;
+}
+
+.csp-feature-selection__card {
+    background-color: white;
+    border: 1px solid rgb(220, 220, 220);
+    box-shadow: 2px 3px 4px rgb(220, 220, 220);
+}
+
+.csp-feature-selection__card:hover {
+    background-color: var(--c-successPlatformLightGreenHover,rgb(237,247,246));
+    cursor: pointer;
+}
+
+.csp-feature-selection__card-title {
+    font-weight: 500;
+}
+
+.csp-feature-selection__title:hover {
+    cursor: pointer;
+}
+
+.csp-feature-selection__card-icon {
+    background-color: rgb(67, 67, 67);
+    border-radius: 0px;
+}
+
+.csp-feature-selection__card-box {
+    height: 48px;
+    width: 48px;
+    background-color: rgb(67, 67, 67);
+    border-radius: 0px;
+}
+
+.csp-feature-selection__item {
+    font-weight: 400;
+}
+
+.csp-feature-selection__item:hover {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.csp-feature-selection__item-title.active {
+    font-weight: 600;
+}
+
+.csp-feature-selection__item-border {
+    border-color: var(--c-successPlatformLightGrey, rgb(119,119,119));
+}

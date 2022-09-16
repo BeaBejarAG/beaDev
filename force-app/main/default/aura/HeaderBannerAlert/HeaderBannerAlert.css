@@ -1,0 +1,38 @@
+.THIS.alert-box {
+    color:#555;
+    border-radius:10px;
+    font-family:Tahoma,Geneva,Arial,sans-serif;
+    font-size:20px;
+    padding:10px 10px 10px 36px;
+    margin:10px;
+}
+
+.THIS.alert-box span {
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.THIS.warning {
+    background:#fff8c4 url('http://www.cssportal.com/images/warning.png') no-repeat 10px 50%;
+    border:1px solid #f2c779;
+}
+
+.THIS.error {
+    background:#ffecec url('http://www.cssportal.com/images/error.png') no-repeat 10px 50%;
+    border:1px solid #f5aca6;
+}
+.THIS.success {
+    background:#e9ffd9 url('http://www.cssportal.com/images/success.png') no-repeat 10px 50%;
+    border:1px solid #a6ca8a;
+}
+.THIS.notice {
+    background:#e3f7fc url('http://www.cssportal.com/images/notice.png') no-repeat 10px 50%;
+    border:1px solid #8ed9f6;
+}
+
+.THIS div#close {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+}

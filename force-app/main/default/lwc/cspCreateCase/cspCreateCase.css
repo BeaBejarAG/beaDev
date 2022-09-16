@@ -1,0 +1,100 @@
+.csp-popover_header {
+    background-color: var(--c-successPlatformRed);
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: -1px;
+}
+.csp-popover_validation {
+    background-color: var(--c-successPlatformDarkGrey);
+    color: white;
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+.csp-case-plan_box {
+    min-height: 383px;
+    font-size: 0.9rem;
+    border: 1px solid var(--c-successPlatformLightGrey);
+}
+.csp-case-plan_box p {
+    color: #666;
+}
+.csp-case-plan_box-inner {
+    background-color: rgb(83,185,179);
+    height: 150px;
+}
+.csp-case-plan_box-inner img {
+    height: 150px;
+    padding: 15px;
+}
+.csp-case-plan_box p {
+    height: 60px;
+}
+
+.csp-case-plan_box-inactive h2,
+.csp-case-plan_box-inactive p {
+    color: rgb(120,120,120);
+}
+.csp-case-plan_box-inactive img {
+    display: none;
+}
+.csp-case-plan_box-inactive .csp-case-plan_badge,
+.csp-case-plan_box-offline .csp-case-plan_badge {
+    display: table !important;
+    background-color: var(--c-successPlatformDarkGrey);
+    margin: -12px auto -11px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border-radius: 5px;
+}
+.csp-case-plan_box-offline .csp-case-plan_badge {
+    background-color: var(--c-successPlatformRed);
+}
+.csp-case-plan_box-offline .csp-case-plan_box-inner,
+.csp-case-plan_box-inactive .csp-case-plan_box-inner {
+    background-color: rgb(240,240,240);
+}
+.csp-case-plan_plan-copy {
+    padding-top: 100px;
+}
+
+.csp-case_results-box {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.csp-case_small {
+    font-size: 0.9rem;
+}
+.csp-case-plan_recommended {
+    top: 1rem;
+    background-color: rgb(62,62,62);
+    margin-left: -0.6rem;
+    color: white;
+}
+
+.csp-iframe {
+    border: 0px;
+}
+
+.csp-portal-team__top-border {
+    border-color: rgb(220, 220, 220);
+}
+
+.csp-portal-member {
+    border-color: rgb(220, 220, 220);
+    border-style: solid;
+    border-width: 0px 1px 1px 1px;
+    font-size: 0.875rem;
+    min-height: 60px;
+}
+.csp-portal-member:hover {
+    background-color: var(--c-successPlatformGreyBackground, rgb(246,246,246));
+}
+.csp-portal-member__name {
+    font-size: 15px;
+}
+
+.csp-portal-member__avatar {
+    border-radius: 1rem;
+}

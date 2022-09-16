@@ -1,0 +1,17 @@
+<template>
+    <div class="csp-breadcrumbs slds-grid slds-var-m-bottom_medium csp-text_small slds-var-m-top_xxx-small">
+        <template if:true={items}>
+            <template iterator:item={items}>
+                <div key={item.value.label} class="slds-var-m-right_x-small slds-grid">
+                    <lightning-button
+                        class="csp-breadcrumbs__home slds-var-m-right_small csp-button_link csp-button_link-secondary csp-button_link-normal"
+                        onclick={handleClick}
+                        value={item.value.value}
+                        label={item.value.label}>
+                    </lightning-button>
+                    <div class="slds-show_inline-block slds-var-p-top_xx-small">></div>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

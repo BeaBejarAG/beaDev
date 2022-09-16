@@ -1,0 +1,4 @@
+<design:component label="CSP: Global Navigation">
+    <design:attribute name="navigationLinkSetId" label="Navigation" datasource="apex://cspGlobalNavigation"/>
+    <design:attribute name="selected" label="Selected Nav Item" datasource="None,Help Centre,Community,My Access"/>
+</design:component>

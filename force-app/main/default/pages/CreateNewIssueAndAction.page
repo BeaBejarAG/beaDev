@@ -1,0 +1,10 @@
+<apex:page StandardController="case" recordSetVar="records"> >
+<script type="text/javascript">
+
+window.onload = function() {
+    // similar behavior as clicking on a link
+    window.location.href = "https://access-support.force.com/Support/s/create-project-case";
+}
+</script>
+
+</apex:page>

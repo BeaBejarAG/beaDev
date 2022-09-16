@@ -1,0 +1,26 @@
+<template>
+    <div class="csp-breadcrumbs slds-grid slds-m-bottom_medium">
+        <div class="slds-m-vertical_x-small slds-m-right_x-small slds-grid">
+            <div class="csp-breadcrumbs__home slds-m-right_small" onclick={handlePortalClick}>Portal Home</div>
+            >
+        </div>
+        <template if:true={displayProduct}>
+            <div class="slds-m-around_x-small slds-grid">
+                <div class="csp-breadcrumbs__product slds-m-right_small" onclick={handleProductClick}>{product}</div>
+                >
+            </div>
+        </template>
+        <template if:true={displaySubNavItem}>
+            <div class="slds-m-around_x-small slds-grid">
+                <div class="csp-breadcrumbs__subnav slds-m-right_small" onclick={handleSubNavClick}>{subNavItemName}</div>
+                >
+            </div>
+        </template>
+        <template if:true={displayFeature}>
+            <div class="slds-m-around_x-small slds-grid">
+                <div class="csp-breadcrumbs__feature slds-m-right_small">{feature}</div>
+                >
+            </div>
+        </template>
+    </div>
+</template>

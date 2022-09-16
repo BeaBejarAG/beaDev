@@ -1,0 +1,95 @@
+<template>
+    <div class="slds-size_1-of-1 slds-large-size_9-of-12">
+        <div class="slds-grid slds-gutters_direct slds-wrap">
+            <template if:true={cardResults}>
+                <template iterator:result={cardResults}>
+                    <template if:true={result.first}>
+                        <template if:true={horizontalFirstFeature}>
+                            <c-csp-article-card class="slds-col slds-size_1-of-1" direction="horizontal" article={result.value} key={result.value.id} oncspfeatureselectarticle={handleSelectResult}></c-csp-article-card>
+                        </template>
+                        <template if:false={horizontalFirstFeature}>
+                            <c-csp-article-card class="slds-col slds-size_1-of-1 slds-large-size_1-of-2" direction="vertical" article={result.value} key={result.value.id} oncspfeatureselectarticle={handleSelectResult}></c-csp-article-card>
+                        </template>
+                    </template>
+                    <template if:false={result.first}>
+                        <c-csp-article-card class="slds-col slds-size_1-of-1 slds-large-size_1-of-2" direction="vertical" article={result.value} key={result.value.id} oncspfeatureselectarticle={handleSelectResult}></c-csp-article-card>
+                    </template>
+                </template>
+            </template>
+        </div>
+        <template if:true={error}>
+            <lightning-card>{error}</lightning-card>
+        </template>
+        <template if:true={listResults}>
+            <template iterator:result={listResults}>
+                <template if:true={result.first}>
+                    <div key={result.value.id} class="slds-border_top slds-var-m-top_large"></div>
+                </template>
+                <div key={result.value.id} class="article-item slds-var-p-vertical_medium">
+                    <div>
+                        <lightning-button onclick={handleListViewClick} data-url={result.value.url} label={result.value.title} variant="base" class="csp-button_link"></lightning-button>
+                    </div>
+                    <div class="slds-var-m-vertical_x-small slds-line-clamp_small">
+                        <lightning-formatted-rich-text value={result.value.snippet}></lightning-formatted-rich-text>
+                    </div>
+                    <div class="slds-grid article-item__meta slds-var-m-top_medium">
+                        <template if:false={suppressProduct}>
+                            <div if:true={result.value.product} class="slds-var-m-right_medium slds-var-m-top_xx-small article-item__product">
+                                {result.value.product}
+                            </div>
+                        </template>
+                        <div class="slds-var-m-right_medium slds-var-m-top_x-small">
+                            <lightning-icon icon-name="utility:preview" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                            {result.value.views}
+                        </div>
+                        <div class="slds-var-m-right_medium slds-var-m-top_x-small">
+                            <lightning-icon icon-name="utility:clock" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                            <lightning-relative-date-time value={result.value.dttm}></lightning-relative-date-time>
+                        </div>
+                        <div class="slds-var-m-right_medium slds-var-m-top_xxx-small"  if:true={result.value.productCategories}>
+                            <lightning-icon icon-name="utility:summary" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
+                            <template iterator:category={result.value.productCategories}>
+                                <template if:true={userId.length}>
+                                    <lightning-button key={category.value} onclick={handleFeatureClick} value={category.value} label={category.value} variant="base"></lightning-button><span key={category.value} if:false={category.last}>, </span>
+                                </template>
+                                <template if:false={userId.length}>
+                                    <span key={category.value} if:true={category.first} class="article-item__anon-feature">{category.value}</span>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div key={result.value.id} class="slds-border_bottom"></div>
+            </template>
+        </template>
+    </div>
+
+    <c-csp-modal
+        size="medium"
+        data-id="article-popup"
+        onkeydown={handleEscape}>
+        <template if:true={articleUrl.length}>
+            <span slot="header">
+                <c-csp-knowledge-article
+                    show-title="true"
+                    show-feedback-component="false"
+                    hide-action-buttons="true"
+                    url-name={articleUrl}>
+                </c-csp-knowledge-article>
+            </span>
+            <div class="slds-is-relative">
+                <div if:false={hasLoadedArticle}>
+                    <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                </div>
+                <c-csp-knowledge-article onkeydown={handleEscape}
+                    show-body="true"
+                    show-feedback-component="true"
+                    hide-action-buttons="true"
+                    oncspsubmittedarticlefeedback={handleArticleFeedback}
+                    oncsparticleloaded={handleArticleLoaded}
+                    url-name={articleUrl}>
+                </c-csp-knowledge-article>
+            </div>
+        </template>
+    </c-csp-modal>
+</template>

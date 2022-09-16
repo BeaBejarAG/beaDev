@@ -1,0 +1,476 @@
+<template>
+    <template if:true={showStepProduct}>
+        <h1 class="slds-text-heading_large slds-var-m-top_large slds-var-m-bottom_xx-large cKnowledge_Articles">Create a case</h1>
+        <p class="slds-var-m-bottom_small csp-text_large">Please select the product you wish to create a case for:</p>
+        <p if:true={superUser} class="csp-text slds-text-color_weak">You are only able to raise a case for the products where you are a named Support contact for your organisation. Where you see the tag "Content Only", you cannot raise cases, but are able to view knowledge content and comment on existing cases.</p>
+        <p if:false={superUser} class="csp-text slds-text-color_weak">You are only able to raise a case for the products where you are a named Support contact for your organisation. Where you see the tag "Content Only", you cannot raise cases, but are able to view knowledge content.</p>
+    </template>
+
+    <template if:true={showStepProduct}>
+        <div class="slds-grid slds-var-m-top_large">
+            <div class="slds-size_1-of-12">
+            </div>
+            <div class="slds-size_10-of-12">
+                <c-csp-product-selection-matrix product-target="" disable-account-products="true">
+                    <span slot="header"></span>
+                </c-csp-product-selection-matrix>
+            </div>
+            <div class="slds-size_1-of-12">
+            </div>
+        </div>
+    </template>
+
+    <template if:false={showStepProduct}>
+        <h1 class="slds-text-heading_large slds-var-m-top_large slds-var-m-bottom_xx-large cKnowledge_Articles">Create a case</h1>
+        <p class="slds-var-m-bottom_xx-large csp-text_large">Submit a case and our Support team will get back to you soon.</p>
+    </template>
+
+    <template if:true={showStepOne}>
+        <div class="slds-grid">
+            <div class="slds-size_1-of-12">
+            </div>
+            <div class="slds-size_6-of-12">
+                <lightning-progress-indicator current-step="1" type="base" variant="base">
+                    <lightning-progress-step value="1"></lightning-progress-step>
+                    <lightning-progress-step value="2"></lightning-progress-step>
+                    <lightning-progress-step value="3"></lightning-progress-step>
+                </lightning-progress-indicator>
+
+                <p class="slds-var-m-top_large slds-var-m-bottom_large csp-text_large">Describe the issue you are experiencing</p>
+
+                <form class="slds-box csp-box slds-var-m-bottom_x-large">
+                    <div class="slds-var-p-around_medium">
+                        <p class="slds-var-p-bottom_large"><strong class="csp-text_brand">Step One</strong></p>
+                        <p>To help us get to this issue quickly, please briefly describe it below.</p><br /> 
+
+                        <lightning-input
+                            placeholder="Describe the issue..."
+                            message-when-value-missing=" "
+                            required
+                            onchange={handleTitleChange}
+                            class="slds-var-m-bottom_large csp-input_base"
+                            data-id="title"
+                            max-length="255">
+                        </lightning-input>
+
+                        <span data-id="description"></span>
+                        <lightning-button label="Next" type="submit" class="csp-button_brand" onclick={handleStepOne}></lightning-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={showStepTwo}>
+        <div class="slds-grid" >
+            <div class="slds-size_1-of-12">
+            </div>
+            <div class="slds-size_6-of-12">
+                <lightning-progress-indicator current-step="2" type="base" variant="base">
+                    <lightning-progress-step value="1"></lightning-progress-step>
+                    <lightning-progress-step value="2"></lightning-progress-step>
+                    <lightning-progress-step value="3"></lightning-progress-step>
+                </lightning-progress-indicator>
+
+                <p class="slds-var-m-top_large slds-var-m-bottom_large csp-text_large">Tell us a little more...</p>
+            </div>
+        </div>
+
+        <div class="slds-grid">
+            <div class="slds-size_1-of-12">
+            </div>
+            <div class="slds-size_6-of-12">
+                <form class="slds-box csp-box" onsubmit={handleStepTwo}>
+                    <div class="slds-var-p-around_medium">
+                        <p class="slds-var-p-bottom_large"><strong class="csp-text_brand">Step Two</strong></p>
+                        <p></p>
+                        <p>To help us get to this issue quickly, please briefly describe it below.</p><br /> 
+
+                        <lightning-input
+                            placeholder="Describe the issue..."
+                            message-when-value-missing=" "
+                            required
+                            label="Subject:"
+                            onchange={handleTitleChange}
+                            value={pageRef.state.title}
+                            class="slds-var-m-top_large csp-input_base"
+                            data-id="title"
+                            max-length="255">
+                        </lightning-input>
+                        
+                        <lightning-textarea
+                            placeholder="Please include information about: where in the software you are what you are expecting to happen, and what happened. If relevant, please include: the version number, the browser being used, details of an affected user, error message, screenshots and any relevant files..."
+                            label= 'Description:'
+                            message-when-value-missing=" "
+                            required
+                            class="slds-var-m-top_large csp-input_base"
+                            onchange={handleValidation}
+                            data-id="description">
+                        </lightning-textarea>
+                        <p></p>
+                        <template if:true={serviceUser}>
+                                                <lightning-combobox
+                                                name="Service Account"
+                                                label="Service Account:"
+                                                value=""
+                                                placeholder="Please select..."
+                                                class="slds-var-m-top_large csp-input_base"
+                                                options={serviceaccounts}
+                                                onchange={handleServAcc}
+                                                required
+                                                ></lightning-combobox>
+                                            </template>
+
+                        <lightning-combobox
+                            label="Product area:"
+                            placeholder="Please select..."
+                            options={features}
+                            data-id="feature"
+                            message-when-value-missing=" "
+                            required
+                            class="slds-var-m-top_large csp-input_base"
+                            onchange={handleFeatureSelect} >
+                        </lightning-combobox>
+
+                        <lightning-combobox
+                            label="Business impact:"
+                            placeholder="Please select..."
+                            options={impacts}
+                            data-id="impact"
+                            message-when-value-missing=" "
+                            required
+                            class="slds-var-m-top_large csp-input_base"
+                            onchange={handleImpactSelect} >
+                        </lightning-combobox>
+
+                        <div class="slds-var-m-top_large csp-input_base">
+                            <lightning-file-upload
+                                label="Add attachments (optional):"
+                                name="fileUploader"
+                                record-id={userId}
+                                onuploadfinished={handleUploadFinished}
+                                multiple>
+                            </lightning-file-upload>
+
+                            <div class="slds-grid slds-wrap slds-gutters slds-var-m-top_medium" if:true={files.length}>
+                                <template iterator:file={files}>
+                                    <div key={file.value.name} class="slds-col slds-var-m-bottom_x-small slds-size_1-of-1">
+                                        <lightning-icon icon-name="doctype:attachment" size="small" class="csp-fill_brand"></lightning-icon>
+                                        <span class="slds-var-m-left_small slds-var-m-right_xx-small csp-text_small">{file.value.name}</span>
+                                        <lightning-button-icon variant="bare" size="medium" icon-name="utility:delete" slot="actions" onclick={handleDeleteFile} data-id={file.value.documentId}></lightning-button-icon>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <div class="slds-grid slds-wrap slds-grid_vertical-align-center slds-m-top_medium">
+                            <div class="slds-size_4-of-5 slds-var-m-bottom_medium slds-text-color_weak">Add case collaborators (optional):</div>
+                            <lightning-button
+                                class="slds-size_1-of-5 slds-var-m-bottom_medium csp-button_brand-white slds-button slds-var-m-bottom_medium csp-button_stretch"
+                                label="Add" onclick={handleAddCollaborator}></lightning-button>
+                            <div class="slds-size_1-of-1">
+                                <template iterator:collaborator={collaborators}>
+                                    <div if:true={collaborator.first} key={collaborator.value.id} class="slds-border_top csp-portal-team__top-border"></div>
+                                    <div key={collaborator.value.id} class="csp-portal-member slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid--vertical-stretch">
+                                        <div class="csp-portal-member__name slds-col slds-size_5-of-12 slds-grid slds-grid_vertical-align-center">
+                                            <lightning-avatar class={collaborator.value.avatar} src={collaborator.value.photoUrl}
+                                                initials={collaborator.value.initials}>
+                                            </lightning-avatar>
+                                            <div class="slds-m-vertical_small slds-m-horizontal_x-small slds-truncate">
+                                                {collaborator.value.contactName}</div>
+                                        </div>
+                                        <div class="csp-portal-member__name slds-col slds-size_5-of-12 slds-grid slds-grid_vertical-align-center">
+                                            <lightning-formatted-text class="slds-m-vertical_small slds-m-horizontal_x-small slds-truncate" value={collaborator.value.email} linkify></lightning-formatted-text>
+                                        </div>
+                                        <div class="slds-col slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                                            <lightning-button-icon-stateful id={collaborator.value.id}
+                                                data-name={collaborator.value.id} icon-name="action:delete" onclick={removeCollaborator}
+                                                alternative-text="Remove Collaborator"></lightning-button-icon-stateful>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template if:false={hasCollaborators}>
+                                    <div class="slds-size_1-of-1 slds-text-align_center slds-text-color_weak slds-m-vertical_small">
+                                        No collaborators selected
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="slds-nubbin_top-left slds-popover slds-is-relative slds-var-p-vertical_small slds-var-p-horizontal_large slds-container_fluid csp-box csp-popover_validation" if:true={validationMessage.length}>
+                    {validationMessage}
+                </div>
+            </div>
+            <div class="slds-size_5-of-12">
+                <div class="slds-var-m-left_x-large slds-hide" data-id="search-results">
+                    <div class="slds-nubbin_left csp-box slds-popover slds-is-relative slds-var-p-around_x-large slds-container_fluid csp-popover_header">
+                        Based on the information you have supplied, we recommend these articles may help:
+                    </div>
+                    <div class="slds-box csp-box csp-case_results-box">
+                        <c-csp-search-results
+                            limit-amount=3
+                            search-text={pageRef.state.title}
+                            suppress-highlighting=true
+                            suppress-product=true
+                            suppress-more-button=true
+                            include-knowledge-results=true
+                            feature=''
+                            onkeydown={handleEscape}
+                            oncspsearcheventcomplete={handleSearchResult}
+                            oncspsearchselectresult={handleSelectResult}>
+                        </c-csp-search-results>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-hide" data-id="case-options">
+            <div class="slds-size_1-of-12"></div>
+            <div class="slds-size_10-of-12">
+                <div class="slds-nubbin_top-left csp-box slds-popover slds-is-relative slds-var-p-vertical_small slds-var-p-horizontal_large slds-container_fluid csp-popover_validation">
+                    With your current success plan you have <strong>{channels.size} support options</strong> available:
+                </div>
+                <div class="slds-box csp-box">
+                    <div class="slds-grid slds-wrap slds-var-m-horizontal_x-large slds-var-m-vertical_medium">
+                        <div class="slds-col_padded slds-size_12-of-12 slds-large-size_4-of-12 slds-var-m-vertical_x-small">
+                            <div class="csp-case-plan_box csp-case-plan_chat">
+                                <div class="csp-case-plan_box-inner slds-text-align_center slds-is-relative">
+                                    <img src={planImage1}>
+                                    <div class="slds-is-absolute slds-hide csp-case-plan_recommended slds-var-p-horizontal_medium slds-var-p-vertical_x-small csp-text_strong">
+                                        RECOMMENDED
+                                    </div>
+                                    <div class="csp-case-plan_plan-copy slds-hide">
+                                        Your Success Plan: <strong>{product.successPlan}</strong>
+                                    </div>
+                                </div>
+                                <lightning-badge label="Option Unavailable" class="csp-case-plan_badge slds-hide slds-is-relative"></lightning-badge>
+                                <div class="slds-var-p-around_large">
+                                    <h2 class="csp-text_large">Start A Live Chat</h2>
+                                    <p class="slds-var-m-top_small slds-var-m-bottom_large">Have a question about how to do something on your software? Start a live chat with a member of our team.</p>
+                                    <lightning-button label="Start a live chat" type="submit" class="csp-button_brand csp-case-plan_plan-button" onclick={handleStepTwo} name="chat"></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col_padded slds-size_12-of-12 slds-large-size_4-of-12 slds-var-m-vertical_x-small">
+                            <div class="csp-case-plan_box csp-case-plan_phone">
+                                <div class="csp-case-plan_box-inner slds-text-align_center slds-is-relative">
+                                    <img src={planImage2}>
+                                    <div class="slds-is-absolute slds-hide csp-case-plan_recommended slds-var-p-horizontal_medium slds-var-p-vertical_x-small csp-text_strong">
+                                        RECOMMENDED
+                                    </div>
+                                    <div class="csp-case-plan_plan-copy slds-hide">
+                                        Your Success Plan: <strong>{product.successPlan}</strong>
+                                    </div>
+                                </div>
+                                <lightning-badge label="Option Unavailable" class="csp-case-plan_badge slds-hide slds-is-relative"></lightning-badge>
+                                <div class="slds-var-p-around_large">
+                                    <h2 class="csp-text_large">Give Us A Call</h2>
+                                    <p class="slds-var-m-top_small slds-var-m-bottom_large">Create a support case in advance of giving us a call to discuss.</p>
+                                    <lightning-button label="Give Us A Call" type="submit" class="csp-button_brand csp-case-plan_plan-button" onclick={handleSelectTel}></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col_padded slds-size_12-of-12 slds-large-size_4-of-12 slds-var-m-vertical_x-small">
+                            <div class="csp-case-plan_box csp-case-plan_online">
+                                <div class="csp-case-plan_box-inner slds-text-align_center slds-is-relative">
+                                    <img src={planImage3}>
+                                    <div class="slds-is-absolute slds-hide csp-case-plan_recommended slds-var-p-horizontal_medium slds-var-p-vertical_x-small csp-text_strong">
+                                        RECOMMENDED
+                                    </div>
+                                    <div class="csp-case-plan_plan-copy slds-hide">
+                                        Your Success Plan: <strong>{product.successPlan}</strong>
+                                    </div>
+                               </div>
+                                <lightning-badge label="Option Unavailable" class="csp-case-plan_badge slds-hide slds-is-relative"></lightning-badge>
+                                <div class="slds-var-p-around_large">
+                                    <h2 class="csp-text_large">Raise A Case Online</h2>
+                                    <p class="slds-var-m-top_small slds-var-m-bottom_large">Raise your ticket online and a member of our team will be in touch soon to help.</p>
+                                    <lightning-button label="Raise A Case Online" type="submit" class="csp-button_brand csp-case-plan_plan-button" onclick={handleStepTwo} name="online"></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-size_1-of-12"></div>
+        </div>
+
+        <iframe class="csp-iframe" src={chatUrl} width="0" height="0" style="border:0px"></iframe>
+
+        <c-csp-modal
+            size="medium"
+            data-id="article-popup"
+            onclosedialog={handleCloseDialog}
+            onkeydown={handleEscape}>
+            <template if:true={articleUrl.length}>
+                <span slot="header">
+                    <c-csp-knowledge-article
+                        display-modal=true
+                        show-title="true"
+                        show-feedback-component="false"
+                        hide-action-buttons="true"
+                        url-name={articleUrl}>
+                    </c-csp-knowledge-article>
+                </span>
+                <div class="slds-is-relative">
+                <div if:false={hasLoadedArticle}>
+                    <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                </div>
+                <c-csp-knowledge-article onkeydown={handleEscape}
+                    display-modal=true
+                    show-body="true"
+                    show-feedback-component="true"
+                    hide-action-buttons="true"
+                    oncspsubmittedarticlefeedback={handleArticleFeedback}
+                    oncsparticleloaded={handleArticleLoaded}
+                    url-name={articleUrl}>
+                </c-csp-knowledge-article>
+                </div>
+            </template>
+        </c-csp-modal>
+
+        <c-csp-modal
+            data-id="close-case-popup"
+            onclosedialog={handleCloseDialog}
+            onkeydown={handleEscape}>
+
+            <span slot="header">
+                Do you want to close the case?
+            </span>
+            <template if:true={articleUrl.length}>
+                <p class="slds-var-m-bottom_large">If this article has solved your problem would you like to close this case or continue?</p>
+                <div>
+                    <lightning-button label="CLOSE CASE" type="submit" class="csp-button_brand slds-var-m-right_large" onclick={handleCloseCase}></lightning-button>
+                    <lightning-button label="CONTINUE WITH CASE" type="submit" class="csp-button_brand-white slds-var-m-right_large" onclick={handleContinueCase}></lightning-button>
+                </div>
+            </template>
+        </c-csp-modal>
+
+        <c-csp-modal
+            data-id="tel-confirm-popup"
+            onkeydown={handleTelConfirmEscape}>
+
+            <span slot="header">
+                Select Support Call?
+            </span>
+            <p class="slds-var-m-bottom_large">On the next screen you'll be presented with the support number that you need to phone. If we don't hear from you within 72hrs, we'll mark your case as Closed.</p>
+            <div class="slds-grid slds-grid_align-end">
+                <lightning-button label="CHANGE CHOICE" type="submit" class="csp-button_brand-white slds-var-m-right_large" onclick={handleHideTel}></lightning-button>
+                <lightning-button label="CREATE CASE" type="submit" class="csp-button_brand slds-var-m-right_large" onclick={handleStepTwo} name="phone"></lightning-button>
+            </div>
+        </c-csp-modal>
+    </template>
+
+    <template if:true={showStepThree}>
+        <div class="slds-grid">
+            <div class="slds-size_1-of-12">
+            </div>
+            <div class="slds-size_6-of-12">
+                <lightning-progress-indicator current-step="3" type="base" variant="base">
+                    <lightning-progress-step value="1"></lightning-progress-step>
+                    <lightning-progress-step value="2"></lightning-progress-step>
+                    <lightning-progress-step value="3"></lightning-progress-step>
+                </lightning-progress-indicator>
+
+                <p class="slds-var-m-top_x-large slds-var-m-bottom_large csp-text_large csp-text_brand">Thank you - your case has been created</p>
+                <p>Your case number: <strong>{caseNumber}</strong></p>
+
+
+                <div if:true={isChatCase} class="slds-var-m-top_medium">
+                    <iframe class="csp-iframe" src={chatUrl} width="100%" height="40" style="border:0px"></iframe>
+                </div>
+
+                <div if:true={isPhoneCase}>
+                    <div if:true={isCaseContactNumbersRetrieved}>
+                        <p class="slds-var-m-top_x-large slds-var-m-bottom_medium csp-text_large csp-text_brand">Please call: </p> 
+                            <template for:each={caseContactNumbers} for:item="contactNumber">
+                                <div key={contactNumber.Id} class="slds-grid slds-grid_align-center slds-gutters">
+                                    <div key={contactNumber.Id} class="csp-text_large slds-col slds-size_5-of-12 slds-text-align_left">
+                                        <strong>
+                                            <template if:true={contactNumber.Country__c}>
+                                                {contactNumber.Country__c}
+                                            </template>
+                                            <template if:false={contactNumber.Country__c}>
+                                                Other
+                                            </template>
+                                        </strong>
+                                    </div>
+                                    <div key={contactNumber.Id} class="csp-text_large slds-col slds-size_2-of-12 slds-text-align_center">
+                                        <strong>-</strong>
+                                    </div>
+                                    <div key={contactNumber.Id} class="csp-text_large slds-col slds-size_5-of-12 csp-text_brand slds-text-align_left">
+                                        {contactNumber.Contact_Telephone_Number__c}
+                                    </div>
+                                </div>
+                            </template>
+                    </div>
+                    <div if:false={isCaseContactNumbersRetrieved}>
+                        <p class="slds-var-m-top_x-large slds-var-m-bottom_xx-large csp-text_large csp-text_brand">Please call: {product.phoneNumber}</p>
+                    </div>
+                </div>
+
+                <div class="slds-var-m-top_large slds-var-m-bottom_large">
+                    <lightning-button label="VIEW THIS CASE" class="csp-button_brand slds-var-m-right_large" onclick={handleViewCase}></lightning-button>
+                    <lightning-button label="CREATE A NEW CASE" type="submit" class="csp-button_brand-white" onclick={handleCreateCase}></lightning-button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={showCaseClosed}>
+        <div class="slds-grid">
+            <div class="slds-size_1-of-12">
+            </div>
+            <div class="slds-size_6-of-12">
+                <lightning-progress-indicator current-step="3" type="base" variant="base">
+                    <lightning-progress-step value="1"></lightning-progress-step>
+                    <lightning-progress-step value="2"></lightning-progress-step>
+                    <lightning-progress-step value="3"></lightning-progress-step>
+                </lightning-progress-indicator>
+
+                <p class="slds-var-m-top_large slds-var-m-bottom_large csp-text_large csp-text_brand">Thank you - your case has been closed</p>
+
+                <div class="slds-var-m-top_large slds-var-m-bottom_large">
+                    <lightning-button label="CREATE A NEW CASE" type="submit" class="csp-button_brand" onclick={handleCreateCase}></lightning-button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <lightning-spinner alternative-text="Loading" size="large" if:true={creatingCase}></lightning-spinner>
+
+
+    <c-csp-modal onclosedialog={handleCloseCollabDialog} show-modal={showCollabModal} size="small" onkeyup={handleEscape}>
+        <span slot="header">Add Case Collaborator</span>
+        <div class="slds-grid slds-wrap slds-grid_vertical-align-center slds-var-m-bottom_medium">
+            <div class="slds-m-right_xx-small">Available Case collaborators:</div>
+            <div class="slds-size_1-of-1 slds-text-color_weak slds-text-body_regular slds-m-right_xx-small slds-m-top_xx-small">Note - Named support contacts for the associated product can be added as a collaborator</div>
+        </div>
+        <template if:true={potentialCollaborators} iterator:collaborator={potentialCollaborators}>
+            <div if:true={collaborator.first} key={collaborator.value.id} class="slds-border_top csp-portal-team__top-border"></div>
+            <div key={collaborator.value.id}
+                class="csp-portal-member slds-grid slds-wrap slds-gutters-direct slds-grid_align-spread slds-grid--vertical-stretch">
+                <div class="csp-portal-member__name slds-col slds-size_5-of-12 slds-grid slds-grid_vertical-align-center">
+                    <lightning-avatar class={collaborator.value.avatar} src={collaborator.value.photoUrl}
+                        initials={collaborator.value.initials}>
+                    </lightning-avatar>
+                    <div class="slds-m-vertical_small slds-m-horizontal_x-small slds-truncate">{collaborator.value.contactName}</div>
+                </div>
+                <div class="csp-portal-member__name slds-col slds-size_5-of-12 slds-grid slds-grid_vertical-align-center">
+                    <lightning-formatted-text class="slds-m-vertical_small slds-m-horizontal_x-small slds-truncate" value={collaborator.value.email} linkify></lightning-formatted-text>
+                </div>
+                <div class="slds-col slds-size_2-of-12 slds-grid slds-grid_vertical-align-center">
+                    <lightning-button-icon-stateful id={collaborator.value.id} data-name={collaborator.value.id}
+                        icon-name="action:approval" onclick={createCollaborator} alternative-text="Add Collaborator">
+                    </lightning-button-icon-stateful>
+                </div>
+            </div>
+        </template>
+        <template if:false={hasPotentialCollaborators}>
+            <div class="slds-size_1-of-1 slds-text-align_center slds-text-color_weak slds-m-vertical_small">
+                No potential collaborators for this case
+            </div>
+        </template>
+    </c-csp-modal>
+</template>

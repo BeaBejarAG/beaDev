@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CSP: Curated Collection</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="title" type="String" default="Explore our curated collections" label="Component Title"/>
+            <property name="subtitle" type="String" default="Looking for help around a single subject? We've put together key articles that help you through specific topics." label="Component Subtitle"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
