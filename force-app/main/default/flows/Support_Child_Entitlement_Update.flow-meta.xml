@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <assignments>
+        <name>Add_to_Collection</name>
+        <label>Add to Collection</label>
+        <locationX>951</locationX>
+        <locationY>327</locationY>
+        <assignmentItems>
+            <assignToReference>OutputCollectionVarible</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Through_Children</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Children</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Update Child Record Details</description>
+        <name>Set_Child_Record</name>
+        <label>Set Child Record</label>
+        <locationX>1002</locationX>
+        <locationY>459</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Children.StartDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.StartDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Children.EndDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.EndDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Children.PlanType__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.PlanType__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Children.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Children.SlaProcessId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.SlaProcessId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_to_Collection</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Check for differences in the Start/End Date and the Plan Type to ensure these are setup to make the parent</description>
+        <name>Check_for_differences</name>
+        <label>Check for differences</label>
+        <locationX>842</locationX>
+        <locationY>574</locationY>
+        <defaultConnector>
+            <targetReference>Loop_Through_Children</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Differences</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.StartDate</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Loop_Through_Children.StartDate</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.EndDate</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Loop_Through_Children.EndDate</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.PlanType__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Loop_Through_Children.PlanType__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Name</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Loop_Through_Children.Name</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.SlaProcessId</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>Loop_Through_Children.SlaProcessId</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Child_Record</targetReference>
+            </connector>
+            <label>Differences</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to see if there are any children</description>
+        <name>Check_if_Any_Children</name>
+        <label>Check if Any Children</label>
+        <locationX>428</locationX>
+        <locationY>413</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Not_Empty</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_all_child_Entitlements</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Through_Children</targetReference>
+            </connector>
+            <label>Not Empty</label>
+        </rules>
+    </decisions>
+    <description>This flow updates the children entitlements when a parent is updated</description>
+    <interviewLabel>Support - Child Entitlement Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Support - Child Entitlement Update</label>
+    <loops>
+        <description>Loop through children Ents and check for differences</description>
+        <name>Loop_Through_Children</name>
+        <label>Loop Through Children</label>
+        <locationX>713</locationX>
+        <locationY>413</locationY>
+        <collectionReference>Get_all_child_Entitlements</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_for_differences</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Fields</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>When the Entitlement is updated check to see if there are Child Entitlements</description>
+        <name>Get_all_child_Entitlements</name>
+        <label>Get all child Entitlements</label>
+        <locationX>439</locationX>
+        <locationY>116</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_if_Any_Children</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Linked_Entitlement__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Entitlement</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Update Child Fields</description>
+        <name>Update_Fields</name>
+        <label>Update Fields</label>
+        <locationX>722</locationX>
+        <locationY>220</locationY>
+        <inputReference>OutputCollectionVarible</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>25</locationX>
+        <locationY>52</locationY>
+        <connector>
+            <targetReference>Get_all_child_Entitlements</targetReference>
+        </connector>
+        <object>Entitlement</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>OutputCollectionVarible</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Entitlement</objectType>
+    </variables>
+</Flow>

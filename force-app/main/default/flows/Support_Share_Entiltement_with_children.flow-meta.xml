@@ -1,0 +1,1106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <assignments>
+        <description>Account ID to be set</description>
+        <name>AccountID</name>
+        <label>AccountID</label>
+        <locationX>874</locationX>
+        <locationY>1040</locationY>
+        <assignmentItems>
+            <assignToReference>FoundAccountID</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Select_Contains_Match_0</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Account_Found</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Account ID to be set</description>
+        <name>AccountID_0</name>
+        <label>AccountID</label>
+        <locationX>993</locationX>
+        <locationY>871</locationY>
+        <assignmentItems>
+            <assignToReference>FoundAccountID</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Select_Contains_Match</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Account_Found</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the found entitlement to the collection</description>
+        <name>Assign_Ent_To_Collection</name>
+        <label>Assign Ent To Collection</label>
+        <locationX>706</locationX>
+        <locationY>362</locationY>
+        <assignmentItems>
+            <assignToReference>ListOfEnts</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>FirstEnt</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ListOfSelectedID</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>RemoveFirstEnt</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_Value_Still_Existing</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the found entitlement to the collection</description>
+        <name>Assign_Ent_To_Collection_0</name>
+        <label>Assign Ent To Collection</label>
+        <locationX>788</locationX>
+        <locationY>142</locationY>
+        <assignmentItems>
+            <assignToReference>ListOfAccounts</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>FirstEnt</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ListOfSelectedID</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>RemoveFirstEnt</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_Value_Still_Existing_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assign lists to varible</description>
+        <name>Assign_List_To_Varible</name>
+        <label>Assign List To Varible</label>
+        <locationX>891</locationX>
+        <locationY>546</locationY>
+        <assignmentItems>
+            <assignToReference>ListOfSelectedID</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>{!Select_Entitlements_To_Share};</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_Value_Still_Existing</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assign lists to varible</description>
+        <name>Assign_List_To_Varible_0</name>
+        <label>Assign List To Varible</label>
+        <locationX>890</locationX>
+        <locationY>233</locationY>
+        <assignmentItems>
+            <assignToReference>ListOfSelectedID</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>{!Select_Accounts_To_Share_With};</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_Value_Still_Existing_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Take Only First Word</description>
+        <name>RemoveFirstWord</name>
+        <label>Remove First Word</label>
+        <locationX>1395</locationX>
+        <locationY>704</locationY>
+        <assignmentItems>
+            <assignToReference>SearchAccountNameShort</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FirstWordOnly</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>AccountName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>RestOfAccountName</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Search_Results_Exact_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Take Only First Word</description>
+        <name>RemoveFirstWord_0</name>
+        <label>Remove First Word</label>
+        <locationX>1481</locationX>
+        <locationY>891</locationY>
+        <assignmentItems>
+            <assignToReference>SearchAccountNameShort</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FirstWordOnly</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>AccountName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>RestOfAccountName</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Search_Results_Exact_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set Account Id</description>
+        <name>Set_Account_Id</name>
+        <label>Set Account Id</label>
+        <locationX>1767</locationX>
+        <locationY>286</locationY>
+        <assignmentItems>
+            <assignToReference>EntitlementLoop.AccountId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>EntitlementLoop.Linked_Entitlement__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ListOfSelectedID</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>EntitlementLoop.Integration_ID__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>CHILD-ENT-{!EntitlementLoop.AssociatedProductRange__c}-{!recordId}</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>EntitlementLoop.Linked_Entitlement__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EntitlementLoop.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Child_Entitlemnt</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets varibles needed to create an account</description>
+        <name>Set_Varibles_for_account_creation</name>
+        <label>Set Varibles for account creation</label>
+        <locationX>1009</locationX>
+        <locationY>1273</locationY>
+        <assignmentItems>
+            <assignToReference>Account_Create_Rec.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Account_Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Account_Create_Rec.Type</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Dealer Customer</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Account_Create_Rec.Phone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Company_Phone_Number</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Account_Create_Rec.Website</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Company_Web_Site</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Account_Create_Rec.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>01258000000O8JWAA0</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Account_Create_Rec.OwnerId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>00558000001IEk4AAG</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Account_Create_Rec.ParentId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Account_Record</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>SetAccountName</name>
+        <label>SetAccountName</label>
+        <locationX>1175</locationX>
+        <locationY>704</locationY>
+        <assignmentItems>
+            <assignToReference>AccountName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Search_Account_Name</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>RemoveFirstWord</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <description>When an account is not listed user can select this to create and link a new one</description>
+        <name>AccountNotListed</name>
+        <choiceText>Account Not Listed</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>AccountNotListed</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <description>Check to see if the account not listed option is ticked, if so we need to handle this differently</description>
+        <name>Account_Not_Listed</name>
+        <label>Account Not Listed</label>
+        <locationX>594</locationX>
+        <locationY>539</locationY>
+        <defaultConnector>
+            <targetReference>Confirm_Link</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Account_not_listed_selected</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Select_Accounts_To_Share_With</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <elementReference>AccountNotListed</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>GetAccountInfo</targetReference>
+            </connector>
+            <label>Account not listed selected</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>AccountFound</name>
+        <label>AccountFound?</label>
+        <locationX>1005</locationX>
+        <locationY>964</locationY>
+        <defaultConnector>
+            <targetReference>AccountID</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Account_Empty</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>AccountName</leftValueReference>
+                <operator>EqualTo</operator>
+            </conditions>
+            <connector>
+                <targetReference>Create_Account</targetReference>
+            </connector>
+            <label>Account Empty</label>
+        </rules>
+        <rules>
+            <name>Account_Not_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Select_Contains_Match_0</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>AccountNotListed</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>RemoveFirstWord_0</targetReference>
+            </connector>
+            <label>Account Not Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_if_sharing_is_allowed</name>
+        <label>Check if sharing is allowed</label>
+        <locationX>342</locationX>
+        <locationY>438</locationY>
+        <defaultConnector>
+            <targetReference>Ent_Sharing_Not_Allowed</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Allowed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Current_Account.Entitlement_Sharing_Allowed__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>List_Of_Child_Accounts</targetReference>
+            </connector>
+            <label>Is Allowed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to see if Ents still have Ents in</description>
+        <name>Is_Value_Still_Existing</name>
+        <label>Is Value Still Existing</label>
+        <locationX>883</locationX>
+        <locationY>365</locationY>
+        <defaultConnector>
+            <targetReference>Assign_Ent_To_Collection</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ListOfSelectedID</leftValueReference>
+                <operator>EqualTo</operator>
+            </conditions>
+            <connector>
+                <targetReference>Assign_List_To_Varible_0</targetReference>
+            </connector>
+            <label>Is Null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to see if Ents still have Ents in</description>
+        <name>Is_Value_Still_Existing_0</name>
+        <label>Is Value Still Existing</label>
+        <locationX>882</locationX>
+        <locationY>52</locationY>
+        <defaultConnector>
+            <targetReference>Assign_Ent_To_Collection_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Null_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ListOfSelectedID</leftValueReference>
+                <operator>EqualTo</operator>
+            </conditions>
+            <connector>
+                <targetReference>Get_Matching_Ents</targetReference>
+            </connector>
+            <label>Is Null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Result Not Found</description>
+        <name>Result_Not_Found</name>
+        <label>Result Not Found</label>
+        <locationX>1002</locationX>
+        <locationY>682</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>No_Result_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Select_Contains_Match</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <elementReference>AccountNotListed</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SetAccountName</targetReference>
+            </connector>
+            <label>No Result Found</label>
+        </rules>
+        <rules>
+            <name>Result_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Select_Contains_Match</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>AccountNotListed</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>AccountID_0</targetReference>
+            </connector>
+            <label>Result Found</label>
+        </rules>
+    </decisions>
+    <description>Shares an entitlement with a child accounts so customers can log cases</description>
+    <dynamicChoiceSets>
+        <description>List of child accounts to pick from</description>
+        <name>ChildAccountPicks</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ParentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <object>Account</object>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>ContainsResults</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>Contains</operator>
+            <value>
+                <elementReference>Search_Account_Name</elementReference>
+            </value>
+        </filters>
+        <object>Account</object>
+        <sortField>Name</sortField>
+        <sortOrder>Asc</sortOrder>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>FilteredResults</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>Contains</operator>
+            <value>
+                <elementReference>SearchAccountNameShort</elementReference>
+            </value>
+        </filters>
+        <object>Account</object>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <description>Get Entitlement List for current Account</description>
+        <name>GetEntitlementList</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Active__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Entitlement</object>
+        <sortField>Name</sortField>
+        <sortOrder>Desc</sortOrder>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
+    <formulas>
+        <description>Moves Accounts to rows</description>
+        <name>AccountsToRows</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE({!Select_Accounts_To_Share_With},&quot;;&quot;,&quot;&lt;br/&gt;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <description>Split Entitlements to Rows</description>
+        <name>EntsToRows</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE({!Select_Entitlements_To_Share},&quot;;&quot;,&quot;&lt;br/&gt;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <description>Ent ID&apos;s to Rows</description>
+        <name>EntsToRowsID</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE({!Select_Entitlements_To_Share},&quot;;&quot;,&quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <description>Grab the First Ent in the list</description>
+        <name>FirstEnt</name>
+        <dataType>String</dataType>
+        <expression>LEFT({!ListOfSelectedID}, FIND(&quot;;&quot;, {!ListOfSelectedID})-1)</expression>
+    </formulas>
+    <formulas>
+        <description>FirstWordOnly</description>
+        <name>FirstWordOnly</name>
+        <dataType>String</dataType>
+        <expression>IF( FIND(&quot; &quot;, {!AccountName}) != 0,LEFT({!AccountName}, FIND(&quot; &quot;, {!AccountName}) ),{!AccountName})</expression>
+    </formulas>
+    <formulas>
+        <description>Remove First Ent</description>
+        <name>RemoveFirstEnt</name>
+        <dataType>String</dataType>
+        <expression>TRIM(SUBSTITUTE({!ListOfSelectedID},{!FirstEnt} + &quot;;&quot;,&quot;&quot;))</expression>
+    </formulas>
+    <formulas>
+        <name>RestOfAccountName</name>
+        <dataType>String</dataType>
+        <expression>IF( FIND(&quot; &quot;, {!AccountName}) != 0,SUBSTITUTE({!AccountName},{!FirstWordOnly},&quot;&quot;),&quot;&quot;)</expression>
+    </formulas>
+    <interviewLabel>Support - Share Entiltement with children {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Support - Share Entiltement with children</label>
+    <loops>
+        <description>Get Matching Ents</description>
+        <name>Get_Matching_Ents</name>
+        <label>Get Matching Ents</label>
+        <locationX>1017</locationX>
+        <locationY>236</locationY>
+        <assignNextValueToReference>ListOfSelectedID</assignNextValueToReference>
+        <collectionReference>ListOfEnts</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_Related_Ents</targetReference>
+        </nextValueConnector>
+    </loops>
+    <loops>
+        <description>Loop and add to all accounts</description>
+        <name>Loop_All_Accounts</name>
+        <label>Loop All Accounts</label>
+        <locationX>1379</locationX>
+        <locationY>121</locationY>
+        <assignNextValueToReference>recordId</assignNextValueToReference>
+        <collectionReference>ListOfAccounts</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Set_Account_Id</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Get_Matching_Ents</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <description>Creates the account record</description>
+        <name>Create_Account_Record</name>
+        <label>Create Account Record</label>
+        <locationX>385</locationX>
+        <locationY>1161</locationY>
+        <connector>
+            <targetReference>List_Of_Child_Accounts</targetReference>
+        </connector>
+        <inputReference>Account_Create_Rec</inputReference>
+    </recordCreates>
+    <recordCreates>
+        <description>Creates the child entitlement</description>
+        <name>Create_Child_Entitlemnt</name>
+        <label>Create Child Entitlemnt</label>
+        <locationX>1322</locationX>
+        <locationY>395</locationY>
+        <connector>
+            <targetReference>Loop_All_Accounts</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>errorsecreen</targetReference>
+        </faultConnector>
+        <inputReference>EntitlementLoop</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <description>Find all exact matchs based on name given</description>
+        <name>Find_exact_Match</name>
+        <label>Find exact Match</label>
+        <locationX>733</locationX>
+        <locationY>689</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Search_Results_Exact</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>Contains</operator>
+            <value>
+                <elementReference>Search_Account_Name</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Account</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>Website</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Current Account</description>
+        <name>Get_Current_Account</name>
+        <label>Get Current Account</label>
+        <locationX>178</locationX>
+        <locationY>483</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_if_sharing_is_allowed</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Gets all related Entitlements</description>
+        <name>Get_Related_Ents</name>
+        <label>Get Related Ents</label>
+        <locationX>1220</locationX>
+        <locationY>65</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_All_Accounts</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>ListOfSelectedID</elementReference>
+            </value>
+        </filters>
+        <object>Entitlement</object>
+        <outputReference>EntitlementLoop</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>AssociatedProductRange__c</queriedFields>
+        <queriedFields>StartDate</queriedFields>
+        <queriedFields>EndDate</queriedFields>
+        <queriedFields>Contract__c</queriedFields>
+        <queriedFields>PlanType__c</queriedFields>
+        <queriedFields>SlaProcessId</queriedFields>
+    </recordLookups>
+    <recordUpdates>
+        <description>Set parent id of account to be what has been chosen</description>
+        <name>Update_account_set_parent_ID</name>
+        <label>Update account set parent ID</label>
+        <locationX>525</locationX>
+        <locationY>1085</locationY>
+        <connector>
+            <targetReference>List_Of_Child_Accounts</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>FoundAccountID</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <runInMode>SystemModeWithSharing</runInMode>
+    <screens>
+        <description>Account Found</description>
+        <name>Account_Found</name>
+        <label>Account Found</label>
+        <locationX>735</locationX>
+        <locationY>1113</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Update_account_set_parent_ID</targetReference>
+        </connector>
+        <fields>
+            <name>Account_Found1</name>
+            <fieldText>&lt;p&gt;Account Found&lt;/p&gt;&lt;p&gt;{!FoundAccountID}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Confirm the link that will occour (Last chance to change mind)</description>
+        <name>Confirm_Link</name>
+        <label>Confirm Link</label>
+        <locationX>745</locationX>
+        <locationY>546</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Assign_List_To_Varible</targetReference>
+        </connector>
+        <fields>
+            <name>confirmchangesal</name>
+            <fieldText>&lt;p&gt;You have selected the following entitlements to share:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;{!EntsToRows}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;These will be shared with the following accounts:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;{!AccountsToRows}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;﻿&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Once confirmed the entilements will be added to the child accounts listed, to remove them you will need to delete them from the Shared Entitlement related list on the parent account.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Create_Account</name>
+        <label>Create Account</label>
+        <locationX>1008</locationX>
+        <locationY>1122</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Set_Varibles_for_account_creation</targetReference>
+        </connector>
+        <fields>
+            <name>CreateAccountText</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;No accounts were found using the names provided, please create an account below. This account will be linked with the account this flow started from.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Account_Name</name>
+            <dataType>String</dataType>
+            <fieldText>Account Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Company_Phone_Number</name>
+            <dataType>String</dataType>
+            <fieldText>Company Phone Number</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Company_Web_Site</name>
+            <dataType>String</dataType>
+            <fieldText>Company Web Site</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Ent_Sharing_Not_Allowed</name>
+        <label>Ent Sharing Not Allowed</label>
+        <locationX>349</locationX>
+        <locationY>650</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>NotAllowedText</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Entitlement Sharing on this account is not enabled. At this time this functionality is in trial.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>error</description>
+        <name>errorsecreen</name>
+        <label>errorsecreen</label>
+        <locationX>1321</locationX>
+        <locationY>600</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>errorcreateent</name>
+            <fieldText>&lt;p&gt;An error has occurred when creating this entitlement, either the account in question already has this entitlement or something when wrong&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>GetAccountInfo</name>
+        <label>GetAccountInfo</label>
+        <locationX>604</locationX>
+        <locationY>778</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Find_exact_Match</targetReference>
+        </connector>
+        <fields>
+            <name>GetAccountDetials</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Please enter the name of the account you are expecting to find, please note that its possible the account name may not be as you are expecting so we advise you do a full search in Salesforce first before heading down this route and make sure it has its parent record set.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Search_Account_Name</name>
+            <dataType>String</dataType>
+            <fieldText>Account Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <helpText>&lt;p&gt;Avoid starting with common words like The, eg if the company name is The Access Group just enter Access Group.&lt;/p&gt;</helpText>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Search_Example_Customer_E_mail</name>
+            <dataType>String</dataType>
+            <fieldText>Example Customer E-mail</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Display list of child accounts</description>
+        <name>List_Of_Child_Accounts</name>
+        <label>List Of Child Accounts</label>
+        <locationX>489</locationX>
+        <locationY>535</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Account_Not_Listed</targetReference>
+        </connector>
+        <fields>
+            <name>Select_Entitlements_To_Share</name>
+            <choiceReferences>GetEntitlementList</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select Entitlements To Share</fieldText>
+            <fieldType>MultiSelectCheckboxes</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Select_Accounts_To_Share_With</name>
+            <choiceReferences>ChildAccountPicks</choiceReferences>
+            <choiceReferences>AccountNotListed</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select Accounts To Share With</fieldText>
+            <fieldType>MultiSelectCheckboxes</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Search_Results_Exact</name>
+        <label>Search Results Exact</label>
+        <locationX>877</locationX>
+        <locationY>768</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Result_Not_Found</targetReference>
+        </connector>
+        <fields>
+            <name>SearchResultsText</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Here are a list of the results found, please note we will run several iterations of this, we advise you check all links in sales force first.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Select_Contains_Match</name>
+            <choiceReferences>ContainsResults</choiceReferences>
+            <choiceReferences>AccountNotListed</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select Contains Match</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Search_Results_Exact_0</name>
+        <label>Search Results Exact</label>
+        <locationX>1579</locationX>
+        <locationY>980</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>AccountFound</targetReference>
+        </connector>
+        <fields>
+            <name>SearchResultsText_0</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Here are a list of the results found, please note we will run several iterations of this, we advise you check all links in sales force first.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Select_Contains_Match_0</name>
+            <choiceReferences>FilteredResults</choiceReferences>
+            <choiceReferences>AccountNotListed</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select Contains Match</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>528</locationY>
+        <connector>
+            <targetReference>Get_Current_Account</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Data used to create the account record</description>
+        <name>Account_Create_Rec</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>AccountFlowStartedOn</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>AccountName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>List of child accounts</description>
+        <name>ChildAccounts</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <description>Loop varirble for Entitlements</description>
+        <name>EntitlementLoop</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Entitlement</objectType>
+    </variables>
+    <variables>
+        <description>Lists all Ents for matching</description>
+        <name>EntitlementsForMatching</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Entitlement</objectType>
+    </variables>
+    <variables>
+        <description>the selected account ID</description>
+        <name>FoundAccountID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ListOfAccounts</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>List of entitlement ID&apos;s</description>
+        <name>ListOfEnts</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>List of Selected ID&apos;s</description>
+        <name>ListOfSelectedID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Record Id</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>the field the cut versions of the account name</description>
+        <name>SearchAccountNameShort</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>List of selected Account ID&apos;s</description>
+        <name>SelectedAccountIDs</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Selected Accounts</description>
+        <name>SelectedAccounts</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+</Flow>

@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Send community user 2nd chase e-mail</description>
+        <name>Community_User_2nd_Chase</name>
+        <label>Community User 2nd Chase</label>
+        <locationX>1898</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_reply_2_Community</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Second_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Customer Outstanding Community Access</description>
+        <name>Customer_Outstanding_Community_Access</name>
+        <label>Customer Outstanding - Community Access</label>
+        <locationX>842</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.NoReplyFollowUpOne</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>First_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Posts in Case feed that the first chaser email has been sent to the contact</description>
+        <name>First_Chaser_Sent</name>
+        <label>First Chaser Sent</label>
+        <locationX>446</locationX>
+        <locationY>732</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Set_2nd_No_Reply_Date</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>First chaser email has been sent to the case contact.</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>visibility</name>
+            <value>
+                <stringValue>internalUsers</stringValue>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <description>Posts in Case feed that the second chaser email has been sent to the contact</description>
+        <name>Second_Chaser_Sent</name>
+        <label>Second Chaser Sent</label>
+        <locationX>1502</locationX>
+        <locationY>732</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Set_3rd_No_Reply_Date</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>Second chaser email has been sent to the case contact.</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>visibility</name>
+            <value>
+                <stringValue>internalUsers</stringValue>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <description>Sends 2nd no community e-mail</description>
+        <name>Send_2nd_e_mail_no_community</name>
+        <label>Send 2nd e-mail no community</label>
+        <locationX>1370</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_Reply_2_No_Community</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Second_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Sends 3rd e-mail for community users</description>
+        <name>Send_3rd_Email_Community</name>
+        <label>Send 3rd Email Community</label>
+        <locationX>2954</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_Reply_3_Community</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Third_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Sends 3rd e-mail for no community</description>
+        <name>Send_3rd_Email_No_Community</name>
+        <label>Send 3rd Email No Community</label>
+        <locationX>2426</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_Reply_3_No_Community</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Third_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Sends 3rd e-mail no portal</description>
+        <name>Send_3rd_Email_No_Portal</name>
+        <label>Send 3rd Email No Portal</label>
+        <locationX>2162</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_Reply_3_No_Portal</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Third_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Send no portal 1st email</description>
+        <name>Send_No_Portal_1st_Email</name>
+        <label>Send No Portal 1st Email</label>
+        <locationX>50</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_Reply_1_No_Portal</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>First_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Sends the no portal 2nd e-mail</description>
+        <name>Send_No_Portal_2nd_Email</name>
+        <label>Send No Portal 2nd Email</label>
+        <locationX>1106</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_Reply_2_No_Portal</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Second_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Support_Customer_Outstanding_Reply_1_No_Portal</name>
+        <label>Support - Customer Outstanding Reply (1) - No Portal</label>
+        <locationX>578</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_Reply_1_No_Portal</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>First_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Support_Customer_Outstanding_Reply_2_No_Portal</name>
+        <label>Support - Customer Outstanding Reply (2) - No Portal</label>
+        <locationX>1634</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_Reply_2_No_Portal</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Second_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Support_Customer_Outstanding_Reply_3_No_Portal</name>
+        <label>Support - Customer Outstanding Reply (3) - No Portal</label>
+        <locationX>2690</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_Reply_3_No_Portal</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Third_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Posts in Case feed that the third chaser email has been sent to the contact</description>
+        <name>Third_Chaser_Sent</name>
+        <label>Third Chaser Sent</label>
+        <locationX>2558</locationX>
+        <locationY>732</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Resolve_Case</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>Third chaser email has been sent to the case contact.</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>visibility</name>
+            <value>
+                <stringValue>internalUsers</stringValue>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <description>First response with No Community Template</description>
+        <name>X1st_Response_No_Community</name>
+        <label>1st Response No Community</label>
+        <locationX>314</locationX>
+        <locationY>516</locationY>
+        <actionName>Case.Support_Customer_Outstanding_Reply_1</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>First_Chaser_Sent</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>53.0</apiVersion>
+    <decisions>
+        <description>Check the current outstanding stage of the cases</description>
+        <name>Check_Current_Outstanding_Stage</name>
+        <label>Check Current Outstanding Stage</label>
+        <locationX>1832</locationX>
+        <locationY>276</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>X1st_No_Reply</name>
+            <conditionLogic>1 AND 2 AND (4 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.NoReply1stEmailSent__c</leftValueReference>
+                <operator>LessThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Flow.CurrentDate</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.NoReply2ndEmailSent__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>InformationRequired</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.EntitlementId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Template_Type_To_Send_1st_Reply</targetReference>
+            </connector>
+            <label>1st No Reply</label>
+        </rules>
+        <rules>
+            <name>X2nd_No_Reply</name>
+            <conditionLogic>1 AND 2 AND 3  AND 5 AND (6 OR 4)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.NoReply1stEmailSent__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.NoReply2ndEmailSent__c</leftValueReference>
+                <operator>LessThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Flow.CurrentDate</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.No_Reply_3rd_Email_Sent__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>InformationRequired</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.NoReply2ndEmailSent__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.EntitlementId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Template_Type_To_Send_2nd_Reply</targetReference>
+            </connector>
+            <label>2nd No Reply</label>
+        </rules>
+        <rules>
+            <name>X3rd_No_Reply</name>
+            <conditionLogic>1 AND 2 AND 3 AND 5 AND(6 OR 4)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.NoReply1stEmailSent__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.NoReply2ndEmailSent__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.No_Reply_3rd_Email_Sent__c</leftValueReference>
+                <operator>LessThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Flow.CurrentDate</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>InformationRequired</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.No_Reply_3rd_Email_Sent__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.EntitlementId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Template_Type_To_Send_3rd_Reply</targetReference>
+            </connector>
+            <label>3rd No Reply</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check the template type that needs to be sent out.</description>
+        <name>Check_Template_Type_To_Send_1st_Reply</name>
+        <label>Check Template Type To Send 1st Reply</label>
+        <locationX>446</locationX>
+        <locationY>396</locationY>
+        <defaultConnector>
+            <targetReference>Customer_Outstanding_Community_Access</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Standard</defaultConnectorLabel>
+        <rules>
+            <name>No_Portal</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RelatedProduct__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Access Attaché</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_No_Portal_1st_Email</targetReference>
+            </connector>
+            <label>No Portal</label>
+        </rules>
+        <rules>
+            <name>No_Community</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contact.Community_User__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X1st_Response_No_Community</targetReference>
+            </connector>
+            <label>No Community</label>
+        </rules>
+        <rules>
+            <name>End_User_1st_No_Reply</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Payments_Support</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Support_Customer_Outstanding_Reply_1_No_Portal</targetReference>
+            </connector>
+            <label>End User 1st No Reply</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check the template type that needs to be sent out.</description>
+        <name>Check_Template_Type_To_Send_2nd_Reply</name>
+        <label>Check Template Type To Send 2nd Reply</label>
+        <locationX>1502</locationX>
+        <locationY>396</locationY>
+        <defaultConnector>
+            <targetReference>Community_User_2nd_Chase</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Standard</defaultConnectorLabel>
+        <rules>
+            <name>No_Portal_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RelatedProduct__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Access Attaché</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_No_Portal_2nd_Email</targetReference>
+            </connector>
+            <label>No Portal</label>
+        </rules>
+        <rules>
+            <name>No_Community_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contact.Community_User__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_2nd_e_mail_no_community</targetReference>
+            </connector>
+            <label>No Community</label>
+        </rules>
+        <rules>
+            <name>End_User_2nd_No_Reply_Reply</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Payments_Support</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Support_Customer_Outstanding_Reply_2_No_Portal</targetReference>
+            </connector>
+            <label>End User 2nd No Reply Reply</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check the template type that needs to be sent out.</description>
+        <name>Check_Template_Type_To_Send_3rd_Reply</name>
+        <label>Check Template Type To Send 3rd Reply</label>
+        <locationX>2558</locationX>
+        <locationY>396</locationY>
+        <defaultConnector>
+            <targetReference>Send_3rd_Email_Community</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Standard</defaultConnectorLabel>
+        <rules>
+            <name>No_Portal_0_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RelatedProduct__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Access Attaché</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_3rd_Email_No_Portal</targetReference>
+            </connector>
+            <label>No Portal</label>
+        </rules>
+        <rules>
+            <name>No_Community_0_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contact.Community_User__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_3rd_Email_No_Community</targetReference>
+            </connector>
+            <label>No Community</label>
+        </rules>
+        <rules>
+            <name>End_User_3rd_No_Reply</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Payments_Support</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Support_Customer_Outstanding_Reply_3_No_Portal</targetReference>
+            </connector>
+            <label>End User 3rd No Reply</label>
+        </rules>
+    </decisions>
+    <description>Fires Customer outstanding for EMEA - London time zone</description>
+    <formulas>
+        <description>Sets information required</description>
+        <name>InformationRequired</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISBLANK({!$Record.EntitlementId}),True,{!$Record.Entitlement.ProductRouting__r.Information_Required_Automation_Enabled__c})</expression>
+    </formulas>
+    <formulas>
+        <description>Sets the date for the case to be resolved</description>
+        <name>ResolutionTimer</name>
+        <dataType>DateTime</dataType>
+        <expression>CASE(
+MOD( DATEVALUE( NOW() ) - DATE( 1900, 1, 7 ), 7 ),
+0, NOW() + 4 ,
+1, NOW() + 3 ,
+2, NOW() + 3 ,
+3, NOW() + 3 ,
+4, NOW() + 5 ,
+5, NOW() + 5 ,
+6, NOW() + 4 ,
+NOW() + 3
+)</expression>
+    </formulas>
+    <formulas>
+        <description>Sets the 2nd no reply date</description>
+        <name>x2ndNoReplyDateSet</name>
+        <dataType>DateTime</dataType>
+        <expression>CASE(
+MOD( DATEVALUE({!$Record.NoReply1stEmailSent__c}) - DATE( 1900, 1, 7 ), 7 ),
+0, {!$Record.NoReply1stEmailSent__c}+ 3,
+1, {!$Record.NoReply1stEmailSent__c}+ 2,
+2, {!$Record.NoReply1stEmailSent__c}+ 2,
+3, {!$Record.NoReply1stEmailSent__c}+ 2,
+4, {!$Record.NoReply1stEmailSent__c}+ 4,
+5, {!$Record.NoReply1stEmailSent__c}+ 4,
+6, {!$Record.NoReply1stEmailSent__c}+ 3,
+{!$Record.NoReply1stEmailSent__c}+ 2
+)</expression>
+    </formulas>
+    <formulas>
+        <description>Set no reply 3rd date</description>
+        <name>x3rdNoReplyDateSet</name>
+        <dataType>DateTime</dataType>
+        <expression>CASE(
+MOD( DATEVALUE( {!$Record.NoReply2ndEmailSent__c} ) - DATE( 1900, 1, 7 ), 7 ),
+0, {!$Record.NoReply2ndEmailSent__c}+ 2,
+1, {!$Record.NoReply2ndEmailSent__c}+ 1,
+2, {!$Record.NoReply2ndEmailSent__c}+ 1,
+3, {!$Record.NoReply2ndEmailSent__c}+ 1,
+4, {!$Record.NoReply2ndEmailSent__c}+ 1,
+5, {!$Record.NoReply2ndEmailSent__c}+ 3,
+6, {!$Record.NoReply2ndEmailSent__c}+ 3,
+{!$Record.NoReply2ndEmailSent__c}+ 1
+)</expression>
+    </formulas>
+    <interviewLabel>Support - Customer Outstanding {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Support - Customer Outstanding EMEA - London</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Resolved the case.</description>
+        <name>Resolve_Case</name>
+        <label>Resolve Case</label>
+        <locationX>2558</locationX>
+        <locationY>852</locationY>
+        <inputAssignments>
+            <field>Case_Resolved_Date__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Cause__c</field>
+            <value>
+                <stringValue>Unknown Cause</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Channel_For_Resolution__c</field>
+            <value>
+                <stringValue>Web</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>NoReply1stEmailSent__c</field>
+            <value>
+                <elementReference>ResolutionTimer</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>NoReply2ndEmailSent__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>No_Reply_3rd_Email_Sent__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Prevention__c</field>
+            <value>
+                <stringValue>Not Applicable</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Resolved__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SolutionCode__c</field>
+            <value>
+                <stringValue>NF: No Response from Customer</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Solution__c</field>
+            <value>
+                <stringValue>We havent heard back from you following our couple of reminders and as such this case has now been marked as Resolved. If the case has not been resolved to your satisfaction, please click View Case below, add a New Comment and we&apos;ll be happy to contact you and investigate further.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Resolved</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the 2nd no reply date.</description>
+        <name>Set_2nd_No_Reply_Date</name>
+        <label>Set 2nd No Reply Date</label>
+        <locationX>446</locationX>
+        <locationY>852</locationY>
+        <inputAssignments>
+            <field>NoReply2ndEmailSent__c</field>
+            <value>
+                <elementReference>x2ndNoReplyDateSet</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the 2nd no reply date.</description>
+        <name>Set_3rd_No_Reply_Date</name>
+        <label>Set 3rd No Reply Date</label>
+        <locationX>1502</locationX>
+        <locationY>852</locationY>
+        <inputAssignments>
+            <field>No_Reply_3rd_Email_Sent__c</field>
+            <value>
+                <elementReference>x3rdNoReplyDateSet</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>1706</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Current_Outstanding_Stage</targetReference>
+        </connector>
+        <filterLogic>(1 AND 2 AND 3 AND 4 AND 5) OR (1 AND 3 AND 6)</filterLogic>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Customer Outstanding</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>012580000006HfdAAE</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>NoReply1stEmailSent__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>CreatedDate</field>
+            <operator>GreaterThan</operator>
+            <value>
+                <dateTimeValue>2021-01-01T00:00:00.000Z</dateTimeValue>
+            </value>
+        </filters>
+        <filters>
+            <field>SubAnalysis__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>0128e000000Xd0GAAS</stringValue>
+            </value>
+        </filters>
+        <object>Case</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2021-10-21</startDate>
+            <startTime>10:20:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

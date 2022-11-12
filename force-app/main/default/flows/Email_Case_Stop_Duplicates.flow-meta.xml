@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <assignments>
+        <name>Wipe</name>
+        <label>Wipe</label>
+        <locationX>930</locationX>
+        <locationY>387</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Dont_Create_Case__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Add one to the varible</description>
+        <name>X1</name>
+        <label>+1</label>
+        <locationX>749</locationX>
+        <locationY>818</locationY>
+        <assignmentItems>
+            <assignToReference>RecordCount</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_over_records</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Check the origin of the case, make sure we are only blocking e-mail cases</description>
+        <name>Check_E_mail_Origin</name>
+        <label>Check E-mail Origin</label>
+        <locationX>577</locationX>
+        <locationY>380</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Origin_is_E_mail</name>
+            <conditionLogic>5 AND (1 OR 2 OR 3 OR 4)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Origin</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Email</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Origin</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>EmailOff</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Origin</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>FMS</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Origin</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NoThreadID</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>012580000006HfdAAE</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_All_Records_Matching_Case</targetReference>
+            </connector>
+            <label>Email Origin</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to see if more than 1 cases have been created with the same data and if they have delete them</description>
+        <name>Record_count_is_greater_than_1</name>
+        <label>Record count is greater than 1</label>
+        <locationX>920</locationX>
+        <locationY>612</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>X2</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>RecordCount</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>1.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Wipe</targetReference>
+            </connector>
+            <label>&gt;=1</label>
+        </rules>
+    </decisions>
+    <description>Stops duplicate cases being raised by Auto reply rules</description>
+    <formulas>
+        <description>Current time minus 1 hour to see case creation</description>
+        <name>CurrentTimeless1hour</name>
+        <dataType>DateTime</dataType>
+        <expression>{!$Flow.CurrentDateTime} - (1/24)</expression>
+    </formulas>
+    <interviewLabel>Email Case - Stop Duplicates {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Email Case - Stop Duplicates</label>
+    <loops>
+        <description>Loops over the records to count the total</description>
+        <name>Loop_over_records</name>
+        <label>Loop over records</label>
+        <locationX>748</locationX>
+        <locationY>607</locationY>
+        <collectionReference>Get_All_Records_Matching_Case</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>X1</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Record_count_is_greater_than_1</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Get all records matching original Case</description>
+        <name>Get_All_Records_Matching_Case</name>
+        <label>Get All Records Matching Case</label>
+        <locationX>588</locationX>
+        <locationY>606</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_over_records</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>CreatedDate</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value>
+                <elementReference>CurrentTimeless1hour</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Subject</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Subject</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>SuppliedEmail</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.SuppliedEmail</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>458</locationX>
+        <locationY>85</locationY>
+        <connector>
+            <targetReference>Check_E_mail_Origin</targetReference>
+        </connector>
+        <object>Case</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Total Record Count</description>
+        <name>RecordCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+</Flow>

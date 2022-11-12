@@ -28,7 +28,8 @@ public without sharing class cspPointsExpiryHandler {
                                     SUM(Points__c) Redemptions
                                     FROM FlexPoints_Transactions__c
                                     WHERE Account__c IN: accountIds
-                                    AND Type__c = 'Redemption'
+                                    AND Type__c = 'Redemption' 
+                                    AND Status__c != 'Cancelled'
                                     GROUP BY Account__c])
         {
             Id accountId = Id.valueOf(String.valueOf(ar.get('Account__c')));

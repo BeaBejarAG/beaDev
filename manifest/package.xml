@@ -25,14 +25,7 @@
 		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
-		<members>Support_Case_Automation/Case_Collaborator_Case_Resolved</members>
-		<members>Support_Case_Automation/Case_Collaborator_New_Case</members>
-		<members>Support_Case_Automation/Case_Collaborator_New_Comment</members>
-		<members>Support_Case_Automation/New_Customer_P1_Support_Case_Created</members>
-		<members>Support_Case_Automation/Support_Case_Open</members>
-		<members>Support_Case_Automation/Support_Case_Resolved</members>
-		<members>Support_Case_Automation/Support_Case_Resolved_VF</members>
-		<members>Support_Case_Automation/Support_Case_Updated</members>
+		<members>*</members>
 		<name>EmailTemplate</name>
 	</types>
 	<types>
@@ -42,6 +35,18 @@
 	<types>
 		<members>*</members>
 		<name>StaticResource</name>
+	</types>
+	 <types>
+        <members>BusinessHours</members>
+        <name>Settings</name>
+    </types>
+	<types>
+		<members>*</members>
+		<name>Flow</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>FlowDefinition</name>
 	</types>
 	<version>53.0</version>
 </Package>

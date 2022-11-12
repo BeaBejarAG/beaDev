@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <constants>
+        <description>KCS Certified</description>
+        <name>KCSCertified</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>0PS4I0000015bKRWAY</stringValue>
+        </value>
+    </constants>
+    <constants>
+        <description>KCS Expert</description>
+        <name>KCSExpert</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>0PS4I0000015bKSWAY</stringValue>
+        </value>
+    </constants>
+    <constants>
+        <description>KCS Master</description>
+        <name>KCSMaster</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>0PS4I0000015bKTWAY</stringValue>
+        </value>
+    </constants>
+    <constants>
+        <name>KCSReady</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>0PS4I0000015bKUWAY</stringValue>
+        </value>
+    </constants>
+    <decisions>
+        <description>Checks through all and removes wrong assignments</description>
+        <name>Check_for_wrong_assignments</name>
+        <label>Check for wrong assignments</label>
+        <locationX>107</locationX>
+        <locationY>294</locationY>
+        <defaultConnector>
+            <targetReference>Check_Permission_Sets</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Delete_KCS_Ready</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Check_Permission_Sets.PermissionSetId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>KCSReady</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Delete_KCS_Ready_Permission_ID</targetReference>
+            </connector>
+            <label>Delete KCS Ready</label>
+        </rules>
+        <rules>
+            <name>Delete_KCS_Certified</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Check_Permission_Sets.PermissionSetId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>KCSCertified</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Delete_KCS_Ready_Permission_ID</targetReference>
+            </connector>
+            <label>Delete KCS Certified</label>
+        </rules>
+        <rules>
+            <name>Delete_KCS_Master</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Check_Permission_Sets.PermissionSetId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>KCSMaster</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Delete_KCS_Ready_Permission_ID</targetReference>
+            </connector>
+            <label>Delete KCS Master</label>
+        </rules>
+        <rules>
+            <name>Delete_KCS_Expert</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Check_Permission_Sets.PermissionSetId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>KCSExpert</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Delete_KCS_Ready_Permission_ID</targetReference>
+            </connector>
+            <label>Delete KCS Expert</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks the level and sends off for assignment</description>
+        <name>Check_KCS_Level</name>
+        <label>Check KCS Level</label>
+        <locationX>915</locationX>
+        <locationY>37</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>KCS_Ready</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ChosenLevel</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Ready</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_to_Permission_Set</targetReference>
+            </connector>
+            <label>KCS Ready</label>
+        </rules>
+        <rules>
+            <name>KCS_Certified</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ChosenLevel</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Certified</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_to_Permission_Set_0_0</targetReference>
+            </connector>
+            <label>KCS Certified</label>
+        </rules>
+        <rules>
+            <name>KCS_Expert</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ChosenLevel</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Expert</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_to_Permission_Set_0</targetReference>
+            </connector>
+            <label>KCS Expert</label>
+        </rules>
+        <rules>
+            <name>KCS_Master</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ChosenLevel</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Master</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_to_Permission_Set_0_0_0</targetReference>
+            </connector>
+            <label>KCS Master</label>
+        </rules>
+    </decisions>
+    <description>Assigns user to KCS Permission set based on KCS_LEVEL__C picklist value</description>
+    <interviewLabel>Support - KCS Permission Assignment {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Support - KCS Permission Set Assignment</label>
+    <loops>
+        <description>Looks through all Permission sets and finds KCS ones</description>
+        <name>Check_Permission_Sets</name>
+        <label>Check Permission Sets</label>
+        <locationX>336</locationX>
+        <locationY>173</locationY>
+        <collectionReference>Current_Permission_Sets</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_for_wrong_assignments</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Check_KCS_Level</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Add user to permission set</description>
+        <name>Add_to_Permission_Set</name>
+        <label>Add to Permission Set</label>
+        <locationX>791</locationX>
+        <locationY>244</locationY>
+        <inputAssignments>
+            <field>AssigneeId</field>
+            <value>
+                <elementReference>UserId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PermissionSetId</field>
+            <value>
+                <elementReference>KCSReady</elementReference>
+            </value>
+        </inputAssignments>
+        <object>PermissionSetAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <description>Add user to permission set</description>
+        <name>Add_to_Permission_Set_0</name>
+        <label>Add to Permission Set</label>
+        <locationX>1117</locationX>
+        <locationY>234</locationY>
+        <inputAssignments>
+            <field>AssigneeId</field>
+            <value>
+                <elementReference>UserId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PermissionSetId</field>
+            <value>
+                <elementReference>KCSExpert</elementReference>
+            </value>
+        </inputAssignments>
+        <object>PermissionSetAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <description>Add user to permission set</description>
+        <name>Add_to_Permission_Set_0_0</name>
+        <label>Add to Permission Set</label>
+        <locationX>905</locationX>
+        <locationY>253</locationY>
+        <inputAssignments>
+            <field>AssigneeId</field>
+            <value>
+                <elementReference>UserId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PermissionSetId</field>
+            <value>
+                <elementReference>KCSCertified</elementReference>
+            </value>
+        </inputAssignments>
+        <object>PermissionSetAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <description>Add user to permission set</description>
+        <name>Add_to_Permission_Set_0_0_0</name>
+        <label>Add to Permission Set</label>
+        <locationX>1001</locationX>
+        <locationY>244</locationY>
+        <inputAssignments>
+            <field>AssigneeId</field>
+            <value>
+                <elementReference>UserId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PermissionSetId</field>
+            <value>
+                <elementReference>KCSMaster</elementReference>
+            </value>
+        </inputAssignments>
+        <object>PermissionSetAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordDeletes>
+        <name>Delete_KCS_Ready_Permission_ID</name>
+        <label>Delete KCS Ready Permission ID</label>
+        <locationX>215</locationX>
+        <locationY>527</locationY>
+        <connector>
+            <targetReference>Check_Permission_Sets</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Check_Permission_Sets.Id</elementReference>
+            </value>
+        </filters>
+        <object>PermissionSetAssignment</object>
+    </recordDeletes>
+    <recordLookups>
+        <description>Get current permission set assignments</description>
+        <name>Current_Permission_Sets</name>
+        <label>Current Permission Sets</label>
+        <locationX>407</locationX>
+        <locationY>15</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Permission_Sets</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AssigneeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>UserId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>PermissionSetAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <start>
+        <locationX>50</locationX>
+        <locationY>22</locationY>
+        <connector>
+            <targetReference>Current_Permission_Sets</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Incomming user to be added to permission set</description>
+        <name>ChangedUser</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>User</objectType>
+    </variables>
+    <variables>
+        <name>ChangeType</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Current KCS Level</description>
+        <name>ChosenLevel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>UserId</description>
+        <name>UserId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

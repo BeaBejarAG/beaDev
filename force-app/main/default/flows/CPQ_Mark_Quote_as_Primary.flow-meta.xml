@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <assignments>
+        <name>Update_count</name>
+        <label>Update count</label>
+        <locationX>591</locationX>
+        <locationY>269</locationY>
+        <assignmentItems>
+            <assignToReference>QuoteCount</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_to_count_the_quotes</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Check_if_there_is_any_Quote</name>
+        <label>Check if there is any Quote</label>
+        <locationX>334</locationX>
+        <locationY>452</locationY>
+        <defaultConnector>
+            <targetReference>Update_Quote_as_Primary</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>If_Quotes_are_present</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>QuoteCount</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>1.0</numberValue>
+                </rightValue>
+            </conditions>
+            <label>If Quotes are present</label>
+        </rules>
+    </decisions>
+    <description>Marking the first quote on every opportunity as primary</description>
+    <interviewLabel>Mark Quote as Primary {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Mark Quote as Primary</label>
+    <loops>
+        <name>Loop_to_count_the_quotes</name>
+        <label>Loop to count the quotes</label>
+        <locationX>347</locationX>
+        <locationY>290</locationY>
+        <collectionReference>Get_all_Quotes</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Update_count</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Check_if_there_is_any_Quote</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_all_Quotes</name>
+        <label>Get all Quotes</label>
+        <locationX>154</locationX>
+        <locationY>320</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_to_count_the_quotes</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SBQQ__Opportunity2__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.SBQQ__Opportunity2__r.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>SBQQ__Quote__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Quote_as_Primary</name>
+        <label>Update Quote as Primary</label>
+        <locationX>630</locationX>
+        <locationY>461</locationY>
+        <inputAssignments>
+            <field>SBQQ__Primary__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Get_all_Quotes</targetReference>
+        </connector>
+        <object>SBQQ__Quote__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>QuoteCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+</Flow>

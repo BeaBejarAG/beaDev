@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <processMetadataValues>
+            <name>postTarget</name>
+            <value>
+                <stringValue>EazyCollect</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>textJson</name>
+            <value>
+                <stringValue>{&quot;mentions&quot;:[],&quot;message&quot;:&quot;Hi Everyone\n\nThe following customer has given notice to cancel their account:\n\nAccount Name: {![Account_Extension_Eazy_Collect__c].Account_c__c.Name}\n\nThe reason for leaving: {![Account_Extension_Eazy_Collect__c].Reason_Left__c}\n\nNotice Date: {![Account_Extension_Eazy_Collect__c].Notice_Date__c}\n\nNotice Preference: {![Account_Extension_Eazy_Collect__c].Notice_Preference__c}\n\n1st Response Sent: {![Account_Extension_Eazy_Collect__c].First_Response_Sent__c}\n\nAve monthly transactions in last 6 months: {![Account_Extension_Eazy_Collect__c].Ave_monthly_transactions_in_last_6_month__c}\n\nAgreed Final Collection Date: {![Account_Extension_Eazy_Collect__c].Final_Collection_Date__c}\n\nFinal Invoice Date: {![Account_Extension_Eazy_Collect__c].Final_Invoice_Date__c}\n\nNotes:\n\n{![Account_Extension_Eazy_Collect__c].Notes__c}\n\n&quot;}</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A1</name>
+        <label>Post Chatter Update that Org Type is Given Notice</label>
+        <locationX>100</locationX>
+        <locationY>200</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>myRule_1_A2</targetReference>
+        </connector>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>Hi Everyone
+
+The following customer has given notice to cancel their account:
+
+Account Name: {!myVariable_current.Account_c__r.Name}
+
+The reason for leaving: {!myVariable_current.Reason_Left__c}
+
+Notice Date: {!myVariable_current.Notice_Date__c}
+
+Notice Preference: {!myVariable_current.Notice_Preference__c}
+
+1st Response Sent: {!myVariable_current.First_Response_Sent__c}
+
+Ave monthly transactions in last 6 months: {!myVariable_current.Ave_monthly_transactions_in_last_6_month__c}
+
+Agreed Final Collection Date: {!myVariable_current.Final_Collection_Date__c}
+
+Final Invoice Date: {!myVariable_current.Final_Invoice_Date__c}
+
+Notes:
+
+{!myVariable_current.Notes__c}
+
+</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>type</name>
+            <value>
+                <stringValue>GROUP</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <stringValue>0F94I000000HzhHSAS</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>textJson</name>
+            <value>
+                <stringValue>{&quot;mentions&quot;:[],&quot;message&quot;:&quot;The following Chatter post has been sent to the Eazy Collect Chatter Group:\n\nHi Everyone\n\nThe following customer has given notice to cancel their account:\n\nAccount Name: {![Account_Extension_Eazy_Collect__c].Account_c__c.Name}\n\nThe reason for leaving: {![Account_Extension_Eazy_Collect__c].Reason_Left__c}\n\nNotice Date: {![Account_Extension_Eazy_Collect__c].Notice_Date__c}\n\nNotice Preference: {![Account_Extension_Eazy_Collect__c].Notice_Preference__c}\n\n1st Response Sent: {![Account_Extension_Eazy_Collect__c].First_Response_Sent__c}\n\nAve monthly transactions in last 6 months: {![Account_Extension_Eazy_Collect__c].Ave_monthly_transactions_in_last_6_month__c}\n\nAgreed Final Collection Date: {![Account_Extension_Eazy_Collect__c].Final_Collection_Date__c}\n\nFinal Invoice Date: {![Account_Extension_Eazy_Collect__c].Final_Invoice_Date__c}\n\nNotes:\n\n{![Account_Extension_Eazy_Collect__c].Notes__c}&quot;}</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A2</name>
+        <label>Update Account Extension with Chatter Update</label>
+        <locationX>100</locationX>
+        <locationY>300</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>The following Chatter post has been sent to the Eazy Collect Chatter Group:
+
+Hi Everyone
+
+The following customer has given notice to cancel their account:
+
+Account Name: {!myVariable_current.Account_c__r.Name}
+
+The reason for leaving: {!myVariable_current.Reason_Left__c}
+
+Notice Date: {!myVariable_current.Notice_Date__c}
+
+Notice Preference: {!myVariable_current.Notice_Preference__c}
+
+1st Response Sent: {!myVariable_current.First_Response_Sent__c}
+
+Ave monthly transactions in last 6 months: {!myVariable_current.Ave_monthly_transactions_in_last_6_month__c}
+
+Agreed Final Collection Date: {!myVariable_current.Final_Collection_Date__c}
+
+Final Invoice Date: {!myVariable_current.Final_Invoice_Date__c}
+
+Notes:
+
+{!myVariable_current.Notes__c}</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>type</name>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <decisions>
+        <name>isChangedDecision2_myRule_1_Organisation_Type_c</name>
+        <label>isChangedDecision2_myRule_1_Organisation_Type_c</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>isChangedRule_2_myRule_1_Organisation_Type_c</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>myVariable_old.Organisation_Type__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>myVariable_current.Organisation_Type__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myDecision</targetReference>
+            </connector>
+            <label>isChangedRule_2_myRule_1_Organisation_Type_c</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision</name>
+        <label>myDecision</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <processMetadataValues>
+                    <name>inputDataType</name>
+                    <value>
+                        <stringValue>Boolean</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>leftHandSideType</name>
+                    <value>
+                        <stringValue>Picklist</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>operatorDataType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>rightHandSideType</name>
+                    <value>
+                        <stringValue>Boolean</stringValue>
+                    </value>
+                </processMetadataValues>
+                <leftValueReference>isChangedRule_2_myRule_1_Organisation_Type_c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <processMetadataValues>
+                    <name>inputDataType</name>
+                    <value>
+                        <stringValue>Picklist</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>leftHandSideType</name>
+                    <value>
+                        <stringValue>Picklist</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>operatorDataType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>rightHandSideType</name>
+                    <value>
+                        <stringValue>Picklist</stringValue>
+                    </value>
+                </processMetadataValues>
+                <leftValueReference>myVariable_current.Organisation_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Given Notice</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>Organisation Type Changed to Given Notice</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Organisation_Type_Changed_to_Given_Notice-1_InterviewLabel</interviewLabel>
+    <label>Organisation Type Changed to Given Notice</label>
+    <processMetadataValues>
+        <name>ObjectType</name>
+        <value>
+            <stringValue>Account_Extension_Eazy_Collect__c</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>ObjectVariable</name>
+        <value>
+            <elementReference>myVariable_current</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OldObjectVariable</name>
+        <value>
+            <elementReference>myVariable_old</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>TriggerType</name>
+        <value>
+            <stringValue>onAllChanges</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Workflow</processType>
+    <startElementReference>isChangedDecision2_myRule_1_Organisation_Type_c</startElementReference>
+    <status>Obsolete</status>
+    <variables>
+        <name>myVariable_current</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Account_Extension_Eazy_Collect__c</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_old</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account_Extension_Eazy_Collect__c</objectType>
+    </variables>
+</Flow>

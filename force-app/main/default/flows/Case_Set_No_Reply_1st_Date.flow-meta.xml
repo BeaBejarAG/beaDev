@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <assignments>
+        <description>Sets the No Reply 1st date used in automation to resolve the customer case when no interaction</description>
+        <name>Set_Payments_1st_No_Reply_Date</name>
+        <label>Set Payments 1st No Reply Date</label>
+        <locationX>578</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>IncommingCase.NoReply1stEmailSent__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>NoReply1stDateSupport</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>IncommingCase.NoReply2ndEmailSent__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>IncommingCase.No_Reply_3rd_Email_Sent__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Sets the No Reply 1st date used in automation to resolve the customer case when no interaction</description>
+        <name>Set_Salesforce_Case_1st_No_Reply_Date</name>
+        <label>Set Salesforce Case 1st No Reply Date</label>
+        <locationX>314</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>IncommingCase.NoReply1stEmailSent__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>NoReply1stDateSalesforceCase</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>IncommingCase.NoReply2ndEmailSent__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>IncommingCase.No_Reply_3rd_Email_Sent__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Sets the No Reply 1st date used in automation to resolve the customer case when no interaction</description>
+        <name>Set_Support_1st_No_Reply_Date</name>
+        <label>Set Support 1st No Reply Date</label>
+        <locationX>50</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>IncommingCase.NoReply1stEmailSent__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>NoReply1stDateSupport</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>IncommingCase.NoReply2ndEmailSent__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>IncommingCase.No_Reply_3rd_Email_Sent__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>Check the record type so we know what time to set as it varies from internal and external</description>
+        <name>Check_Record_Type</name>
+        <label>Check Record Type</label>
+        <locationX>446</locationX>
+        <locationY>158</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Support</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>IncommingCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Escalation</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Support_1st_No_Reply_Date</targetReference>
+            </connector>
+            <label>Support</label>
+        </rules>
+        <rules>
+            <name>Salesforce_Support</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>IncommingCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>SalesForce_Case</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Salesforce_Case_1st_No_Reply_Date</targetReference>
+            </connector>
+            <label>Salesforce Support</label>
+        </rules>
+        <rules>
+            <name>Payments_Support</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>IncommingCase.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Payments_Support</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Payments_1st_No_Reply_Date</targetReference>
+            </connector>
+            <label>Payments Support</label>
+        </rules>
+    </decisions>
+    <description>Sets the No Reply 1st date on cases</description>
+    <formulas>
+        <description>Sets the No Reply dates on a salesforce case to enable Solved to Closed automation Adds 2 days to todays date</description>
+        <name>NoReply1stDateSalesforceCase</name>
+        <dataType>DateTime</dataType>
+        <expression>CASE(
+MOD( DATEVALUE(NOW()) - DATE( 1900, 1, 7 ), 7 ),
+0, NOW() + 2 ,
+1, NOW() + 1 ,
+2, NOW() + 1 ,
+3, NOW() + 1 ,
+4, NOW() + 3 ,
+5, NOW() + 3 ,
+6, NOW() + 2 ,
+NOW() + 1
+)</expression>
+    </formulas>
+    <formulas>
+        <description>Sets the No Reply 1st date on the support ticket adding 3 days to days date.</description>
+        <name>NoReply1stDateSupport</name>
+        <dataType>DateTime</dataType>
+        <expression>CASE(
+MOD( DATEVALUE(NOW()) - DATE( 1900, 1, 7 ), 7 ),
+0, NOW() + 3 ,
+1, NOW() + 2 ,
+2, NOW() + 2 ,
+3, NOW() + 2 ,
+4, NOW() + 4 ,
+5, NOW() + 4 ,
+6, NOW() + 3 ,
+NOW() + 2
+)</expression>
+    </formulas>
+    <interviewLabel>Case - Set No Reply 1st Date {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case - Set No Reply 1st Date</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>320</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Record_Type</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Incomming case from parent flow</description>
+        <name>IncommingCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

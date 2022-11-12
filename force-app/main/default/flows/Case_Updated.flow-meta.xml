@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <decisions>
+        <description>Account and/Or entitlement have changed on the support case</description>
+        <name>Changed_Account_and_Entitlement</name>
+        <label>Changed Account and Entitlement</label>
+        <locationX>534</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Case_Updated</name>
+            <conditionLogic>(1 OR 2) AND 3 AND 4 AND 5</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.AccountId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.EntitlementId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.IsClosed</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Resolved</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Support</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Business_Hours</targetReference>
+            </connector>
+            <label>Case Updated</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>As Label</description>
+        <name>Check_Business_Hours_Found_and_Different</name>
+        <label>Check Business Hours Found and Different</label>
+        <locationX>314</locationX>
+        <locationY>575</locationY>
+        <defaultConnector>
+            <targetReference>Get_Default_UK_Record</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>BHNull</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Business_Hours</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Case_Bussiness_Hours</targetReference>
+            </connector>
+            <label>Null</label>
+        </rules>
+        <rules>
+            <name>BHChanged</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Business_Hours.Id</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.BusinessHoursId</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Case_Bussiness_Hours_0</targetReference>
+            </connector>
+            <label>Changed</label>
+        </rules>
+    </decisions>
+    <description>Fires when a case is updated only.</description>
+    <formulas>
+        <description>Sets the Bussiness Hours Name so we can use the get records to find the right one</description>
+        <name>SetBussinessHoursName</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.Entitlement_Plan_Level__c},
+&quot;Classic&quot;, TEXT({!$Record.Account.Service_Region__c}) + &quot; : Classic/Essential&quot;,
+&quot;Essential&quot;, TEXT({!$Record.Account.Service_Region__c}) + &quot; : Classic/Essential&quot;,
+&quot;Standard&quot;, TEXT({!$Record.Account.Service_Region__c}) + &quot; : Standard/Premier&quot;,
+&quot;Premier&quot;, TEXT({!$Record.Account.Service_Region__c}) + &quot; : Standard/Premier&quot;,
+TEXT({!$Record.Account.Service_Region__c}) + &quot; : Classic/Essential&quot;
+)</expression>
+    </formulas>
+    <interviewLabel>Case - Updated {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case - Updated</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Gets Business Hours to update case with</description>
+        <name>Get_Business_Hours</name>
+        <label>Get Business Hours</label>
+        <locationX>314</locationX>
+        <locationY>455</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Business_Hours_Found_and_Different</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>SetBussinessHoursName</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>BusinessHours</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Default UK Record</description>
+        <name>Get_Default_UK_Record</name>
+        <label>Get Default UK Record</label>
+        <locationX>314</locationX>
+        <locationY>1031</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Default_Case_Business_Hours</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsDefault</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>BusinessHours</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Sets the business hours on the case to be the new value</description>
+        <name>Set_Case_Bussiness_Hours</name>
+        <label>Set Case Bussiness Hours</label>
+        <locationX>50</locationX>
+        <locationY>695</locationY>
+        <connector>
+            <targetReference>Get_Default_UK_Record</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>BusinessHoursId</field>
+            <value>
+                <elementReference>Get_Business_Hours.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the business hours on the case to be the new value</description>
+        <name>Set_Case_Bussiness_Hours_0</name>
+        <label>Set Case Bussiness Hours</label>
+        <locationX>314</locationX>
+        <locationY>695</locationY>
+        <inputAssignments>
+            <field>BusinessHoursId</field>
+            <value>
+                <elementReference>Get_Business_Hours.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Sets the business hours on the case to be the new value</description>
+        <name>Set_Default_Case_Business_Hours</name>
+        <label>Set Default Case Business Hours</label>
+        <locationX>314</locationX>
+        <locationY>1151</locationY>
+        <inputAssignments>
+            <field>BusinessHoursId</field>
+            <value>
+                <elementReference>Get_Default_UK_Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>408</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Changed_Account_and_Entitlement</targetReference>
+        </connector>
+        <object>Case</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

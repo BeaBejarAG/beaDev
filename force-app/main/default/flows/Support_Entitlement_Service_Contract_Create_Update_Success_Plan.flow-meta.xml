@@ -1,0 +1,1351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <assignments>
+        <name>Add_Product_Routing</name>
+        <label>Add Product Routing</label>
+        <locationX>1628</locationX>
+        <locationY>526</locationY>
+        <assignmentItems>
+            <assignToReference>AllProductRoutings</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Product_Routing</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Product_Routings</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Add_To_Create_Collection</name>
+        <label>Add To Create Collection</label>
+        <locationX>1634</locationX>
+        <locationY>1011</locationY>
+        <assignmentItems>
+            <assignToReference>AddToNewCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>NewEntitlementRecord</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Routings</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Add_To_Update_Collection</name>
+        <label>Add To Update Collection</label>
+        <locationX>50</locationX>
+        <locationY>1043</locationY>
+        <assignmentItems>
+            <assignToReference>UpdateEntitlementRecords</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Find_Entitlements</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Routings</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_To_New</name>
+        <label>Assign To New</label>
+        <locationX>1631</locationX>
+        <locationY>1151</locationY>
+        <assignmentItems>
+            <assignToReference>NewEntitlementRecord.AccountId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Service_Contracts.AccountId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewEntitlementRecord.AssociatedProductRange__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Through_Routings.Related_Product_Range__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewEntitlementRecord.EndDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EntitlementEndDate_Plus90</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewEntitlementRecord.Integration_ID__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>{!Get_Service_Contracts.Name} - {!$Record.Product_Number__c} - {!Loop_Through_Routings.Id}</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewEntitlementRecord.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>{!PlanLeveledited} {!Loop_Through_Routings.Related_Product_Range__c}</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewEntitlementRecord.PlanType__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>PlanLeveledited</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewEntitlementRecord.ProductRouting__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Through_Routings.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewEntitlementRecord.ServiceContractId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Service_Contracts.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewEntitlementRecord.SlaProcessId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_SLA_Proccess.Proccess_ID__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewEntitlementRecord.StartDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Start_Date__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_To_Create_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Changes the name if Product Routing Different</description>
+        <name>Different_Enttitlement_Name</name>
+        <label>Different Enttitlement Name</label>
+        <locationX>183</locationX>
+        <locationY>1313</locationY>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>{!PlanLeveledited} {!Loop_Through_Routings.Related_Product_Range__c}</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.AssociatedProductRange__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Through_Routings.Related_Product_Range__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Start_Date_Less</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Expire Entitlement</description>
+        <name>Expire_Entitlement</name>
+        <label>Expire Entitlement</label>
+        <locationX>525</locationX>
+        <locationY>1900</locationY>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.EndDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_To_Update_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>set_date</name>
+        <label>set date</label>
+        <locationX>449</locationX>
+        <locationY>1982</locationY>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.EndDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EntitlementEndDate_Plus90_ExpiredLine</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.PlanType__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Classic</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Classic {!Loop_Through_Routings.Related_Product_Range__c}</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_To_Update_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets end date if higher</description>
+        <name>Set_End_Date</name>
+        <label>Set End Date</label>
+        <locationX>177</locationX>
+        <locationY>1191</locationY>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.EndDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EntitlementEndDate_Plus90</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Start_Date_Less</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Entitlement</name>
+        <label>Set Entitlement</label>
+        <locationX>663</locationX>
+        <locationY>1396</locationY>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.SlaProcessId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_SLA_Proccess_New_Plan.Proccess_ID__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>{!Find_Entitlements.PlanType__c} {!Get_Product_Routing.Related_Product_Range__c}</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_To_Update_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Higher_Level</name>
+        <label>Set Higher Level</label>
+        <locationX>1029</locationX>
+        <locationY>1238</locationY>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.PlanType__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Find_Highest_Success_Plan.Plan_Level__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>End_Date_Higher</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Higher_Level_0</name>
+        <label>Set Higher Level</label>
+        <locationX>783</locationX>
+        <locationY>1425</locationY>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.EndDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>DeadCSPNewEnd_Plus90</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Find_Highest_Success_Plan</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set new plan and name</description>
+        <name>Set_Plan_and_Name</name>
+        <label>Set Plan and Name</label>
+        <locationX>174</locationX>
+        <locationY>1932</locationY>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.PlanType__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>PlanLeveledited</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.SlaProcessId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_SLA_Proccess_Update.Proccess_ID__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>{!PlanLeveledited} {!Loop_Through_Routings.Related_Product_Range__c}</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_To_Update_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set the start date</description>
+        <name>Set_Start_Date</name>
+        <label>Set Start Date</label>
+        <locationX>180</locationX>
+        <locationY>1073</locationY>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.StartDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Start_Date__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Start_Date_Less</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set the plan to classic</description>
+        <name>Set_To_Classic</name>
+        <label>Set To Classic</label>
+        <locationX>940</locationX>
+        <locationY>1692</locationY>
+        <assignmentItems>
+            <assignToReference>Find_Entitlements.PlanType__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Classic</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Find_Highest_Success_Plan</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Swappable</name>
+        <label>Swappable</label>
+        <locationX>1457</locationX>
+        <locationY>1680</locationY>
+        <assignmentItems>
+            <assignToReference>SwappableCSPs</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_All_Service_Contract_Lines_with_Success_Plan</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Product_Numbers_Looking_For_Plan</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Checks that the line is active</description>
+        <name>Active_Line</name>
+        <label>Active Line</label>
+        <locationX>934</locationX>
+        <locationY>1149</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Frozen</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Entitlements.Freeze_Updating__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Frozen</label>
+        </rules>
+        <rules>
+            <name>Line_Active</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Line_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Active</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>EntitlementEndDate_Plus90</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Flow.CurrentDate</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Start_Date_Less</targetReference>
+            </connector>
+            <label>Line Active</label>
+        </rules>
+        <rules>
+            <name>Not_Active</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Line_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Active</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.End_Date__c</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <elementReference>EntitlementEndDate_Plus90</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Associated_Product_Numbers</targetReference>
+            </connector>
+            <label>Not Active</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Any_New_Success_Plans</name>
+        <label>Any New Success Plans</label>
+        <locationX>1101</locationX>
+        <locationY>1687</locationY>
+        <defaultConnector>
+            <targetReference>Get_All_Service_Contract_Lines</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Plan_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SwappableCSPs</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_To_Classic</targetReference>
+            </connector>
+            <label>Plan Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check if any lines exist</description>
+        <name>Check_If_Lines_Found</name>
+        <label>Check If Lines Found</label>
+        <locationX>860</locationX>
+        <locationY>1984</locationY>
+        <defaultConnector>
+            <targetReference>set_date</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>No_Lines</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_All_Service_Contract_Lines</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Expire_Entitlement</targetReference>
+            </connector>
+            <label>No Lines</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check if the incomming plan is higher</description>
+        <name>Check_if_plan_type_is_higher</name>
+        <label>Check if plan type is higher</label>
+        <locationX>1013</locationX>
+        <locationY>1373</locationY>
+        <defaultConnector>
+            <targetReference>Find_Highest_Success_Plan</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Higher</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>PlanLevelServiceContract</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>PlanRankedPlanLevel</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Higher_Level</targetReference>
+            </connector>
+            <label>Higher</label>
+        </rules>
+        <rules>
+            <name>Classic</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>PlanRankedPlanLevel</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <label>Classic</label>
+        </rules>
+        <rules>
+            <name>equal</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>PlanLevelServiceContract</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>2.0</numberValue>
+                </rightValue>
+            </conditions>
+            <label>equal</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to make sure a reacord has been returned</description>
+        <name>Check_Records_Returned</name>
+        <label>Check Records Returned</label>
+        <locationX>1645</locationX>
+        <locationY>1599</locationY>
+        <defaultConnector>
+            <targetReference>Swappable</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Check_For_Nulls_in_GSC</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_All_Service_Contract_Lines_with_Success_Plan</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Through_Product_Numbers_Looking_For_Plan</targetReference>
+            </connector>
+            <label>Null SC CSP</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Create_Update_Records</name>
+        <label>Create/Update Records</label>
+        <locationX>1773</locationX>
+        <locationY>839</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Create_and_Update</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>AddToNewCollection</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>UpdateEntitlementRecords</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_New_Entitlement_0</targetReference>
+            </connector>
+            <label>Create and Update</label>
+        </rules>
+        <rules>
+            <name>Create_Only</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>AddToNewCollection</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_New_Entitlement</targetReference>
+            </connector>
+            <label>Create Only</label>
+        </rules>
+        <rules>
+            <name>Update_Only</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>UpdateEntitlementRecords</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Entitlement</targetReference>
+            </connector>
+            <label>Update Only</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to see if there was a result from the previous get entitlement method (This will decide if its a new entitlement or we might be updating one.</description>
+        <name>Does_Entitlement_Exist</name>
+        <label>Does Entitlement Exist</label>
+        <locationX>1154</locationX>
+        <locationY>1151</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Entitlement_Exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Entitlements</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Active_Line</targetReference>
+            </connector>
+            <label>Entitlement Exists</label>
+        </rules>
+        <rules>
+            <name>No_Entitlement</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Entitlements</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Line_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Dead</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>EntitlementEndDate_Plus90</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>$System.OriginDateTime</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_SLA_Proccess</targetReference>
+            </connector>
+            <label>No Entitlement</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check the end date is further in the future or not</description>
+        <name>End_Date_Higher</name>
+        <label>End Date Higher?</label>
+        <locationX>765</locationX>
+        <locationY>1311</locationY>
+        <defaultConnector>
+            <targetReference>Find_Highest_Success_Plan</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>End_Date_Higher_CSP</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Entitlements.EndDate</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <elementReference>DeadCSPNewEnd_Plus90</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Higher_Level_0</targetReference>
+            </connector>
+            <label>End Date Higher CSP?</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Found_Number</name>
+        <label>Found Number</label>
+        <locationX>1154</locationX>
+        <locationY>360</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Number_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Product_Number_Table</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Product_Routings</targetReference>
+            </connector>
+            <label>Number Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Plan_Level_Different</name>
+        <label>Plan Level Different</label>
+        <locationX>346</locationX>
+        <locationY>1481</locationY>
+        <defaultConnector>
+            <targetReference>Add_To_Update_Collection</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Plan_Level_Has_Changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>PlanRankedPlanLevel</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <elementReference>PlanRankedNumberNew</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_SLA_Proccess_Update</targetReference>
+            </connector>
+            <label>Plan Level Has Changed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Start date is less than original, end date is greater, product name has changed</description>
+        <name>Start_Date_Less</name>
+        <label>Start Date Less</label>
+        <locationX>581</locationX>
+        <locationY>1151</locationY>
+        <defaultConnector>
+            <targetReference>Plan_Level_Different</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Lower_Start_Date</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Entitlements.StartDate</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>$Record.Start_Date__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Start_Date</targetReference>
+            </connector>
+            <label>Lower Start Date</label>
+        </rules>
+        <rules>
+            <name>Higher_End_Date</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Entitlements.EndDate</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <elementReference>EntitlementEndDate_Plus90</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_End_Date</targetReference>
+            </connector>
+            <label>Higher End Date</label>
+        </rules>
+        <rules>
+            <name>Different_Name</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Entitlements.Name</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>{!PlanLeveledited} {!Loop_Through_Routings.Related_Product_Range__c}</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Different_Enttitlement_Name</targetReference>
+            </connector>
+            <label>Different Name</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <description>New end date + 90 days</description>
+        <name>DeadCSPNewEnd_Plus90</name>
+        <dataType>Date</dataType>
+        <expression>{!Find_Highest_Success_Plan.End_Date__c} + 90</expression>
+    </formulas>
+    <formulas>
+        <description>Entitlement End Date + 90 days</description>
+        <name>EntitlementEndDate_Plus90</name>
+        <dataType>Date</dataType>
+        <expression>{!$Record.End_Date__c} + 90</expression>
+    </formulas>
+    <formulas>
+        <name>EntitlementEndDate_Plus90_ExpiredLine</name>
+        <dataType>Date</dataType>
+        <expression>{!Get_All_Service_Contract_Lines.End_Date__c} + 90</expression>
+    </formulas>
+    <formulas>
+        <name>NewPlanLevelID</name>
+        <dataType>String</dataType>
+        <expression>CASE({!Find_Entitlements.PlanType__c}, 
+&quot;Classic&quot;,{!Get_Product_Routing.Classic_Entitlement_Process__c},  
+&quot;Essential&quot;,{!Get_Product_Routing.Essential_Entitlement_Process__c},  
+&quot;Standard&quot;,{!Get_Product_Routing.Standard_Entitlement_Process__c},  
+&quot;Premier&quot;,{!Get_Product_Routing.Premier_Entitlement_Process__c},  
+{!Get_Product_Routing.Classic_Entitlement_Process__c})</expression>
+    </formulas>
+    <formulas>
+        <description>Entitlement name without the Standard, Classic, Premier</description>
+        <name>PlanLeveledited</name>
+        <dataType>String</dataType>
+        <expression>LEFT(UPPER({!$Record.Plan_Level__c}), 1) &amp; RIGHT(LOWER({!$Record.Plan_Level__c}),LEN({!$Record.Plan_Level__c}) - 1)</expression>
+    </formulas>
+    <formulas>
+        <name>PlanLevelID</name>
+        <dataType>String</dataType>
+        <expression>CASE( {!PlanLeveledited}, 
+&quot;Classic&quot;,{!Get_Product_Routing.Classic_Entitlement_Process__c},  
+&quot;Essential&quot;,{!Get_Product_Routing.Essential_Entitlement_Process__c},  
+&quot;Standard&quot;,{!Get_Product_Routing.Standard_Entitlement_Process__c},  
+&quot;Premier&quot;,{!Get_Product_Routing.Premier_Entitlement_Process__c},  
+{!Get_Product_Routing.Classic_Entitlement_Process__c})</expression>
+    </formulas>
+    <formulas>
+        <name>PlanLevelServiceContract</name>
+        <dataType>Number</dataType>
+        <expression>Case({!Find_Highest_Success_Plan.Plan_Level__c},
+&quot;Classic&quot;,0,
+&quot;Essential&quot;,1,
+&quot;Standard&quot;,2,
+&quot;Premier&quot;,3,
+0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <description>Converts planproductnumber to int</description>
+        <name>PlanProductNumberToInt</name>
+        <dataType>Number</dataType>
+        <expression>VALUE({!$Record.Plan_Product_Number__c})</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>PlanRankedNumberNew</name>
+        <dataType>Number</dataType>
+        <expression>Case(LOWER({!$Record.Plan_Level__c}),
+&quot;classic&quot;,0,
+&quot;essential&quot;,1,
+&quot;standard&quot;,2,
+&quot;premier&quot;,3,
+0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>PlanRankedPlanLevel</name>
+        <dataType>Number</dataType>
+        <expression>Case(LOWER({!Find_Entitlements.PlanType__c}),
+&quot;classic&quot;,0,
+&quot;essential&quot;,1,
+&quot;standard&quot;,2,
+&quot;premier&quot;,3,
+0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Support - Entitlement (Service Contract) Create/Update Success Plan {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Support - Entitlement (Service Contract) Create/Update Success Plan</label>
+    <loops>
+        <description>Loops through looking for the highest success plan</description>
+        <name>Find_Highest_Success_Plan</name>
+        <label>Find Highest Success Plan</label>
+        <locationX>940</locationX>
+        <locationY>1524</locationY>
+        <collectionReference>SwappableCSPs</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_if_plan_type_is_higher</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Get_SLA_Proccess_New_Plan</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_Product_Routings</name>
+        <label>Loop Product Routings</label>
+        <locationX>1363</locationX>
+        <locationY>447</locationY>
+        <collectionReference>Product_Number_Table</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_Product_Routing</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Get_Service_Contracts</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <description>Loops through</description>
+        <name>Loop_Through_Product_Numbers_Looking_For_Plan</name>
+        <label>Loop Through Product Numbers Looking For Plan</label>
+        <locationX>1422</locationX>
+        <locationY>1410</locationY>
+        <collectionReference>Get_Associated_Product_Numbers</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_All_Service_Contract_Lines_with_Success_Plan</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Any_New_Success_Plans</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_Through_Routings</name>
+        <label>Loop Through Routings</label>
+        <locationX>1155</locationX>
+        <locationY>831</locationY>
+        <collectionReference>AllProductRoutings</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Find_Entitlements</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Create_Update_Records</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Creates a new entitlement when one not found</description>
+        <name>Create_New_Entitlement</name>
+        <label>Create New Entitlement</label>
+        <locationX>2053</locationX>
+        <locationY>987</locationY>
+        <inputReference>AddToNewCollection</inputReference>
+    </recordCreates>
+    <recordCreates>
+        <description>Creates a new entitlement when one not found</description>
+        <name>Create_New_Entitlement_0</name>
+        <label>Create New Entitlement</label>
+        <locationX>1784</locationX>
+        <locationY>1017</locationY>
+        <connector>
+            <targetReference>Update_Entitlement_0</targetReference>
+        </connector>
+        <inputReference>AddToNewCollection</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <description>Find the entitlement related to the incoming Line</description>
+        <name>Find_Entitlements</name>
+        <label>Find Entitlements</label>
+        <locationX>1155</locationX>
+        <locationY>1025</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Does_Entitlement_Exist</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ServiceContractId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Service_Contracts.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>ProductRouting__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_Through_Routings.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Entitlement</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get all service contract lines that match this product on this contract</description>
+        <name>Get_All_Service_Contract_Lines</name>
+        <label>Get All Service Contract Lines</label>
+        <locationX>1070</locationX>
+        <locationY>1976</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_If_Lines_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Service_Contract__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Service_Contracts.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Product_Number__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>PlanProductNumberToInt</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Line_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Active</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>End_Date__c</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value>
+                <elementReference>Find_Entitlements.StartDate</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <elementReference>$Record__Prior.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Service_Contract_Lines__c</object>
+        <sortField>End_Date__c</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get all service contract lines that match this product on this contract</description>
+        <name>Get_All_Service_Contract_Lines_with_Success_Plan</name>
+        <label>Get All Service Contract Lines with Success Plan</label>
+        <locationX>1642</locationX>
+        <locationY>1419</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Records_Returned</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Service_Contract__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Service_Contracts.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Line_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Active</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>End_Date__c</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value>
+                <elementReference>Find_Entitlements.StartDate</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <elementReference>$Record__Prior.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Plan_Product_Number__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_Through_Product_Numbers_Looking_For_Plan.Name</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Plan_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Success Plan</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Service_Contract_Lines__c</object>
+        <sortField>End_Date__c</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get all linked product numbers to help find matching products</description>
+        <name>Get_Associated_Product_Numbers</name>
+        <label>Get Associated Product Numbers</label>
+        <locationX>1261</locationX>
+        <locationY>1410</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Through_Product_Numbers_Looking_For_Plan</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Product_Routing__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_Through_Routings.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Product_Number__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Product Routing</description>
+        <name>Get_Product_Routing</name>
+        <label>Get Product Routing</label>
+        <locationX>1629</locationX>
+        <locationY>356</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Add_Product_Routing</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_Product_Routings.Product_Routing__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ProductRouting__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Top level service contract for this line</description>
+        <name>Get_Service_Contracts</name>
+        <label>Get Service Contract</label>
+        <locationX>1161</locationX>
+        <locationY>599</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Through_Routings</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Service_Contract__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ServiceContract</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Classic SLA Proccess</description>
+        <name>Get_SLA_Proccess</name>
+        <label>Get SLA Proccess</label>
+        <locationX>1372</locationX>
+        <locationY>1151</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_To_New</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>PlanLevelID</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Entitlement_Process__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Classic SLA Proccess</description>
+        <name>Get_SLA_Proccess_New_Plan</name>
+        <label>Get SLA Proccess Update</label>
+        <locationX>663</locationX>
+        <locationY>1533</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Entitlement</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>NewPlanLevelID</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Entitlement_Process__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Classic SLA Proccess</description>
+        <name>Get_SLA_Proccess_Update</name>
+        <label>Get SLA Proccess Update</label>
+        <locationX>176</locationX>
+        <locationY>1490</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Plan_and_Name</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>PlanLevelID</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Entitlement_Process__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get related product number</description>
+        <name>Product_Number_Table</name>
+        <label>Product Number Table</label>
+        <locationX>1161</locationX>
+        <locationY>226</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Found_Number</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Plan_Product_Number__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Product_Number__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Updates the original entitlement with new values</description>
+        <name>Update_Entitlement</name>
+        <label>Update Entitlement</label>
+        <locationX>2085</locationX>
+        <locationY>803</locationY>
+        <inputReference>UpdateEntitlementRecords</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Updates the original entitlement with new values</description>
+        <name>Update_Entitlement_0</name>
+        <label>Update Entitlement</label>
+        <locationX>1785</locationX>
+        <locationY>1164</locationY>
+        <inputReference>UpdateEntitlementRecords</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>625</locationX>
+        <locationY>164</locationY>
+        <connector>
+            <targetReference>Product_Number_Table</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Product_Number__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Plan_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Success Plan</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Plan_Product_Number__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Service_Contract_Lines__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>AddToNewCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Entitlement</objectType>
+    </variables>
+    <variables>
+        <name>AllProductRoutings</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ProductRouting__c</objectType>
+    </variables>
+    <variables>
+        <name>NewEntitlementRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Entitlement</objectType>
+    </variables>
+    <variables>
+        <description>Collection of CSP lines</description>
+        <name>SwappableCSPs</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Service_Contract_Lines__c</objectType>
+    </variables>
+    <variables>
+        <name>UpdateEntitlementRecords</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Entitlement</objectType>
+    </variables>
+</Flow>

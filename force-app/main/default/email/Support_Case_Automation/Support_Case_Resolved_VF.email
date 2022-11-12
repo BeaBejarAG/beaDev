@@ -1,6 +1,6 @@
 <messaging:emailTemplate subject="Access Support Team | {!RelatedTo.CaseNumber} - Your Case Has Been Resolved" recipientType="Contact"
         relatedToType="Case">
-    <messaging:htmlEmailBody>
+    <messaging:htmlEmailBody >
         <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
         <head>
@@ -899,47 +899,7 @@
                                                         <tbody class="mcnTextBlockOuter">
                                                             <tr>
                                                                 <td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
-                                                                    <apex:outputPanel layout="none" rendered="{!AND(RelatedTo.Contact.Can_Log_Into_Community__c == false, RelatedTo.Entitlement.ProductRouting__r.Case_Resolved_Template__c == 'Portal Enabled')}">
-                                                                        <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
-                                                                            <tbody>
-                                                                                <tr>
-
-                                                                                    <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
-
-                                                                                        <span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif">
-                                                                                            <span style="font-size:14px">Hi {!RelatedTo.Contact.FirstName},
-                                                                                                <br />
-                                                                                                <br /> Thank you for working
-                                                                                                with The Access Group
-                                                                                                Support.
-                                                                                                <br />
-                                                                                                <br /> Your case has now been
-                                                                                                marked as Resolved.
-                                                                                                <br />
-                                                                                                <br /> If the case has not
-                                                                                                been resolved to your
-                                                                                                satisfaction, please
-                                                                                                let us know and we'll
-                                                                                                be happy to contact you
-                                                                                                and investigate further.
-                                                                                                &nbsp;
-                                                                                                <br />
-                                                                                                <br /> If that isn't the case,
-                                                                                                then there is no further
-                                                                                                action required on your
-                                                                                                part and your case will
-                                                                                                automatically close in
-                                                                                                a few days. Once closed,
-                                                                                                no further comments can
-                                                                                                be added.
-                                                                                            </span>
-                                                                                        </span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </apex:outputPanel>
-                                                                    <apex:outputPanel layout="none" rendered="{!ISNULL(RelatedTo.Entitlement.ProductRouting__c)}">
+                                                                    <apex:outputPanel layout="none" rendered="{!AND(RelatedTo.Contact.Can_Log_Into_Community__c == false, RelatedTo.Entitlement.ProductRouting__r.Case_Resolved_Template__c == 'Portal Enabled',RelatedTo.RecordType.Name != 'Learning Services')}">
                                                                         <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
                                                                             <tbody>
                                                                                 <tr>
@@ -980,7 +940,48 @@
                                                                         </table>
                                                                     </apex:outputPanel>
 
-                                                                    <apex:outputPanel layout="none" rendered="{!RelatedTo.Entitlement.ProductRouting__r.Case_Resolved_Template__c == 'Portal Disabled'}">
+                                                                    <apex:outputPanel layout="none" rendered="{!AND(ISNULL(RelatedTo.Entitlement.ProductRouting__c),RelatedTo.RecordType.Name != 'Learning Services')}">
+                                                                        <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+                                                                            <tbody>
+                                                                                <tr>
+
+                                                                                    <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
+
+                                                                                        <span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif">
+                                                                                            <span style="font-size:14px">Hi {!RelatedTo.Contact.FirstName},
+                                                                                                <br />
+                                                                                                <br /> Thank you for working
+                                                                                                with The Access Group
+                                                                                                Support.
+                                                                                                <br />
+                                                                                                <br /> Your case has now been
+                                                                                                marked as Resolved.
+                                                                                                <br />
+                                                                                                <br /> If the case has not
+                                                                                                been resolved to your
+                                                                                                satisfaction, please
+                                                                                                let us know and we'll
+                                                                                                be happy to contact you
+                                                                                                and investigate further.
+                                                                                                &nbsp;
+                                                                                                <br />
+                                                                                                <br /> If that isn't the case,
+                                                                                                then there is no further
+                                                                                                action required on your
+                                                                                                part and your case will
+                                                                                                automatically close in
+                                                                                                a few days. Once closed,
+                                                                                                no further comments can
+                                                                                                be added.
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </apex:outputPanel>
+
+                                                                    <apex:outputPanel layout="none" rendered="{!AND(RelatedTo.Entitlement.ProductRouting__r.Case_Resolved_Template__c == 'Portal Disabled',RelatedTo.RecordType.Name != 'Learning Services')}">
                                                                         <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
                                                                             <tbody>
                                                                                 <tr>
@@ -1021,7 +1022,8 @@
                                                                             </tbody>
                                                                         </table>
                                                                     </apex:outputPanel>
-                                                                    <apex:outputPanel layout="none" rendered="{!AND(RelatedTo.Contact.Can_Log_Into_Community__c == true, RelatedTo.Entitlement.ProductRouting__r.Case_Resolved_Template__c == 'Portal Enabled')}">
+
+                                                                    <apex:outputPanel layout="none" rendered="{!AND(RelatedTo.Contact.Can_Log_Into_Community__c == true, RelatedTo.Entitlement.ProductRouting__r.Case_Resolved_Template__c == 'Portal Enabled',RelatedTo.RecordType.Name != 'Learning Services')}">
                                                                         <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
                                                                             <tbody>
                                                                                 <tr>
@@ -1094,6 +1096,31 @@
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </apex:outputPanel>
+
+                                                                    <apex:outputPanel layout="none" rendered="{!RelatedTo.RecordType.Name == 'Learning Services'}">
+                                                                        <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+                                                                            <tbody>
+                                                                                <tr>
+
+                                                                                    <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
+
+                                                                                        <span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif">
+                                                                                            <span style="font-size:14px">Hi {!RelatedTo.Contact.FirstName},
+                                                                                                <br />
+                                                                                                <br /> Thank you for working
+                                                                                                with The Access Learning Services Team.
+                                                                                                <br />
+                                                                                                <br /> According to our records, your case 
+                                                                                                has been resolved and will be closed. If this 
+                                                                                                is not the case, please contact the Learning Services team at 
+                                                                                                APAC.Learningservices@theaccessgroup.com 
+                                                                                            </span>
+                                                                                        </span>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -1295,7 +1322,7 @@
                                                                                     <span style="font-size:14px">
                                                                                         <span style="color:#008080">
                                                                                             <span style="font-family:open sans,helvetica neue,helvetica,arial,sans-serif">
-                                                                                                <em>Copyright © 2021 | All
+                                                                                                <em>Copyright © 2022 | All
                                                                                                     rights reserved.</em>
                                                                                                 <br />
                                                                                                 <br />

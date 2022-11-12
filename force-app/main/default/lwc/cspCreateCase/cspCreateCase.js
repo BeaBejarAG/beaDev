@@ -326,6 +326,8 @@ export default class CspCreateCase extends NavigationMixin(LightningElement) {
         })
         .then(caseObject => {
             this.caseId = caseObject.id;
+            // ***
+            // console.log('*** AccountId: ' + caseObject.AccountId);
 
             /* Move files from user to case */
             if(this.files.length > 0) {
@@ -350,7 +352,7 @@ export default class CspCreateCase extends NavigationMixin(LightningElement) {
                     this.creatingCase = false;
                 });
         })
-
+        
         event.preventDefault();
     }
 
@@ -800,7 +802,7 @@ export default class CspCreateCase extends NavigationMixin(LightningElement) {
 
     get impacts() {
         return [
-            { value: '4', label: 'Limited - I have a question about how to do something or a minor error' },
+            { value: '4', label: 'Limited - I have a question about how to do something' },
             { value: '3', label: 'Moderate - A feature I am using is not working as expected'},
             { value: '2', label: 'Major - A major feature has stopped working'},
             { value: '1', label: 'Critical - My system is not available'}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <apiVersion>49.0</apiVersion>
+    <dynamicChoiceSets>
+        <name>InitialLicences</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Family</picklistField>
+        <picklistObject>Product2</picklistObject>
+    </dynamicChoiceSets>
+    <interviewLabel>New Product {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>New Product</label>
+    <processType>Flow</processType>
+    <screens>
+        <name>Start_Screen</name>
+        <label>Start Screen</label>
+        <locationX>419</locationX>
+        <locationY>260</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Product_Family</name>
+            <choiceReferences>InitialLicences</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Product Family</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Start_Screen</startElementReference>
+    <status>Draft</status>
+</Flow>

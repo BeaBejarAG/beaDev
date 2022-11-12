@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <assignments>
+        <description>Update flex case to Cancelled</description>
+        <name>Copy_3_of_Update_Flex_Case_Cancelled</name>
+        <label>Flex Case Pending Cancelled</label>
+        <locationX>842</locationX>
+        <locationY>1415</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Flex_Case.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Cancelled</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_Flex_Case.IsClosed</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Case_Multi</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Record Counts</description>
+        <name>Counts</name>
+        <label>Counts</label>
+        <locationX>578</locationX>
+        <locationY>1175</locationY>
+        <assignmentItems>
+            <assignToReference>CountCancelled</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Filter_Cancelled</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CountConfirmed</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Filter_Confirmed</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CountDelivered</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Filter_Delivered</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CountPending</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Filter_Pending</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Case_Status_based_on_lowest_Level</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set the current status for a single line so we can mapp to case status&apos;s</description>
+        <name>Set_Current_Status_for_single_line</name>
+        <label>Set Current Status for single line</label>
+        <locationX>1282</locationX>
+        <locationY>695</locationY>
+        <assignmentItems>
+            <assignToReference>CurrentStatus</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Status__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Case_Single_Line</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Update the case when its a single line</description>
+        <name>Update_Case_Single_Line</name>
+        <label>Update Case Single Line</label>
+        <locationX>1282</locationX>
+        <locationY>815</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Flex_Case.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MapStatusToCaseStatus</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Case_Single</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Update flex case to Confirmed</description>
+        <name>Update_Flex_Case_Confirmed</name>
+        <label>Update Flex Case Confirmed</label>
+        <locationX>314</locationX>
+        <locationY>1415</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Flex_Case.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Confirmed</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Case_Multi</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Update flex case to Delivered</description>
+        <name>Update_Flex_Case_Delivered</name>
+        <label>Update Flex Case Delivered</label>
+        <locationX>578</locationX>
+        <locationY>1415</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Flex_Case.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Delivered</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_Flex_Case.IsClosed</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Case_Multi</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Update flex case to pending</description>
+        <name>Update_Flex_Case_Pending</name>
+        <label>Update Flex Case Pending</label>
+        <locationX>50</locationX>
+        <locationY>1415</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Flex_Case.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Pending</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Case_Multi</targetReference>
+        </connector>
+    </assignments>
+    <collectionProcessors>
+        <description>Filter Cancelled</description>
+        <name>Filter_Cancelled</name>
+        <elementSubtype>FilterCollectionProcessor</elementSubtype>
+        <label>Filter Cancelled</label>
+        <locationX>578</locationX>
+        <locationY>1055</locationY>
+        <assignNextValueToReference>currentItem_Filter_Cancelled_0</assignNextValueToReference>
+        <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
+        <collectionReference>Get_Flex_Bookings</collectionReference>
+        <conditionLogic>and</conditionLogic>
+        <conditions>
+            <leftValueReference>currentItem_Filter_Cancelled_0.Status__c</leftValueReference>
+            <operator>EqualTo</operator>
+            <rightValue>
+                <stringValue>Cancelled</stringValue>
+            </rightValue>
+        </conditions>
+        <connector>
+            <targetReference>Counts</targetReference>
+        </connector>
+    </collectionProcessors>
+    <collectionProcessors>
+        <description>Filter Confirmed</description>
+        <name>Filter_Confirmed</name>
+        <elementSubtype>FilterCollectionProcessor</elementSubtype>
+        <label>Filter Confirmed</label>
+        <locationX>578</locationX>
+        <locationY>815</locationY>
+        <assignNextValueToReference>currentItem_Filter_Confirmed</assignNextValueToReference>
+        <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
+        <collectionReference>Get_Flex_Bookings</collectionReference>
+        <conditionLogic>and</conditionLogic>
+        <conditions>
+            <leftValueReference>currentItem_Filter_Confirmed.Status__c</leftValueReference>
+            <operator>EqualTo</operator>
+            <rightValue>
+                <stringValue>Confirmed</stringValue>
+            </rightValue>
+        </conditions>
+        <connector>
+            <targetReference>Filter_Delivered</targetReference>
+        </connector>
+    </collectionProcessors>
+    <collectionProcessors>
+        <description>Filter Delivered</description>
+        <name>Filter_Delivered</name>
+        <elementSubtype>FilterCollectionProcessor</elementSubtype>
+        <label>Filter Delivered</label>
+        <locationX>578</locationX>
+        <locationY>935</locationY>
+        <assignNextValueToReference>currentItem_Filter_Delivered_0</assignNextValueToReference>
+        <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
+        <collectionReference>Get_Flex_Bookings</collectionReference>
+        <conditionLogic>or</conditionLogic>
+        <conditions>
+            <leftValueReference>currentItem_Filter_Delivered_0.Status__c</leftValueReference>
+            <operator>EqualTo</operator>
+            <rightValue>
+                <stringValue>Invoiced</stringValue>
+            </rightValue>
+        </conditions>
+        <conditions>
+            <leftValueReference>currentItem_Filter_Delivered_0.Status__c</leftValueReference>
+            <operator>EqualTo</operator>
+            <rightValue>
+                <stringValue>Completed</stringValue>
+            </rightValue>
+        </conditions>
+        <connector>
+            <targetReference>Filter_Cancelled</targetReference>
+        </connector>
+    </collectionProcessors>
+    <collectionProcessors>
+        <description>Filter only Pending Lines</description>
+        <name>Filter_Pending</name>
+        <elementSubtype>FilterCollectionProcessor</elementSubtype>
+        <label>Filter Pending</label>
+        <locationX>578</locationX>
+        <locationY>695</locationY>
+        <assignNextValueToReference>currentItem_Filter_Pending_0</assignNextValueToReference>
+        <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
+        <collectionReference>Get_Flex_Bookings</collectionReference>
+        <conditionLogic>or</conditionLogic>
+        <conditions>
+            <leftValueReference>currentItem_Filter_Pending_0.Status__c</leftValueReference>
+            <operator>EqualTo</operator>
+            <rightValue>
+                <stringValue>Provisional</stringValue>
+            </rightValue>
+        </conditions>
+        <conditions>
+            <leftValueReference>currentItem_Filter_Pending_0.Status__c</leftValueReference>
+            <operator>EqualTo</operator>
+            <rightValue>
+                <stringValue>Submitted</stringValue>
+            </rightValue>
+        </conditions>
+        <conditions>
+            <leftValueReference>currentItem_Filter_Pending_0.Status__c</leftValueReference>
+            <operator>EqualTo</operator>
+            <rightValue>
+                <stringValue>Buffer</stringValue>
+            </rightValue>
+        </conditions>
+        <connector>
+            <targetReference>Filter_Confirmed</targetReference>
+        </connector>
+    </collectionProcessors>
+    <decisions>
+        <description>Checks to see if other active bookings exist so we can check those first before changing status on the case</description>
+        <name>Other_Active_Bookings_Exists</name>
+        <label>Other Active Bookings Exists</label>
+        <locationX>930</locationX>
+        <locationY>575</locationY>
+        <defaultConnector>
+            <targetReference>Set_Current_Status_for_single_line</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Bookings_Exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Flex_Bookings</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Filter_Pending</targetReference>
+            </connector>
+            <label>Bookings Exists</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks the filtered groups for the lowest pending lines</description>
+        <name>Set_Case_Status_based_on_lowest_Level</name>
+        <label>Set Case Status based on lowest Level</label>
+        <locationX>578</locationX>
+        <locationY>1295</locationY>
+        <defaultConnector>
+            <targetReference>Update_Case_Multi</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Found_Pending</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CountPending</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Flex_Case_Pending</targetReference>
+            </connector>
+            <label>Found Pending</label>
+        </rules>
+        <rules>
+            <name>Found_Confirmed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CountConfirmed</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Flex_Case_Confirmed</targetReference>
+            </connector>
+            <label>Found Confirmed</label>
+        </rules>
+        <rules>
+            <name>Found_Delivered</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CountDelivered</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Flex_Case_Delivered</targetReference>
+            </connector>
+            <label>Found Delivered</label>
+        </rules>
+        <rules>
+            <name>Found_Cancelled</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CountCancelled</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_3_of_Update_Flex_Case_Cancelled</targetReference>
+            </connector>
+            <label>Found Cancelled</label>
+        </rules>
+    </decisions>
+    <description>On Create and update of the Flex Points bookings, change the case status to be correct based on what the other lines are doing.</description>
+    <formulas>
+        <description>Checks to see if the case needs to be closed</description>
+        <name>IsCloseCase</name>
+        <dataType>Boolean</dataType>
+        <expression>IF({!NumberToStatus} = &apos;Cancelled&apos;,true,
+IF({!NumberToStatus} = &apos;Invoiced&apos;,true,
+IF({!NumberToStatus} = &apos;Rejected&apos;,true,false)))</expression>
+    </formulas>
+    <formulas>
+        <description>Checks the single version to see if the case should be closed</description>
+        <name>IsCloseCaseSingle</name>
+        <dataType>Boolean</dataType>
+        <expression>IF({!CurrentStatus} = &apos;Cancelled&apos;,true,
+IF({!CurrentStatus} = &apos;Invoiced&apos;,true,
+IF({!CurrentStatus} = &apos;Rejected&apos;,true,false)))</expression>
+    </formulas>
+    <formulas>
+        <description>Puts the status into a number order</description>
+        <name>LevelOfStatus</name>
+        <dataType>Number</dataType>
+        <expression>CASE({!MapStatusToCaseStatus},
+&apos;Pending&apos;,1,
+&apos;Confirmed&apos;,2,
+&apos;Delivered&apos;,3,
+&apos;Cancelled&apos;,4,0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <description>Maps the status&apos;s to a case status</description>
+        <name>MapStatusToCaseStatus</name>
+        <dataType>String</dataType>
+        <expression>CASE({!CurrentStatus},
+&apos;Provisional&apos;,&apos;Pending&apos;,
+&apos;Submitted&apos;,&apos;Pending&apos;,
+&apos;Buffer&apos;,&apos;Pending&apos;,
+&apos;Completed&apos;,&apos;Delivered&apos;,
+&apos;Invoiced&apos;,&apos;Delivered&apos;,
+&apos;Rejected&apos;,&apos;Rejected&apos;,
+&apos;Cancelled&apos;,&apos;Cancelled&apos;,{!CurrentStatus})</expression>
+    </formulas>
+    <formulas>
+        <description>Map Numbers to status</description>
+        <name>NumberToStatus</name>
+        <dataType>String</dataType>
+        <expression>CASE({!LowestNumber},
+1,&apos;Pending&apos;,
+2,&apos;Confirmed&apos;,
+4,&apos;Delivered&apos;,
+3,&apos;Cancelled&apos;,&apos;&apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>SetCloseDateSingle</name>
+        <dataType>DateTime</dataType>
+        <expression>IF({!NumberToStatus} = &apos;Cancelled&apos;,{!$Flow.CurrentDateTime},
+IF({!NumberToStatus} = &apos;Invoiced&apos;,{!$Flow.CurrentDateTime},
+IF({!NumberToStatus} = &apos;Rejected&apos;,{!$Flow.CurrentDateTime},null)))</expression>
+    </formulas>
+    <interviewLabel>Flex Points : Booking Lines Create/Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Flex Points : Booking Lines Create/Update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>This returns all active flex bookings only</description>
+        <name>Get_Flex_Bookings</name>
+        <label>Get Flex Bookings</label>
+        <locationX>930</locationX>
+        <locationY>455</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Other_Active_Bookings_Exists</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Flex_Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Flex_Case.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Flex_Points_Bookings__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Flex Case to be updated by changed booking lines</description>
+        <name>Get_Flex_Case</name>
+        <label>Get Flex Case</label>
+        <locationX>930</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Flex_Bookings</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Flex_Case__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Update Multi Case</description>
+        <name>Update_Case_Multi</name>
+        <label>Update Case Multi</label>
+        <locationX>578</locationX>
+        <locationY>1631</locationY>
+        <inputReference>Get_Flex_Case</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Update a single Case</description>
+        <name>Update_Case_Single</name>
+        <label>Update Case Single</label>
+        <locationX>1282</locationX>
+        <locationY>935</locationY>
+        <inputReference>Get_Flex_Case</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>804</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Flex_Case</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Flex_Case__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Flex_Points_Bookings__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Collection of the status Numbers to determine lowest</description>
+        <name>CollectionOfStatusNumbers</name>
+        <dataType>Number</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
+    </variables>
+    <variables>
+        <description>Count Cancelled</description>
+        <name>CountCancelled</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Count Confirmed</description>
+        <name>CountConfirmed</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Count Delivered</description>
+        <name>CountDelivered</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Count of pending records</description>
+        <name>CountPending</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <name>currentItem_Filter_Cancelled_0</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Flex_Points_Bookings__c</objectType>
+    </variables>
+    <variables>
+        <name>currentItem_Filter_Confirmed</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Flex_Points_Bookings__c</objectType>
+    </variables>
+    <variables>
+        <name>currentItem_Filter_Delivered_0</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Flex_Points_Bookings__c</objectType>
+    </variables>
+    <variables>
+        <name>currentItem_Filter_Pending_0</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Flex_Points_Bookings__c</objectType>
+    </variables>
+    <variables>
+        <description>Current Status</description>
+        <name>CurrentStatus</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>LowestNumber</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+</Flow>

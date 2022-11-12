@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <assignments>
+        <name>Clear_HasNPSCoverage</name>
+        <label>Clear HasNPSCoverage</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.HasNPSCoverage__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Turnover_Size</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Data_Source_Update_History</name>
+        <label>Set Data Source Update History</label>
+        <locationX>182</locationX>
+        <locationY>1103</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Data_Source_Update_History__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>DataSourceUpdateHistory</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Type_Change_Reason_History</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_HasNPSCoverage</name>
+        <label>Set HasNPSCoverage</label>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.HasNPSCoverage__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Turnover_Size</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_Turnover_Size</name>
+        <label>Update Turnover Size</label>
+        <locationX>182</locationX>
+        <locationY>767</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Turnover_Size__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>TurnoverSize</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Data_Source_Update_History</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Update_Type_Change_Reason_History</name>
+        <label>Update Type Change Reason History</label>
+        <locationX>182</locationX>
+        <locationY>1439</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Type_Change_Reason_History__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>TypeChangeReasonHistory</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Data_Source_Update_History</name>
+        <label>Data Source Update History</label>
+        <locationX>314</locationX>
+        <locationY>983</locationY>
+        <defaultConnector>
+            <targetReference>Type_Change_Reason_History</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Data_Source_Verified_Checkbox</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Data_Source_Update_Complete__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Data_Source_Update_Complete__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Data_Source_Update_History</targetReference>
+            </connector>
+            <label>Data Source Verified Checkbox</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Has_NPS_Coverage</name>
+        <label>Has NPS Coverage</label>
+        <locationX>314</locationX>
+        <locationY>311</locationY>
+        <defaultConnector>
+            <targetReference>Turnover_Size</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>NPS_Contact_Count_NULL_0</name>
+            <conditionLogic>1 AND (2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contact_Count__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Contact_Count__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Contact_Count__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Clear_HasNPSCoverage</targetReference>
+            </connector>
+            <label>NPS Contact Count = NULL || 0</label>
+        </rules>
+        <rules>
+            <name>NPS_Contact_Count_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contact_Count__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Contact_Count__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_HasNPSCoverage</targetReference>
+            </connector>
+            <label>NPS Contact Count &gt; 0</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Turnover_Size</name>
+        <label>Turnover Size</label>
+        <locationX>314</locationX>
+        <locationY>647</locationY>
+        <defaultConnector>
+            <targetReference>Data_Source_Update_History</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Annual_Revenue_New_Value</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.AnnualRevenue</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.AnnualRevenue</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Turnover_Size</targetReference>
+            </connector>
+            <label>Annual Revenue New Value</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Type_Change_Reason_History</name>
+        <label>Type Change Reason History</label>
+        <locationX>314</locationX>
+        <locationY>1319</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Type_Change_Reason_History_Changed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Type_Change_Reason__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Type_Change_Reason_History</targetReference>
+            </connector>
+            <label>Type Change Reason History Changed</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>DataSourceUpdateHistory</name>
+        <dataType>String</dataType>
+        <expression>TEXT(DAY(TODAY()))&amp;&quot;/&quot;&amp;TEXT(MONTH(TODAY()))&amp;&quot;/&quot;&amp;TEXT(YEAR(TODAY()))&amp;&quot;:&quot;&amp;{!$User.FirstName}&amp;&quot; &quot;&amp;{!$User.LastName}&amp;&quot;|&quot;&amp;{!$Record.Data_Source_Update_History__c}</expression>
+    </formulas>
+    <formulas>
+        <name>TurnoverSize</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.AnnualRevenue} &gt; 0 &amp;&amp; {!$Record.AnnualRevenue} &lt; 5000000, &quot;,5M&quot;,
+IF({!$Record.AnnualRevenue} &gt;= 5000000 &amp;&amp; {!$Record.AnnualRevenue} &lt; 11000000, &quot;5M - 10M&quot;,
+IF({!$Record.AnnualRevenue} &gt;= 11000000 &amp;&amp; {!$Record.AnnualRevenue} &lt; 21000000, &quot;11M - 20M&quot;,
+IF({!$Record.AnnualRevenue} &gt;= 21000000 &amp;&amp; {!$Record.AnnualRevenue} &lt; 51000000, &quot;21M - 50M&quot;,
+IF({!$Record.AnnualRevenue} &gt;= 51000000 &amp;&amp; {!$Record.AnnualRevenue} &lt; 100000000, &quot;51M - 100M&quot;,
+IF({!$Record.AnnualRevenue} &gt;= 100000000 &amp;&amp; {!$Record.AnnualRevenue} &lt; 201000000, &quot;101M - 200M&quot;,
+IF({!$Record.AnnualRevenue} &gt;= 201000000 &amp;&amp; {!$Record.AnnualRevenue} &lt; 501000000, &quot;201M - 500M&quot;,
+IF({!$Record.AnnualRevenue} &gt;= 201000000 &amp;&amp; {!$Record.AnnualRevenue} &lt; 500000000, &quot;201M - 500M&quot;,
+IF({!$Record.AnnualRevenue} &gt;= 500000000 , &quot;500M+&quot;,
+NULL)))))))))</expression>
+    </formulas>
+    <formulas>
+        <name>TypeChangeReasonHistory</name>
+        <dataType>String</dataType>
+        <expression>TEXT(DAY(TODAY()))&amp;&quot;/&quot;&amp;TEXT(MONTH(TODAY()))&amp;&quot;/&quot;&amp;TEXT(YEAR(TODAY()))&amp;&quot;:&quot;&amp;{!$User.FirstName}&amp;&quot; &quot;&amp;{!$User.LastName}&amp;&quot;|&quot;&amp;TEXT({!$Record.Type_Change_Reason__c})&amp;&quot;|&quot;&amp;{!$Record.Type_Change_Reason_History__c}</expression>
+    </formulas>
+    <interviewLabel>Account - BEFORE Save {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Account - BEFORE Save</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Has_NPS_Coverage</targetReference>
+        </connector>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

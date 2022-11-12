@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <description>Created and updated flow for Case&apos;s</description>
+    <formulas>
+        <description>Sets the first reply date</description>
+        <name>SetFirstReplyDate</name>
+        <dataType>DateTime</dataType>
+        <expression>CASE(
+MOD( DATEVALUE(NOW()) - DATE( 1900, 1, 7 ), 7 ),
+0, NOW() + 3 ,
+1, NOW() + 2 ,
+2, NOW() + 2 ,
+3, NOW() + 2 ,
+4, NOW() + 4 ,
+5, NOW() + 4 ,
+6, NOW() + 3 ,
+NOW() + 2
+)</expression>
+    </formulas>
+    <interviewLabel>Created/Updated - Case {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Created/Updated - Case</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Set 1st No Reply Date</description>
+        <name>Set_1st_No_Reply</name>
+        <label>Set 1st No Reply</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <inputAssignments>
+            <field>NoReply1stEmailSent__c</field>
+            <value>
+                <elementReference>SetFirstReplyDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>NoReply2ndEmailSent__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <field>No_Reply_3rd_Email_Sent__c</field>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_1st_No_Reply</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>2 AND (1 OR 3)</filterLogic>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>012580000006HfdAAE</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Customer Outstanding</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>0128e000000Xd0GAAS</stringValue>
+            </value>
+        </filters>
+        <object>Case</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

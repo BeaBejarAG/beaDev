@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <description>Deletes the Duplicate &apos;Clari Split&apos; if the original Revenue Split is deleted</description>
+    <interviewLabel>Sales - Clari Split Delete Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Sales - Clari Split Delete Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordDeletes>
+        <description>If the Revenue Split is deleted for a Player Manager - This deletes the duplicate &apos;Clari Split&apos;</description>
+        <name>Delete_Clari_Split</name>
+        <label>Delete Clari Split</label>
+        <locationX>227</locationX>
+        <locationY>348</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Related_Split_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <object>OpportunitySplit</object>
+    </recordDeletes>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Delete_Clari_Split</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Player_Managers_Inactive_User_ID__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>SplitTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>149580000004hXqAAI</stringValue>
+            </value>
+        </filters>
+        <object>OpportunitySplit</object>
+        <recordTriggerType>Delete</recordTriggerType>
+        <triggerType>RecordBeforeDelete</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

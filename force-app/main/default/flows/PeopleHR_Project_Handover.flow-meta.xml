@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <assignments>
+        <description>Combine the field values</description>
+        <name>PHR_Set_Project_Handover_Text</name>
+        <label>PHR Set Project Handover Text</label>
+        <locationX>712</locationX>
+        <locationY>199</locationY>
+        <assignmentItems>
+            <assignToReference>PHR_vHandover_Text</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>PHR_Handover_CONCAT</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>PHR_Select_Opportunity_to_Update</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <name>PHR_FUL_cSelfFulfillment</name>
+        <choiceText>Self Fulfillment</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Self Fulfillment</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_FULcAdditionalTraining</name>
+        <choiceText>Additional Training</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Additional Training</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_FULcLicenceUpgrade</name>
+        <choiceText>Licence Upgrade</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Licence Upgrade</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_FULcStandardProject</name>
+        <choiceText>Standard Project</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Standard Project</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_INTcGREENHOUSE</description>
+        <name>PHR_INTcGREENHOUSE</name>
+        <choiceText>GREENHOUSE</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>GREENHOUSE</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_INTcIDENCY</name>
+        <choiceText>IDENCY</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>IDENCY</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_INTcNONE</description>
+        <name>PHR_INTcNONE</name>
+        <choiceText>NONE</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>NONE</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_INTcONELOGIN</description>
+        <name>PHR_INTcONELOGIN</name>
+        <choiceText>ONELOGIN</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <description>PHR_INTcORG CHART NOW</description>
+        <name>PHR_INTcORGCHARTNOW</name>
+        <choiceText>ORG CHART NOW</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>ORG CHART NOW</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_INTcOTHER (Details in the comments box)</description>
+        <name>PHR_INTcOTHER</name>
+        <choiceText>OTHER (Details in the comments box)&lt;p&gt;&lt;br&gt;&lt;/p&gt;</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>OTHER (Details in the comments box)</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_INTcPAYROLL</name>
+        <choiceText>PAYROLL</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>PAYROLL</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_INTcPAYSLIPS</description>
+        <name>PHR_INTcPAYSLIPS</name>
+        <choiceText>PAYSLIPS</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>PAYSLIPS</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_INTcROTACLOUD</name>
+        <choiceText>ROTA CLOUD</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>ROTA CLOUD</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_INTcWHEN I WORK</description>
+        <name>PHR_INTcWHENIWORK</name>
+        <choiceText>WHEN I WORK</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>WHEN I WORK</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_PKG_cELITE</name>
+        <choiceText>ELITE</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>ELITE</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_PKG_cENTERPRISE</name>
+        <choiceText>ENTERPRISE</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>ENTERPRISE</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_PKG_cPROFESSIONAL</name>
+        <choiceText>PROFESSIONAL</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>PROFESSIONAL</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>STARTER</description>
+        <name>PHR_PKG_cSTARTER</name>
+        <choiceText>STARTER</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>STARTER</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_PKG_cTEAM</name>
+        <choiceText>TEAM</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>TEAM</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cAMI</description>
+        <name>PHR_PROD_cAMI</name>
+        <choiceText>AMI</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>AMI</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cAPI</description>
+        <name>PHR_PROD_cAPI</name>
+        <choiceText>API</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>API</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cATS</description>
+        <name>PHR_PROD_cATS</name>
+        <choiceText>ATS</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>ATS</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cE-Sign</description>
+        <name>PHR_PROD_cESign</name>
+        <choiceText>E-Sign</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>E-Sign</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_PROD_cExpenses</name>
+        <choiceText>Expenses</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Expenses</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cFlexible Benefits</description>
+        <name>PHR_PROD_cFlexibleBenefits</name>
+        <choiceText>Flexible Benefits</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Flexible Benefits</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_PROD_cHRSelfService</name>
+        <choiceText>HR + Self Service</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>HR + Self Service</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cLogbook (Custom Screens)</description>
+        <name>PHR_PROD_cLogbook</name>
+        <choiceText>Logbook (Custom Screens)</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Logbook (Custom Screens)</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cLogbook Data Loader</description>
+        <name>PHR_PROD_cLogbookDataLoader</name>
+        <choiceText>Logbook Data Loader</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Logbook Data Loader</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cPerformance</description>
+        <name>PHR_PROD_cPerformance</name>
+        <choiceText>Performance</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Performance</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cReport Writer (info graph designer)</description>
+        <name>PHR_PROD_cReportWriter</name>
+        <choiceText>Report Writer (info graph designer)</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Report Writer (info graph designer)</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cRipple</description>
+        <name>PHR_PROD_cRipple</name>
+        <choiceText>Ripple</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Ripple</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>PHR_PROD_cRotatingWorkPatterns</name>
+        <choiceText>Rotating Work Patterns</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Rotating Work Patterns</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>PHR_PROD_cTime</description>
+        <name>PHR_PROD_cTime</name>
+        <choiceText>Time</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Time</stringValue>
+        </value>
+    </choices>
+    <description>Complete fields to automatically update the Notes to Project Office</description>
+    <formulas>
+        <description>Combine with Labels &amp; &lt;BR&gt;</description>
+        <name>PHR_Handover_CONCAT</name>
+        <dataType>String</dataType>
+        <expression>&apos;FULFILLMENT: &apos; &amp; {!PHR_Fulfillment} &amp; BR() 
+&amp; &apos;PACKAGE PURCHASED: &apos; &amp; {!PHR_Package_Purchased} &amp; BR() 
+&amp; &apos;PRODUCTS PURCHASED: &apos; &amp; {!PHR_Products_Purchased} &amp; BR() 
+&amp; &apos;EMPLOYEES: &apos; &amp; TEXT({!PHR_Employees}) &amp; BR() 
+&amp; &apos;TRIAL URL: &apos; &amp; {!PHR_URL} &amp; BR()
+&amp; &apos;DATA SOURCES: &apos; &amp; {!PHR_Data_Source} &amp; BR() 
+&amp; &apos;INTEGRATIONS: &apos; &amp; {!PHR_Integrations} &amp; BR() 
+&amp; &apos;INTEGRATION COMMENTS: &apos; &amp; {!PHR_Integration_Comments} &amp; BR() 
+&amp; &apos;TRAINING COMMENTS: &apos; &amp; {!PHR_Training_Comments} &amp; BR() 
+&amp; &apos;ANY OTHER COMMENTS: &apos; &amp; {!PHR_Any_Other_Comments}</expression>
+    </formulas>
+    <interviewLabel>PeopleHR Project Handover {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>PeopleHR Project Handover</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Opportunity</name>
+        <label>Get Opportunity</label>
+        <locationX>432</locationX>
+        <locationY>110</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>PHR_Project_Handover</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Opportunity</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>SOW_Description__c</queriedFields>
+        <sortField>Id</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Combines the form handover form answer into a single text box on the Opp.</description>
+        <name>PHR_Select_Opportunity_to_Update</name>
+        <label>PHR Select Opportunity to Update</label>
+        <locationX>872</locationX>
+        <locationY>245</locationY>
+        <connector>
+            <targetReference>PHR_Finish</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>SOW_Description__c</field>
+            <value>
+                <elementReference>PHR_vHandover_Text</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <screens>
+        <description>Details have been written to the Opportunity &apos;Notes to Project Office&apos;</description>
+        <name>PHR_Finish</name>
+        <label>PHR_Finish</label>
+        <locationX>995</locationX>
+        <locationY>317</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>PHR_Finish_Text</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(7, 215, 28);&quot;&gt;FINISHED &lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(7, 215, 28);&quot;&gt;Details have been written to the Opportunity &apos;Notes to Project Office&apos;&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>PHR_Intro_Footer</name>
+        <label>PHR_Intro_Footer</label>
+        <locationX>242</locationX>
+        <locationY>207</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Get_Opportunity</targetReference>
+        </connector>
+        <fields>
+            <name>PHR_Intro</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Use this form to capture the structured details for PeopleHR Project handovers; press [Next] + [Finish] and it will send the results to the &apos;Notes to project office&apos; field on the opportunity.&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;i&gt;(This form will then reset).&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>PHR_Project_Handover</name>
+        <label>PHR Project Handover</label>
+        <locationX>571</locationX>
+        <locationY>161</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>PHR_Set_Project_Handover_Text</targetReference>
+        </connector>
+        <fields>
+            <name>PHR_Instructions</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Use this form to capture the structured details for PeopleHR Project handovers; press [Next] + [Finish] and it will send the results to the &apos;Notes to project office&apos; field on the opportunity.&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;(This form will then reset).&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>PHR_Fulfillment</name>
+            <choiceReferences>PHR_FUL_cSelfFulfillment</choiceReferences>
+            <choiceReferences>PHR_FULcStandardProject</choiceReferences>
+            <choiceReferences>PHR_FULcLicenceUpgrade</choiceReferences>
+            <choiceReferences>PHR_FULcAdditionalTraining</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>PHR Fulfillment</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>PHR_Package_Purchased</name>
+            <choiceReferences>PHR_PKG_cSTARTER</choiceReferences>
+            <choiceReferences>PHR_PKG_cTEAM</choiceReferences>
+            <choiceReferences>PHR_PKG_cPROFESSIONAL</choiceReferences>
+            <choiceReferences>PHR_PKG_cENTERPRISE</choiceReferences>
+            <choiceReferences>PHR_PKG_cELITE</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>PHR Package Purchased</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>PHR_Products_Purchased</name>
+            <choiceReferences>PHR_PROD_cHRSelfService</choiceReferences>
+            <choiceReferences>PHR_PROD_cRotatingWorkPatterns</choiceReferences>
+            <choiceReferences>PHR_PROD_cExpenses</choiceReferences>
+            <choiceReferences>PHR_PROD_cESign</choiceReferences>
+            <choiceReferences>PHR_PROD_cAPI</choiceReferences>
+            <choiceReferences>PHR_PROD_cTime</choiceReferences>
+            <choiceReferences>PHR_PROD_cLogbook</choiceReferences>
+            <choiceReferences>PHR_PROD_cLogbookDataLoader</choiceReferences>
+            <choiceReferences>PHR_PROD_cPerformance</choiceReferences>
+            <choiceReferences>PHR_PROD_cATS</choiceReferences>
+            <choiceReferences>PHR_PROD_cFlexibleBenefits</choiceReferences>
+            <choiceReferences>PHR_PROD_cRipple</choiceReferences>
+            <choiceReferences>PHR_PROD_cReportWriter</choiceReferences>
+            <choiceReferences>PHR_PROD_cAMI</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>PHR Products_Purchased</fieldText>
+            <fieldType>MultiSelectPicklist</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>PHR_Employees</name>
+            <dataType>Number</dataType>
+            <fieldText>PHR Employees</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>0</scale>
+        </fields>
+        <fields>
+            <name>PHR_URL</name>
+            <dataType>String</dataType>
+            <fieldText>People HR URL (Must Enter for ECB)</fieldText>
+            <fieldType>InputField</fieldType>
+            <helpText>&lt;p&gt;&lt;span style=&quot;font-size: 11.36px; font-family: Arial, Helvetica, sans-serif; color: rgb(0, 0, 0);&quot;&gt;Make sure this is entered for licence upgrades and self-fulfilled&lt;/span&gt;&lt;/p&gt;</helpText>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>PHR_Data_Source</name>
+            <fieldText>PHR Data Source</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>PHR_Integrations</name>
+            <choiceReferences>PHR_INTcPAYROLL</choiceReferences>
+            <choiceReferences>PHR_INTcIDENCY</choiceReferences>
+            <choiceReferences>PHR_INTcROTACLOUD</choiceReferences>
+            <choiceReferences>PHR_INTcORGCHARTNOW</choiceReferences>
+            <choiceReferences>PHR_INTcPAYSLIPS</choiceReferences>
+            <choiceReferences>PHR_INTcWHENIWORK</choiceReferences>
+            <choiceReferences>PHR_INTcGREENHOUSE</choiceReferences>
+            <choiceReferences>PHR_INTcONELOGIN</choiceReferences>
+            <choiceReferences>PHR_INTcOTHER</choiceReferences>
+            <choiceReferences>PHR_INTcNONE</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>PHR Integrations</fieldText>
+            <fieldType>MultiSelectPicklist</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>PHR_Integration_Comments</name>
+            <fieldText>PHR Integration Comments</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>PHR_Training_Comments</name>
+            <fieldText>PHR Training Comments</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>PHR_Any_Other_Comments</name>
+            <defaultValue>
+                <stringValue>{!Get_Opportunity.SOW_Description__c}</stringValue>
+            </defaultValue>
+            <fieldText>PHR Any Other Comments</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <helpText>&lt;p&gt;&lt;span style=&quot;color: rgb(247, 1, 1);&quot;&gt;Any previous text in &apos;Notes to Project Office&apos; can be edited here, before ALL the fields are then combined into &apos;Notes to Project Office&apos;&lt;/span&gt;&lt;/p&gt;</helpText>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>PHR_Intro_Footer</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Opportunity</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Opportunity</objectType>
+    </variables>
+    <variables>
+        <name>PHR_Handover_Notes_Combined</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>PHR_vHandover_Text</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <assignments>
+        <description>Set the accepted by support date into variable for update</description>
+        <name>Set_Accepted_By_Support_Date</name>
+        <label>Set Accepted By Support Date</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Accepted_By_Support_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Project_Handover</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Wipe the Accepted by support date</description>
+        <name>Wipe_Accepted_By_Support_Date</name>
+        <label>Wipe Accepted By Support Date</label>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Accepted_By_Support_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>NullDate</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Null_Date_Field</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Check the current status to see if it match&apos;s any changes we are looking for</description>
+        <name>Check_Status</name>
+        <label>Check Status</label>
+        <locationX>314</locationX>
+        <locationY>311</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Accepted_By_Support</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Handover_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Accepted By Support</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.Handover_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Accepted By Support</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Accepted_By_Support_Date__c</leftValueReference>
+                <operator>EqualTo</operator>
+            </conditions>
+            <connector>
+                <targetReference>Set_Accepted_By_Support_Date</targetReference>
+            </connector>
+            <label>Accepted By Support</label>
+        </rules>
+        <rules>
+            <name>No_Longer_Accepted_By_Support</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Handover_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Accepted By Support</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Handover_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Accepted By Support</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Accepted_By_Support_Date__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+            </conditions>
+            <connector>
+                <targetReference>Wipe_Accepted_By_Support_Date</targetReference>
+            </connector>
+            <label>No Longer Accepted By Support</label>
+        </rules>
+    </decisions>
+    <description>Project Handover Create/update actions</description>
+    <formulas>
+        <description>Null a date field because SFDC Cant do it in a flow</description>
+        <name>NullDate</name>
+        <dataType>Date</dataType>
+        <expression>DATEVALUE(&quot;&quot;)</expression>
+    </formulas>
+    <interviewLabel>Project Handover - Create/Update Actions {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Project Handover - Create/Update Actions</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Null</description>
+        <name>Null_Date_Field</name>
+        <label>Null Date Field</label>
+        <locationX>314</locationX>
+        <locationY>551</locationY>
+        <inputAssignments>
+            <field>Accepted_By_Support_Date__c</field>
+            <value>
+                <elementReference>NullDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Update the project handover record</description>
+        <name>Update_Project_Handover</name>
+        <label>Update Project Handover</label>
+        <locationX>50</locationX>
+        <locationY>551</locationY>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Status</targetReference>
+        </connector>
+        <object>Project_Handover__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

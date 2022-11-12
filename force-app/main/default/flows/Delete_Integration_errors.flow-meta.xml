@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <decisions>
+        <name>X2_days_old</name>
+        <label>2 days old</label>
+        <locationX>182</locationX>
+        <locationY>276</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>olderthan_2_days</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>twodaysold</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>2.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Delete_integration_Error</targetReference>
+            </connector>
+            <label>olderthan 2 days</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <name>twodaysold</name>
+        <dataType>Number</dataType>
+        <expression>TODAY() - {!Changedatetimetodate}</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Delete Integration {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>System - Delete Integration Errors</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordDeletes>
+        <name>Delete_integration_Error</name>
+        <label>Delete integration Error</label>
+        <locationX>50</locationX>
+        <locationY>396</locationY>
+        <inputReference>$Record</inputReference>
+    </recordDeletes>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>X2_days_old</targetReference>
+        </connector>
+        <object>Integration_Errors__c</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2021-03-15</startDate>
+            <startTime>00:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Changedatetimetodate</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <elementReference>$Record.CreatedDate</elementReference>
+        </value>
+    </variables>
+</Flow>

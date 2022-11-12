@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <description>Stamps User fields onto the Opportunity Split for reporting</description>
+    <interviewLabel>Split Opportunity Field Stamps {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Split Opportunity Field Stamps</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Stamp User Fields onto Split record
+Used for</description>
+        <name>Stamp_Fields</name>
+        <label>Stamp Fields</label>
+        <locationX>215</locationX>
+        <locationY>292</locationY>
+        <inputAssignments>
+            <field>User_Department__c</field>
+            <value>
+                <elementReference>$Record.SplitOwner.Department</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>User_Division__c</field>
+            <value>
+                <elementReference>$Record.SplitOwner.Division</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>User_Profile__c</field>
+            <value>
+                <elementReference>$Record.SplitOwner.Profile.Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>User_Role__c</field>
+            <value>
+                <elementReference>$Record.SplitOwner.UserRole.Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>User_Title__c</field>
+            <value>
+                <elementReference>$Record.SplitOwner.Title</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Stamp_Fields</targetReference>
+        </connector>
+        <object>OpportunitySplit</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

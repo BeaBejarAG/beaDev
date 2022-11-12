@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Case Upated with contact</description>
+        <name>Case_Upated_with_contact</name>
+        <label>Case Upated with contact</label>
+        <locationX>974</locationX>
+        <locationY>518</locationY>
+        <actionName>Case.Support_Case_Updated_All_Templates_Contact</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Are_there_Collaborators</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Case.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Learning_Services_Case_Updated_Contact</name>
+        <label>Learning Services - Case Updated - Contact</label>
+        <locationX>50</locationX>
+        <locationY>638</locationY>
+        <actionName>Case.Learning_Services_Case_Updated_All_Templates_Contact</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Case.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Learning_Services_Case_Updated_No_Contact</name>
+        <label>Learning Services - Case Updated - No Contact</label>
+        <locationX>314</locationX>
+        <locationY>638</locationY>
+        <actionName>Case.Learning_Services_Case_Updated_All_Templates_No_Contact</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Case.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Sends collaborator e-mail</description>
+        <name>Send_Collaborator_E_mail</name>
+        <label>Send Collaborator E-mail</label>
+        <locationX>930</locationX>
+        <locationY>998</locationY>
+        <actionName>Case_Collaborator__c.All_Channels_Case_Updated_Case_Collaborator</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Loop_throw_all_collaborators_and_send_e_mail</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Loop_throw_all_collaborators_and_send_e_mail.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <decisions>
+        <description>Check to see if the case Collaborators &gt; 0</description>
+        <name>Are_there_Collaborators</name>
+        <label>Are there Collaborators</label>
+        <locationX>974</locationX>
+        <locationY>638</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Count_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Case.Case_Collaborators__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_All_Collaborators</targetReference>
+            </connector>
+            <label>Count &gt; 0</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Email alert is different for Learning Services</description>
+        <name>Case_Record_Type</name>
+        <label>Case Record Type</label>
+        <locationX>644</locationX>
+        <locationY>398</locationY>
+        <defaultConnector>
+            <targetReference>Case_Upated_with_contact</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Other Record Types</defaultConnectorLabel>
+        <rules>
+            <name>Learning_Services</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Case.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Label.Case_RecordTypeId_LearningServices</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Case_Updated_Email</targetReference>
+            </connector>
+            <label>Learning Services</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Case_Updated_Email</name>
+        <label>Case Updated Email</label>
+        <locationX>314</locationX>
+        <locationY>518</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>IsContact</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Case.ContactId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Learning_Services_Case_Updated_Contact</targetReference>
+            </connector>
+            <label>IsContact</label>
+        </rules>
+        <rules>
+            <name>IsWebMail</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Case.SuppliedEmail</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Learning_Services_Case_Updated_No_Contact</targetReference>
+            </connector>
+            <label>IsWebMail</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>This fires the curated content alerts based on product</description>
+        <name>Divert_curated_content_alerts</name>
+        <label>Divert curated content alerts</label>
+        <locationX>963</locationX>
+        <locationY>158</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Just_Send</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Case.Block_Email_Send__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Lat_Case_Comment_Field</targetReference>
+            </connector>
+            <label>Just Send</label>
+        </rules>
+    </decisions>
+    <description>Fires alerts on case comments, triggered from a flow</description>
+    <interviewLabel>Support - Alert Customer On Case Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Support - Alert Customer On Case Update</label>
+    <loops>
+        <description>Loops through all the Collaborators and sends the e-mail</description>
+        <name>Loop_throw_all_collaborators_and_send_e_mail</name>
+        <label>Loop through all collaborators and send e-mail</label>
+        <locationX>842</locationX>
+        <locationY>878</locationY>
+        <collectionReference>Get_All_Collaborators</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Send_Collaborator_E_mail</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Gets all case collaborators</description>
+        <name>Get_All_Collaborators</name>
+        <label>Get All Collaborators</label>
+        <locationX>842</locationX>
+        <locationY>758</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_throw_all_collaborators_and_send_e_mail</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Case.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Case_Collaborator__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Last Case Comment Up</description>
+        <name>Update_Lat_Case_Comment_Field</name>
+        <label>Update Lat Case Comment Field</label>
+        <locationX>644</locationX>
+        <locationY>278</locationY>
+        <connector>
+            <targetReference>Case_Record_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Case.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Last_Case_Comment__c</field>
+            <value>
+                <elementReference>CaseComment.CommentBody</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <start>
+        <locationX>837</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Divert_curated_content_alerts</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Case</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <name>CaseComment</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>CaseComment</objectType>
+    </variables>
+</Flow>

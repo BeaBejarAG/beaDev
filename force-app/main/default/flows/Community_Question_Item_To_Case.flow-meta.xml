@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Create Question to Case</description>
+        <name>Create_Question_To_Case</name>
+        <label>Create Question To Case</label>
+        <locationX>845</locationX>
+        <locationY>627</locationY>
+        <actionName>FeedItem.EscalateQFIToCase</actionName>
+        <actionType>quickAction</actionType>
+        <connector>
+            <targetReference>Delete_original_QFI_Item</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>OwnerId</name>
+            <value>
+                <stringValue>00G58000003ExN8</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>Priority</name>
+            <value>
+                <stringValue>4</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>RelatedProduct__c</name>
+            <value>
+                <elementReference>$Record.Product__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>contextId</name>
+            <value>
+                <elementReference>$Record.FeedItemID__c</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <decisions>
+        <description>Check there is no best answer</description>
+        <name>No_Best_Answer</name>
+        <label>No Best Answer?</label>
+        <locationX>836</locationX>
+        <locationY>414</locationY>
+        <defaultConnector>
+            <targetReference>Delete_original_QFI_Item</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Blank_Best_Answer</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Feed_Item.BestCommentId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Question_To_Case</targetReference>
+            </connector>
+            <label>Blank Best Answer</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Todays_Date</name>
+        <label>Todays Date</label>
+        <locationX>687</locationX>
+        <locationY>117</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Today</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Date__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Flow.CurrentDate</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Feed_Item</targetReference>
+            </connector>
+            <label>Today</label>
+        </rules>
+    </decisions>
+    <description>Esculate question item to case</description>
+    <interviewLabel>Community - Question Item To Case {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Community - Question Item To Case</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordDeletes>
+        <description>Delete QFI Item</description>
+        <name>Delete_original_QFI_Item</name>
+        <label>Delete original QFI Item</label>
+        <locationX>1063</locationX>
+        <locationY>623</locationY>
+        <inputReference>$Record</inputReference>
+    </recordDeletes>
+    <recordLookups>
+        <description>Check if best answer</description>
+        <name>Get_Feed_Item</name>
+        <label>Get Feed Item</label>
+        <locationX>831</locationX>
+        <locationY>248</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>No_Best_Answer</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.FeedItemID__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>FeedItem</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>49</locationY>
+        <connector>
+            <targetReference>Todays_Date</targetReference>
+        </connector>
+        <object>Question_To_Case_Item__c</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2020-08-17</startDate>
+            <startTime>09:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

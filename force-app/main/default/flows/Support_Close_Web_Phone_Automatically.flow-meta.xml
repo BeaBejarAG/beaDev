@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Fire_Autoclose_Alert</name>
+        <label>Fire Autoclose Alert</label>
+        <locationX>509</locationX>
+        <locationY>610</locationY>
+        <actionName>Case.Support_Auto_Close_Phone_Web_Cases</actionName>
+        <actionType>emailAlert</actionType>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>InCase.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Fire_Autoclose_Alert_0</name>
+        <label>Fire Autoclose Alert</label>
+        <locationX>679</locationX>
+        <locationY>613</locationY>
+        <actionName>Case.Support_Auto_Close_Phone_Web_Cases</actionName>
+        <actionType>emailAlert</actionType>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>InCase.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <assignments>
+        <description>Set Closed Fields</description>
+        <name>Set_Closed_Fields</name>
+        <label>Set Closed Fields</label>
+        <locationX>508</locationX>
+        <locationY>311</locationY>
+        <assignmentItems>
+            <assignToReference>InCase.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Resolved</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.ReasonCode__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Other</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.Prevention__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Applicable</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.SolutionCode__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Closed By Customer</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.Solution__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Solution</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.Cause__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>User Error</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.Survey_Sent__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Close_Case</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set Closed Fields</description>
+        <name>Set_Closed_Fields_0</name>
+        <label>Set Closed Fields</label>
+        <locationX>678</locationX>
+        <locationY>309</locationY>
+        <assignmentItems>
+            <assignToReference>InCase.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Resolved</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.ReasonCode__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Other</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.Prevention__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Applicable</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.SolutionCode__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Closed By Customer</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.Solution__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>SolutionNoEnt</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.Cause__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>User Error</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>InCase.Survey_Sent__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Close_Case_0</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Check the case is still not picked up out of the &quot;Awaiting your call&quot; queue</description>
+        <name>Check_If_Still_Not_Picked_Up</name>
+        <label>Check If Still Not Picked Up</label>
+        <locationX>574</locationX>
+        <locationY>143</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Still_In_Awaiting_your_Call</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>InCase.OwnerId</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>00G4I000005bTVy</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>InCase.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>InCase.EntitlementId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Closed_Fields</targetReference>
+            </connector>
+            <label>Is Still In Awaiting your Call</label>
+        </rules>
+        <rules>
+            <name>Awaiting_Call_No_Number</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>InCase.OwnerId</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>00G4I000005bTVy</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>InCase.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>InCase.EntitlementId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Closed_Fields_0</targetReference>
+            </connector>
+            <label>Awaiting Call No Number</label>
+        </rules>
+    </decisions>
+    <description>Currently set to 24 hours this is driven by the process builder Support - Web Logged Case To Queue</description>
+    <interviewLabel>Support - Close Web Phone after time {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Support - Close Web Phone Automatically</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Close Case</description>
+        <name>Close_Case</name>
+        <label>Close Case</label>
+        <locationX>508</locationX>
+        <locationY>491</locationY>
+        <connector>
+            <targetReference>Fire_Autoclose_Alert</targetReference>
+        </connector>
+        <inputReference>InCase</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Close Case</description>
+        <name>Close_Case_0</name>
+        <label>Close Case</label>
+        <locationX>678</locationX>
+        <locationY>487</locationY>
+        <connector>
+            <targetReference>Fire_Autoclose_Alert_0</targetReference>
+        </connector>
+        <inputReference>InCase</inputReference>
+    </recordUpdates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Check_If_Still_Not_Picked_Up</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>Solution</description>
+        <name>Solution</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>Hi {!InCase.Contact.FirstName},
+
+When you created this case, you specified that you were going to call us to discuss it. As we have not received a call from you, your case has now been marked as Resolved.
+
+If you still require some help, please call us on {!InCase.Entitlement.ProductRouting__r.Dedicated_Telephone_Number__c}, quote this case number and we&apos;ll be happy to work with you on finding a solution.
+
+If that isn&apos;t the case, then there is no further action required on your part.
+
+Thank you.
+
+The Access Support Team</text>
+    </textTemplates>
+    <textTemplates>
+        <name>SolutionNoEnt</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>Hi {!InCase.Contact.FirstName},
+
+When you created this case, you specified that you were going to call us to discuss it. As we have not received a call from you, your case has now been marked as Resolved.
+
+If you still require some help, please call us, quote this case number and we&apos;ll be happy to work with you on finding a solution.
+
+If that isn&apos;t the case, then there is no further action required on your part.
+
+Thank you.
+
+The Access Support Team</text>
+    </textTemplates>
+    <variables>
+        <name>InCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

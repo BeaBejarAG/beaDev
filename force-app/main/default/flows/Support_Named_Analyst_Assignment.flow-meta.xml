@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <description>Named Agent Assigmenets</description>
+    <interviewLabel>Support - Named Analyst Assignment {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Support - Named Analyst Assignment</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create an omni offering</description>
+        <name>Create_Omni_Offering</name>
+        <label>Create Omni Offering</label>
+        <locationX>502</locationX>
+        <locationY>51</locationY>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Get_Prem_Agent</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ShouldSkipCapacityCheck</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserId</field>
+            <value>
+                <elementReference>Get_Prem_Agent</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WorkItemId</field>
+            <value>
+                <elementReference>IncommingCase.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>AgentWork</object>
+    </recordCreates>
+    <recordLookups>
+        <description>Get Prem Agent</description>
+        <name>Get_Prem_Agent</name>
+        <label>Get Prem Agent</label>
+        <locationX>310</locationX>
+        <locationY>50</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Omni_Offering</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>IncommingCase.NamedAgent__c</elementReference>
+            </value>
+        </filters>
+        <object>User</object>
+        <outputReference>NamedAgent</outputReference>
+        <queriedFields>Id</queriedFields>
+    </recordLookups>
+    <startElementReference>Get_Prem_Agent</startElementReference>
+    <status>Obsolete</status>
+    <variables>
+        <description>Incoming Case Details</description>
+        <name>IncommingCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <description>NamedAgent</description>
+        <name>NamedAgent</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>User</objectType>
+    </variables>
+</Flow>

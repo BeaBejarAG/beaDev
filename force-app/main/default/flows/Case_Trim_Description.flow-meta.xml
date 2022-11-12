@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <assignments>
+        <description>Trim the description Down</description>
+        <name>Trim_Descrtiption</name>
+        <label>Trim Descrtiption</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <assignmentItems>
+            <assignToReference>CaseIn.Description_Trimmed__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>TrimmedDescription</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Trims the Description down for cases.</description>
+    <formulas>
+        <description>Trim description to 255</description>
+        <name>TrimmedDescription</name>
+        <dataType>String</dataType>
+        <expression>TRIM(LEFT( {!CaseIn.Description}, 255))</expression>
+    </formulas>
+    <interviewLabel>Case - Trim Description {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case - Trim Description</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Trim_Descrtiption</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Incoming Case</description>
+        <name>CaseIn</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

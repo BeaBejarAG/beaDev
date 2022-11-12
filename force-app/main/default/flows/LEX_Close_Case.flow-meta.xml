@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <apiVersion>49.0</apiVersion>
+    <assignments>
+        <name>Set_Status</name>
+        <label>Set Status</label>
+        <locationX>1027</locationX>
+        <locationY>81</locationY>
+        <assignmentItems>
+            <assignToReference>GetCase.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Close_Case</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>GetCase.IsClosed</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Case</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <description>Already Purchased/Quoted</description>
+        <name>AlreadyPurchasedQuoted</name>
+        <choiceText>Already Purchased/Quoted</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Already Purchased/Quoted</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Back To Support</description>
+        <name>BackToSupport</name>
+        <choiceText>Back to Support</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Back to Support</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Close_Createhandoverinfpman</name>
+        <choiceText>Close - Create Handover In FP Manually (PS Only)</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Close - Create Handover In FP Manually (PS Only)</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Close_CreateOpBD</name>
+        <choiceText>Close - Create Opportunity (BD Only)</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Close - Create Opportunity (BD Only)</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Closed Lost Opp</description>
+        <name>ClosedLost</name>
+        <choiceText>Closed - Lost opportunity</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Closed - Lost opportunity</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>ClosenOOp</name>
+        <choiceText>Close - No Opportunity</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Close - No Opportunity</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Consultancy reviews</description>
+        <name>Consultancyreviews</name>
+        <choiceText>Consultancy reviews</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Consultancy reviews</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Core Dev</description>
+        <name>CoreDev</name>
+        <choiceText>Core Dev</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Core Dev</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Customer Unqualified</description>
+        <name>CustomerUnqualified</name>
+        <choiceText>Customer Unqualified</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Customer Unqualified</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>DIY</description>
+        <name>DIY</name>
+        <choiceText>DIY</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>DIY</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Duplicate</description>
+        <name>Duplicate</name>
+        <choiceText>Duplicate</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Duplicate</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>FOC Consultancy</description>
+        <name>FOCConsultancy</name>
+        <choiceText>FOC Consultancy</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>FOC Consultancy</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>FOC CSM</description>
+        <name>FOCCSM</name>
+        <choiceText>FOC CSM</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>FOC CSM</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>FOC Support</description>
+        <name>FOCSupport</name>
+        <choiceText>FOC Support</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>FOC Support</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NewCloseCreateHandoverInFPManually</name>
+        <choiceText>&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Close - Create Handover In FP Manually (PS Only)&lt;/span&gt;</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Close - Create Handover In FP Manually (PS Only)</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>NewCloseNoOpportunity</name>
+        <choiceText>&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Close - No Opportunity &lt;/span&gt;</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Close - No Opportunity </stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Other</description>
+        <name>Other</name>
+        <choiceText>Other</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Other</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <description>Show only the correct closed Status&apos;s</description>
+        <name>Show_Correct_Close_Status_s</name>
+        <label>Show Correct Close Status&apos;s</label>
+        <locationX>654</locationX>
+        <locationY>98</locationY>
+        <defaultConnector>
+            <targetReference>show</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Sales_Op</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>GetCase.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01258000000VXbhAAG</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Choose_Status</targetReference>
+            </connector>
+            <label>Sales Op</label>
+        </rules>
+    </decisions>
+    <description>LEX Close Case with additional fields for Sales Opp</description>
+    <dynamicChoiceSets>
+        <name>ReasonCode</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>ReasonCode__c</picklistField>
+        <picklistObject>Case</picklistObject>
+    </dynamicChoiceSets>
+    <interviewLabel>LEX - Close Case {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>LEX - Close Case V22</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <description>get Case</description>
+        <name>GetCase</name>
+        <label>GetCase</label>
+        <locationX>464</locationX>
+        <locationY>76</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Show_Correct_Close_Status_s</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>CaseId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Case</name>
+        <label>Update Case</label>
+        <locationX>1197</locationX>
+        <locationY>81</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>GetCase.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>ReasonCode__c</field>
+            <value>
+                <elementReference>ReasonCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SalesHandover__c</field>
+            <value>
+                <elementReference>SalesHandover</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <elementReference>Close_Case</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <screens>
+        <name>Choose_Status</name>
+        <label>Choose Status</label>
+        <locationX>894</locationX>
+        <locationY>75</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Set_Status</targetReference>
+        </connector>
+        <fields>
+            <name>Close_Case</name>
+            <choiceReferences>Close_CreateOpBD</choiceReferences>
+            <choiceReferences>ClosenOOp</choiceReferences>
+            <choiceReferences>Close_Createhandoverinfpman</choiceReferences>
+            <choiceReferences>ClosedLost</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Close Case</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>SalesHandover</name>
+            <dataType>String</dataType>
+            <fieldText>SalesHandover</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>or</conditionLogic>
+                <conditions>
+                    <leftValueReference>Close_Case</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>Close_Createhandoverinfpman</elementReference>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>Close_Case</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>NewCloseCreateHandoverInFPManually</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Reason_Code</name>
+            <choiceReferences>AlreadyPurchasedQuoted</choiceReferences>
+            <choiceReferences>BackToSupport</choiceReferences>
+            <choiceReferences>Consultancyreviews</choiceReferences>
+            <choiceReferences>CoreDev</choiceReferences>
+            <choiceReferences>CustomerUnqualified</choiceReferences>
+            <choiceReferences>DIY</choiceReferences>
+            <choiceReferences>Duplicate</choiceReferences>
+            <choiceReferences>FOCConsultancy</choiceReferences>
+            <choiceReferences>FOCCSM</choiceReferences>
+            <choiceReferences>FOCSupport</choiceReferences>
+            <choiceReferences>Other</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Reason Code</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>or</conditionLogic>
+                <conditions>
+                    <leftValueReference>Close_Case</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>NewCloseNoOpportunity</elementReference>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>Close_Case</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>ClosenOOp</elementReference>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>Close_Case</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>ClosedLost</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>show</name>
+        <label>show</label>
+        <locationX>648</locationX>
+        <locationY>276</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>asdawfwagfa</name>
+            <fieldText>&lt;p&gt;{!GetCase.RecordTypeId}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>124</locationX>
+        <locationY>76</locationY>
+        <connector>
+            <targetReference>GetCase</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>CaseId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>RecordID</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

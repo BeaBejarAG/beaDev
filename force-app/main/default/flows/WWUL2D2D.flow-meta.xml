@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <assignments>
+        <name>Assign_Values</name>
+        <label>Assign Values</label>
+        <locationX>1011</locationX>
+        <locationY>301</locationY>
+        <assignmentItems>
+            <assignToReference>CaseObject.Business_Area__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Idea_Choices</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseObject.Reason</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Idea</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseObject.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>IdeaDesc</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseObject.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>0124I000000FVSB</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseObject.CaseNumber</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseObject.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Idea_Case</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <description>Idea for the community</description>
+        <name>ComminityIdea</name>
+        <choiceText>Community</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Community</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>GetHelpWithAnIssue</name>
+        <choiceText>Get help with a issue</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <description>IdeaOther</description>
+        <name>IdeaOther</name>
+        <choiceText>Other area</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Other</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Omni Zeacom Change</description>
+        <name>OmniZeacom</name>
+        <choiceText>Omni / Zeacom Change (TL/SM Only)</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>OmniZeacom Change</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Idea</description>
+        <name>PassOnAnIdea</name>
+        <choiceText>I have an idea I want to suggest</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>I have an idea I want to suggest</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Project Work</description>
+        <name>Project</name>
+        <choiceText>Request A Planned Project</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <description>Something Extra in Salesforce</description>
+        <name>SalesforceIdea</name>
+        <choiceText>Salesforce Main/Console</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Salesforce</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Support Hub Suggestion</description>
+        <name>SupportHubSuggestion</name>
+        <choiceText>Support Hub</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Support Hub</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <description>Check choice from frirst screen</description>
+        <name>Choice</name>
+        <label>Choice</label>
+        <locationX>343</locationX>
+        <locationY>394</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Get_Help</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>WWUL2DTD</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>GetHelpWithAnIssue</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>IssueScreen</targetReference>
+            </connector>
+            <label>Get Help</label>
+        </rules>
+        <rules>
+            <name>Idea</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>WWUL2DTD</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>PassOnAnIdea</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>IdeaScreen</targetReference>
+            </connector>
+            <label>Idea</label>
+        </rules>
+    </decisions>
+    <description>What Would you like to do today, Support Ops Stuff</description>
+    <interviewLabel>WWUL2D2D {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>WWUL2D2D</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <description>Idea Case</description>
+        <name>Create_Idea_Case</name>
+        <label>Create Idea Case</label>
+        <locationX>1172</locationX>
+        <locationY>301</locationY>
+        <connector>
+            <targetReference>FileUploadScreen</targetReference>
+        </connector>
+        <inputReference>CaseObject</inputReference>
+    </recordCreates>
+    <screens>
+        <name>FileUploadScreen</name>
+        <label>FileUploadScreen</label>
+        <locationX>1101</locationX>
+        <locationY>692</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>WWUL2D2DScreen</targetReference>
+        </connector>
+        <fields>
+            <name>casecreated</name>
+            <fieldText>Your case has been created as id {!CaseObject.CaseNumber} if you need to upload a file you can do now.</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>FileUpload</name>
+            <extensionName>forceContent:fileUpload</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>File Upload</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>recordId</name>
+                <value>
+                    <elementReference>CaseObject.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>multiple</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>IdeaInformation</name>
+        <label>IdeaInformation</label>
+        <locationX>880</locationX>
+        <locationY>406</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Assign_Values</targetReference>
+        </connector>
+        <fields>
+            <name>IdeaText</name>
+            <fieldText>Please enter as much information below for your idea, you will be able to submit files after this post</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>IdeaDesc</name>
+            <fieldText>Description</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>IdeaScreen</name>
+        <label>IdeaScreen</label>
+        <locationX>725</locationX>
+        <locationY>404</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>IdeaInformation</targetReference>
+        </connector>
+        <fields>
+            <name>Wheredoesitrealteidea</name>
+            <fieldText>Where does your idea realate to in the system, If you need to upload any files you will be able to do so after this screen</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Idea_Choices</name>
+            <choiceReferences>SupportHubSuggestion</choiceReferences>
+            <choiceReferences>SalesforceIdea</choiceReferences>
+            <choiceReferences>ComminityIdea</choiceReferences>
+            <choiceReferences>IdeaOther</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Idea Choices</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>IssueScreen</name>
+        <label>IssueScreen</label>
+        <locationX>353</locationX>
+        <locationY>123</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>IssueLogging</name>
+            <fieldText>Where does your issue realate to in the system, If you need to upload any files you will be able to do so after this screen</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Issue_Area</name>
+            <choiceReferences>SupportHubSuggestion</choiceReferences>
+            <choiceReferences>SalesforceIdea</choiceReferences>
+            <choiceReferences>ComminityIdea</choiceReferences>
+            <choiceReferences>IdeaOther</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Issue Area</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>WWUL2D2DScreen</name>
+        <label>What Would you Like to do today</label>
+        <locationX>53</locationX>
+        <locationY>694</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Choice</targetReference>
+        </connector>
+        <fields>
+            <name>WWULTD2DText</name>
+            <fieldText>What would you like to do today?</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>WWUL2DTD</name>
+            <choiceReferences>GetHelpWithAnIssue</choiceReferences>
+            <choiceReferences>PassOnAnIdea</choiceReferences>
+            <choiceReferences>Project</choiceReferences>
+            <choiceReferences>OmniZeacom</choiceReferences>
+            <dataType>String</dataType>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <startElementReference>WWUL2D2DScreen</startElementReference>
+    <status>Obsolete</status>
+    <variables>
+        <name>CaseObject</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

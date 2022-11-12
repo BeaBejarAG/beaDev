@@ -16,8 +16,9 @@ public without sharing class cspProductSelection {
 
     private static List<Map<String, String>> getFullProductList(Boolean allProducts, String selectedAccId) {
         List<Map<String, String>> productList = cspProductSelection.getProductRoutingProducts();
-
+        System.debug('*** selectedAccId: ' + selectedAccId);
         Boolean bypassEntitlements = FeatureManagement.checkPermission('Bypass_Entitlements_Check');
+        System.debug('*** bypassEntitlements: ' + bypassEntitlements);
         if (bypassEntitlements) {
             // The current profile can see all products with no entitlement requirements
             for (Map<String,String> product : productList) {
@@ -27,6 +28,8 @@ public without sharing class cspProductSelection {
             }
         }
         if (bypassEntitlements || allProducts) {
+            System.debug('*** productList: ' + productList);
+
             return productList;
         }
 

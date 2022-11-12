@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <assignments>
+        <description>Set the plan level based on the entitlement</description>
+        <name>Set_New_Plan_Level</name>
+        <label>Set New Plan Level</label>
+        <locationX>50</locationX>
+        <locationY>518</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Account_Data.Highest_CSP_Level__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>InEntitlement.PlanType__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Account</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set blank plan level</description>
+        <name>Set_No_Plan_Level</name>
+        <label>Set No Plan Level</label>
+        <locationX>578</locationX>
+        <locationY>758</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Account_Data.Highest_CSP_Level__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Account</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets the plan level to an existing entitlement</description>
+        <name>Set_Plan_Level</name>
+        <label>Set Plan Level</label>
+        <locationX>314</locationX>
+        <locationY>758</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Account_Data.Highest_CSP_Level__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_All_Account_Entitlements.PlanType__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Account</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Account Object No Null</description>
+        <name>Account_Object_Not_Null</name>
+        <label>Account Object Not Null</label>
+        <locationX>776</locationX>
+        <locationY>278</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Check_we_have_a_valid_account</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Account_Data</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Updated_or_inactive</targetReference>
+            </connector>
+            <label>Check we have a valid account</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks that results were found and that we have an entitlement to work with</description>
+        <name>Check_Results_Found</name>
+        <label>Check Results Found</label>
+        <locationX>446</locationX>
+        <locationY>638</locationY>
+        <defaultConnector>
+            <targetReference>Set_No_Plan_Level</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Not_Null_Ents</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_All_Account_Entitlements</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Plan_Level</targetReference>
+            </connector>
+            <label>Not Null Ents</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check to see if this is an inactive entitlement or an updated one</description>
+        <name>Updated_or_inactive</name>
+        <label>Updated or Inactive</label>
+        <locationX>446</locationX>
+        <locationY>398</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Updated</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>IncommingEntPlanLevelRanked</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>AccountEntPlanLevelRanked</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>InEntitlement.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Expired</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_New_Plan_Level</targetReference>
+            </connector>
+            <label>Updated</label>
+        </rules>
+        <rules>
+            <name>Inactive</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>InEntitlement.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Expired</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>IncommingEntPlanLevelRanked</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>AccountEntPlanLevelRanked</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_All_Account_Entitlements</targetReference>
+            </connector>
+            <label>Inactive</label>
+        </rules>
+    </decisions>
+    <description>Sets the highest CSP level on the account based on the current active entitlements on the case.</description>
+    <formulas>
+        <description>Account Level Plan rank</description>
+        <name>AccountEntPlanLevelRanked</name>
+        <dataType>Number</dataType>
+        <expression>Case(LOWER({!Get_Account_Data.Highest_CSP_Level__c}),
+&quot;classic&quot;,0,
+&quot;essential&quot;,1,
+&quot;standard&quot;,2,
+&quot;premier&quot;,3,
+0)</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <description>Plan Level in a ranked order to help decide if a plan is higher or not</description>
+        <name>IncommingEntPlanLevelRanked</name>
+        <dataType>Number</dataType>
+        <expression>Case(LOWER({!InEntitlement.PlanType__c}),
+&quot;classic&quot;,0,
+&quot;essential&quot;,1,
+&quot;standard&quot;,2,
+&quot;premier&quot;,3,
+0)</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>Entitlement - Set Highest CSP Level On Account {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Entitlement - Set Highest CSP Level On Account</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Gets the account data so we can calculate the highest CSP</description>
+        <name>Get_Account_Data</name>
+        <label>Get Account Data</label>
+        <locationX>776</locationX>
+        <locationY>158</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Account_Object_Not_Null</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>InEntitlement.AccountId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get all the account entitlements</description>
+        <name>Get_All_Account_Entitlements</name>
+        <label>Get All Account Entitlements</label>
+        <locationX>446</locationX>
+        <locationY>518</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Results_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Account_Data.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Active</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Plan_Level_Rank__c</field>
+            <operator>LessThanOrEqualTo</operator>
+            <value>
+                <elementReference>IncommingEntPlanLevelRanked</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Entitlement</object>
+        <sortField>Plan_Level_Rank__c</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Update Account</description>
+        <name>Update_Account</name>
+        <label>Update Account</label>
+        <locationX>446</locationX>
+        <locationY>1070</locationY>
+        <inputReference>Get_Account_Data</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>650</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Account_Data</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Incoming Entitlement</description>
+        <name>InEntitlement</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Entitlement</objectType>
+    </variables>
+</Flow>

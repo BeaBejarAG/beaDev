@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Sents the e-mail alert</description>
+        <name>Send_Points_Available_Alert_0</name>
+        <label>Send Points Available Alert</label>
+        <locationX>374</locationX>
+        <locationY>768</locationY>
+        <actionName>AccountContactRelation.FlexPoints_New_Points_Available</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Loop_Through_Points_Guardisn_0</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Loop_Through_Points_Guardisn_0.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>53.0</apiVersion>
+    <assignments>
+        <description>Adds the roles to a text collection to check if the role contains points guardian</description>
+        <name>Adds_the_roles</name>
+        <label>Adds the roles</label>
+        <locationX>418</locationX>
+        <locationY>408</locationY>
+        <assignmentItems>
+            <assignToReference>accountRoles</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Through_Points_Guardisn_0.Roles</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_Flexpoints_Guardian</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Checks to see if the role contains Points Guardian</description>
+        <name>Check_Flexpoints_Guardian</name>
+        <label>Check Flexpoints Guardian</label>
+        <locationX>418</locationX>
+        <locationY>528</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Points_Guardian</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>accountRoles</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Points_Guardian</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Through_Points_Guardisn_0</targetReference>
+            </connector>
+            <label>Points Guardian</label>
+        </rules>
+    </decisions>
+    <description>Email Alerts for the Flexpoints Transactions table</description>
+    <interviewLabel>Flexpoints Transactions - Email Alerts {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Flexpoints Transactions - Email Alerts</label>
+    <loops>
+        <description>Loop through guardians to send emails</description>
+        <name>Loop_Through_Points_Guardisn_0</name>
+        <label>Loop Through Points Guardisn</label>
+        <locationX>286</locationX>
+        <locationY>648</locationY>
+        <collectionReference>Get_All_Points_Guardians</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Send_Points_Available_Alert_0</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Get all related points guardians</description>
+        <name>Get_All_Points_Guardians</name>
+        <label>Get All Points Guardians</label>
+        <locationX>418</locationX>
+        <locationY>288</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Adds_the_roles</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Account__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>AccountContactRelation</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Type__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Redemption</stringValue>
+            </value>
+        </filters>
+        <object>FlexPoints_Transactions__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>X9am_Redemption</name>
+            <connector>
+                <targetReference>Get_All_Points_Guardians</targetReference>
+            </connector>
+            <label>9am Redemption</label>
+            <offsetNumber>9</offsetNumber>
+            <offsetUnit>Hours</offsetUnit>
+            <recordField>Start_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Holds the roles associated with the account.</description>
+        <name>accountRoles</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

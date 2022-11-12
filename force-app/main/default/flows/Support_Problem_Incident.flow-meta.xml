@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <assignments>
+        <description>Adds the article to a collection</description>
+        <name>Add_Article_To_Collection</name>
+        <label>Add Article To Collection</label>
+        <locationX>1762</locationX>
+        <locationY>1775</locationY>
+        <assignmentItems>
+            <assignToReference>ArticlesToInsert</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Through_Articles</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Articles</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Add Incident to collection</description>
+        <name>Add_to_collection</name>
+        <label>Add to collection</label>
+        <locationX>1738</locationX>
+        <locationY>1055</locationY>
+        <assignmentItems>
+            <assignToReference>IncidentsToUpdate</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Through_Incidents</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Problem_is_resolved_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Mapps new Case ID to article</description>
+        <name>Create_New_Article_Mapp</name>
+        <label>Create New Article Mapp</label>
+        <locationX>1762</locationX>
+        <locationY>1655</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Articles.Id</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Articles.CaseId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Through_Incidents.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_Article_To_Collection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets all the fields, as really most would change together.</description>
+        <name>Set_All_Fields</name>
+        <label>Set All Fields</label>
+        <locationX>1738</locationX>
+        <locationY>935</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Incidents.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>StatusMappingUpdate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Incidents.Solution__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Solution__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Incidents.Cause__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Cause__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Incidents.Prevention__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Prevention__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Incidents.SolutionCode__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.SolutionCode__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Incidents.Channel_For_Resolution__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Channel_For_Resolution__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_to_collection</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Checks and counts the number of linked items.</description>
+        <name>Check_that_there_are_linked_Incidents</name>
+        <label>Check that there are linked Incidents</label>
+        <locationX>1366</locationX>
+        <locationY>695</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>More_than_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_All_Linked_Incidents</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Through_Incidents</targetReference>
+            </connector>
+            <label>More than 0</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to see if its a new Linked incident or the problem itself has been updated.</description>
+        <name>Linked_Or_Updated_Problem</name>
+        <label>Linked Or Updated Problem</label>
+        <locationX>906</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>New_Linked_Incident</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>012580000006HfdAAE</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.LinkedProblem__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Problem_Details</targetReference>
+            </connector>
+            <label>New Linked Incident</label>
+        </rules>
+        <rules>
+            <name>Problem_Updated</name>
+            <conditionLogic>1 AND 6 AND (2 OR 3 OR 4 OR 5 OR 7)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>0128e000000Xd0HAAS</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Solution__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Prevention__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Cause__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.of_Linked_Incidents__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.SolutionCode__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_All_Linked_Incidents</targetReference>
+            </connector>
+            <label>Problem Updated</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>If no articles are found Prep and add to collection</description>
+        <name>No_Articles_Found</name>
+        <label>No Articles Found</label>
+        <locationX>1894</locationX>
+        <locationY>1535</locationY>
+        <defaultConnector>
+            <targetReference>Loop_Through_Articles</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>No_Article_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Check_that_the_article_hasnt_already_been_added</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_New_Article_Mapp</targetReference>
+            </connector>
+            <label>No Article Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check to see if the problem is resolved, if so Grab all the knowledge and share it around if it exists.</description>
+        <name>Problem_is_resolved_0</name>
+        <label>Problem is resolved</label>
+        <locationX>1738</locationX>
+        <locationY>1175</locationY>
+        <defaultConnector>
+            <targetReference>Loop_Through_Incidents</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Case_Resolved_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Problem Resolved</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_All_Linked_Knowledge</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Through_Articles</targetReference>
+            </connector>
+            <label>Case Resolved</label>
+        </rules>
+    </decisions>
+    <description>Moved data over to an incident when a problem is updated, and updates newly linked incidents.</description>
+    <formulas>
+        <description>Sets status for Linked cases</description>
+        <name>StatusMappingLink</name>
+        <dataType>String</dataType>
+        <expression>IF(!ISPICKVAL({!$Record.Status}, &apos;Closed&apos;),
+(CASE({!Get_Problem_Details.Status},
+&apos;Under Investigation&apos;, &apos;Development Outstanding&apos;,
+&apos;Working on a Fix&apos;, &apos;Development Outstanding&apos;,
+&apos;Monitoring&apos;, &apos;Development Outstanding&apos;,
+&apos;Problem Resolved&apos;, IF({!$Record.DoNotAutoClose__c} = true, &apos;Awaiting Fix Confirmation&apos;,&apos;Resolved&apos;),&apos;&apos;
+)), &apos;&apos;)</expression>
+    </formulas>
+    <formulas>
+        <description>Mapping for the Problem to Incident status mapping</description>
+        <name>StatusMappingUpdate</name>
+        <dataType>String</dataType>
+        <expression>CASE({!$Record.Status},
+&apos;Under Investigation​&apos;, &apos;Development Outstanding&apos;,
+&apos;Working on a Fix​&apos;, &apos;Development Outstanding&apos;,
+&apos;Monitoring​&apos;, &apos;Development Outstanding&apos;,
+&apos;Problem Resolved&apos;, IF({!Loop_Through_Incidents.DoNotAutoClose__c} = true, &apos;Awaiting Fix Confirmation&apos;,&apos;Resolved&apos;),&apos;&apos;
+)</expression>
+    </formulas>
+    <interviewLabel>Support - Problem/Incident {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Support - Problem/Incident</label>
+    <loops>
+        <description>Loops through all articles on the case</description>
+        <name>Loop_Through_Articles</name>
+        <label>Loop Through Articles</label>
+        <locationX>1674</locationX>
+        <locationY>1295</locationY>
+        <collectionReference>Get_All_Linked_Knowledge</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_that_the_article_hasnt_already_been_added</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Loop_Through_Incidents</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <description>Loops through all incident data and adds problem information</description>
+        <name>Loop_Through_Incidents</name>
+        <label>Loop Through Incidents</label>
+        <locationX>1234</locationX>
+        <locationY>815</locationY>
+        <collectionReference>Get_All_Linked_Incidents</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Set_All_Fields</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Linked_Cases</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Creates new article links</description>
+        <name>Create_Article_Links</name>
+        <label>Create Article Links</label>
+        <locationX>1234</locationX>
+        <locationY>2399</locationY>
+        <inputReference>ArticlesToInsert</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <description>Check to see that this article doesnt exist for this case</description>
+        <name>Check_that_the_article_hasnt_already_been_added</name>
+        <label>Check that the article hasnt already been added</label>
+        <locationX>1894</locationX>
+        <locationY>1415</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>No_Articles_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>CaseId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_Through_Incidents.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>KnowledgeArticleId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_Through_Articles.KnowledgeArticleId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CaseArticle</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Gets all currently linked incidents</description>
+        <name>Get_All_Linked_Incidents</name>
+        <label>Get All Linked Incidents</label>
+        <locationX>1366</locationX>
+        <locationY>455</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_All_Linked_Knowledge</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>LinkedProblem__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>012580000006HfdAAE</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Gets all linked knowledge if any</description>
+        <name>Get_All_Linked_Knowledge</name>
+        <label>Get All Linked Knowledge</label>
+        <locationX>1366</locationX>
+        <locationY>575</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_that_there_are_linked_Incidents</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>CaseId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>CaseArticle</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get problem details.</description>
+        <name>Get_Problem_Details</name>
+        <label>Get Problem Details</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_New_Link</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.LinkedProblem__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>0128e000000Xd0HAAS</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Updates all the linked incidents</description>
+        <name>Update_Linked_Cases</name>
+        <label>Update Linked Cases</label>
+        <locationX>1234</locationX>
+        <locationY>2279</locationY>
+        <connector>
+            <targetReference>Create_Article_Links</targetReference>
+        </connector>
+        <inputReference>IncidentsToUpdate</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Updates the new linked case</description>
+        <name>Update_New_Link</name>
+        <label>Update New Link</label>
+        <locationX>50</locationX>
+        <locationY>575</locationY>
+        <inputAssignments>
+            <field>Cause__c</field>
+            <value>
+                <elementReference>Get_Problem_Details.Cause__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Channel_For_Resolution__c</field>
+            <value>
+                <elementReference>Get_Problem_Details.Channel_For_Resolution__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Prevention__c</field>
+            <value>
+                <elementReference>Get_Problem_Details.Prevention__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SolutionCode__c</field>
+            <value>
+                <elementReference>Get_Problem_Details.SolutionCode__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Solution__c</field>
+            <value>
+                <elementReference>Get_Problem_Details.Solution__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <elementReference>StatusMappingLink</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>780</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Linked_Or_Updated_Problem</targetReference>
+        </connector>
+        <filterLogic>1 OR (2 AND 3)</filterLogic>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>0128e000000Xd0HAAS</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>012580000006HfdAAE</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>LinkedProblem__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Case</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>All articles to insert</description>
+        <name>ArticlesToInsert</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>CaseArticle</objectType>
+    </variables>
+    <variables>
+        <description>Collection of incidents to update</description>
+        <name>IncidentsToUpdate</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

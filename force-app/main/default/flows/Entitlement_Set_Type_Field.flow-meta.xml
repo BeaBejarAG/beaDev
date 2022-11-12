@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <assignments>
+        <description>Set type level (This should probably be a formula on the object rather than this, but im just copying the PB to a flow for now CJL)</description>
+        <name>Set_Type_Classic</name>
+        <label>Set Type Classic</label>
+        <locationX>578</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>InEntitlement.Type</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>&quot;How To&quot; Questions</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Set type level (This should probably be a formula on the object rather than this, but im just copying the PB to a flow for now CJL)</description>
+        <name>Set_Type_Essential</name>
+        <label>Set Type Essential</label>
+        <locationX>314</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>InEntitlement.Type</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Essential Support Only</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Set type level (This should probably be a formula on the object rather than this, but im just copying the PB to a flow for now CJL)</description>
+        <name>Set_Type_Prem</name>
+        <label>Set Type Prem</label>
+        <locationX>50</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>InEntitlement.Type</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>&quot;How To&quot; Questions/Phone Support</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>Current Plan Plevel</description>
+        <name>Plan_Level</name>
+        <label>Plan Level</label>
+        <locationX>314</locationX>
+        <locationY>158</locationY>
+        <defaultConnector>
+            <targetReference>Set_Type_Classic</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Classic</defaultConnectorLabel>
+        <rules>
+            <name>Premier</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>InEntitlement.PlanType__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Premier</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>InEntitlement.PlanType__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Standard</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Type_Prem</targetReference>
+            </connector>
+            <label>Premier</label>
+        </rules>
+        <rules>
+            <name>Essential</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>InEntitlement.PlanType__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Essential</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Type_Essential</targetReference>
+            </connector>
+            <label>Essential</label>
+        </rules>
+    </decisions>
+    <description>Set type level on the entitlement record based on the plan level. (This should probably be a formula on the object rather than this, but im just copying the PB to a flow for now CJL)</description>
+    <interviewLabel>Entitlement - Set Type Field {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Entitlement - Set Type Field</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Plan_Level</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Incoming Entitlement</description>
+        <name>InEntitlement</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Entitlement</objectType>
+    </variables>
+</Flow>

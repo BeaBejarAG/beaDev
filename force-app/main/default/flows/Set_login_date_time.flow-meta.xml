@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <assignments>
+        <name>Set_Last_login_date_time</name>
+        <label>Set Last login date time</label>
+        <locationX>176</locationX>
+        <locationY>276</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.LastLoginDate__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.LastLoginDate</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_the_date_time</targetReference>
+        </connector>
+    </assignments>
+    <description>Sets the Last Login date time on the contact record, based on the last time at time of flow run</description>
+    <interviewLabel>Set login date time {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Community - Set Last Login Date/Time On Contact</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Set_the_date_time</name>
+        <label>Set the date time</label>
+        <locationX>176</locationX>
+        <locationY>396</locationY>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Last_login_date_time</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContactId</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>ProfileId</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>00e58000000MeEHAA0</stringValue>
+            </value>
+        </filters>
+        <object>User</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2021-03-12</startDate>
+            <startTime>04:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

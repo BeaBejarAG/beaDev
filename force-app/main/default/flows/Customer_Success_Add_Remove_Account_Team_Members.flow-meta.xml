@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <decisions>
+        <description>Searchs for the Account Team Record incase it hasnt been removed.</description>
+        <name>Check_For_Account_Team_Records</name>
+        <label>Check For Account Team Records</label>
+        <locationX>182</locationX>
+        <locationY>791</locationY>
+        <defaultConnector>
+            <targetReference>Check_New_CSM_Is_not_blank</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No Account Team Member Records Found</defaultConnectorLabel>
+        <rules>
+            <name>Account_Team_Record_Exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Previous_CSM_Owner</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Delete_Previous_Account_Team_Memeber</targetReference>
+            </connector>
+            <label>Account Team Record Exists</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to see if there a previous CSM OWner</description>
+        <name>Check_if_previous_User_Exists</name>
+        <label>Check if previous User Exists</label>
+        <locationX>182</locationX>
+        <locationY>455</locationY>
+        <defaultConnector>
+            <targetReference>Check_For_Account_Team_Records</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No Existing User</defaultConnectorLabel>
+        <rules>
+            <name>Prior_CSM_Owner</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.CSM_Owner__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Previous_CSM_Owner</targetReference>
+            </connector>
+            <label>Prior CSM Owner</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_New_CSM_Is_not_blank</name>
+        <label>Check New CSM Is not blank</label>
+        <locationX>182</locationX>
+        <locationY>1127</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Not_Nul</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CSM_Owner__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_New_Account_Team_Member_0_0</targetReference>
+            </connector>
+            <label>Not Nul</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check the CSM has been changed</description>
+        <name>CSM_Changed</name>
+        <label>CSM Changed</label>
+        <locationX>380</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>No CSM Changes</defaultConnectorLabel>
+        <rules>
+            <name>CSMChangeFound</name>
+            <conditionLogic>1 AND (2 OR 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.CSM_Owner__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.CSM_Owner__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CSM_Owner__r.IsActive</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CSM_Owner__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_if_previous_User_Exists</targetReference>
+            </connector>
+            <label>CSM Change Found</label>
+        </rules>
+    </decisions>
+    <description>Adds and removed account team members.</description>
+    <interviewLabel>Customer Success - Add/Remove Account Team Members {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Customer Success - Add/Remove Account Team Members</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Adds new account team member</description>
+        <name>Add_New_Account_Team_Member_0_0</name>
+        <label>Add New Account Team Member</label>
+        <locationX>50</locationX>
+        <locationY>1247</locationY>
+        <inputAssignments>
+            <field>AccountAccessLevel</field>
+            <value>
+                <stringValue>Edit</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>AccountId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>CaseAccessLevel</field>
+            <value>
+                <stringValue>Edit</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TeamMemberRole</field>
+            <value>
+                <stringValue>Customer Success Manager</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserId</field>
+            <value>
+                <elementReference>$Record.CSM_Owner__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>AccountTeamMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordDeletes>
+        <description>Deletes the last Account Team Member</description>
+        <name>Delete_Previous_Account_Team_Memeber</name>
+        <label>Delete Previous Account Team Memeber</label>
+        <locationX>50</locationX>
+        <locationY>911</locationY>
+        <connector>
+            <targetReference>Check_New_CSM_Is_not_blank</targetReference>
+        </connector>
+        <inputReference>Get_Previous_CSM_Owner</inputReference>
+    </recordDeletes>
+    <recordLookups>
+        <description>Get the previous CSM Owner</description>
+        <name>Get_Previous_CSM_Owner</name>
+        <label>Get Previous CSM Owner</label>
+        <locationX>50</locationX>
+        <locationY>575</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_For_Account_Team_Records</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>UserId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record__Prior.CSM_Owner__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>AccountTeamMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>254</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>CSM_Changed</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>CSM_Owner__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

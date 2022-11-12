@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <assignments>
+        <name>Add_Variables_to_record_0</name>
+        <label>Add Variables to record</label>
+        <locationX>138</locationX>
+        <locationY>935</locationY>
+        <assignmentItems>
+            <assignToReference>ContentDocuementLink.ContentDocumentId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Through_Quote_Docs.ContentDocumentId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ContentDocuementLink.LinkedEntityId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.SBQQ__Opportunity2__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ContentDocuementLink.ShareType</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>V</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ContentDocuementLink.Visibility</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>AllUsers</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Links_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Add_Variables_to_record_0_0_0</name>
+        <label>Add Variables to record</label>
+        <locationX>578</locationX>
+        <locationY>1175</locationY>
+        <assignmentItems>
+            <assignToReference>ContentDocuementLink.ContentDocumentId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Through_Quote_Docs.ContentDocumentId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ContentDocuementLink.LinkedEntityId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.SBQQ__Opportunity2__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ContentDocuementLink.ShareType</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>V</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ContentDocuementLink.Visibility</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>AllUsers</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Links_0_0_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assign CV to collection</description>
+        <name>Assign_Content_Version_to_collection</name>
+        <label>Assign Content Version to collection</label>
+        <locationX>138</locationX>
+        <locationY>1415</locationY>
+        <assignmentItems>
+            <assignToReference>ContentVersion</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_Content_Version</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Quote_Docs</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Create document</description>
+        <name>Create_Links_0</name>
+        <label>Create Links</label>
+        <locationX>138</locationX>
+        <locationY>1055</locationY>
+        <assignmentItems>
+            <assignToReference>ContentLinkCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>ContentDocuementLink</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Content_Version</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Create document</description>
+        <name>Create_Links_0_0_0</name>
+        <label>Create Links</label>
+        <locationX>578</locationX>
+        <locationY>1295</locationY>
+        <assignmentItems>
+            <assignToReference>ContentLinkCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>ContentDocuementLink</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Quote_Docs</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets opp link value for Integration</description>
+        <name>Set_OppLink_Value</name>
+        <label>Set OppLink Value</label>
+        <locationX>138</locationX>
+        <locationY>1295</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Content_Version.AssociatedOppLinkID__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.SBQQ__Opportunity2__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Content_Version_to_collection</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Check if CDL exists already</description>
+        <name>CHeck_if_CDL_Exists</name>
+        <label>CHeck if CDL Exists</label>
+        <locationX>490</locationX>
+        <locationY>1055</locationY>
+        <defaultConnector>
+            <targetReference>Add_Variables_to_record_0_0_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>CDL_Exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Opp_Content_Version</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Through_Quote_Docs</targetReference>
+            </connector>
+            <label>CDL Exists</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check if the opp already has docuements</description>
+        <name>Check_if_opp_has_docuements</name>
+        <label>Check if opp has docuements</label>
+        <locationX>314</locationX>
+        <locationY>815</locationY>
+        <defaultConnector>
+            <targetReference>Get_Opp_Content_Version</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>No_Docuements</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_All_Opp_Docuements</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_Variables_to_record_0</targetReference>
+            </connector>
+            <label>No Docuements</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check the quote to ensure there are items to process</description>
+        <name>Check_there_are_quote_items_to_proccess</name>
+        <label>Check there are quote items to proccess</label>
+        <locationX>182</locationX>
+        <locationY>575</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Quote_Links_Not_Null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_All_Linked_Quote_Documents</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Through_Quote_Docs</targetReference>
+            </connector>
+            <label>Quote Links Not Null</label>
+        </rules>
+    </decisions>
+    <description>This copies documents form the Quote object to the linked opportunity</description>
+    <interviewLabel>CPQ - Copy Docuements To Opp {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CPQ - Copy Documents To Opp</label>
+    <loops>
+        <description>Loop through all quote doc to compare with Opp Docs</description>
+        <name>Loop_Through_Quote_Docs</name>
+        <label>Loop Through Quote Docs</label>
+        <locationX>50</locationX>
+        <locationY>695</locationY>
+        <collectionReference>Get_All_Linked_Quote_Documents</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_if_opp_has_docuements</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Insert_Content_Docuements</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Inserts the content docs</description>
+        <name>Insert_Content_Docuements</name>
+        <label>Insert Content Docuements</label>
+        <locationX>50</locationX>
+        <locationY>1727</locationY>
+        <connector>
+            <targetReference>Update_Content_Version</targetReference>
+        </connector>
+        <inputReference>ContentLinkCollection</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <description>Get all linked docuements associated with the Quote</description>
+        <name>Get_All_Linked_Quote_Documents</name>
+        <label>Get All Linked Quote Documents</label>
+        <locationX>182</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_All_Opp_Docuements</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>LinkedEntityId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContentDocumentLink</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get All Opp Documents</description>
+        <name>Get_All_Opp_Docuements</name>
+        <label>Get All Opp Docuements</label>
+        <locationX>182</locationX>
+        <locationY>455</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_there_are_quote_items_to_proccess</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>LinkedEntityId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.SBQQ__Opportunity2__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContentDocumentLink</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Opp Content Version</description>
+        <name>Get_Content_Version</name>
+        <label>Get Content Version</label>
+        <locationX>138</locationX>
+        <locationY>1175</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_OppLink_Value</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContentDocumentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_Through_Quote_Docs.ContentDocumentId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ContentVersion</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Gets the opps content link if exists</description>
+        <name>Get_Opp_Content_Version</name>
+        <label>Get Opp Content Version</label>
+        <locationX>490</locationX>
+        <locationY>935</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>CHeck_if_CDL_Exists</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContentDocumentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Loop_Through_Quote_Docs.ContentDocumentId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>LinkedEntityId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.SBQQ__Opportunity2__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ContentDocumentLink</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Update Content Versions</description>
+        <name>Update_Content_Version</name>
+        <label>Update Content Version</label>
+        <locationX>50</locationX>
+        <locationY>1847</locationY>
+        <inputReference>ContentVersion</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_All_Linked_Quote_Documents</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SBQQ__Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Accepted</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>SBQQ__Opportunity2__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>SBQQ__Quote__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>The single record used to add to the collection</description>
+        <name>ContentDocuementLink</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ContentDocumentLink</objectType>
+    </variables>
+    <variables>
+        <description>Collection of content links for insert</description>
+        <name>ContentLinkCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ContentDocumentLink</objectType>
+    </variables>
+    <variables>
+        <description>Stores content versions for udpate</description>
+        <name>ContentVersion</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ContentVersion</objectType>
+    </variables>
+</Flow>

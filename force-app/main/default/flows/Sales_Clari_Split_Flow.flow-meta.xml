@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <decisions>
+        <description>If none - Create One
+Otherwise, there can only ever be 1 related Clari Split, so update that</description>
+        <name>Are_there_any_Existing_Clari_Splits</name>
+        <label>Are there any Existing Clari Splits?</label>
+        <locationX>524</locationX>
+        <locationY>342</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>No_Splits</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Existing_Clari_Splits.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_New_Clari_Split</targetReference>
+            </connector>
+            <label>No Splits</label>
+        </rules>
+        <rules>
+            <name>Split_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Existing_Clari_Splits.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Existing_Clari_Split</targetReference>
+            </connector>
+            <label>Split Found</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Sales - Clari Split Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Sales - Clari Split Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create a new split of Type &apos;Clari&apos; and assign to the Player Managers &apos;inactive&apos; User record</description>
+        <name>Create_New_Clari_Split</name>
+        <label>Create New Clari Split</label>
+        <locationX>695</locationX>
+        <locationY>182</locationY>
+        <inputAssignments>
+            <field>OpportunityId</field>
+            <value>
+                <elementReference>$Record.OpportunityId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Related_Split_ID__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SplitOwnerId</field>
+            <value>
+                <elementReference>$Record.Player_Managers_Inactive_User_ID__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SplitPercentage</field>
+            <value>
+                <elementReference>$Record.SplitPercentage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SplitTypeId</field>
+            <value>
+                <stringValue>1498e0000004C93AAE</stringValue>
+            </value>
+        </inputAssignments>
+        <object>OpportunitySplit</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <description>Finds any existing Clari Split(s)</description>
+        <name>Get_Existing_Clari_Splits</name>
+        <label>Get Existing Clari Splits</label>
+        <locationX>215</locationX>
+        <locationY>408</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Are_there_any_Existing_Clari_Splits</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Related_Split_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>OpportunitySplit</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>As a Clari Split has already been created - update it to the new values</description>
+        <name>Update_Existing_Clari_Split</name>
+        <label>Update Existing Clari Split</label>
+        <locationX>672</locationX>
+        <locationY>534</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Related_Split_ID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>SplitPercentage</field>
+            <value>
+                <elementReference>$Record.SplitPercentage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>OpportunitySplit</object>
+    </recordUpdates>
+    <start>
+        <locationX>83</locationX>
+        <locationY>73</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Player_Managers_Inactive_User_ID__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>SplitTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>149580000004hXqAAI</stringValue>
+            </value>
+        </filters>
+        <object>OpportunitySplit</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>Run_After_API_calls_finish</name>
+            <connector>
+                <targetReference>Get_Existing_Clari_Splits</targetReference>
+            </connector>
+            <label>Run After API calls finish</label>
+            <offsetNumber>1</offsetNumber>
+            <offsetUnit>Hours</offsetUnit>
+            <timeSource>RecordTriggerEvent</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>The number of Clari Splits already associated to the Opp</description>
+        <name>NumberofClariSplits</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+</Flow>

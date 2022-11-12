@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <assignments>
+        <name>Set_deal_to_Strategic_Enterprise</name>
+        <label>Set deal to Strategic (Enterprise)</label>
+        <locationX>314</locationX>
+        <locationY>455</locationY>
+        <assignmentItems>
+            <assignToReference>DealType</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Strategic</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Set_Deal_type_to_Compliance</name>
+        <label>Set Deal type to Compliance</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <assignmentItems>
+            <assignToReference>DealType</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Compliance</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Role_is_Compliance_or_Enterprise</name>
+        <label>Role is Compliance or Enterprise</label>
+        <locationX>314</locationX>
+        <locationY>335</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Compliance</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TeamMemberRole</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Compliance Team</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.User_Role_Name__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Compliance Team Member</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.User_Role_Name__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Head of Compliance</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Deal_type_to_Compliance</targetReference>
+            </connector>
+            <label>Compliance</label>
+        </rules>
+        <rules>
+            <name>Enterprise</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.TeamMemberRole</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Enterprise Sales Manager</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.User_Role_Name__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Enterprise</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_deal_to_Strategic_Enterprise</targetReference>
+            </connector>
+            <label>Enterprise</label>
+        </rules>
+    </decisions>
+    <description>Updates the Opportunity Deal Type if the team member is added or deleted</description>
+    <interviewLabel>Sales - Opportunity Team Member {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Sales - Opportunity Deal Type</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Role_is_Compliance_or_Enterprise</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>TeamMemberRole</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Enterprise Sales Manager</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>TeamMemberRole</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Compliance Team</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>User_Role_Name__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Head of Compliance</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>User_Role_Name__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Compliance Team Member</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>User_Role_Name__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Enterprise</stringValue>
+            </value>
+        </filters>
+        <object>OpportunityTeamMember</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>To store the value of flow output: opp.deal_type__c field.</description>
+        <name>DealType</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

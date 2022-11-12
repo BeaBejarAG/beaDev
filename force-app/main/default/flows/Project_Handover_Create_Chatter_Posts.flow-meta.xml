@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <assignments>
+        <description>Set parent ID to new record</description>
+        <name>Set_Parent_ID</name>
+        <label>Set Parent ID</label>
+        <locationX>1466</locationX>
+        <locationY>136</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_and_create_all_chatter_posts.ParentId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CurrentThreadID</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_and_create_all_chatter_posts.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Chatter_Post</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set the Thread and Parent ID to link in the new comment</description>
+        <name>Set_Thread_ID_and_Parent_ID</name>
+        <label>Set Thread ID and Parent ID</label>
+        <locationX>1629</locationX>
+        <locationY>286</locationY>
+        <assignmentItems>
+            <assignToReference>Loop_Through_Comments_for_Thread.FeedItemId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_and_create_all_chatter_posts.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Comments</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Checks to see if any comments exist</description>
+        <name>Check_if_any_comments</name>
+        <label>Check if any comments</label>
+        <locationX>1549</locationX>
+        <locationY>655</locationY>
+        <defaultConnector>
+            <targetReference>Loop_and_create_all_chatter_posts</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Not_Null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_All_Related_Comments</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_Through_Comments_for_Thread</targetReference>
+            </connector>
+            <label>Not Null</label>
+        </rules>
+    </decisions>
+    <description>Create all chatter posts from the Taskray Project</description>
+    <interviewLabel>Project Handover - Create Chatter Posts {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Project Handover - Create Chatter Posts</label>
+    <loops>
+        <description>Loop through and create all chatter posts on the Project Handover</description>
+        <name>Loop_and_create_all_chatter_posts</name>
+        <label>Loop and create all chatter posts</label>
+        <locationX>1100</locationX>
+        <locationY>619</locationY>
+        <collectionReference>Get_Chatter_Items</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Set_Parent_ID</targetReference>
+        </nextValueConnector>
+    </loops>
+    <loops>
+        <description>Loops through all comments on thread</description>
+        <name>Loop_Through_Comments_for_Thread</name>
+        <label>Loop Through Comments for Thread</label>
+        <locationX>1556</locationX>
+        <locationY>478</locationY>
+        <collectionReference>Get_All_Related_Comments</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Set_Thread_ID_and_Parent_ID</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Loop_and_create_all_chatter_posts</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create a chatter post on the project handover object.</description>
+        <name>Create_Chatter_Post</name>
+        <label>Create Chatter Post</label>
+        <locationX>1818</locationX>
+        <locationY>136</locationY>
+        <connector>
+            <targetReference>Get_All_Related_Comments</targetReference>
+        </connector>
+        <inputReference>Loop_and_create_all_chatter_posts</inputReference>
+    </recordCreates>
+    <recordCreates>
+        <description>Create Comments on thread</description>
+        <name>Create_Comments</name>
+        <label>Create Comments</label>
+        <locationX>1492</locationX>
+        <locationY>309</locationY>
+        <connector>
+            <targetReference>Loop_Through_Comments_for_Thread</targetReference>
+        </connector>
+        <inputReference>Loop_Through_Comments_for_Thread</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <description>Gets all related Comments</description>
+        <name>Get_All_Related_Comments</name>
+        <label>Get All Related Comments</label>
+        <locationX>1813</locationX>
+        <locationY>652</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_if_any_comments</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>FeedItemId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>CurrentThreadID</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>FeedComment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get all chatter items?</description>
+        <name>Get_Chatter_Items</name>
+        <label>Get Chatter Items</label>
+        <locationX>1094</locationX>
+        <locationY>303</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_and_create_all_chatter_posts</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ParentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Project_Name__r.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Type</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>TrackedChange</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>FeedItem</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>970</locationX>
+        <locationY>47</locationY>
+        <connector>
+            <targetReference>Get_Chatter_Items</targetReference>
+        </connector>
+        <object>Project_Handover__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+    <variables>
+        <name>AllChatterComments</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>FeedComment</objectType>
+    </variables>
+    <variables>
+        <name>AllChatterPosts</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>FeedItem</objectType>
+    </variables>
+    <variables>
+        <description>Holds the current thread ID in the loop</description>
+        <name>CurrentThreadID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>
