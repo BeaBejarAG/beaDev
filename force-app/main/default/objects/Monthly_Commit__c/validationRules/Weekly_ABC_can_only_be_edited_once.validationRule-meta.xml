@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Weekly_ABC_can_only_be_edited_once</fullName>
+    <active>true</active>
+    <description>Sales User can only edit the Weekly Commit fields once, otherwise they will need a manager to overide.</description>
+    <errorConditionFormula>AND(
+OR(
+AND(ISCHANGED(Week_1_Commit__c),NOT(ISBLANK(PRIORVALUE(Week_1_Commit__c)))),
+AND(ISCHANGED(Week_2_Commit__c),NOT(ISBLANK(PRIORVALUE(Week_2_Commit__c)))),
+AND(ISCHANGED(Week_3_Commit__c),NOT(ISBLANK(PRIORVALUE(Week_3_Commit__c)))),
+AND(ISCHANGED(Week_4_Commit__c),NOT(ISBLANK(PRIORVALUE(Week_4_Commit__c)))),
+AND(ISCHANGED(Week_5_Commit__c),NOT(ISBLANK(PRIORVALUE(Week_5_Commit__c))))
+),
+NOT( $Permission.Override_Monthly_Commit_Values )
+)</errorConditionFormula>
+    <errorMessage>You cannot edit Weekly Commit fields once entered. Please speak to your team leader to do this for you.</errorMessage>
+</ValidationRule>

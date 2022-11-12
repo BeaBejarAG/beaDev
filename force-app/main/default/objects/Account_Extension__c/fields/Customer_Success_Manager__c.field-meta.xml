@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Success_Manager__c</fullName>
+    <externalId>false</externalId>
+    <label>Customer Success Manager</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Laura</fullName>
+                <default>false</default>
+                <label>Laura</label>
+            </value>
+            <value>
+                <fullName>Paul</fullName>
+                <default>false</default>
+                <label>Paul</label>
+            </value>
+            <value>
+                <fullName>Support Team</fullName>
+                <default>false</default>
+                <label>Support Team</label>
+            </value>
+            <value>
+                <fullName>Nicole</fullName>
+                <default>false</default>
+                <label>Nicole</label>
+            </value>
+            <value>
+                <fullName>Adam Papajcsik</fullName>
+                <default>false</default>
+                <label>Adam Papajcsik</label>
+            </value>
+            <value>
+                <fullName>Sam Furminger</fullName>
+                <default>false</default>
+                <label>Sam Furminger</label>
+            </value>
+            <value>
+                <fullName>Emma_G</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Emma G</label>
+            </value>
+            <value>
+                <fullName>Jamie</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Jamie</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TaskRay_Project__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The Taskray Project from salesforce to push out to SQL</description>
+    <externalId>false</externalId>
+    <label>TaskRay Project</label>
+    <referenceTo>TASKRAY__Project__c</referenceTo>
+    <relationshipLabel>Transactions Table</relationshipLabel>
+    <relationshipName>Transactions_Table</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

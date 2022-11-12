@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Knowledge_Edition_Image__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Link to the Knowledge Edition Object</description>
+    <externalId>false</externalId>
+    <label>Knowledge Edition Image</label>
+    <referenceTo>Knowledge_Edition_Image__c</referenceTo>
+    <relationshipLabel>Knowledge</relationshipLabel>
+    <relationshipName>Knowledge</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

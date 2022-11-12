@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Supplied__c</fullName>
+    <externalId>false</externalId>
+    <label>Service Supplied</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Accelerate</fullName>
+                <default>false</default>
+                <label>Accelerate</label>
+            </value>
+            <value>
+                <fullName>BACS Credit</fullName>
+                <default>false</default>
+                <label>BACS Credit</label>
+            </value>
+            <value>
+                <fullName>Bespoke</fullName>
+                <default>false</default>
+                <label>Bespoke</label>
+            </value>
+            <value>
+                <fullName>Eazy Corporate</fullName>
+                <default>false</default>
+                <label>Eazy Corporate</label>
+            </value>
+            <value>
+                <fullName>EazyDD</fullName>
+                <default>false</default>
+                <label>EazyDD</label>
+            </value>
+            <value>
+                <fullName>Eazy Enterprise</fullName>
+                <default>false</default>
+                <label>Eazy Enterprise</label>
+            </value>
+            <value>
+                <fullName>Eazy Flat-rate</fullName>
+                <default>false</default>
+                <label>Eazy Flat-rate</label>
+            </value>
+            <value>
+                <fullName>Eazy Managed</fullName>
+                <default>false</default>
+                <label>Eazy Managed</label>
+            </value>
+            <value>
+                <fullName>EDDI</fullName>
+                <default>false</default>
+                <label>EDDI</label>
+            </value>
+            <value>
+                <fullName>Evolve</fullName>
+                <default>false</default>
+                <label>Evolve</label>
+            </value>
+            <value>
+                <fullName>Ignite</fullName>
+                <default>false</default>
+                <label>Ignite</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

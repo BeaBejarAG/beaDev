@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vaule__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( Points__c , 
+&quot;Sign - Up&quot;, 0, 
+&quot;Sign - Up (HCM)&quot;, 1000,
+&quot;Telephone Reference&quot;, 100,
+&quot;Executive Quote&quot;, 250,
+&quot;Onsite Reference&quot;, 500,
+&quot;Webinar Presentation&quot;, 500,
+&quot;Case study and press release (written)&quot;, 550,
+&quot;Case study and press release (video and written)&quot;, 850,
+&quot;Event Speaker&quot;, 1000,
+&quot;Host and speaker at an Access event on own premises&quot;, 2000,
+&quot;Custom&quot;,  Custom_Amount__c
+,0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Value</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

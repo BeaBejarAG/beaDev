@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Presidents_Club_Qualified__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Presidents_Clubs__c &gt;  Presidents_Clubs_Target__c &amp;&amp; Presidents_Clubs_Target__c != NULL , TRUE,FALSE)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Presidents Club Qualified</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

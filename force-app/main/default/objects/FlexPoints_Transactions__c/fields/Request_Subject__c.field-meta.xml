@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Request_Subject__c</fullName>
+    <description>Mirror of the subject field on the associated case record</description>
+    <externalId>false</externalId>
+    <formula>FlexPoint_Redemption_Case__r.Subject</formula>
+    <label>Request Subject</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

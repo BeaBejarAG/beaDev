@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Utility_Icon__c</fullName>
+    <description>The utility icon name to be displayed in the customer community portal</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Pick one of the utility icons found here www.lightningdesignsystem.com/icons/#utility</inlineHelpText>
+    <label>Utility Icon</label>
+    <length>50</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

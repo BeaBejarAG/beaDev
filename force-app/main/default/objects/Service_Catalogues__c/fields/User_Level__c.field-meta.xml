@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User_Level__c</fullName>
+    <externalId>false</externalId>
+    <label>User Level</label>
+    <required>true</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Beginner</fullName>
+                <default>false</default>
+                <label>Beginner</label>
+            </value>
+            <value>
+                <fullName>Competent</fullName>
+                <default>false</default>
+                <label>Competent</label>
+            </value>
+            <value>
+                <fullName>Expert</fullName>
+                <default>false</default>
+                <label>Expert</label>
+            </value>
+            <value>
+                <fullName>Available for all levels</fullName>
+                <default>false</default>
+                <label>Available for all levels</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

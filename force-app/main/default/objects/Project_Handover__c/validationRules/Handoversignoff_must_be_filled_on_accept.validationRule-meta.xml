@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Handoversignoff_must_be_filled_on_accept</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISPICKVAL( Handover_Status__c , &apos;Accepted By Support&apos;) ,   ISBLANK(Handover_Signed_Off__c) )</errorConditionFormula>
+    <errorMessage>It is not possible to set the Status to Accepted By Support until a Support Handover Signed Off date has been entered.</errorMessage>
+</ValidationRule>

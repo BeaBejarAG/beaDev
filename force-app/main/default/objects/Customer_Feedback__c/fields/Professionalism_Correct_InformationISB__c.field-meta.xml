@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Professionalism_Correct_InformationISB__c</fullName>
+    <externalId>false</externalId>
+    <formula>ISBLANK( Professionalism_Correct_Information__c )</formula>
+    <label>Professionalism &amp; Correct InformationISB</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

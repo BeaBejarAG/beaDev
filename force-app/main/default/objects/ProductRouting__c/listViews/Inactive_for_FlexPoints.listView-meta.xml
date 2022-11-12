@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inactive_for_FlexPoints</fullName>
+    <columns>NAME</columns>
+    <columns>recordid__c</columns>
+    <columns>Support_Team_Go_Live__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Enabled_for_FlexPoints__c</field>
+        <operation>equals</operation>
+        <value>Not Available</value>
+    </filters>
+    <label>Inactive for FlexPoints</label>
+</ListView>

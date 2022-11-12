@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Score_Case__c</fullName>
+    <description>Questions where the option N/A is chosen are given the maximum score</description>
+    <externalId>false</externalId>
+    <formula>CASE( Case_Origin__c ,                        &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Case_Source__c ,                        &quot;Yes&quot;, 8, &quot;No&quot;, 0,0)+
+CASE( Case_Type__c ,                          &quot;Yes&quot;, 8, &quot;No&quot;, 0,0)+
+CASE( Related_Product__c ,                    &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Sub_Analysis__c ,                       &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Case_Status__c ,                        &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Case_Priority__c ,                      &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Contact_Name__c ,                       &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Contact_Email__c ,                      &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Contact_Phone_Mobile__c ,               &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Contact_Entitlement__c ,                &quot;Yes&quot;, 8, &quot;No&quot;, 0,0)+
+CASE( Contact_Against_Entitlement__c ,        &quot;Yes&quot;, 8, &quot;No&quot;, 0,0)+
+CASE( Timely_Within_SLA__c ,                  &quot;Yes&quot;, 8, &quot;No&quot;, 0,0)+
+CASE( KB_Attached__c ,                        &quot;Yes&quot;, 5, &quot;No&quot;, 0,5)+
+CASE( Is_KBA_relevant__c ,                    &quot;Yes&quot;, 5, &quot;No&quot;, 0,5)+
+CASE( KB_Recommended__c ,                     &quot;Yes&quot;, 5, &quot;No&quot;, 0,5)+
+CASE( Feedback_Provided__c ,                  &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Cause_Coded_Appropriately__c ,          &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Solution_Coded_Appropriately__c ,       &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Prevention_Filled_appropriate__c ,      &quot;Yes&quot;, 6, &quot;No&quot;, 0,0)+
+CASE(  Public_Comments__c ,                   &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+
+
+
+VALUE( TEXT ( Case_Subject_Meaningful__c ))+
+VALUE( TEXT ( Detail_Description__c ))+
+VALUE( TEXT ( Case_Comments__c ))+
+VALUE( TEXT ( Solution__c ))+
+VALUE( TEXT ( Relevant_Update__c ))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Questions where the option N/A is chosen are given the maximum score</inlineHelpText>
+    <label>Score (Case)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

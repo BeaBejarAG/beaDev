@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Entitlement_Processes</fullName>
+    <columns>NAME</columns>
+    <columns>Product_Division__c</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>Classic_Entitlement_Process__c</columns>
+    <columns>Essential_Entitlement_Process__c</columns>
+    <columns>Standard_Entitlement_Process__c</columns>
+    <columns>Premier_Entitlement_Process__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Entitlement Processes</label>
+</ListView>

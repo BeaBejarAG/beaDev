@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Community_Redirect</fullName>
+    <columns>NAME</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>Enabled_For_Community__c</columns>
+    <columns>Community_Redirect__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Enabled_For_Community__c</field>
+        <operation>equals</operation>
+        <value>Redirection</value>
+    </filters>
+    <label>Community Redirect</label>
+</ListView>

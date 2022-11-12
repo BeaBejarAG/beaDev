@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>InDevelopment</deploymentStatus>
+    <eventType>StandardVolume</eventType>
+    <label>Opportunity_Attachment_Counter__e</label>
+    <pluralLabel>Opportunity_Attachment_Counter__e</pluralLabel>
+    <publishBehavior>PublishImmediately</publishBehavior>
+</CustomObject>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EWS_Renewal_Perc_DNR__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The total percentage of the overall contract value that is set to DNR</inlineHelpText>
+    <label>Contract Do Not Renew %</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NFP_Projects_Handovers_Submitted</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Product__c</columns>
+    <columns>Flightpath_Type__c</columns>
+    <columns>PS_Owner__c</columns>
+    <columns>Support_Owner__c</columns>
+    <columns>Handover_Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Division__c</field>
+        <operation>equals</operation>
+        <value>NFP</value>
+    </filters>
+    <filters>
+        <field>Handover_Status__c</field>
+        <operation>equals</operation>
+        <value>Submitted</value>
+    </filters>
+    <label>#NFP: Projects Handovers - Created</label>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

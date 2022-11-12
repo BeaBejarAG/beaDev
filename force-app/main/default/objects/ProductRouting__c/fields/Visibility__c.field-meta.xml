@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Visibility__c</fullName>
+    <defaultValue>(&quot;Public&quot;)</defaultValue>
+    <description>Visibility of community articles related to this product</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Select &apos;Public&apos; to show content to all users, &apos;Admin&apos; to limit visibility to community admin users and &apos;None&apos; to hide</inlineHelpText>
+    <label>Visibility</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Admin</fullName>
+                <default>false</default>
+                <label>Admin</label>
+            </value>
+            <value>
+                <fullName>Archived</fullName>
+                <default>false</default>
+                <label>Archived</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
+            </value>
+            <value>
+                <fullName>Public</fullName>
+                <default>false</default>
+                <label>Public</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CSATFollowUpCode__c</fullName>
+    <externalId>false</externalId>
+    <label>CSAT Follow Up Code</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Internal Processes</fullName>
+                <default>false</default>
+                <label>Internal Processes</label>
+            </value>
+            <value>
+                <fullName>Missing Functionality</fullName>
+                <default>false</default>
+                <label>Missing Functionality</label>
+            </value>
+            <value>
+                <fullName>Misunderstood Survey</fullName>
+                <default>false</default>
+                <label>Misunderstood Survey</label>
+            </value>
+            <value>
+                <fullName>Other Team - Account Management</fullName>
+                <default>false</default>
+                <label>Other Team - Account Management</label>
+            </value>
+            <value>
+                <fullName>Other Team - Development/Product</fullName>
+                <default>false</default>
+                <label>Other Team - Development/Product</label>
+            </value>
+            <value>
+                <fullName>Other Team - Finance</fullName>
+                <default>false</default>
+                <label>Other Team - Finance</label>
+            </value>
+            <value>
+                <fullName>Other Team - Projects/Onboarding</fullName>
+                <default>false</default>
+                <label>Other Team - Projects/Onboarding</label>
+            </value>
+            <value>
+                <fullName>Quality of Resolution Provided</fullName>
+                <default>false</default>
+                <label>Quality of Resolution Provided</label>
+            </value>
+            <value>
+                <fullName>Software Performance</fullName>
+                <default>false</default>
+                <label>Software Performance</label>
+            </value>
+            <value>
+                <fullName>Support Responsiveness</fullName>
+                <default>false</default>
+                <label>Support Responsiveness</label>
+            </value>
+            <value>
+                <fullName>Survey Fatigue</fullName>
+                <default>false</default>
+                <label>Survey Fatigue</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

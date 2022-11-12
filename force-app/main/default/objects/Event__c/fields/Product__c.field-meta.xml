@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product__c</fullName>
+    <description>The product that the event is relevant for, multiples can be selected</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The product that the event is relevant for, multiples can be selected</inlineHelpText>
+    <label>Product</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>ProductRange</valueSetName>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

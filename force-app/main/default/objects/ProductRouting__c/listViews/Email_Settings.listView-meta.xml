@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_Settings</fullName>
+    <columns>NAME</columns>
+    <columns>Visibility__c</columns>
+    <columns>Case_Received_Template__c</columns>
+    <columns>Case_Received_Custom_Header__c</columns>
+    <columns>Case_Updated_Template__c</columns>
+    <columns>Case_Updated_Custom_Header__c</columns>
+    <columns>Case_Resolved_Template__c</columns>
+    <columns>Case_Resolved_Custom_Header__c</columns>
+    <columns>Information_Required_Automation_Enabled__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Email Settings</label>
+</ListView>

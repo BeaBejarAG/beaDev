@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cannot_Create_Validated_Articles</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(AND(ISNEW(),  ISPICKVAL(ValidationStatus  , &apos;Validated&apos;), $Permission.Can_t_create_validated_Articles),   
+AND(OR(ISPICKVAL( PRIORVALUE(ValidationStatus  ) , &apos;Work In Progress&apos;),ISPICKVAL( PRIORVALUE(ValidationStatus  ) , &apos;Not Validated&apos;)),ISPICKVAL(ValidationStatus  , &apos;Validated&apos;),$Permission.Can_t_create_validated_Articles) )</errorConditionFormula>
+    <errorMessage>You cannot create validated articles, please change the validation status</errorMessage>
+</ValidationRule>

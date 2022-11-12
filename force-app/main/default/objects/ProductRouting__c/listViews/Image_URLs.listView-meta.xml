@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Image_URLs</fullName>
+    <columns>NAME</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>Visibility__c</columns>
+    <columns>ImageUrl__c</columns>
+    <columns>ProductColour__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ImageUrl__c</field>
+        <operation>contains</operation>
+        <value>https</value>
+    </filters>
+    <label>Image URLs</label>
+</ListView>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_My_Events</fullName>
+    <columns>NAME</columns>
+    <columns>Product__c</columns>
+    <columns>Title__c</columns>
+    <columns>Featured__c</columns>
+    <columns>Start__c</columns>
+    <columns>Success_Plan__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>All My Events</label>
+</ListView>

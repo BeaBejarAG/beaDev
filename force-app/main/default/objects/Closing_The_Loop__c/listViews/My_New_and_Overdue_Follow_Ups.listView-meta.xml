@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_New_and_Overdue_Follow_Ups</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>ContactName__c</columns>
+    <columns>Product__c</columns>
+    <columns>CSATScore__c</columns>
+    <columns>CSATComments__c</columns>
+    <columns>Status__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>New,Overdue,In Progress</value>
+    </filters>
+    <label>My Open Follow Ups</label>
+</ListView>

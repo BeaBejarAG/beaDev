@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Health_Score__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The Health score that has been calculated through various customer data points. The health score can be broken down into 4 categories; Commercial, Adoption, Experience and Product</inlineHelpText>
+    <label>Customer Health Score</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

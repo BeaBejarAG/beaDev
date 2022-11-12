@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cant_Change_Commit_Name</fullName>
+    <active>true</active>
+    <description>Commit Name is system generated and shouldn&apos;t be edited</description>
+    <errorConditionFormula>ISCHANGED( Name )</errorConditionFormula>
+    <errorMessage>Monthly Commit Name is system generated and can&apos;t be changed</errorMessage>
+</ValidationRule>

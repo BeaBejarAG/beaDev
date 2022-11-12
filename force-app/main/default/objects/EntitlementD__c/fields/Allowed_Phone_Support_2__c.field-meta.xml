@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allowed_Phone_Support_2__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+OR(PlanType__c = &quot;Premier Plan&quot;, PlanType__c =&quot;Standard Plan&quot;,PlanType__c = &quot;Classic Plan&quot;),TRUE,FALSE)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Allowed Phone Support (2)</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Number__c</fullName>
+    <description>Mirror field of the Account Number from the associated Account record</description>
+    <externalId>false</externalId>
+    <formula>Account__r.AccountNumber</formula>
+    <label>Account Number</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

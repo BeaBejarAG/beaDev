@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Competitor_Product__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Shows which product is related to this competitor record</description>
+    <externalId>false</externalId>
+    <label>Competitor Product</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Competitor_Product__c.Competitor_Account__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Competitor__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Competitor_Product__c</referenceTo>
+    <relationshipLabel>Competitors</relationshipLabel>
+    <relationshipName>Competitors</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

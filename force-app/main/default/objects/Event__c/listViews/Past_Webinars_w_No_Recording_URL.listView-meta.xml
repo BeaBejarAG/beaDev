@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Past_Webinars_w_No_Recording_URL</fullName>
+    <columns>NAME</columns>
+    <columns>Product__c</columns>
+    <columns>Title__c</columns>
+    <columns>Featured__c</columns>
+    <columns>Start__c</columns>
+    <columns>Success_Plan__c</columns>
+    <columns>Recording_Link__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Recording_Link__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>Start__c</field>
+        <operation>lessOrEqual</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>Past Webinars w/ No Recording URL</label>
+</ListView>

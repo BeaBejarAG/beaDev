@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Journey_Stage__c</fullName>
+    <externalId>false</externalId>
+    <label>Account Journey Stage</label>
+    <required>true</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New to Product</fullName>
+                <default>false</default>
+                <label>New to Product</label>
+            </value>
+            <value>
+                <fullName>In first year of using product</fullName>
+                <default>false</default>
+                <label>In first year of using product</label>
+            </value>
+            <value>
+                <fullName>Been using the product for some time</fullName>
+                <default>false</default>
+                <label>Been using the product for some time</label>
+            </value>
+            <value>
+                <fullName>Applicable to all</fullName>
+                <default>false</default>
+                <label>Applicable to all</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

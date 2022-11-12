@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPQ_Product_Group_Type__c</fullName>
+    <description>This field is used as to define the Product Group Type of the product.</description>
+    <externalId>false</externalId>
+    <label>Product Group Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>CPQ_Product_Group_Type</valueSetName>
+    </valueSet>
+</CustomField>

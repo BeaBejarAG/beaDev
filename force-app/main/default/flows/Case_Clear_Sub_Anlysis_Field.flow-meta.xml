@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <assignments>
+        <description>Sets the Sub Analysis field an empty field.</description>
+        <name>Set_Sub_Analysis_Value</name>
+        <label>Set Sub Analysis Value</label>
+        <locationX>50</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>caseIn.SubAnalysis__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>Checks that the Product on the Entitlement does not match the Product on the Case</description>
+        <name>Does_Product_Match</name>
+        <label>Does Product Match</label>
+        <locationX>182</locationX>
+        <locationY>158</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Does_The_Product_Match</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>caseIn.Entitlement.SubProductArea__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>caseIn.ProductId</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Sub_Analysis_Value</targetReference>
+            </connector>
+            <label>Does The Product Match</label>
+        </rules>
+    </decisions>
+    <description>Clears the Sub Analysis field on the Case.</description>
+    <interviewLabel>Case - Clear Sub Anlysis Field {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case - Clear Sub Anlysis Field</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Does_Product_Match</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>caseIn</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

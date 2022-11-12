@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Must_Fill_out_DDMS_Completed_By_field</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISBLANK( RDS_DDMS_Live_Date__c ) )
+&amp;&amp; 
+ISBLANK( RDS_DDMS_Live_Date_Completed_by__c )</errorConditionFormula>
+    <errorDisplayField>RDS_DDMS_Live_Date_Completed_by__c</errorDisplayField>
+    <errorMessage>You must complete the DDMS Completed By: field when entering a DDMS Live Date</errorMessage>
+</ValidationRule>

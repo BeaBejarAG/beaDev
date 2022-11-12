@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RDS_Artez_Modules__c</fullName>
+    <externalId>false</externalId>
+    <label>RDS Artez Modules</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>All</fullName>
+                <default>false</default>
+                <label>All</label>
+            </value>
+            <value>
+                <fullName>Donation</fullName>
+                <default>false</default>
+                <label>Donation</label>
+            </value>
+            <value>
+                <fullName>Event</fullName>
+                <default>false</default>
+                <label>Event</label>
+            </value>
+            <value>
+                <fullName>Personal Event</fullName>
+                <default>false</default>
+                <label>Personal Event</label>
+            </value>
+            <value>
+                <fullName>Tribute</fullName>
+                <default>false</default>
+                <label>Tribute</label>
+            </value>
+            <value>
+                <fullName>Shop</fullName>
+                <default>false</default>
+                <label>Shop</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

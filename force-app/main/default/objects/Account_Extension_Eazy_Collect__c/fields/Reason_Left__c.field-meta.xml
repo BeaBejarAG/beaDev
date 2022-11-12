@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_Left__c</fullName>
+    <externalId>false</externalId>
+    <label>Reason Left</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Business Ceased Trading</fullName>
+                <default>false</default>
+                <label>Business Ceased Trading</label>
+            </value>
+            <value>
+                <fullName>Business Model Changed</fullName>
+                <default>false</default>
+                <label>Business Model Changed</label>
+            </value>
+            <value>
+                <fullName>DD not appropriate</fullName>
+                <default>false</default>
+                <label>DD not appropriate</label>
+            </value>
+            <value>
+                <fullName>DD transaction limit issues</fullName>
+                <default>false</default>
+                <label>DD transaction limit issues</label>
+            </value>
+            <value>
+                <fullName>Eazy Collect Terminated - Risk Control</fullName>
+                <default>false</default>
+                <label>Eazy Collect Terminated - Risk Control</label>
+            </value>
+            <value>
+                <fullName>Lost to competitor</fullName>
+                <default>false</default>
+                <label>Lost to competitor</label>
+            </value>
+            <value>
+                <fullName>No reason given</fullName>
+                <default>false</default>
+                <label>No reason given</label>
+            </value>
+            <value>
+                <fullName>System Shortfalls</fullName>
+                <default>false</default>
+                <label>System Shortfalls</label>
+            </value>
+            <value>
+                <fullName>Too Expensive</fullName>
+                <default>false</default>
+                <label>Too Expensive</label>
+            </value>
+            <value>
+                <fullName>Unhappy with service</fullName>
+                <default>false</default>
+                <label>Unhappy with service</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProductColour__c</fullName>
+    <description>The Colour which represents this product in the success community portal</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Select a product colour to represent this product in the success community portal</inlineHelpText>
+    <label>Product Colour</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Colour 1</fullName>
+                <default>false</default>
+                <label>Colour 1</label>
+            </value>
+            <value>
+                <fullName>Colour 2</fullName>
+                <default>false</default>
+                <label>Colour 2</label>
+            </value>
+            <value>
+                <fullName>Colour 3</fullName>
+                <default>false</default>
+                <label>Colour 3</label>
+            </value>
+            <value>
+                <fullName>Colour 4</fullName>
+                <default>false</default>
+                <label>Colour 4</label>
+            </value>
+            <value>
+                <fullName>Colour 5</fullName>
+                <default>false</default>
+                <label>Colour 5</label>
+            </value>
+            <value>
+                <fullName>Colour 6</fullName>
+                <default>false</default>
+                <label>Colour 6</label>
+            </value>
+            <value>
+                <fullName>Colour 7</fullName>
+                <default>false</default>
+                <label>Colour 7</label>
+            </value>
+            <value>
+                <fullName>Colour 8</fullName>
+                <default>false</default>
+                <label>Colour 8</label>
+            </value>
+            <value>
+                <fullName>Colour 9</fullName>
+                <default>false</default>
+                <label>Colour 9</label>
+            </value>
+            <value>
+                <fullName>Colour 10</fullName>
+                <default>false</default>
+                <label>Colour 10</label>
+            </value>
+            <value>
+                <fullName>Colour 11</fullName>
+                <default>false</default>
+                <label>Colour 11</label>
+            </value>
+            <value>
+                <fullName>Colour 12</fullName>
+                <default>false</default>
+                <label>Colour 12</label>
+            </value>
+            <value>
+                <fullName>Colour 13</fullName>
+                <default>false</default>
+                <label>Colour 13</label>
+            </value>
+            <value>
+                <fullName>Colour 14</fullName>
+                <default>false</default>
+                <label>Colour 14</label>
+            </value>
+            <value>
+                <fullName>Colour 15</fullName>
+                <default>false</default>
+                <label>Colour 15</label>
+            </value>
+            <value>
+                <fullName>Colour 16</fullName>
+                <default>false</default>
+                <label>Colour 16</label>
+            </value>
+            <value>
+                <fullName>Colour 17</fullName>
+                <default>false</default>
+                <label>Colour 17</label>
+            </value>
+            <value>
+                <fullName>Colour 18</fullName>
+                <default>false</default>
+                <label>Colour 18</label>
+            </value>
+            <value>
+                <fullName>Colour 19</fullName>
+                <default>false</default>
+                <label>Colour 19</label>
+            </value>
+            <value>
+                <fullName>Colour 20</fullName>
+                <default>false</default>
+                <label>Colour 20</label>
+            </value>
+            <value>
+                <fullName>Colour 21</fullName>
+                <default>false</default>
+                <label>Colour 21</label>
+            </value>
+            <value>
+                <fullName>Colour 22</fullName>
+                <default>false</default>
+                <label>Colour 22</label>
+            </value>
+            <value>
+                <fullName>Colour 23</fullName>
+                <default>false</default>
+                <label>Colour 23</label>
+            </value>
+            <value>
+                <fullName>Colour 24</fullName>
+                <default>false</default>
+                <label>Colour 24</label>
+            </value>
+            <value>
+                <fullName>Colour 25</fullName>
+                <default>false</default>
+                <label>Colour 25</label>
+            </value>
+            <value>
+                <fullName>Colour 26</fullName>
+                <default>false</default>
+                <label>Colour 26</label>
+            </value>
+            <value>
+                <fullName>Colour 27</fullName>
+                <default>false</default>
+                <label>Colour 27</label>
+            </value>
+            <value>
+                <fullName>Colour 28</fullName>
+                <default>false</default>
+                <label>Colour 28</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

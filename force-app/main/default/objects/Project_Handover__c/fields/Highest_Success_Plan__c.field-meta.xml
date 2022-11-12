@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Highest_Success_Plan__c</fullName>
+    <description>Highest Success Plan stored at time of creation via a WFR</description>
+    <externalId>false</externalId>
+    <label>Highest Success Plan</label>
+    <length>75</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

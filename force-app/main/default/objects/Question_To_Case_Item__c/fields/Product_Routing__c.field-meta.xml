@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Routing__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Linked Product Routing</description>
+    <externalId>false</externalId>
+    <label>Product Routing</label>
+    <referenceTo>ProductRouting__c</referenceTo>
+    <relationshipLabel>Question To Case Items</relationshipLabel>
+    <relationshipName>Question_To_Case_Items</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

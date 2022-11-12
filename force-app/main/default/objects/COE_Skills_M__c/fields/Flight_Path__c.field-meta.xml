@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Flight_Path__c</fullName>
+    <description>Used by the COE to indicate which IS level a team member needs to be to deliver the associated product&apos;s FlightPath.</description>
+    <externalId>false</externalId>
+    <label>Competency</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Deliver to Customer</fullName>
+                <default>false</default>
+                <label>Deliver to Customer</label>
+            </value>
+            <value>
+                <fullName>Train Internally</fullName>
+                <default>false</default>
+                <label>Train Internally</label>
+            </value>
+            <value>
+                <fullName>A</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>A</label>
+            </value>
+            <value>
+                <fullName>B</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>B</label>
+            </value>
+            <value>
+                <fullName>C</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>C</label>
+            </value>
+            <value>
+                <fullName>Design</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Design</label>
+            </value>
+            <value>
+                <fullName>IC1</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>IC1</label>
+            </value>
+            <value>
+                <fullName>IC2</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>IC2</label>
+            </value>
+            <value>
+                <fullName>IC3</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>IC3</label>
+            </value>
+            <value>
+                <fullName>Tech</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Tech</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

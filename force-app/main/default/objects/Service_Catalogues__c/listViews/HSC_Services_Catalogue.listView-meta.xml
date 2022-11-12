@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HSC_Services_Catalogue</fullName>
+    <columns>NAME</columns>
+    <columns>Division__c</columns>
+    <columns>Products__c</columns>
+    <columns>Service_Title__c</columns>
+    <columns>Days_to_Deliver__c</columns>
+    <columns>Hours_to_Deliver__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Division__c</field>
+        <operation>equals</operation>
+        <value>HSC</value>
+    </filters>
+    <label>HSC Services Catalogue</label>
+</ListView>

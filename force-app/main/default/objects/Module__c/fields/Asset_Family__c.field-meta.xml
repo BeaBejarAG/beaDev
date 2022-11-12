@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Asset_Family__c</fullName>
+    <externalId>false</externalId>
+    <label>Asset Family</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>aCloud</fullName>
+                <default>false</default>
+                <label>aCloud</label>
+            </value>
+            <value>
+                <fullName>Delta</fullName>
+                <default>false</default>
+                <label>Delta</label>
+            </value>
+            <value>
+                <fullName>Dimensions</fullName>
+                <default>false</default>
+                <label>Dimensions</label>
+            </value>
+            <value>
+                <fullName>FocalPoint</fullName>
+                <default>false</default>
+                <label>FocalPoint</label>
+            </value>
+            <value>
+                <fullName>Goldmine</fullName>
+                <default>false</default>
+                <label>Goldmine</label>
+            </value>
+            <value>
+                <fullName>Orchestrate</fullName>
+                <default>false</default>
+                <label>Orchestrate</label>
+            </value>
+            <value>
+                <fullName>Payroll</fullName>
+                <default>false</default>
+                <label>Payroll</label>
+            </value>
+            <value>
+                <fullName>PeoplePlanner</fullName>
+                <default>false</default>
+                <label>PeoplePlanner</label>
+            </value>
+            <value>
+                <fullName>Supply Chain</fullName>
+                <default>false</default>
+                <label>Supply Chain</label>
+            </value>
+            <value>
+                <fullName>Hosting HCM</fullName>
+                <default>false</default>
+                <label>Hosting HCM</label>
+            </value>
+            <value>
+                <fullName>Hosting NFP</fullName>
+                <default>false</default>
+                <label>Hosting NFP</label>
+            </value>
+            <value>
+                <fullName>Hosting FMS</fullName>
+                <default>false</default>
+                <label>Hosting FMS</label>
+            </value>
+            <value>
+                <fullName>Hosting SCS</fullName>
+                <default>false</default>
+                <label>Hosting SCS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

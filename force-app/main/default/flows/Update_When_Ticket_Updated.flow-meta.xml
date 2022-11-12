@@ -190,8 +190,8 @@
     <assignments>
         <name>Get_Case_Comment</name>
         <label>Get Case Comment</label>
-        <locationX>624</locationX>
-        <locationY>416</locationY>
+        <locationX>247</locationX>
+        <locationY>529</locationY>
         <assignmentItems>
             <assignToReference>MessageFromCustomer</assignToReference>
             <operator>Assign</operator>
@@ -339,7 +339,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Set_Case_Customer_Outstanding_0_0_0</targetReference>
+                <targetReference>Is_Issues_and_Actions_Case</targetReference>
             </connector>
             <label>Current Status Customer Outstanding</label>
         </rules>
@@ -534,7 +534,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Is_User</targetReference>
+                <targetReference>Is_internal_user_comment</targetReference>
             </connector>
             <label>Internal</label>
         </rules>
@@ -562,6 +562,32 @@
         </rules>
     </decisions>
     <decisions>
+        <description>SFAE-567 Adding decision tree to see if case is Issues and Actions case</description>
+        <name>Is_Issues_and_Actions_Case</name>
+        <label>Is Issues and Actions Case</label>
+        <locationX>297</locationX>
+        <locationY>742</locationY>
+        <defaultConnector>
+            <targetReference>Set_Case_Customer_Outstanding_0_0_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Issues_and_Actions</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>FoundCase.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01258000000Vb44AAC</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Issue_and_actions_case</targetReference>
+            </connector>
+            <label>Is Issues and Actions</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Is_Self_Update</name>
         <label>Is Self Update?</label>
         <locationX>56</locationX>
@@ -584,13 +610,14 @@
         </rules>
     </decisions>
     <decisions>
+        <description>SFAE-530 stops internal email sending to case owner if the owner comments</description>
         <name>Is_Self_Update_0</name>
-        <label>Is Self Update?</label>
-        <locationX>251</locationX>
-        <locationY>539</locationY>
-        <defaultConnectorLabel>[Default Outcome]</defaultConnectorLabel>
+        <label>Is Self Update</label>
+        <locationX>800</locationX>
+        <locationY>975</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>NotSelf_0</name>
+            <name>Is_Not_Self_Comment</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>FoundCase.OwnerId</leftValueReference>
@@ -600,9 +627,9 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Get_Case_Comment</targetReference>
+                <targetReference>Is_User</targetReference>
             </connector>
-            <label>NotSelf</label>
+            <label>Is Not Self Comment</label>
         </rules>
     </decisions>
     <decisions>
@@ -684,8 +711,9 @@
         </rules>
     </decisions>
     <decisions>
+        <description>#SFAE-280 - Added record type check. No action is required for Flexpoint Redemption cases when triggered from added FeedItems Process Builder - &apos;Support - Email Update On Ticket Feed&apos;. Hence, filtering these out.</description>
         <name>Is_This_A_Case</name>
-        <label>Is This A Case</label>
+        <label>Is This A Case, Except Flexpoint Redemption Cases</label>
         <locationX>50</locationX>
         <locationY>743</locationY>
         <defaultConnectorLabel>[Default Outcome]</defaultConnectorLabel>
@@ -697,6 +725,13 @@
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>FoundCase.RecordTypeId</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>0128e000000L2YbAAK</stringValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -722,7 +757,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Is_Self_Update_0</targetReference>
+                <targetReference>Get_Case_Comment</targetReference>
             </connector>
             <label>IsCase</label>
         </rules>
@@ -1081,6 +1116,7 @@
             <label>Email Update</label>
         </rules>
     </decisions>
+    <description>#SFAE-280 - Added exception for Flexpoint Redemption cases, when triggered from FeedItems workflow.</description>
     <formulas>
         <description>Trim Text Body</description>
         <name>TextBodyTrimmed</name>
@@ -1105,8 +1141,8 @@
     <recordLookups>
         <name>Get_Commentor_Data</name>
         <label>Get Commentor Data</label>
-        <locationX>784</locationX>
-        <locationY>448</locationY>
+        <locationX>777</locationX>
+        <locationY>529</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Internal_Or_External</targetReference>
@@ -1239,6 +1275,10 @@
             <field>OwnerId</field>
         </outputAssignments>
         <outputAssignments>
+            <assignToReference>FoundCase.RecordTypeId</assignToReference>
+            <field>RecordTypeId</field>
+        </outputAssignments>
+        <outputAssignments>
             <assignToReference>FoundCase.Status</assignToReference>
             <field>Status</field>
         </outputAssignments>
@@ -1315,6 +1355,10 @@
         <outputAssignments>
             <assignToReference>FoundCase.OwnerId</assignToReference>
             <field>OwnerId</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>FoundCase.RecordTypeId</assignToReference>
+            <field>RecordTypeId</field>
         </outputAssignments>
         <outputAssignments>
             <assignToReference>FoundCase.Resolved__c</assignToReference>
@@ -1436,6 +1480,31 @@
         </outputAssignments>
     </recordLookups>
     <recordUpdates>
+        <description>SFAE-530 updates customer comment checkbox to false if is internal user commenting</description>
+        <name>Is_internal_user_comment</name>
+        <label>Update Customer Comment Check</label>
+        <locationX>808</locationX>
+        <locationY>831</locationY>
+        <connector>
+            <targetReference>Is_Self_Update_0</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>FoundCase.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Customer_Comment__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>Set_Case_Customer_Outstanding_0</name>
         <label>Set Case Support Outstanding</label>
         <locationX>1064</locationX>
@@ -1505,10 +1574,11 @@
         <object>Case</object>
     </recordUpdates>
     <recordUpdates>
+        <description>Updated for SFAE-530 to update customer comment check box</description>
         <name>Set_Case_Customer_Outstanding_0_0_0</name>
         <label>Set Case Customer Outstanding</label>
         <locationX>305</locationX>
-        <locationY>876</locationY>
+        <locationY>950</locationY>
         <connector>
             <targetReference>Is_User</targetReference>
         </connector>
@@ -1520,6 +1590,12 @@
                 <elementReference>FoundCase.Id</elementReference>
             </value>
         </filters>
+        <inputAssignments>
+            <field>Customer_Comment__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
         <inputAssignments>
             <field>Status</field>
             <value>
@@ -1658,6 +1734,37 @@
             <field>Status</field>
             <value>
                 <stringValue>Support Outstanding</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>SFAE-567 adding node to update case to &quot;Access Outstanding&quot; if is issues and actions case</description>
+        <name>Update_Issue_and_actions_case</name>
+        <label>Update Issues and actions case</label>
+        <locationX>404</locationX>
+        <locationY>865</locationY>
+        <connector>
+            <targetReference>Is_User</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>FoundCase.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Customer_Comment__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Access Outstanding</stringValue>
             </value>
         </inputAssignments>
         <object>Case</object>

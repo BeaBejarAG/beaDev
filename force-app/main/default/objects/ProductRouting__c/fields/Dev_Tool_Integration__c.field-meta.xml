@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dev_Tool_Integration__c</fullName>
+    <description>The integration currently used by this product</description>
+    <externalId>false</externalId>
+    <label>Dev Tool Integration</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Blank/Null/Empty</fullName>
+                <default>false</default>
+                <label>Blank/Null/Empty</label>
+            </value>
+            <value>
+                <fullName>Original JIRA</fullName>
+                <default>false</default>
+                <label>Original JIRA</label>
+            </value>
+            <value>
+                <fullName>Service Rocket</fullName>
+                <default>false</default>
+                <label>Service Rocket</label>
+            </value>
+            <value>
+                <fullName>Quantum Whisper</fullName>
+                <default>false</default>
+                <label>Quantum Whisper</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

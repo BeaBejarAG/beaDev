@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Region__c</fullName>
+    <description>Region(s) that the event is available in</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Region(s) that the event is available in. No value means the event is available in all regions</inlineHelpText>
+    <label>Region</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Community_Region</valueSetName>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

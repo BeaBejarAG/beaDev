@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Number_of_Days_until_Next_Month__c</fullName>
+    <description>Referenced in Other Formula Fields for Weekly Commit</description>
+    <externalId>false</externalId>
+    <formula>IF(
+  MONTH(  TODAY() ) = 12,
+  DATE( YEAR(  TODAY() ), 12, 31 ),
+  DATE( YEAR(  TODAY() ), MONTH (  TODAY() ) + 1, 1 )
+) 
+ - 
+ TODAY()</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Number of Days until Next Month</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

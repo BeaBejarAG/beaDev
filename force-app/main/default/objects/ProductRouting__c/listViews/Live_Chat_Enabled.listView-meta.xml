@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Live_Chat_Enabled</fullName>
+    <columns>NAME</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>Enabled_For_Live_Chat__c</columns>
+    <columns>Live_Chat_Button_ID__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Enabled_For_Live_Chat__c</field>
+        <operation>equals</operation>
+        <value>Available</value>
+    </filters>
+    <label>Live Chat Enabled</label>
+</ListView>

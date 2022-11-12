@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PeopleXD</fullName>
+    <columns>NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Product__c</field>
+        <operation>equals</operation>
+        <value>PeopleXD - Expense,PeopleXD - Payroll,PeopleXD - Pension,PeopleXD - People Management,PeopleXD - Recruitment,PeopleXD - Talent,PeopleXD - Workforce Management</value>
+    </filters>
+    <label>PeopleXD</label>
+</ListView>

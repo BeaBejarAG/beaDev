@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RDS_Direct_Client__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If client is a direct client</description>
+    <externalId>false</externalId>
+    <label>RDS Direct Client</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

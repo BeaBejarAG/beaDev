@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Activity_Value__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL( Points__c, &apos;Sign-Up&apos; ), 0,
+IF(ISPICKVAL( Points__c, &apos;Sign-Up (HCM)&apos; ), 1000,
+IF(ISPICKVAL( Points__c, &apos;Telephone Reference&apos; ), 100,
+IF(ISPICKVAL( Points__c, &apos;Executive Quote&apos; ), 250,
+IF(ISPICKVAL( Points__c, &apos;Onsite Reference&apos; ), 500,
+IF(ISPICKVAL( Points__c, &apos;Case study and press release (written)&apos; ), 550,
+IF(ISPICKVAL( Points__c, &apos;Case study and press release (video and written)&apos; ), 850,
+IF(ISPICKVAL( Points__c, &apos;Event Speaker&apos; ), 1000,
+IF(ISPICKVAL( Points__c, &apos;Points Spend&apos; ), - Custom_Amount__c ,
+IF(ISPICKVAL( Points__c, &apos;Host and speaker at an Access event on own premises&apos; ), 2000,0))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Activity Value</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

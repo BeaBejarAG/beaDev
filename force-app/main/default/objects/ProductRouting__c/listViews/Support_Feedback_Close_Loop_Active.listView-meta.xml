@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Support_Feedback_Close_Loop_Active</fullName>
+    <columns>Product_Division__c</columns>
+    <columns>NAME</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>Visibility__c</columns>
+    <columns>TopicID__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Closing_The_Loop_Enabled__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Closing_The_Loop_Enabled__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Enabled for Closing The Loop</label>
+</ListView>

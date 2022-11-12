@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Support_Telephone_Number</fullName>
+    <columns>NAME</columns>
+    <columns>Product_Division__c</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>Visibility__c</columns>
+    <columns>Enabled_For_Telephony__c</columns>
+    <columns>Dedicated_Telephone_Number__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Enabled_For_Telephony__c</field>
+        <operation>equals</operation>
+        <value>Available</value>
+    </filters>
+    <label>Support Telephone Number</label>
+</ListView>

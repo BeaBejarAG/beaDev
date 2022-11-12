@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Salesforce_Object__c</fullName>
+    <description>Object/Area that Salesforce is trying to update</description>
+    <externalId>false</externalId>
+    <label>Salesforce Object</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Account</fullName>
+                <default>false</default>
+                <label>Account</label>
+            </value>
+            <value>
+                <fullName>ActivitySheet</fullName>
+                <default>false</default>
+                <label>ActivitySheet</label>
+            </value>
+            <value>
+                <fullName>ConsultantBookings</fullName>
+                <default>false</default>
+                <label>ConsultantBookings</label>
+            </value>
+            <value>
+                <fullName>Contract</fullName>
+                <default>false</default>
+                <label>Contract</label>
+            </value>
+            <value>
+                <fullName>DBProcedure Account</fullName>
+                <default>false</default>
+                <label>DBProcedure Account</label>
+            </value>
+            <value>
+                <fullName>Entitlement</fullName>
+                <default>false</default>
+                <label>Entitlement</label>
+            </value>
+            <value>
+                <fullName>Jira</fullName>
+                <default>false</default>
+                <label>Jira</label>
+            </value>
+            <value>
+                <fullName>Opportunity</fullName>
+                <default>false</default>
+                <label>Opportunity</label>
+            </value>
+            <value>
+                <fullName>Poap</fullName>
+                <default>false</default>
+                <label>Poap</label>
+            </value>
+            <value>
+                <fullName>SOW</fullName>
+                <default>false</default>
+                <label>SOW</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

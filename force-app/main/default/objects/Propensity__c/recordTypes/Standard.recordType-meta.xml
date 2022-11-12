@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Standard</fullName>
+    <active>true</active>
+    <description>Standard record, historically used for HG Capital Propensity</description>
+    <label>Standard</label>
+    <picklistValues>
+        <picklist>Priority_Grouping__c</picklist>
+        <values>
+            <fullName>A</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>D</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>F</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Already have Access Solution</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confirmed Not Good Fit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Current Opportunity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Good Fit but No Opportunity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting to Discuss Booked</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Actioned</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+</RecordType>

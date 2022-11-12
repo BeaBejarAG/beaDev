@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trustpilot_Follow_Up</fullName>
+    <active>true</active>
+    <label>Trustpilot Follow Up</label>
+    <picklistValues>
+        <picklist>CSATFollowUpCode__c</picklist>
+        <values>
+            <fullName>Internal Processes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Missing Functionality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Misunderstood Survey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Team - Account Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Team - Development%2FProduct</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Team - Finance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Team - Projects%2FOnboarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quality of Resolution Provided</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Software Performance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Support Responsiveness</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Survey Fatigue</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Overdue</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TrustpilotFollowUpCode__c</picklist>
+        <values>
+            <fullName>Internal Processors</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Missing Functionality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Misunderstood Survey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Team - Account Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Team - Development%2FProduct</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Team - Finance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Team - Projects%2FOnboarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quality of Resolution Provided</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Software Performance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Support Responsiveness</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Survey Fatigue</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

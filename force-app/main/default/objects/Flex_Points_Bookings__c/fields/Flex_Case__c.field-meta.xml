@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Flex_Case__c</fullName>
+    <description>This is populated from the FB_REQUEST_ID field from the UDEF_FLEX_BOOKINGS table in the accounts DB populated via integration</description>
+    <externalId>false</externalId>
+    <label>Flex Case</label>
+    <referenceTo>Case</referenceTo>
+    <relationshipName>Flex_Points_Bookings</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

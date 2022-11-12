@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Score_Call__c</fullName>
+    <description>If question has the option of &quot;N/A&quot; it is given maximum score</description>
+    <externalId>false</externalId>
+    <formula>CASE( Name_Given_Analyst__c ,                       &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Name_Used_Customers__c ,                      &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( If_non_Community_User_setup__c ,              &quot;Yes&quot;, 8, &quot;No&quot;, 0,8)+
+CASE( If_non_Community_User_Walkthrough__c ,        &quot;Yes&quot;, 8, &quot;No&quot;, 0,8)+
+CASE( Understood_the_Priority_and_Impact__c ,       &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Has_the_Analyst_Listened__c ,                 &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Sounding_Confident_Positive_Words__c ,        &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Have_we_sounded_empathetic_built_rapport__c , &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Collecting_appropriate_details_Open_Q_s__c ,  &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Hold_Mute_Appropriate_Use__c ,                &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Reference_to_Portal_Community__c ,            &quot;Yes&quot;, 8, &quot;No&quot;, 0,8)+
+CASE( Ensured_the_customer_Understands__c ,         &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Summarised_Issue_Solution_Next_Steps__c ,     &quot;Yes&quot;, 6, &quot;No&quot;, 0,0)+
+CASE( Use_of_Names_Analyst_Customer__c ,            &quot;Yes&quot;, 5, &quot;No&quot;, 0,0)+
+CASE( Case_Reference_Provided__c ,                  &quot;Yes&quot;, 8, &quot;No&quot;, 0,0)+
+CASE( Mention_of_Survey__c ,                        &quot;Yes&quot;, 6, &quot;No&quot;, 0,6)+
+CASE( Offer_of_Further_Help__c ,                    &quot;Yes&quot;, 8, &quot;No&quot;, 0,0)+
+
+VALUE( TEXT ( Professional_Introduction__c ))+
+VALUE( TEXT ( Is_Customer_confident_of_resolution__c ))+
+VALUE( TEXT ( Did_analyst_adapt_style_to_suit_customer__c ))+
+VALUE( TEXT ( Have_we_answered_the_question__c ))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>If question has the option of &quot;N/A&quot; it is given maximum score</inlineHelpText>
+    <label>Score (Call)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KCS_Admin_Edit_Only</fullName>
+    <active>true</active>
+    <description>SFCS-478 : This article can only be modified by a Knowledge Administrator</description>
+    <errorConditionFormula>if (AND(Admin_Edit_Only__c, !$Permission.KCS_Knowledge_Administrator), true, false)</errorConditionFormula>
+    <errorMessage>This article can only be modified by a Knowledge Administrator, please discuss the changes you are trying to make with a KCS Master, Knowledge Specialist or Knowledge Manager.</errorMessage>
+</ValidationRule>

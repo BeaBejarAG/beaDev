@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Region__c</fullName>
+    <description>Multi select picklist field on curated collection for region</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Region(s) that the collection is available in. No value means the collection is available in all regions</inlineHelpText>
+    <label>Region</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Community_Region</valueSetName>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

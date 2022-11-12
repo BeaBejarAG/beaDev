@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DurationHHMM__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(FLOOR(Duration__c / 3600)&lt;10,&quot;0&quot;,&quot;&quot;)&amp;
+TEXT(FLOOR(Duration__c/ 3600))
+&amp;&apos;:&apos;&amp; 
+IF(MOD((Duration__c/ 60),60)&lt;10,&quot;0&quot;,&quot;&quot;)&amp;
+TEXT(FLOOR(MOD((Duration__c/60) ,60)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Duration (HH:MM)</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

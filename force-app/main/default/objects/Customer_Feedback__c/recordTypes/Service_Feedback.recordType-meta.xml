@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Feedback</fullName>
+    <active>true</active>
+    <description>Service Feedback records, primarily setup for Riliance OS</description>
+    <label>Service Feedback</label>
+    <picklistValues>
+        <picklist>Check_In__c</picklist>
+        <values>
+            <fullName>3 Months</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6 Months</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Product_Division__c</picklist>
+        <values>
+            <fullName>HCM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Product__c</picklist>
+        <values>
+            <fullName>Abacus</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Abintegro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Accountant Cloud</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Applause</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Approve</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Attaché</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access CRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Capture</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Care %26 Clinical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Care Compliance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Care Planning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Care Policies and Procedures</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Career Guru</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Charity Ad Grants</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Charity CRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Charity Websites</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Collaborate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Collins</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Collins For Care</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Compliance Software</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Content</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Contractor Management %28IR35%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Digital Tax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Document</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access EarlyPay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access EasyPay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Education Budgets</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Education Curriculum</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Education Finance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Education Links</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Education People</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Employee Performance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Employee Service</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Expense</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Final Accounts</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Financials</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access HandiSoft</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access HandiTax Cloud</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Health %26 Safety</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access HomeWork</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Insight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Juice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access LMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Legal Hosting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Maintain</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Medication Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access MicrOpay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Northstar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Pay %26 Bill</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Pay %26 Bill Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access PaySuite - Eazipay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access PaySuite DDCMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Payroll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access People - HCM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access People Hospitality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access People Pay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access People Planner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Profile</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access RDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Recruit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Recruitment CRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access SafePay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Screening</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Supply Chain</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access TeamSeer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Tonic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access UBS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access WageEasy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Access Workspace</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Acteol</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Actionfile Payroll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alcuris Memo-Hub</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bureau</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Business Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPL Learning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CareBlox</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Compact%2B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ConQuest Q Series</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ConQuest Q-500</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Core%2B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DPS Hosting%2FHardware</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DPS Legal Accounts</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DPS One Office</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DPS Spitfire</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Data Hub</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DeltaBond</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DeltaWMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dimensions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EasyBuild</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EasyTime</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EducatiONdemand</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elemental</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elemental API</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Emcom FMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employee Performance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Envoy Payroll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ezitracker</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FactoryMaster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fleeteye</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flow</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FocalPoint</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gamebrain</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gamma</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gatehouse</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Goldmine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HAS Care Monitoring</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HAS PAMMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Horizons</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IBS PosLink</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IBS StockLink</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Intersoft Enterprise</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Landscape</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LawFusion</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MicroLearn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mintsoft</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mosaic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>My School Portal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NCCIS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oceano</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Omnifi Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Orbis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Orchestrate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Orderbee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Access IP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PSC eServices</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PSCpay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payroll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>People HR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PeopleXD - Bureau</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PeopleXD - Expense</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PeopleXD - Payroll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PeopleXD - Pension</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PeopleXD - People Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PeopleXD - Recruitment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PeopleXD - Talent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PeopleXD - Workforce Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Proclaim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Procure Wizard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RIO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rapidata</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Riliance Outsourced Compliance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Riliance Training</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roundsman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Safe Financials</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Safe Saber</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sage Business Cloud Accounting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sage Business Cloud Payroll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Select HR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Service Manager</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Synergy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TNA Wizard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Topaz EMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volcanic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Webroster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WeighSoft</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>eLearning For You LMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>thankQ v8%2E6</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Taskray_Product__c</picklist>
+        <values>
+            <fullName>None</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Biannual May19</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Biannual May22</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Biannual Nov22</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Project Closure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Service Delivery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Support</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

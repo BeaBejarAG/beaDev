@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KCS_Internal_Only_can_not_be_public</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Request_Type__c , &quot;Internal Only&quot; )
+&amp;&amp;
+(IsVisibleInCsp = TRUE
+|| 
+IsVisibleInPkb  = TRUE )</errorConditionFormula>
+    <errorMessage>Cannot make visible to public or customers, as request type has been set to &quot;Internal Only</errorMessage>
+</ValidationRule>

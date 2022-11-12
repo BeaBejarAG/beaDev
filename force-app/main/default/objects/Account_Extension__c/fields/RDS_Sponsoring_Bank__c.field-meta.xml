@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RDS_Sponsoring_Bank__c</fullName>
+    <externalId>false</externalId>
+    <label>RDS Sponsoring Bank</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Barclays</fullName>
+                <default>false</default>
+                <label>Barclays</label>
+            </value>
+            <value>
+                <fullName>Allied Irish</fullName>
+                <default>false</default>
+                <label>Allied Irish</label>
+            </value>
+            <value>
+                <fullName>Bank of Ireland</fullName>
+                <default>false</default>
+                <label>Bank of Ireland</label>
+            </value>
+            <value>
+                <fullName>Bank of Scotland</fullName>
+                <default>false</default>
+                <label>Bank of Scotland</label>
+            </value>
+            <value>
+                <fullName>CAF</fullName>
+                <default>false</default>
+                <label>CAF</label>
+            </value>
+            <value>
+                <fullName>Clydesdale</fullName>
+                <default>false</default>
+                <label>Clydesdale</label>
+            </value>
+            <value>
+                <fullName>Coutts</fullName>
+                <default>false</default>
+                <label>Coutts</label>
+            </value>
+            <value>
+                <fullName>Danske Bank</fullName>
+                <default>false</default>
+                <label>Danske Bank</label>
+            </value>
+            <value>
+                <fullName>Handelsbanken</fullName>
+                <default>false</default>
+                <label>Handelsbanken</label>
+            </value>
+            <value>
+                <fullName>Hoare</fullName>
+                <default>false</default>
+                <label>Hoare</label>
+            </value>
+            <value>
+                <fullName>HSBC</fullName>
+                <default>false</default>
+                <label>HSBC</label>
+            </value>
+            <value>
+                <fullName>Lloyds</fullName>
+                <default>false</default>
+                <label>Lloyds</label>
+            </value>
+            <value>
+                <fullName>NatWest</fullName>
+                <default>false</default>
+                <label>NatWest</label>
+            </value>
+            <value>
+                <fullName>RBS</fullName>
+                <default>false</default>
+                <label>RBS</label>
+            </value>
+            <value>
+                <fullName>Santander</fullName>
+                <default>false</default>
+                <label>Santander</label>
+            </value>
+            <value>
+                <fullName>The Cooperative Bank</fullName>
+                <default>false</default>
+                <label>The Cooperative Bank</label>
+            </value>
+            <value>
+                <fullName>The Unity Bank</fullName>
+                <default>false</default>
+                <label>The Unity Bank</label>
+            </value>
+            <value>
+                <fullName>TSB</fullName>
+                <default>false</default>
+                <label>TSB</label>
+            </value>
+            <value>
+                <fullName>Yorkshire Bank</fullName>
+                <default>false</default>
+                <label>Yorkshire Bank</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

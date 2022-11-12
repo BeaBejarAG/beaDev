@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OTHER_Product_Routings</fullName>
+    <columns>NAME</columns>
+    <columns>Product_Division__c</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>Support_Team_Go_Live__c</columns>
+    <columns>Visibility__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Product_Division__c</field>
+        <operation>equals</operation>
+        <value>aCloud,CHS,CTS,No Primary Division,Workspace</value>
+    </filters>
+    <label>OTHER Product Routings</label>
+</ListView>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivery_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Delivery Type</label>
+    <required>true</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bite Size</fullName>
+                <default>false</default>
+                <label>Bite Size</label>
+            </value>
+            <value>
+                <fullName>Virtual Classroom</fullName>
+                <default>false</default>
+                <label>Virtual Classroom</label>
+            </value>
+            <value>
+                <fullName>Classroom</fullName>
+                <default>false</default>
+                <label>Classroom</label>
+            </value>
+            <value>
+                <fullName>1:1 Consulting</fullName>
+                <default>false</default>
+                <label>1:1 Consulting</label>
+            </value>
+            <value>
+                <fullName>1:Many Consulting</fullName>
+                <default>false</default>
+                <label>1:Many Consulting</label>
+            </value>
+            <value>
+                <fullName>Remote Review</fullName>
+                <default>false</default>
+                <label>Remote Review</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

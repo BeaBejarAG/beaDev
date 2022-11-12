@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Optional_Services__c</fullName>
+    <externalId>false</externalId>
+    <label>Optional Services</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>API</fullName>
+                <default>false</default>
+                <label>API</label>
+            </value>
+            <value>
+                <fullName>API, Bank Checker</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>API, Bank Checker</label>
+            </value>
+            <value>
+                <fullName>API, Bank Checker, Own Web Integration</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>API, Bank Checker, Own Web Integration</label>
+            </value>
+            <value>
+                <fullName>API, EazyWeb</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>API, EazyWeb</label>
+            </value>
+            <value>
+                <fullName>API, Mobile App, Own Web Integration</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>API, Mobile App, Own Web Integration</label>
+            </value>
+            <value>
+                <fullName>API, Own Web Integration</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>API, Own Web Integration</label>
+            </value>
+            <value>
+                <fullName>Bank Checker</fullName>
+                <default>false</default>
+                <label>Bank Checker</label>
+            </value>
+            <value>
+                <fullName>Card Processing</fullName>
+                <default>false</default>
+                <label>Card Processing</label>
+            </value>
+            <value>
+                <fullName>Communicate</fullName>
+                <default>false</default>
+                <label>Communicate</label>
+            </value>
+            <value>
+                <fullName>EazyWeb</fullName>
+                <default>false</default>
+                <label>EazyWeb</label>
+            </value>
+            <value>
+                <fullName>EazyWeb, Mobile App</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>EazyWeb, Mobile App</label>
+            </value>
+            <value>
+                <fullName>eDD</fullName>
+                <default>false</default>
+                <label>eDD</label>
+            </value>
+            <value>
+                <fullName>Faster Payment Disbursal</fullName>
+                <default>false</default>
+                <label>Faster Payment Disbursal</label>
+            </value>
+            <value>
+                <fullName>File Upload</fullName>
+                <default>false</default>
+                <label>File Upload</label>
+            </value>
+            <value>
+                <fullName>Mobile App</fullName>
+                <default>false</default>
+                <label>Mobile App</label>
+            </value>
+            <value>
+                <fullName>Own Web Integration</fullName>
+                <default>false</default>
+                <label>Own Web Integration</label>
+            </value>
+            <value>
+                <fullName>Own Web Integration, File Upload</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Own Web Integration, File Upload</label>
+            </value>
+            <value>
+                <fullName>Validate</fullName>
+                <default>false</default>
+                <label>Validate</label>
+            </value>
+            <value>
+                <fullName>Xero</fullName>
+                <default>false</default>
+                <label>Xero</label>
+            </value>
+            <value>
+                <fullName>Xero Integration</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Xero Integration</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

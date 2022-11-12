@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Attache_Events</fullName>
+    <columns>NAME</columns>
+    <columns>Description__c</columns>
+    <columns>Duration__c</columns>
+    <columns>Featured__c</columns>
+    <columns>Product__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>Recording_Link__c</columns>
+    <columns>Registration_Link__c</columns>
+    <columns>Start__c</columns>
+    <columns>Success_Plan__c</columns>
+    <columns>Title__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Product__c</field>
+        <operation>includes</operation>
+        <value>Access Attaché</value>
+    </filters>
+    <label>Attache Events</label>
+</ListView>

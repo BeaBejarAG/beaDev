@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Join_the_converstaion__c</fullName>
+    <description>generic footer to post any questions, feedback, etc in a new community post we’ll create for the release</description>
+    <externalId>false</externalId>
+    <inlineHelpText>generic footer to post any questions, feedback, etc in a new community post we’ll create for the release</inlineHelpText>
+    <label>Join the conversation</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Original_Case__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Case</description>
+    <externalId>false</externalId>
+    <label>Original Case</label>
+    <referenceTo>Case</referenceTo>
+    <relationshipLabel>Case&apos;s Wrong Type For Support</relationshipLabel>
+    <relationshipName>Case_s_Wrong_Type_For_Support</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

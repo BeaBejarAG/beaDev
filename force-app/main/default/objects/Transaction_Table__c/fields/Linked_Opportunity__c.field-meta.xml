@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Linked_Opportunity__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The Opportunity Related to the transaction</description>
+    <externalId>false</externalId>
+    <label>Linked Opportunity</label>
+    <referenceTo>Opportunity</referenceTo>
+    <relationshipLabel>Transactions Table</relationshipLabel>
+    <relationshipName>Transactions_Table</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

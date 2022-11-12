@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_FMS_Content</fullName>
+    <columns>NAME</columns>
+    <columns>Knowledge_Article__c</columns>
+    <columns>Sentiment__c</columns>
+    <columns>Feedback__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Product__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterThan</operation>
+        <value>4/18/2022 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>Product__c</field>
+        <operation>equals</operation>
+        <value>Mintsoft</value>
+    </filters>
+    <label>All Products Article Feedback</label>
+</ListView>

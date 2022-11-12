@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Telephone_Number</fullName>
+    <columns>NAME</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>Visibility__c</columns>
+    <columns>Enabled_For_Live_Chat__c</columns>
+    <columns>Enabled_For_Web_Cases__c</columns>
+    <columns>Enabled_For_Telephony__c</columns>
+    <columns>Dedicated_Telephone_Number__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Dedicated_Telephone_Number__c</field>
+        <operation>notContain</operation>
+        <value>0</value>
+    </filters>
+    <label>No Telephone Number</label>
+</ListView>

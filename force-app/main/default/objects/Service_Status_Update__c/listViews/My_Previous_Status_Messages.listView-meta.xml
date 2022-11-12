@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Previous_Status_Messages</fullName>
+    <columns>NAME</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Description__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>Visible__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>My Previous Status Messages</label>
+</ListView>

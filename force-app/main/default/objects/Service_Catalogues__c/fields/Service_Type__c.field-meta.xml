@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Service Type</label>
+    <required>true</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Analytics/Reporting</fullName>
+                <default>false</default>
+                <label>Analytics/Reporting</label>
+            </value>
+            <value>
+                <fullName>Configurations and Customisation</fullName>
+                <default>false</default>
+                <label>Configurations and Customisation</label>
+            </value>
+            <value>
+                <fullName>Education/Training</fullName>
+                <default>false</default>
+                <label>Education/Training</label>
+            </value>
+            <value>
+                <fullName>Flightpath Implementation Extras/Add Ons</fullName>
+                <default>false</default>
+                <label>Flightpath Implementation Extras/Add Ons</label>
+            </value>
+            <value>
+                <fullName>Integrations</fullName>
+                <default>false</default>
+                <label>Integrations</label>
+            </value>
+            <value>
+                <fullName>Strategic Engagements</fullName>
+                <default>false</default>
+                <label>Strategic Engagements</label>
+            </value>
+            <value>
+                <fullName>Upgrade and Migration</fullName>
+                <default>false</default>
+                <label>Upgrade and Migration</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>7</visibleLines>
+</CustomField>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Not Actioned</fullName>
+                <default>true</default>
+                <label>Not Actioned</label>
+            </value>
+            <value>
+                <fullName>Meeting to Discuss Booked</fullName>
+                <default>false</default>
+                <label>Meeting to Discuss Booked</label>
+            </value>
+            <value>
+                <fullName>Good Fit but No Opportunity</fullName>
+                <default>false</default>
+                <label>Good Fit but No Opportunity</label>
+            </value>
+            <value>
+                <fullName>Confirmed Not Good Fit</fullName>
+                <default>false</default>
+                <label>Confirmed Not Good Fit</label>
+            </value>
+            <value>
+                <fullName>Current Opportunity</fullName>
+                <default>false</default>
+                <label>Current Opportunity</label>
+            </value>
+            <value>
+                <fullName>Already have Access Solution</fullName>
+                <default>false</default>
+                <label>Already have Access Solution</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

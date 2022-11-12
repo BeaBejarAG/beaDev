@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CSM_Owner</fullName>
+    <active>true</active>
+    <description>Ensure where the plan is premier that the csm owner has been populated.</description>
+    <errorConditionFormula>AND( ISPICKVAL(Handover_Status__c, &apos;Accepted By Support&apos;),
+  ISBLANK(CSM_Owner__c),
+ Highest_Success_Plan__c == &apos;Premier&apos;
+)</errorConditionFormula>
+    <errorMessage>It is not possible to mark this handover complete as it is for a Premier Account and no CSM Owner has been assigned</errorMessage>
+</ValidationRule>

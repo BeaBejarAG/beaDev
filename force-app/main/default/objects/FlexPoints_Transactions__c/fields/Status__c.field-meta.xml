@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>If the transaction has the &apos;Expired&apos; checkbox checked, the status is &apos;Expired&apos;
+
+If the transaction type is NOT &apos;Redemption&apos;, the status is &apos;Top Up&apos;
+
+Otherwise the status is = Transaction_Status__c</description>
+    <externalId>false</externalId>
+    <formula>IF (Expired__c, &apos;Expired&apos;,
+IF (NOT(ISPICKVAL(Type__c, &apos;Redemption&apos;)), &apos;Top Up&apos;,  TEXT(Transaction_Status__c)))</formula>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Flightpath_Outcome_Default</fullName>
+    <fields>Name</fields>
+    <fields>Product__c</fields>
+    <fields>Flightpath__c</fields>
+    <label>Flightpath Outcome Default</label>
+</CompactLayout>

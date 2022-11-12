@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expected_Product_Business_Benefits__c</fullName>
+    <externalId>false</externalId>
+    <label>Expected Product/Business Benefits</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Product__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Eliminate departmental barriers</fullName>
+                <default>false</default>
+                <label>Eliminate departmental barriers</label>
+            </value>
+            <value>
+                <fullName>Engage every employee every day</fullName>
+                <default>false</default>
+                <label>Engage every employee every day</label>
+            </value>
+            <value>
+                <fullName>Drive efficiency and accuracy</fullName>
+                <default>false</default>
+                <label>Drive efficiency and accuracy</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Select HR</controllingFieldValue>
+            <valueName>Eliminate departmental barriers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Select HR</controllingFieldValue>
+            <valueName>Engage every employee every day</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Select HR</controllingFieldValue>
+            <valueName>Drive efficiency and accuracy</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disabled_for_FlexPoints</fullName>
+    <columns>NAME</columns>
+    <columns>Product_Division__c</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>Visibility__c</columns>
+    <columns>Enabled_for_FlexPoints__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Enabled_for_FlexPoints__c</field>
+        <operation>equals</operation>
+        <value>Not Available</value>
+    </filters>
+    <label>Disabled for FlexPoints</label>
+</ListView>

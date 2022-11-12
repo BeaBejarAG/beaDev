@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Access_LMS</fullName>
+    <columns>NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Products__c</field>
+        <operation>equals</operation>
+        <value>Access LMS</value>
+    </filters>
+    <label>Access LMS</label>
+</ListView>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RDS_Services__c</fullName>
+    <externalId>false</externalId>
+    <label>RDS Services</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DDMS</fullName>
+                <default>false</default>
+                <label>DDMS</label>
+            </value>
+            <value>
+                <fullName>eDirectDebit</fullName>
+                <default>false</default>
+                <label>eDirectDebit</label>
+            </value>
+            <value>
+                <fullName>Artez</fullName>
+                <default>false</default>
+                <label>Artez</label>
+            </value>
+            <value>
+                <fullName>Contingency Service</fullName>
+                <default>false</default>
+                <label>Contingency Service</label>
+            </value>
+            <value>
+                <fullName>Connect</fullName>
+                <default>false</default>
+                <label>Connect</label>
+            </value>
+            <value>
+                <fullName>Control My Payment</fullName>
+                <default>false</default>
+                <label>Control My Payment</label>
+            </value>
+            <value>
+                <fullName>ANL</fullName>
+                <default>false</default>
+                <label>ANL</label>
+            </value>
+            <value>
+                <fullName>Trigger Comms</fullName>
+                <default>false</default>
+                <label>Trigger Comms</label>
+            </value>
+            <value>
+                <fullName>Contingency</fullName>
+                <default>false</default>
+                <label>Contingency</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

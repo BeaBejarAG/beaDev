@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Phone_Enabled</fullName>
+    <columns>NAME</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>TopicID__c</columns>
+    <columns>Question_To_Case_Days__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Enabled_For_Telephony__c</columns>
+    <columns>Dedicated_Telephone_Number__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Enabled_For_Telephony__c</field>
+        <operation>equals</operation>
+        <value>Available</value>
+    </filters>
+    <label>Phone Enabled</label>
+</ListView>

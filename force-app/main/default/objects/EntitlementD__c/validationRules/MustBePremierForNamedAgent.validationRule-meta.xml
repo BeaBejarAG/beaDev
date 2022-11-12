@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MustBePremierForNamedAgent</fullName>
+    <active>true</active>
+    <description>Must be be a premier plan to have named agent</description>
+    <errorConditionFormula>(PlanType__c = &quot;Standard&quot; &amp;&amp; NOT(ISBLANK(NamedAgentEntitlement__c ))) 
+
+|| 
+
+(PlanType__c = &quot;Essential&quot; &amp;&amp; NOT(ISBLANK(NamedAgentEntitlement__c ))) 
+
+|| 
+
+(PlanType__c = &quot;Classic&quot; &amp;&amp; NOT(ISBLANK(NamedAgentEntitlement__c )))</errorConditionFormula>
+    <errorMessage>Named Agent can only be associated with Premier Plan entitlements</errorMessage>
+</ValidationRule>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Access_Workspace_Articles</fullName>
+    <columns>CREATEDBY_USER</columns>
+    <columns>ARTICLE_CREATED_DATE</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>Product__c</columns>
+    <columns>TITLE</columns>
+    <columns>IS_CHANNEL_PKB</columns>
+    <columns>IS_CHANNEL_CSP</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>PUBLISH_STATUS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Product__c</field>
+        <operation>equals</operation>
+        <value>Access Workspace</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Knowledge__kav.KCS</value>
+    </filters>
+    <label>Access Workspace Articles</label>
+</ListView>

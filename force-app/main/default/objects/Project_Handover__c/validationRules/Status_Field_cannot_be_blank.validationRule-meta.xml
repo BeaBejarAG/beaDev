@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Field_cannot_be_blank</fullName>
+    <active>true</active>
+    <description>If the Handover Status is &apos;Awaiting PS Feedback&apos; the Reason Field cannot be empty.</description>
+    <errorConditionFormula>AND(ISPICKVAL(Handover_Status__c , &apos;Awaiting PS Feedback&apos;), ISBLANK(Reason__c))</errorConditionFormula>
+    <errorMessage>Reason field must be populated when the Handover Status is &apos;Awaiting PS Feedback&apos;</errorMessage>
+</ValidationRule>

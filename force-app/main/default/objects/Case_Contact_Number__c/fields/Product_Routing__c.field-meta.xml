@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Routing__c</fullName>
+    <externalId>false</externalId>
+    <label>Product Routing</label>
+    <referenceTo>ProductRouting__c</referenceTo>
+    <relationshipLabel>Case Contact Numbers</relationshipLabel>
+    <relationshipName>Case_Contact_Numbers</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

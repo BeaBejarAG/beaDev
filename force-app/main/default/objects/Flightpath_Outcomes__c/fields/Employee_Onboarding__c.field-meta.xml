@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Employee_Onboarding__c</fullName>
+    <externalId>false</externalId>
+    <label>Employee Onboarding</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Product__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>HR Team</fullName>
+                <default>false</default>
+                <label>HR Team</label>
+            </value>
+            <value>
+                <fullName>Managers</fullName>
+                <default>false</default>
+                <label>Managers</label>
+            </value>
+            <value>
+                <fullName>Self Service Employees</fullName>
+                <default>false</default>
+                <label>Self Service Employees</label>
+            </value>
+            <value>
+                <fullName>Payroll Team</fullName>
+                <default>false</default>
+                <label>Payroll Team</label>
+            </value>
+            <value>
+                <fullName>Recruitment Consultants</fullName>
+                <default>false</default>
+                <label>Recruitment Consultants</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Select HR</controllingFieldValue>
+            <valueName>HR Team</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Select HR</controllingFieldValue>
+            <valueName>Managers</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Select HR</controllingFieldValue>
+            <valueName>Self Service Employees</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

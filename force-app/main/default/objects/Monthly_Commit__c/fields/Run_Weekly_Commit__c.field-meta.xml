@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Run_Weekly_Commit__c</fullName>
+    <description>Dictates if the Weekly commit Roll-up flow should run. (If TRUE -&gt; Run flow)
+Flow runs on a Monday. If 1st of next month falls on Tues-Fri of the same week, then needs to run for 2 months, so box is ticked for both. Also has to take into account CY rollover.
+Calculation Explained:
+1. Tick box if its current Month
+2. Tick Box if next Month starts within the next 4 days. (Flow runs Monday, so counts until Friday)
+3. Tick box if 1st of Jan is within next 4 days.</description>
+    <externalId>false</externalId>
+    <formula>(MONTH( X1st_of_Commit_Month__c ) = MONTH(TODAY()) 
+&amp;&amp; YEAR( X1st_of_Commit_Month__c ) = YEAR(TODAY()))
+ || 
+(Number_of_Days_until_Next_Month__c  &lt;= 4
+&amp;&amp; (MONTH( X1st_of_Commit_Month__c )  = (MONTH(TODAY()) +1 ) 
+&amp;&amp; YEAR( X1st_of_Commit_Month__c ) = YEAR(TODAY())))
+|| 
+(DATE((YEAR(TODAY())+1), 1, 1) - TODAY()) &lt;= 4</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Run Weekly Commit</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

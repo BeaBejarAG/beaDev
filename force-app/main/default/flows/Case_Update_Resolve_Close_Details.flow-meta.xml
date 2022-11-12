@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <assignments>
+        <name>Set_Resolved_Values</name>
+        <label>Update Resolved Values</label>
+        <locationX>314</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>CaseIn.Resolved_By_User__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Case_Resolved_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Resolved__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Last_Status_Change__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Case_Closed_By__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Case_Closed_Manager__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Closed_Department__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.CaseCloseDate__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Closed_Division__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.ClosedDate</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.IsClosed</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Updates the case closed values</description>
+        <name>Update_Closed_Values_0</name>
+        <label>Update Closed Values</label>
+        <locationX>50</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>CaseIn.Case_Closed_Manager__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CaseIn.Case_Owner_Manager__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Closed_Department__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CaseIn.Owner:User.Department</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Closed_Division__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CaseIn.Owner:User.Division</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.CaseCloseDate__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Case_Closed_By__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.Last_Status_Change__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseIn.ClosedDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Case_Closed_or_Resolved</name>
+        <label>Case Closed or Resolved</label>
+        <locationX>314</locationX>
+        <locationY>158</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Case_Closed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CaseIn.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Closed_Values_0</targetReference>
+            </connector>
+            <label>Is Case Closed</label>
+        </rules>
+        <rules>
+            <name>Is_Case_Resolved</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CaseIn.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Resolved</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Resolved_Values</targetReference>
+            </connector>
+            <label>Is Case Resolved</label>
+        </rules>
+    </decisions>
+    <description>Assign Resolved/Closed values
+#SFAE-287 - Being triggered as a Subflow for End User Support Case record type (Payment_Support)</description>
+    <formulas>
+        <name>EmailNoReplyFormula</name>
+        <dataType>Date</dataType>
+        <expression>CASE(
+MOD( DATEVALUE(NOW()) - DATE( 1900, 1, 7 ), 7 ),
+3, NOW() + 2 + 3,
+4, NOW() + 2 + 3,
+5, NOW() + 2 + 3,
+6, NOW() + 1 + 3,
+NOW() + 3
+)</expression>
+    </formulas>
+    <interviewLabel>Case - Update Resolve/Close Details {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case - Assign Resolve/Close Fields values</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Case_Closed_or_Resolved</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Incoming Case</description>
+        <name>CaseIn</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

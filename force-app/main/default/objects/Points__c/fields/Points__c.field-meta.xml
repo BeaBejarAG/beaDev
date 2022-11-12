@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Points__c</fullName>
+    <externalId>false</externalId>
+    <label>Activity</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Telephone Reference</fullName>
+                <default>false</default>
+                <label>Telephone Reference</label>
+            </value>
+            <value>
+                <fullName>Executive Quote</fullName>
+                <default>false</default>
+                <label>Executive Quote</label>
+            </value>
+            <value>
+                <fullName>Onsite Reference</fullName>
+                <default>false</default>
+                <label>Onsite Reference</label>
+            </value>
+            <value>
+                <fullName>Webinar Presentation</fullName>
+                <default>false</default>
+                <label>Webinar Presentation</label>
+            </value>
+            <value>
+                <fullName>Case study and press release (written)</fullName>
+                <default>false</default>
+                <label>Case study and press release (written)</label>
+            </value>
+            <value>
+                <fullName>Event Speaker</fullName>
+                <default>false</default>
+                <label>Event Speaker</label>
+            </value>
+            <value>
+                <fullName>Case study and press release (video and written)</fullName>
+                <default>false</default>
+                <label>Case study and press release (video and written)</label>
+            </value>
+            <value>
+                <fullName>Host and speaker at an Access event on own premises</fullName>
+                <default>false</default>
+                <label>Host and speaker at an Access event on own premises</label>
+            </value>
+            <value>
+                <fullName>Custom</fullName>
+                <default>false</default>
+                <label>Custom</label>
+            </value>
+            <value>
+                <fullName>Case Study</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Case Study</label>
+            </value>
+            <value>
+                <fullName>Case Study &amp; Press Release (Video &amp; Written)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Case Study &amp; Press Release (Video &amp; Written)</label>
+            </value>
+            <value>
+                <fullName>Case Study &amp; Press Release (Written)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Case Study &amp; Press Release (Written)</label>
+            </value>
+            <value>
+                <fullName>Host &amp; Speaker at Access Event on own Premises</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Host &amp; Speaker at Access Event on own Premises</label>
+            </value>
+            <value>
+                <fullName>Points Spend</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Points Spend</label>
+            </value>
+            <value>
+                <fullName>Sign - Up</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sign - Up</label>
+            </value>
+            <value>
+                <fullName>Sign - Up (HCM)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sign - Up (HCM)</label>
+            </value>
+            <value>
+                <fullName>Sign-Up</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sign-Up</label>
+            </value>
+            <value>
+                <fullName>Sign-Up (HCM)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sign-Up (HCM)</label>
+            </value>
+            <value>
+                <fullName>Site Reference</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Site Reference</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

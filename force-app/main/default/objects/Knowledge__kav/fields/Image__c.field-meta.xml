@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Image__c</fullName>
+    <description>The image to be displayed in article cards on the portal</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Upload a single image into this rich text field to have it displayed in the community portal</inlineHelpText>
+    <label>Image</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
+</CustomField>

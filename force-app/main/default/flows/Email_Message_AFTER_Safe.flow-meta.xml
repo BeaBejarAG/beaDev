@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Email to customer case closed</description>
+        <name>Learning_Services_Case_Closed_Contact</name>
+        <label>Learning Services - Case Closed - Contact</label>
+        <locationX>578</locationX>
+        <locationY>935</locationY>
+        <actionName>Case.Learning_Services_Case_Closed_Contact</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Set_Case_Last_Email</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Get_Parent_Case.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Email to customer case closed</description>
+        <name>Learning_Services_Case_Closed_No_Contact</name>
+        <label>Learning Services - Case Closed - No Contact</label>
+        <locationX>842</locationX>
+        <locationY>935</locationY>
+        <actionName>Case.Learning_Services_Case_Closed_No_Contact</actionName>
+        <actionType>emailAlert</actionType>
+        <connector>
+            <targetReference>Set_Case_Last_Email</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Get_Parent_Case.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Send a notification email to the case owner (support)</description>
+        <name>Support_Internal_Case_Update_Email</name>
+        <label>Support - Internal Case Update Email</label>
+        <locationX>776</locationX>
+        <locationY>1487</locationY>
+        <actionName>Case.Support_Internal_Case_Update_Email</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Get_Parent_Case.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>55.0</apiVersion>
+    <decisions>
+        <description>Check if the case owner is a user</description>
+        <name>Case_Owner_Is_User</name>
+        <label>Case Owner Is User</label>
+        <locationX>908</locationX>
+        <locationY>1367</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_User</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Parent_Case.Owner:User.Id</leftValueReference>
+                <operator>StartsWith</operator>
+                <rightValue>
+                    <stringValue>005</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Support_Internal_Case_Update_Email</targetReference>
+            </connector>
+            <label>Is User</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Case_Record_Type</name>
+        <label>Check Case Record Type</label>
+        <locationX>924</locationX>
+        <locationY>455</locationY>
+        <defaultConnector>
+            <targetReference>Support_Internal_Update_When_Ticket_Updated</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Learning_Services</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Parent_Case.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Learning_Services</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Email_to_from_Customer</targetReference>
+            </connector>
+            <label>Learning Services</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Case_Status</name>
+        <label>Check Case Status</label>
+        <locationX>908</locationX>
+        <locationY>695</locationY>
+        <defaultConnector>
+            <targetReference>Set_Case_Last_Email</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Case_Status_Closed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Parent_Case.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Closed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Is_Case_with_Contact</targetReference>
+            </connector>
+            <label>Case Status = Closed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Email_to_from_Customer</name>
+        <label>Email to/from Customer</label>
+        <locationX>545</locationX>
+        <locationY>575</locationY>
+        <defaultConnector>
+            <targetReference>Check_Case_Status</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Email From Customer</defaultConnectorLabel>
+        <rules>
+            <name>Email_To_Customer</name>
+            <conditionLogic>(1 OR 2) AND 3</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.ToAddress</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <elementReference>Get_Parent_Case.ContactEmail</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.ToAddress</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <elementReference>Get_Parent_Case.SuppliedEmail</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.FromAddress</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>@theaccessgroup.com</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Is_First_Response</targetReference>
+            </connector>
+            <label>Email To Customer</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check if the case has a contact assigned</description>
+        <name>Is_Case_with_Contact</name>
+        <label>Is Case with Contact</label>
+        <locationX>710</locationX>
+        <locationY>815</locationY>
+        <defaultConnector>
+            <targetReference>Learning_Services_Case_Closed_No_Contact</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No Contact</defaultConnectorLabel>
+        <rules>
+            <name>With_Contact</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Parent_Case.ContactId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Learning_Services_Case_Closed_Contact</targetReference>
+            </connector>
+            <label>With Contact</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Check if the case was responded to or not</description>
+        <name>Is_First_Response</name>
+        <label>Is First Response</label>
+        <locationX>182</locationX>
+        <locationY>695</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>First_Response</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Parent_Case.Milestones_hours__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Stamp_Milestones_hours_on_Case_record</targetReference>
+            </connector>
+            <label>First Response</label>
+        </rules>
+    </decisions>
+    <description>-Move PB &apos;Support - Email Update&apos; to FLow
+-Cases record type=&apos;Learning Services&apos;: 
+Set the case&apos;s field Milestones (hours) if the email was the first response.
+Notifications emails for customer and case owner(support)</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>First 250 characters of the email message</description>
+        <name>EmailTextBodyTrimmed</name>
+        <dataType>String</dataType>
+        <expression>LEFT({!$Record.TextBody},250)</expression>
+    </formulas>
+    <formulas>
+        <description>Get the difference (in hours) between the case created time and the first response</description>
+        <name>MilestonesTime</name>
+        <dataType>Number</dataType>
+        <expression>(NOW()-{!Get_Parent_Case.CreatedDate})*24</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>Email Message - AFTER Safe {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Email Message - AFTER Safe</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Parent_Case</name>
+        <label>Get Parent Case</label>
+        <locationX>924</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Case_Record_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.ParentId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Set the case field &apos;Last Email&apos; with the first 250 characters of the email message (text body)</description>
+        <name>Set_Case_Last_Email</name>
+        <label>Set Case Last Email</label>
+        <locationX>908</locationX>
+        <locationY>1247</locationY>
+        <connector>
+            <targetReference>Case_Owner_Is_User</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Parent_Case.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Last_Email__c</field>
+            <value>
+                <elementReference>EmailTextBodyTrimmed</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Set the time the user toke to respond to the case</description>
+        <name>Stamp_Milestones_hours_on_Case_record</name>
+        <label>Stamp Milestones (hours) on Case record</label>
+        <locationX>50</locationX>
+        <locationY>815</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Parent_Case.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Milestones_hours__c</field>
+            <value>
+                <elementReference>MilestonesTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <start>
+        <locationX>798</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Parent_Case</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ParentId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>EmailMessage</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <description>Notification Emails</description>
+        <name>Support_Internal_Update_When_Ticket_Updated</name>
+        <label>Support - Internal Update When Ticket Updated</label>
+        <locationX>1304</locationX>
+        <locationY>575</locationY>
+        <flowName>Update_When_Ticket_Updated</flowName>
+        <inputAssignments>
+            <name>InputEmailMessage</name>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </subflows>
+</Flow>

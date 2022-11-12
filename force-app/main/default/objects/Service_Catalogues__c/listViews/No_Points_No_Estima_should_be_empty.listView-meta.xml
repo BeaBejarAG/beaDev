@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Points_No_Estima_should_be_empty</fullName>
+    <columns>NAME</columns>
+    <columns>Division__c</columns>
+    <columns>Products__c</columns>
+    <columns>Service_Title__c</columns>
+    <columns>Service_Type__c</columns>
+    <columns>User_Level__c</columns>
+    <columns>Points_Conversion__c</columns>
+    <columns>Estimate_Required__c</columns>
+    <columns>Delivery_Type__c</columns>
+    <columns>Delivered_By__c</columns>
+    <columns>Account_Journey_Stage__c</columns>
+    <columns>Premier_Only__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Points_Conversion__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>Estimate_Required__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>** No Points No Estima - should be empty</label>
+</ListView>

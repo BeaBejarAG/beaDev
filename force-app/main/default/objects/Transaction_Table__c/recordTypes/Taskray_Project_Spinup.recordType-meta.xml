@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Taskray_Project_Spinup</fullName>
+    <active>true</active>
+    <description>Project Spinup Taskray Record, records created via integration</description>
+    <label>Taskray Project Spinup</label>
+    <picklistValues>
+        <picklist>Direction__c</picklist>
+        <values>
+            <fullName>In</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Out</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Object__c</picklist>
+        <values>
+            <fullName>Taskray Project</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UDEF_TaskrayProjectRequest</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Delete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Insert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Update</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

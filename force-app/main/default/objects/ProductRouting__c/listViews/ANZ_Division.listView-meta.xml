@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ANZ_Division</fullName>
+    <columns>NAME</columns>
+    <columns>Product_Division__c</columns>
+    <columns>Related_Product_Range__c</columns>
+    <columns>Visibility__c</columns>
+    <columns>ImageUrl__c</columns>
+    <columns>Enabled_For_Community__c</columns>
+    <columns>TopicID__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Enabled_For_Live_Chat__c</columns>
+    <columns>Enabled_For_Telephony__c</columns>
+    <columns>Enabled_For_Web_Cases__c</columns>
+    <columns>Dedicated_Telephone_Number__c</columns>
+    <columns>Question_To_Case_Days__c</columns>
+    <columns>Support_Team_Go_Live__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Product_Division__c</field>
+        <operation>equals</operation>
+        <value>ANZ,APAC,Attache</value>
+    </filters>
+    <label>ANZ Division</label>
+</ListView>

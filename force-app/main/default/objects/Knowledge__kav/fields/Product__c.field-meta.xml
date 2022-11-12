@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product__c</fullName>
+    <externalId>false</externalId>
+    <label>Product</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Division__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>ProductRange</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Visitor Attraction Management</controllingFieldValue>
+            <valueName>Gamma</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Legal</controllingFieldValue>
+            <valueName>Access Compliance Software</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Legal</controllingFieldValue>
+            <valueName>Access Legal Hosting</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Legal</controllingFieldValue>
+            <valueName>Compact+</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Legal</controllingFieldValue>
+            <valueName>DPS Hosting/Hardware</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Legal</controllingFieldValue>
+            <valueName>DPS Legal Accounts</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Legal</controllingFieldValue>
+            <valueName>DPS One Office</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Legal</controllingFieldValue>
+            <valueName>DPS Spitfire</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Legal</controllingFieldValue>
+            <valueName>LawFusion</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Legal</controllingFieldValue>
+            <valueName>Proclaim</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Legal</controllingFieldValue>
+            <valueName>Riliance Training</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PeopleXD</controllingFieldValue>
+            <valueName>PeopleXD - Bureau</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PeopleXD</controllingFieldValue>
+            <valueName>PeopleXD - Expense</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PeopleXD</controllingFieldValue>
+            <valueName>PeopleXD - Payroll</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PeopleXD</controllingFieldValue>
+            <valueName>PeopleXD - Pension</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PeopleXD</controllingFieldValue>
+            <valueName>PeopleXD - People Management</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PeopleXD</controllingFieldValue>
+            <valueName>PeopleXD - Recruitment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PeopleXD</controllingFieldValue>
+            <valueName>PeopleXD - Talent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PeopleXD</controllingFieldValue>
+            <valueName>PeopleXD - Workforce Management</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Construction</controllingFieldValue>
+            <valueName>ConQuest Q-500</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Construction</controllingFieldValue>
+            <valueName>ConQuest Q Series</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Construction</controllingFieldValue>
+            <valueName>EasyBuild</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <valueName>Access Approve</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <valueName>Access Capture</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <valueName>Access Collaborate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <valueName>Access CRM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <valueName>Access Digital Tax</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <valueName>Access Document</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <valueName>Access Expense</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <valueName>Access Insight</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <valueName>Access Workspace</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Data Hub</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Business Management</controllingFieldValue>
+            <valueName>Ezitracker</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Education</controllingFieldValue>
+            <valueName>Access Career Guru</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Education</controllingFieldValue>
+            <valueName>Access Education Budgets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Education</controllingFieldValue>
+            <valueName>Access Education Finance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Education</controllingFieldValue>
+            <valueName>Access Education People</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Education</controllingFieldValue>
+            <valueName>EducatiONdemand</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Education</controllingFieldValue>
+            <valueName>My School Portal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Access Accountant Cloud</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Access Attaché</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Access Final Accounts</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Access Financials</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Access HandiSoft</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Access HandiTax Cloud</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access UBS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Dimensions</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Emcom FMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>FocalPoint</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Horizons</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Orbis</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Financial Management</controllingFieldValue>
+            <valueName>Sage Business Cloud Accounting</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Abacus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Access Care &amp; Clinical</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Access Care Compliance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Access Care Planning</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Access Medication Management</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Access People Planner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Alcuris Memo-Hub</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Business Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>CareBlox</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Core+</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>eLearning For You LMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Elemental</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Elemental API</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Flow</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>HAS Care Monitoring</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>HAS PAMMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Landscape</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Mosaic</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Oceano</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>RIO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Synergy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Health &amp; Social Care</controllingFieldValue>
+            <valueName>Webroster</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>Access Supply Chain</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>DeltaBond</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>DeltaWMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>FactoryMaster</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>Fleeteye</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>Gatehouse</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>Goldmine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>Mintsoft</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>Orchestrate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>Roundsman</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>Service Manager</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Manufacturing &amp; Distribution</controllingFieldValue>
+            <valueName>WeighSoft</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not For Profit</controllingFieldValue>
+            <valueName>Access Charity Ad Grants</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not For Profit</controllingFieldValue>
+            <valueName>Access Charity CRM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not For Profit</controllingFieldValue>
+            <valueName>Access Charity Websites</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not For Profit</controllingFieldValue>
+            <valueName>thankQ v8.6</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payments</controllingFieldValue>
+            <valueName>Access PaySuite DDCMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payments</controllingFieldValue>
+            <valueName>Access PaySuite - Eazipay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payments</controllingFieldValue>
+            <valueName>Rapidata</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Abintegro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access Applause</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access Content</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access Contractor Management (IR35)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access EarlyPay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access EasyPay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access Employee Service</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access Health &amp; Safety</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access HomeWork</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access LMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access Loop</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access MicrOpay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access Payroll</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access People - HCM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access People Pay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access Recruit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access SafePay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access TeamSeer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Access WageEasy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Bureau</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>EasyTime</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Employee Performance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Gamebrain</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>MicroLearn</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Payroll</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>People HR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>PSC eServices</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>PSCpay</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Riliance Outsourced Compliance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Sage Business Cloud Payroll</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Select HR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>People Management</controllingFieldValue>
+            <valueName>Topaz EMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Access Northstar</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Access Pay &amp; Bill</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Access Pay &amp; Bill Services</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Access Profile</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Access RDB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Access Recruitment CRM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Access Screening</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Intersoft Enterprise</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Safe Financials</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Safe Saber</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Recruitment</controllingFieldValue>
+            <valueName>Volcanic</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>Access Collins</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>Access Juice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>Access Maintain</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>Access People Hospitality</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>Access Tonic</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>Acteol</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>CPL Learning</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>IBS PosLink</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>IBS StockLink</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>Omnifi Services</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>Orderbee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>Procure Wizard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Retail &amp; Hospitality</controllingFieldValue>
+            <valueName>TNA Wizard</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

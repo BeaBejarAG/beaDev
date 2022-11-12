@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Points</fullName>
+    <active>true</active>
+    <label>New Points</label>
+    <picklistValues>
+        <picklist>Points__c</picklist>
+        <values>
+            <fullName>Case study and press release %28video and written%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Case study and press release %28written%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Custom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Event Speaker</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executive Quote</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Host and speaker at an Access event on own premises</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Onsite Reference</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telephone Reference</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Webinar Presentation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

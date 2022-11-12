@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>REC_All_Open_CSAT_Follow_Up_Records</fullName>
+    <columns>CaseOwner__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>CSATComments__c</columns>
+    <columns>NAME</columns>
+    <columns>CSATFollowUpCode__c</columns>
+    <columns>CSATFollowUpDetail__c</columns>
+    <columns>Product__c</columns>
+    <columns>CSATScore__c</columns>
+    <columns>Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Closing_The_Loop__c.CSAT_Follow_Up</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Complete</value>
+    </filters>
+    <filters>
+        <field>Product__c</field>
+        <operation>contains</operation>
+        <value>Pay &amp; Bill,Access Recruitment CRM,Profile,RDB,Volcanic,Enterprise,Screening</value>
+    </filters>
+    <label>REC All Open CSAT Follow Up Records</label>
+</ListView>

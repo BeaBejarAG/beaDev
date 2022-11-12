@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KCS_Validation_Status_Must_Validated</fullName>
+    <active>true</active>
+    <errorConditionFormula>And (Not(ISPICKVAL( ValidationStatus , &quot;Validated&quot; )),
+RecordType.Name = &quot;KCS&quot;,
+OR((IsVisibleInCsp = TRUE),(IsVisibleInPkb = TRUE )))</errorConditionFormula>
+    <errorMessage>Cannot make visible to public or customers, as validation status has not been set to &quot;Validated&quot;</errorMessage>
+</ValidationRule>

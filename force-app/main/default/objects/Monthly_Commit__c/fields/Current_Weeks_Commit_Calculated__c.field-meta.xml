@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Weeks_Commit_Calculated__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( NOT( ISBLANK(Weekly_5_Calculated__c)), Weekly_5_Calculated__c,
+IF( NOT( ISBLANK(Weekly_4_Calculated__c)), Weekly_4_Calculated__c,
+IF( NOT( ISBLANK(Weekly_3_Calculated__c)), Weekly_3_Calculated__c,
+IF( NOT( ISBLANK(Weekly_2_Calculated__c)), Weekly_2_Calculated__c, Weekly_1_Calculated__c))))</formula>
+    <label>Current Weeks Commit (Calculated)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>
